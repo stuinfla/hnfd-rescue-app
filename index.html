@@ -934,6 +934,35 @@
       color: white;
     }
 
+    .admin-btn-small {
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 6px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--gray-700);
+      color: white;
+    }
+
+    .admin-btn-camera {
+      background: var(--green-600);
+    }
+
+    .admin-btn-camera:hover {
+      background: var(--green-500);
+      transform: scale(1.05);
+    }
+
+    .admin-btn-secondary {
+      background: var(--gray-600);
+    }
+
+    .admin-btn-secondary:hover {
+      background: var(--gray-500);
+    }
+
     .admin-panel {
       display: none;
       position: fixed;
@@ -1287,6 +1316,43 @@
         <div style="flex: 1;"></div>
         <button class="admin-btn admin-btn-cancel" id="admin-edit-cancel-btn">Cancel</button>
         <button class="admin-btn admin-btn-primary" id="admin-save-btn">💾 Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Capture Modal -->
+  <div class="admin-modal" id="image-capture-modal">
+    <div class="admin-modal-content">
+      <h2>Replace Image</h2>
+      <p id="capture-item-name" style="color: var(--green-500); font-size: 18px; margin: 10px 0;"></p>
+
+      <!-- Hidden file input for camera/gallery -->
+      <input
+        type="file"
+        id="capture-file-input"
+        accept="image/*"
+        capture="environment"
+        style="display: none;"
+        onchange="handleImageCapture(event)"
+      />
+
+      <!-- Image Preview -->
+      <div id="capture-preview" style="display: none; margin: 20px 0;">
+        <img id="capture-preview-img" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.3);" />
+      </div>
+
+      <!-- Controls (shown after image selected) -->
+      <div id="capture-controls" style="display: none; gap: 10px; margin-top: 20px;">
+        <button class="admin-btn admin-btn-primary" onclick="saveCustomImage()">✓ Save Image</button>
+        <button class="admin-btn" onclick="document.getElementById('capture-file-input').click()">🔄 Retake</button>
+        <button class="admin-btn admin-btn-cancel" onclick="closeImageCapture()">Cancel</button>
+      </div>
+
+      <!-- Initial instruction -->
+      <div id="capture-instruction" style="text-align: center; padding: 40px 20px; color: var(--gray-400);">
+        <p style="font-size: 48px; margin: 0;">📷</p>
+        <p>Camera will open automatically...</p>
+        <button class="admin-btn admin-btn-cancel" onclick="closeImageCapture()" style="margin-top: 20px;">Cancel</button>
       </div>
     </div>
   </div>
