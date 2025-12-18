@@ -1,0 +1,23 @@
+{
+  "name": "hnfd-rescue-equipment-finder",
+  "version": "1.0.0",
+  "description": "Harpswell Neck Fire & Rescue - Voice-enabled equipment finder PWA - works 100% offline for EMTs in the field",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "init-db": "node src/init-database.js",
+    "test": "node src/test-search.js"
+  },
+  "keywords": ["ambulance", "emt", "medical", "inventory", "pwa", "offline", "voice"],
+  "author": "HNFD Training",
+  "license": "MIT",
+  "dependencies": {
+    "@ruvector/agentic-synth": "^0.1.6",
+    "@ruvector/ruvllm": "^0.2.3",
+    "agent-booster": "^0.2.2",
+    "agentic-flow": "^2.0.1-alpha.5",
+    "claude-flow": "^2.7.47",
+    "ruvector": "^0.1.35"
+  }
+}

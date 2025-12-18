@@ -1,0 +1,474 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "source": "Harpswell Neck Fire Department Training Video",
+    "last_updated": "2025-12-17",
+    "vehicle": "MC2 Ambulance",
+    "department": "HNFD - Harpswell Neck Fire Department",
+    "critical_items_count": 13,
+    "verified": true
+  },
+  "compartments": {
+    "K": {
+      "name": "Cabinet K",
+      "description": "Main critical equipment cabinet - contains 7 of 12 critical items",
+      "access": {
+        "inside": "Through glass doors from patient compartment",
+        "outside": "External door on ambulance side - PRIMARY ACCESS ON SCENE"
+      },
+      "sections": {
+        "middle_drawer": {
+          "type": "pull-out drawer",
+          "items": [
+            {
+              "id": "trauma_bag_adult",
+              "name": "Adult Trauma Bag",
+              "aliases": ["trauma back", "first-in bag", "first end bag"],
+              "color": "Red/Orange",
+              "position": "Front of middle drawer",
+              "critical": true,
+              "critical_rank": 1,
+              "description": "Contains all trauma supplies for adult patients",
+              "tags": ["red tag - inventory tracking"],
+              "notes": "If seal unbroken, inventory unchanged"
+            },
+            {
+              "id": "oxygen_kit_adult",
+              "name": "Adult Oxygen Kit",
+              "aliases": ["green oxygen bag", "O2 kit", "respiratory kit"],
+              "color": "Green",
+              "position": "Behind adult trauma bag in middle drawer",
+              "critical": true,
+              "critical_rank": 2,
+              "description": "Complete respiratory treatment kit with oxygen",
+              "contents": [
+                "Oral airways (all sizes)",
+                "Nasal airways (all sizes)",
+                "Various oxygen masks",
+                "Oxygen tank (Matheson style)"
+              ],
+              "notes": "Tank is inside green bag"
+            }
+          ]
+        },
+        "lower_drawer": {
+          "type": "pull-out drawer",
+          "items": [
+            {
+              "id": "oxygen_kit_pediatric",
+              "name": "Pediatric Oxygen Kit",
+              "aliases": ["peds oxygen", "child oxygen kit", "pediatric O2"],
+              "color": "Blue",
+              "position": "FRONT of lower drawer",
+              "critical": true,
+              "critical_rank": 3,
+              "description": "Pediatric respiratory kit - placed FIRST because children primarily have respiratory emergencies",
+              "notes": "Kids rarely have cardiac problems - respiratory is primary concern",
+              "reasoning": "Oxygen for children is of PRIMARY importance"
+            },
+            {
+              "id": "trauma_bag_pediatric",
+              "name": "Pediatric Trauma Bag",
+              "aliases": ["peds trauma", "pediatric first-in bag", "child trauma bag"],
+              "color": "Blue (FERNO brand)",
+              "position": "BEHIND pediatric oxygen kit in lower drawer",
+              "critical": true,
+              "critical_rank": 4,
+              "description": "Pediatric trauma supplies"
+            }
+          ]
+        },
+        "top_shelf": {
+          "type": "fixed shelf - does not pull out",
+          "items": [
+            {
+              "id": "intubation_kit",
+              "name": "Intubation Kit",
+              "aliases": ["airway kit", "intubation bag"],
+              "color": "Large bag - labeled",
+              "position": "Top shelf of Cabinet K",
+              "critical": true,
+              "critical_rank": 5,
+              "description": "Complete intubation equipment"
+            },
+            {
+              "id": "iv_bag",
+              "name": "IV Bag/Kit",
+              "aliases": ["IV access kit", "IV supplies"],
+              "position": "Top shelf of Cabinet K",
+              "critical": true,
+              "critical_rank": 6,
+              "description": "Everything to establish IV access for paramedic drug administration",
+              "notes": "Does NOT contain saline bags - primarily for medication administration access"
+            },
+            {
+              "id": "portable_aed",
+              "name": "Portable AED",
+              "aliases": ["defibrillator", "AED", "defib"],
+              "color": "Black bag with red 'AED' lettering and yellow-green reflective strip",
+              "position": "Top shelf of Cabinet K - further back",
+              "critical": true,
+              "critical_rank": 7,
+              "description": "Automated External Defibrillator for cardiac emergencies",
+              "status_indicator": "Green flash every 8-10 seconds means charged and ready",
+              "check_requirement": "EMTs must verify green flash during checks"
+            }
+          ]
+        }
+      }
+    },
+    "J": {
+      "name": "Cabinet J",
+      "description": "Located directly above Cabinet K inside ambulance",
+      "access": "Inside patient compartment - above Cabinet K",
+      "items": [
+        {
+          "id": "drug_box",
+          "name": "Drug Box",
+          "aliases": ["orange box", "medication box", "orange drug box"],
+          "color": "ORANGE",
+          "critical": true,
+          "critical_rank": 8,
+          "description": "Contains non-controlled drugs",
+          "contents_examples": [
+            "Acetaminophen (pain treatment)",
+            "Magnesium sulfate (cardiac)"
+          ],
+          "tags": ["blue tag - drug accountability tracking"],
+          "driver_note": "Driver only needs to know: ORANGE BOX = DRUG BOX. Nothing more."
+        },
+        {
+          "id": "portable_suction",
+          "name": "Portable Suction Unit",
+          "aliases": ["suction", "portable suction", "battery suction"],
+          "critical": true,
+          "critical_rank": 9,
+          "description": "Battery-operated suction for on-scene use",
+          "power": "Battery operated - constantly charging",
+          "charging_location": "Plugged into cigarette lighter at back of cabinet",
+          "CRITICAL_WARNING": "Cord does NOT detach at unit! MUST unplug from cigarette lighter before removing. Pulling without unplugging is like driving away from gas pump with nozzle in tank.",
+          "notes": "One of THREE suction types on board"
+        }
+      ]
+    },
+    "N": {
+      "name": "Drawer N",
+      "description": "EMT medications and diagnostic equipment drawer",
+      "access": "Inside patient compartment",
+      "items": [
+        {
+          "id": "glucometer",
+          "name": "Glucometer",
+          "aliases": ["glucose meter", "blood sugar meter", "diabetic meter"],
+          "color": "Small black box/pouch",
+          "position": "Always in exact same place in Drawer N",
+          "critical": true,
+          "critical_rank": 10,
+          "description": "Checks blood glucose levels in diabetic patients",
+          "driver_note": "Little black box, little black pouch - always in same spot"
+        },
+        {
+          "id": "narcan",
+          "name": "Narcan/Naloxone",
+          "aliases": ["naloxone", "narcan", "opioid reversal", "overdose medication"],
+          "quantity": 3,
+          "position": "Drawer N - readily accessible",
+          "critical": true,
+          "critical_rank": 11,
+          "description": "Opioid overdose reversal medication - delivered intranasally",
+          "packaging_old": "Orange container with syringe inside",
+          "packaging_new": "Clear tube - can see syringe inside",
+          "CRITICAL_COMPONENT": "Nasal atomizer MUST come with syringe - they are taped together",
+          "administration": "Atomizer screws onto syringe tip, plunger creates atomized spray for nasal absorption",
+          "warning": "Syringe alone is worthless without atomizer - cannot just squirt liquid",
+          "additional_location": "More Narcan also in Drug Box but Drawer N is fastest access"
+        },
+        {
+          "id": "emt_medications",
+          "name": "EMT Authorized Medications",
+          "description": "All medications EMT can administer under scope or with online medical control",
+          "notes": "Medical control phone numbers posted on drawer",
+          "authorization_types": [
+            "Under normal scope of practice",
+            "With online medical control authorization"
+          ]
+        }
+      ]
+    },
+    "D": {
+      "name": "Cabinet D",
+      "description": "Saline and IV fluids storage - accessible by walking around foot of stretcher",
+      "access": "Inside patient compartment - easily accessible without climbing over equipment",
+      "access_tip": "Cabinet doors can be FOLDED DOWN for easier access - push down then open",
+      "items": [
+        {
+          "id": "saline_bags",
+          "name": "Saline Bags",
+          "aliases": ["IV saline", "normal saline", "NS", "saline solution"],
+          "quantity": 6,
+          "position": "Cabinet D",
+          "description": "IV fluid for hydration",
+          "moved_from": "Previously in Cabinet K but moved for accessibility",
+          "reason_moved": "With patient hooked to LifePak (pulse ox, BP cuff, 12-lead), couldn't access K without pole vault or limbo"
+        },
+        {
+          "id": "primary_sets",
+          "name": "Primary Sets",
+          "aliases": ["IV tubing", "IV administration set", "drip set"],
+          "position": "Right next to saline bags in Cabinet D",
+          "CRITICAL_NOTE": "MUST grab primary set WITH saline bag - bag is USELESS without tubing",
+          "description": "Tubing with needle for saline bag, ports for IV connection"
+        },
+        {
+          "id": "heated_iv_warmer",
+          "name": "Heated IV Warmer",
+          "aliases": ["IV warmer", "saline warmer", "warm saline"],
+          "position": "Cabinet D",
+          "seasonal_use": "Winter - warm saline for hypothermic patients",
+          "summer_note": "In summer, ambient heat already warms saline sufficiently",
+          "not_critical_item": true,
+          "reasoning": "Patient will be inside ambulance when saline is used"
+        }
+      ]
+    },
+    "oxygen_tank_storage": {
+      "name": "Spare Oxygen Tank Storage",
+      "description": "Next to steps on side entry of ambulance",
+      "access": "Inside patient compartment - near side door steps",
+      "items": [
+        {
+          "id": "spare_oxygen_tanks",
+          "name": "Spare Oxygen Tanks",
+          "aliases": ["O2 tanks", "spare O2", "backup oxygen", "oxygen cylinders"],
+          "quantity_in_holder": 2,
+          "total_on_board": 4,
+          "other_tank_locations": [
+            "1 in Adult Oxygen Kit (green bag)",
+            "1 in Pediatric Oxygen Kit"
+          ],
+          "critical": true,
+          "critical_rank": 12,
+          "tank_types": {
+            "old_style": {
+              "description": "Two-step process tank",
+              "material": "Steel - heavier",
+              "operation": "1. Open main stem/first stage valve 2. Then set flow rate on regulator yoke",
+              "gauge_note": "Shows 0 until valve opened, actually has ~2000 PSI",
+              "status": "Last one remaining - use up first"
+            },
+            "new_style_matheson": {
+              "brand": "Matheson",
+              "description": "Single-step operation",
+              "material": "Aluminum - lighter",
+              "color": "Green top, silver/aluminum body",
+              "operation": "Just turn top valve to set flow - that's it",
+              "gauge": "Shows internal pressure immediately without opening valve",
+              "normal_pressure": "~2000 PSI when full",
+              "features": "Built-in handle/grip for easy carrying"
+            }
+          },
+          "release_mechanism": "SQUEEZE brackets together to release (counterintuitive - not pull apart)",
+          "duration_warning": "At 15 liters/minute, tank only lasts a few minutes"
+        }
+      ]
+    },
+    "lifepak_mount": {
+      "name": "LifePak 15 Mount",
+      "description": "Mounted position in patient compartment",
+      "access": "Obvious position in patient compartment",
+      "items": [
+        {
+          "id": "lifepak_15",
+          "name": "LifePak 15",
+          "aliases": ["life pack", "monitor", "cardiac monitor", "LifePak"],
+          "critical": true,
+          "critical_rank": 13,
+          "cost": "$42,000 - $62,000",
+          "description": "Cardiac monitor/defibrillator - records vitals, EKG, pulse ox, blood pressure",
+          "handling": {
+            "warning": "VERY EXPENSIVE - handle carefully, do not drop",
+            "removal": "Two small posts stick up from base - pull unit off posts",
+            "carrying": "Carry with sensitive side (screen/controls) against your body for protection",
+            "other_side": "Has extra blood pressure cuffs and batteries - can take some bumps"
+          },
+          "startup": {
+            "driver_task": "Press green button ONCE briefly when requested - unit will boot up",
+            "benefit": "Ready to use immediately on scene - just connect pulse ox or BP cuff"
+          },
+          "shutdown_warning": {
+            "DO_NOT_SHUTDOWN": "After hospital delivery during cleanup, do NOT turn off LifePak",
+            "reason": "One button press of 'Code Summary' prints entire transport record",
+            "benefit": "Paper printout makes report writing much easier",
+            "cloud_upload": "If left on, can send data to cloud for automatic report download",
+            "accidental_shutdown_prevention": "Single tap won't shut it off - must press AND HOLD",
+            "if_shutdown": "Code summary still accessible but requires multiple steps"
+          }
+        }
+      ]
+    },
+    "mc2_backseat": {
+      "name": "MC2 Back Seat",
+      "description": "Passenger seat area of MC2 chase vehicle",
+      "vehicle": "MC2 (not ambulance)",
+      "items": [
+        {
+          "id": "lucas_device",
+          "name": "LUCAS Device",
+          "aliases": ["LUCAS", "CPR machine", "mechanical CPR", "automatic CPR"],
+          "critical": true,
+          "critical_rank": 13,
+          "not_on_critical_list": true,
+          "description": "Mechanical CPR device - delivers consistent chest compressions",
+          "location": "Back/passenger seat of MC2",
+          "securing": "Secured with seatbelt ONLY (not strapped 16 ways)",
+          "removal": "Hit seatbelt release, then access LUCAS",
+          "ownership": "Purchased by Town of Harpswell for MC2",
+          "reasoning": "MC2 usually first on scene. OBI has another LUCAS but is 23 minutes away from Ash Point",
+          "department_inventory": "Harpswell has 2 LUCAS devices total (MC2 and OBI)"
+        }
+      ]
+    },
+    "onboard_suction": {
+      "name": "Onboard Suction System",
+      "description": "Built-in suction unit in patient compartment",
+      "items": [
+        {
+          "id": "onboard_suction",
+          "name": "Onboard Suction Unit",
+          "description": "Vacuum pump driven suction for patients on stretcher",
+          "use_case": "Suctioning patients during transport",
+          "notes": "One of THREE suction types on board (with portable and manual)"
+        }
+      ]
+    }
+  },
+  "critical_items_summary": [
+    {
+      "rank": 1,
+      "item": "Adult Trauma Bag",
+      "location": "Cabinet K - Middle Drawer (front)"
+    },
+    {
+      "rank": 2,
+      "item": "Adult Oxygen Kit",
+      "location": "Cabinet K - Middle Drawer (behind trauma bag)"
+    },
+    {
+      "rank": 3,
+      "item": "Pediatric Oxygen Kit",
+      "location": "Cabinet K - Lower Drawer (FRONT)"
+    },
+    {
+      "rank": 4,
+      "item": "Pediatric Trauma Bag",
+      "location": "Cabinet K - Lower Drawer (behind oxygen kit)"
+    },
+    {
+      "rank": 5,
+      "item": "Intubation Kit",
+      "location": "Cabinet K - Top Shelf"
+    },
+    {
+      "rank": 6,
+      "item": "IV Kit",
+      "location": "Cabinet K - Top Shelf"
+    },
+    {
+      "rank": 7,
+      "item": "Portable AED",
+      "location": "Cabinet K - Top Shelf (back)"
+    },
+    {
+      "rank": 8,
+      "item": "Drug Box (Orange)",
+      "location": "Cabinet J"
+    },
+    {
+      "rank": 9,
+      "item": "Portable Suction",
+      "location": "Cabinet J - UNPLUG BEFORE REMOVING"
+    },
+    {
+      "rank": 10,
+      "item": "Glucometer",
+      "location": "Drawer N"
+    },
+    {
+      "rank": 11,
+      "item": "Narcan",
+      "location": "Drawer N - with atomizer attached"
+    },
+    {
+      "rank": 12,
+      "item": "Spare Oxygen Tanks",
+      "location": "Next to steps - side entry"
+    },
+    {
+      "rank": 13,
+      "item": "LifePak 15",
+      "location": "Mounted in patient compartment"
+    }
+  ],
+  "tag_system": {
+    "red_tags": {
+      "purpose": "Internal inventory tracking",
+      "meaning": "If seal unbroken, contents unchanged from last inventory",
+      "benefit": "Saves Scott enormous time on weekly inventories"
+    },
+    "blue_tags": {
+      "purpose": "Drug accountability",
+      "meaning": "Tracks drugs coming in or out of drug box",
+      "requirement": "EMT must record under drug law"
+    }
+  },
+  "suction_types": {
+    "count": 3,
+    "types": [
+      {
+        "name": "Onboard Suction",
+        "power": "Vacuum pump",
+        "use": "Patients on stretcher during transport"
+      },
+      {
+        "name": "Portable Suction",
+        "power": "Battery",
+        "use": "On scene",
+        "location": "Cabinet J",
+        "warning": "Unplug from cigarette lighter before removing"
+      },
+      {
+        "name": "Manual Suction",
+        "power": "Manual",
+        "use": "Backup"
+      }
+    ]
+  },
+  "driver_quick_reference": {
+    "when_asked_for_item": "If unsure where something is, ASK - EMT will direct you",
+    "critical_locations": {
+      "Cabinet K (outside access)": "7 critical items - trauma bags, oxygen kits, intubation, IV, AED",
+      "Cabinet J (inside above K)": "Drug box (orange), portable suction",
+      "Drawer N": "Glucometer (black pouch), Narcan",
+      "By steps": "Spare oxygen tanks",
+      "Mounted": "LifePak 15"
+    },
+    "lifepak_instructions": {
+      "on_request": "Press green button once briefly to turn on",
+      "after_hospital": "Do NOT turn off - EMT needs code summary printout"
+    }
+  },
+  "search_aliases": {
+    "defibrillator": ["AED", "portable AED", "defib", "defibrillator"],
+    "oxygen": ["O2", "oxygen kit", "oxygen tank", "O2 tank", "respiratory"],
+    "trauma": ["trauma bag", "first-in bag", "first end bag", "trauma kit"],
+    "suction": ["suction", "portable suction", "suction unit"],
+    "drugs": ["drug box", "medication", "orange box", "meds"],
+    "narcan": ["narcan", "naloxone", "overdose", "opioid reversal"],
+    "glucose": ["glucometer", "glucose meter", "blood sugar", "diabetic"],
+    "saline": ["saline", "IV fluid", "normal saline", "NS"],
+    "lifepak": ["lifepak", "life pack", "monitor", "cardiac monitor"],
+    "lucas": ["lucas", "cpr machine", "mechanical cpr", "auto cpr"],
+    "pediatric": ["pediatric", "peds", "child", "kids", "children"],
+    "adult": ["adult", "grown-up"]
+  }
+}

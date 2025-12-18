@@ -1,0 +1,13 @@
+{
+  "version": "2.1.0",
+  "build": "2024-12-17",
+  "changelog": [
+    "Added automatic update checking",
+    "Added version display",
+    "Added emergency mode button",
+    "Added night mode",
+    "Added recent searches",
+    "Added haptic feedback",
+    "Compressed images for faster loading"
+  ]
+}

@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#dc2626">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="HNFD Rescue">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <title>HNFD Rescue - Equipment Finder</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --red-600: #dc2626;
+      --red-700: #b91c1c;
+      --red-800: #991b1b;
+      --green-500: #22c55e;
+      --green-600: #16a34a;
+      --yellow-400: #facc15;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--gray-900);
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .header {
+      background: var(--red-700);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: contain;
+      background: transparent;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(0,0,0,0.3);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green-500);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .main-container {
+      padding: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Voice Button */
+    .voice-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 24px 0;
+    }
+
+    .voice-btn {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 4px solid var(--red-600);
+      background: linear-gradient(145deg, var(--red-700), var(--red-800));
+      color: white;
+      font-size: 48px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      box-shadow: 0 8px 32px rgba(220, 38, 38, 0.4);
+    }
+
+    .voice-btn:active {
+      transform: scale(0.95);
+    }
+
+    .voice-btn.listening {
+      animation: listening-pulse 1s infinite;
+      border-color: var(--green-500);
+      box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.3);
+    }
+
+    @keyframes listening-pulse {
+      0%, 100% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.3); }
+      50% { box-shadow: 0 0 0 16px rgba(34, 197, 94, 0.1); }
+    }
+
+    .voice-label {
+      margin-top: 16px;
+      font-size: 16px;
+      color: var(--gray-200);
+      text-align: center;
+    }
+
+    .transcript {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      min-height: 44px;
+      font-size: 16px;
+      text-align: center;
+      color: var(--yellow-400);
+    }
+
+    /* Search Box */
+    .search-section {
+      margin: 24px 0;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 8px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 14px 16px;
+      border: 2px solid var(--gray-800);
+      border-radius: 12px;
+      background: var(--gray-800);
+      color: white;
+      font-size: 16px;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--red-600);
+    }
+
+    .search-btn {
+      padding: 14px 24px;
+      background: var(--red-600);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Results */
+    .results-section {
+      margin-top: 24px;
+    }
+
+    .result-card {
+      background: var(--gray-800);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+      border-left: 4px solid var(--red-600);
+    }
+
+    .result-card.critical {
+      border-left-color: var(--yellow-400);
+    }
+
+    .result-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .result-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .result-badge {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-critical {
+      background: var(--yellow-400);
+      color: var(--gray-900);
+    }
+
+    .badge-location {
+      background: var(--red-600);
+      color: white;
+    }
+
+    .result-location {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 12px 0;
+      padding: 12px;
+      background: rgba(220, 38, 38, 0.2);
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .location-icon {
+      font-size: 24px;
+    }
+
+    .result-details {
+      font-size: 14px;
+      color: var(--gray-200);
+      line-height: 1.6;
+    }
+
+    .result-warning {
+      margin-top: 12px;
+      padding: 12px;
+      background: rgba(250, 204, 21, 0.2);
+      border: 1px solid var(--yellow-400);
+      border-radius: 8px;
+      color: var(--yellow-400);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .result-color {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 12px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    /* Result Images */
+    .result-image-container {
+      margin: 12px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .result-image {
+      width: 100%;
+      height: auto;
+      max-height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+      border-radius: 12px;
+      border: 2px solid var(--gray-800);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .result-image:active {
+      transform: scale(0.98);
+      border-color: var(--red-600);
+    }
+
+    .image-hint {
+      text-align: center;
+      font-size: 11px;
+      color: var(--gray-200);
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
+    /* Image Overlay for Zoom */
+    #image-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #image-overlay.visible {
+      display: flex;
+    }
+
+    .overlay-content {
+      max-width: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .overlay-content img {
+      max-width: 100%;
+      max-height: calc(100vh - 100px);
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .close-overlay {
+      margin-top: 16px;
+      padding: 12px 32px;
+      background: var(--red-600);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Quick Access */
+    .quick-access {
+      margin-top: 32px;
+    }
+
+    .quick-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray-200);
+      margin-bottom: 12px;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .quick-btn {
+      padding: 16px;
+      background: var(--gray-800);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+
+    .quick-btn:active {
+      transform: scale(0.98);
+      border-color: var(--red-600);
+    }
+
+    .quick-btn-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    /* Speaker button */
+    .speak-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--green-600);
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      display: none;
+    }
+
+    .speak-btn.visible {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .speak-btn.speaking {
+      animation: speaking 0.5s infinite;
+    }
+
+    @keyframes speaking {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Offline indicator */
+    .offline-banner {
+      display: none;
+      background: var(--yellow-400);
+      color: var(--gray-900);
+      text-align: center;
+      padding: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    body.offline .offline-banner {
+      display: block;
+    }
+
+    /* Loading state */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--gray-800);
+      border-top-color: var(--red-600);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Compartment visual map */
+    .compartment-map {
+      margin-top: 24px;
+      padding: 16px;
+      background: var(--gray-800);
+      border-radius: 12px;
+    }
+
+    .map-title {
+      font-size: 14px;
+      color: var(--gray-200);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .map-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      margin: 4px 0;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .map-item:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .map-item.highlighted {
+      background: rgba(220, 38, 38, 0.3);
+      border: 1px solid var(--red-600);
+    }
+
+    .map-letter {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--red-600);
+      border-radius: 6px;
+      font-weight: 700;
+      margin-right: 12px;
+    }
+
+    /* NIGHT MODE - Darker theme for night operations */
+    body.night-mode {
+      background: #000;
+    }
+
+    body.night-mode .header {
+      background: #1a0a0a;
+    }
+
+    body.night-mode .result-card,
+    body.night-mode .compartment-map,
+    body.night-mode .search-input {
+      background: #0a0a0a;
+      border-color: #1a1a1a;
+    }
+
+    body.night-mode .quick-btn {
+      background: #1a0a0a;
+      border-color: #2a1a1a;
+    }
+
+    body.night-mode .voice-btn {
+      background: linear-gradient(145deg, #2a0a0a, #1a0505);
+    }
+
+    /* Night mode toggle button */
+    .night-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+
+    /* EMERGENCY MODE BUTTON - Big red button for all critical items */
+    .emergency-btn {
+      width: 100%;
+      padding: 20px;
+      background: linear-gradient(145deg, #dc2626, #991b1b);
+      border: 3px solid #fca5a5;
+      border-radius: 16px;
+      color: white;
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(220, 38, 38, 0.5);
+      animation: emergency-pulse 2s infinite;
+    }
+
+    .emergency-btn:active {
+      transform: scale(0.98);
+    }
+
+    @keyframes emergency-pulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(220, 38, 38, 0.5); }
+      50% { box-shadow: 0 4px 30px rgba(220, 38, 38, 0.8); }
+    }
+
+    .emergency-icon {
+      font-size: 28px;
+    }
+
+    /* RECENT SEARCHES */
+    .recent-searches {
+      display: none;
+      margin-top: 12px;
+      padding: 12px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+    }
+
+    .recent-label {
+      font-size: 11px;
+      color: var(--gray-200);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .recent-btn {
+      display: inline-block;
+      padding: 6px 14px;
+      margin: 4px;
+      background: var(--gray-800);
+      border: 1px solid var(--gray-800);
+      border-radius: 20px;
+      color: white;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .recent-btn:hover {
+      border-color: var(--red-600);
+    }
+
+    /* LARGER QUICK ACCESS BUTTONS - Easier to tap with gloves */
+    .quick-btn {
+      padding: 20px 16px;
+      min-height: 90px;
+      font-size: 15px;
+    }
+
+    .quick-btn-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    /* VERSION DISPLAY */
+    .version-display {
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+      padding: 2px 8px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .version-display:hover {
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* UPDATE NOTIFICATION */
+    #update-notification {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      padding: 16px;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    #update-notification.visible {
+      transform: translateY(0);
+    }
+
+    .update-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .update-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .update-icon {
+      font-size: 20px;
+    }
+
+    .update-changes {
+      font-size: 13px;
+      opacity: 0.9;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .update-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .update-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .update-now {
+      background: white;
+      color: #1e40af;
+    }
+
+    .update-later {
+      background: rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    /* INSTALL PROMPT */
+    #install-prompt {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #059669, #10b981);
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+      border-radius: 20px 20px 0 0;
+    }
+
+    #install-prompt.visible {
+      transform: translateY(0);
+    }
+
+    .install-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .install-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .install-icon {
+      font-size: 28px;
+    }
+
+    .install-instructions {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .install-instructions ol {
+      margin: 8px 0 0 20px;
+      padding: 0;
+    }
+
+    .install-instructions li {
+      margin: 6px 0;
+    }
+
+    .ios-share {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .install-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .install-btn {
+      flex: 1;
+      padding: 14px 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .install-now {
+      background: white;
+      color: #059669;
+    }
+
+    .install-dismiss {
+      background: rgba(255,255,255,0.2);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-banner">OFFLINE MODE - All data available locally</div>
+
+  <header class="header">
+    <div class="header-brand">
+      <img src="/images/hnfr-logo.png" alt="HNFR Logo" class="header-logo" />
+      <div>
+        <h1>HNFR RESCUE</h1>
+        <span class="version-display" id="version-display" title="Tap to check for updates">v2.1.0</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center;">
+      <button class="night-toggle" id="night-toggle" title="Toggle night mode">🌙</button>
+      <div class="status-badge">
+        <div class="status-dot"></div>
+        <span id="status-text">Ready</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <!-- EMERGENCY MODE BUTTON -->
+    <button class="emergency-btn" id="emergency-btn">
+      <span class="emergency-icon">🚨</span>
+      SHOW ALL CRITICAL ITEMS
+    </button>
+
+    <!-- Voice Section -->
+    <section class="voice-section">
+      <button class="voice-btn" id="voiceBtn" aria-label="Press to speak">
+        <span id="voiceIcon">🎤</span>
+      </button>
+      <p class="voice-label" id="voiceLabel">Tap to ask where something is</p>
+      <div class="transcript" id="transcript"></div>
+    </section>
+
+    <!-- Manual Search -->
+    <section class="search-section">
+      <div class="search-box">
+        <input
+          type="text"
+          class="search-input"
+          id="searchInput"
+          placeholder="Type item name (e.g., AED, Narcan, oxygen)"
+          autocomplete="off"
+        >
+        <button class="search-btn" id="searchBtn">Find</button>
+      </div>
+      <!-- Recent Searches -->
+      <div class="recent-searches" id="recent-searches"></div>
+    </section>
+
+    <!-- Results -->
+    <section class="results-section" id="results">
+      <!-- Results appear here -->
+    </section>
+
+    <!-- Quick Access Buttons -->
+    <section class="quick-access">
+      <h2 class="quick-title">Quick Find - Critical Items</h2>
+      <div class="quick-grid">
+        <button class="quick-btn" data-search="AED">
+          <div class="quick-btn-icon">⚡</div>
+          AED / Defibrillator
+        </button>
+        <button class="quick-btn" data-search="narcan">
+          <div class="quick-btn-icon">💉</div>
+          Narcan
+        </button>
+        <button class="quick-btn" data-search="oxygen">
+          <div class="quick-btn-icon">💨</div>
+          Oxygen
+        </button>
+        <button class="quick-btn" data-search="trauma bag">
+          <div class="quick-btn-icon">🎒</div>
+          Trauma Bag
+        </button>
+        <button class="quick-btn" data-search="drug box">
+          <div class="quick-btn-icon">💊</div>
+          Drug Box
+        </button>
+        <button class="quick-btn" data-search="suction">
+          <div class="quick-btn-icon">🔧</div>
+          Suction
+        </button>
+        <button class="quick-btn" data-search="glucometer">
+          <div class="quick-btn-icon">🩸</div>
+          Glucometer
+        </button>
+        <button class="quick-btn" data-search="saline">
+          <div class="quick-btn-icon">💧</div>
+          Saline / IV
+        </button>
+      </div>
+    </section>
+
+    <!-- Compartment Map -->
+    <section class="compartment-map">
+      <h2 class="map-title">Compartment Locations</h2>
+      <div class="map-item" data-compartment="K">
+        <div class="map-letter">K</div>
+        <div>
+          <strong>Cabinet K</strong> - Outside access, 7 critical items
+        </div>
+      </div>
+      <div class="map-item" data-compartment="J">
+        <div class="map-letter">J</div>
+        <div>
+          <strong>Cabinet J</strong> - Drug box, Portable suction
+        </div>
+      </div>
+      <div class="map-item" data-compartment="N">
+        <div class="map-letter">N</div>
+        <div>
+          <strong>Drawer N</strong> - Glucometer, Narcan
+        </div>
+      </div>
+      <div class="map-item" data-compartment="D">
+        <div class="map-letter">D</div>
+        <div>
+          <strong>Cabinet D</strong> - Saline, IV supplies
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Speak Button (appears when there's a result) -->
+  <button class="speak-btn" id="speakBtn" aria-label="Speak result">
+    🔊
+  </button>
+
+  <script src="/app.js"></script>
+</body>
+</html>
