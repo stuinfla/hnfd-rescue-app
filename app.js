@@ -466,7 +466,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.4.3';
+const APP_VERSION = '2.4.4';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
@@ -689,6 +689,56 @@ function applyNightMode() {
   if (toggle) {
     toggle.textContent = nightMode ? '☀️' : '🌙';
     toggle.title = nightMode ? 'Switch to day mode' : 'Switch to night mode';
+  }
+}
+
+// ============================================================================
+// SHARE APP - Let EMTs share with each other via native share or clipboard
+// ============================================================================
+async function shareApp() {
+  const shareBtn = document.getElementById('share-btn');
+  const shareData = {
+    title: 'HNFD Rescue - Equipment Finder',
+    text: 'Find equipment fast on the HNFD ambulance. Voice-enabled, works offline!',
+    url: 'https://hnfd-rescue.vercel.app'
+  };
+
+  hapticFeedback('light');
+
+  // Try native Web Share API first (works great on mobile)
+  if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+    try {
+      await navigator.share(shareData);
+      console.log('[Share] Shared successfully via native share');
+      shareBtn.classList.add('shared');
+      setTimeout(() => shareBtn.classList.remove('shared'), 1000);
+      return;
+    } catch (err) {
+      // User cancelled or share failed - fall through to clipboard
+      if (err.name !== 'AbortError') {
+        console.log('[Share] Native share failed:', err);
+      }
+    }
+  }
+
+  // Fallback: Copy to clipboard
+  try {
+    await navigator.clipboard.writeText(shareData.url);
+    console.log('[Share] URL copied to clipboard');
+    hapticFeedback('success');
+    shareBtn.classList.add('shared');
+
+    // Show feedback
+    const originalText = statusText.textContent;
+    statusText.textContent = 'Link copied!';
+    setTimeout(() => {
+      statusText.textContent = originalText;
+      shareBtn.classList.remove('shared');
+    }, 2000);
+  } catch (err) {
+    console.error('[Share] Clipboard failed:', err);
+    // Last resort: show URL in alert
+    alert('Share this URL with other EMTs:\n\nhttps://hnfd-rescue.vercel.app');
   }
 }
 
@@ -1269,6 +1319,9 @@ document.getElementById('emergency-btn')?.addEventListener('click', showEmergenc
 
 // Night mode toggle
 document.getElementById('night-toggle')?.addEventListener('click', toggleNightMode);
+
+// Share button - allows EMTs to share the app with each other
+document.getElementById('share-btn')?.addEventListener('click', shareApp);
 
 // Compartment map clicks
 document.querySelectorAll('.map-item').forEach(el => {
