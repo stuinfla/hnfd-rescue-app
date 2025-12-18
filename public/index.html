@@ -796,6 +796,239 @@
       background: rgba(255,255,255,0.2);
       color: white;
     }
+
+    /* Admin Mode Styles */
+    .admin-toggle {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .admin-toggle:hover {
+      background: rgba(255,255,255,0.2);
+      transform: rotate(90deg);
+    }
+
+    .admin-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .admin-modal.active {
+      display: flex;
+    }
+
+    .admin-modal-content {
+      background: var(--gray-800);
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 400px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .admin-modal-large {
+      max-width: 600px;
+    }
+
+    .admin-modal-content h2 {
+      margin: 0 0 16px 0;
+      font-size: 22px;
+    }
+
+    .admin-input, .admin-textarea {
+      width: 100%;
+      padding: 12px;
+      background: var(--gray-900);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      color: white;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .admin-textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .admin-btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--gray-200);
+      color: var(--gray-900);
+    }
+
+    .admin-btn-primary {
+      background: var(--green-600);
+      color: white;
+    }
+
+    .admin-btn-primary:hover {
+      background: var(--green-500);
+    }
+
+    .admin-btn-danger {
+      background: var(--red-600);
+      color: white;
+    }
+
+    .admin-btn-danger:hover {
+      background: var(--red-700);
+    }
+
+    .admin-btn-cancel {
+      background: transparent;
+      border: 1px solid var(--gray-200);
+      color: white;
+    }
+
+    .admin-panel {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gray-900);
+      z-index: 999;
+      overflow-y: auto;
+    }
+
+    .admin-panel.active {
+      display: block;
+    }
+
+    .admin-panel-header {
+      background: var(--red-700);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .admin-panel-header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .admin-close-btn {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .admin-close-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: rotate(90deg);
+    }
+
+    .admin-toolbar {
+      padding: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--gray-800);
+    }
+
+    .admin-search-box {
+      padding: 16px;
+      border-bottom: 1px solid var(--gray-800);
+    }
+
+    .admin-items-list {
+      padding: 16px;
+    }
+
+    .admin-item {
+      background: var(--gray-800);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 2px solid transparent;
+    }
+
+    .admin-item:hover {
+      border-color: var(--green-600);
+    }
+
+    .admin-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 8px;
+    }
+
+    .admin-item-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .admin-item-location {
+      font-size: 14px;
+      color: var(--green-500);
+    }
+
+    .admin-item-badges {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .admin-badge {
+      background: var(--red-600);
+      color: white;
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .admin-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .admin-form label {
+      font-size: 12px;
+      color: var(--gray-200);
+      font-weight: 600;
+      margin-bottom: -8px;
+    }
   </style>
 </head>
 <body>
@@ -809,7 +1042,8 @@
         <span class="version-display" id="version-display" title="Tap to check for updates">v2.1.0</span>
       </div>
     </div>
-    <div style="display: flex; align-items: center;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <button class="admin-toggle" id="admin-toggle" title="Admin mode">⚙️</button>
       <button class="night-toggle" id="night-toggle" title="Toggle night mode">🌙</button>
       <div class="status-badge">
         <div class="status-dot"></div>
@@ -928,6 +1162,98 @@
   <button class="speak-btn" id="speakBtn" aria-label="Speak result">
     🔊
   </button>
+
+  <!-- Admin Login Modal -->
+  <div class="admin-modal" id="admin-login-modal">
+    <div class="admin-modal-content">
+      <h2>Admin Login</h2>
+      <p style="color: #888; font-size: 14px; margin-bottom: 20px;">Enter password to manage equipment</p>
+      <input type="password" id="admin-password" placeholder="Password" class="admin-input" />
+      <div style="display: flex; gap: 10px; margin-top: 20px;">
+        <button class="admin-btn admin-btn-cancel" id="admin-cancel-btn">Cancel</button>
+        <button class="admin-btn admin-btn-primary" id="admin-login-btn">Login</button>
+      </div>
+      <p id="admin-login-error" style="color: var(--red-600); font-size: 12px; margin-top: 10px; display: none;"></p>
+    </div>
+  </div>
+
+  <!-- Admin Panel -->
+  <div class="admin-panel" id="admin-panel">
+    <div class="admin-panel-header">
+      <h2>Equipment Management</h2>
+      <button class="admin-close-btn" id="admin-close-btn">✕</button>
+    </div>
+
+    <div class="admin-toolbar">
+      <button class="admin-btn admin-btn-primary" id="admin-add-btn">➕ Add Equipment</button>
+      <button class="admin-btn" id="admin-export-btn">📥 Export JSON</button>
+      <button class="admin-btn" id="admin-import-btn">📤 Import JSON</button>
+      <input type="file" id="admin-import-file" accept=".json" style="display: none;" />
+    </div>
+
+    <div class="admin-search-box">
+      <input type="text" id="admin-search" placeholder="Search equipment..." class="admin-input" />
+    </div>
+
+    <div class="admin-items-list" id="admin-items-list">
+      <!-- Equipment items will be listed here -->
+    </div>
+  </div>
+
+  <!-- Admin Edit Modal -->
+  <div class="admin-modal" id="admin-edit-modal">
+    <div class="admin-modal-content admin-modal-large">
+      <h2 id="admin-edit-title">Edit Equipment</h2>
+      <div class="admin-form">
+        <input type="hidden" id="edit-item-id" />
+
+        <label>Item Name *</label>
+        <input type="text" id="edit-name" class="admin-input" required />
+
+        <label>Aliases (comma separated)</label>
+        <input type="text" id="edit-aliases" class="admin-input" placeholder="trauma bag, first in bag" />
+
+        <label>Location *</label>
+        <input type="text" id="edit-location" class="admin-input" required />
+
+        <label>Compartment</label>
+        <input type="text" id="edit-compartment" class="admin-input" placeholder="K, J, N, D, etc." />
+
+        <label>Color</label>
+        <input type="text" id="edit-color" class="admin-input" placeholder="Red/Orange, GREEN, etc." />
+
+        <label>Description</label>
+        <textarea id="edit-description" class="admin-textarea" rows="3"></textarea>
+
+        <label>Contents</label>
+        <textarea id="edit-contents" class="admin-textarea" rows="2"></textarea>
+
+        <label>Warning</label>
+        <input type="text" id="edit-warning" class="admin-input" placeholder="CRITICAL: Check expiration dates" />
+
+        <label>Driver Note</label>
+        <input type="text" id="edit-driver-note" class="admin-input" />
+
+        <label>Image Path</label>
+        <input type="text" id="edit-image" class="admin-input" placeholder="/images/item.jpg" />
+
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <input type="checkbox" id="edit-critical" />
+          <label for="edit-critical" style="margin: 0;">Critical Item</label>
+        </div>
+
+        <label>Critical Rank (1-10, lower = more critical)</label>
+        <input type="number" id="edit-critical-rank" class="admin-input" min="1" max="10" />
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 20px;">
+        <button class="admin-btn admin-btn-danger" id="admin-delete-btn">🗑️ Delete</button>
+        <div style="flex: 1;"></div>
+        <button class="admin-btn admin-btn-cancel" id="admin-edit-cancel-btn">Cancel</button>
+        <button class="admin-btn admin-btn-primary" id="admin-save-btn">💾 Save</button>
+      </div>
+    </div>
+  </div>
 
   <script src="/app.js"></script>
 </body>

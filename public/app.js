@@ -282,7 +282,7 @@ const INVENTORY_DATABASE = {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.1.2';
+const APP_VERSION = '2.2.0';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
@@ -416,6 +416,7 @@ let modelLoaded = false;
 let recentSearches = JSON.parse(localStorage.getItem('hnfd_recent_searches') || '[]');
 let nightMode = localStorage.getItem('hnfd_night_mode') === 'true';
 let audioInitialized = false;
+let micPermissionRequested = localStorage.getItem('hnfd_mic_permission_requested') === 'true';
 
 // ============================================================================
 // HAPTIC FEEDBACK - Better tactile confirmation in stressful situations
@@ -1046,6 +1047,23 @@ function initializeAudio() {
   }
 }
 
+// Request microphone permission on first interaction (one-time setup)
+function requestMicrophonePermission() {
+  if (micPermissionRequested || !recognition) return;
+
+  try {
+    // Attempt to start and immediately stop recognition
+    // This triggers the browser's permission prompt
+    recognition.start();
+    recognition.stop();
+    localStorage.setItem('hnfd_mic_permission_requested', 'true');
+    micPermissionRequested = true;
+    console.log('[Mic] Permission requested');
+  } catch (e) {
+    console.error('[Mic] Permission request failed:', e);
+  }
+}
+
 // Load voices (needed for some browsers)
 if (synthesis) {
   synthesis.onvoiceschanged = () => {
@@ -1054,10 +1072,13 @@ if (synthesis) {
   // Trigger voice loading
   synthesis.getVoices();
 
-  // Initialize audio on any user interaction
+  // Initialize audio AND request mic permission on any user interaction
   const initEvents = ['click', 'touchstart', 'keydown'];
   initEvents.forEach(event => {
-    document.addEventListener(event, initializeAudio, { once: true, passive: true });
+    document.addEventListener(event, () => {
+      initializeAudio();
+      requestMicrophonePermission();
+    }, { once: true, passive: true });
   });
 }
 
@@ -1220,3 +1241,336 @@ console.log('[HNFD] Items in database:', INVENTORY_DATABASE.items.length);
 console.log('[HNFD] Offline:', !navigator.onLine);
 console.log('[HNFD] Night mode:', nightMode);
 console.log('[HNFD] Recent searches:', recentSearches.length);
+// ============================================================================
+// ADMIN MODE - Equipment Management System
+// ============================================================================
+
+const ADMIN_PASSWORD = 'hnfd2024'; // Change this for production
+const ADMIN_STORAGE_KEY = 'hnfd_equipment_custom';
+let adminAuthenticated = false;
+let customInventory = null;
+
+// DOM Elements
+const adminToggleBtn = document.getElementById('admin-toggle');
+const adminLoginModal = document.getElementById('admin-login-modal');
+const adminPanel = document.getElementById('admin-panel');
+const adminEditModal = document.getElementById('admin-edit-modal');
+const adminPasswordInput = document.getElementById('admin-password');
+const adminLoginBtn = document.getElementById('admin-login-btn');
+const adminCancelBtn = document.getElementById('admin-cancel-btn');
+const adminCloseBtn = document.getElementById('admin-close-btn');
+const adminLoginError = document.getElementById('admin-login-error');
+const adminItemsList = document.getElementById('admin-items-list');
+const adminSearchInput = document.getElementById('admin-search');
+const adminAddBtn = document.getElementById('admin-add-btn');
+const adminExportBtn = document.getElementById('admin-export-btn');
+const adminImportBtn = document.getElementById('admin-import-btn');
+const adminImportFile = document.getElementById('admin-import-file');
+const adminSaveBtn = document.getElementById('admin-save-btn');
+const adminDeleteBtn = document.getElementById('admin-delete-btn');
+const adminEditCancelBtn = document.getElementById('admin-edit-cancel-btn');
+
+// Load custom inventory from localStorage
+function loadCustomInventory() {
+  const stored = localStorage.getItem(ADMIN_STORAGE_KEY);
+  if (stored) {
+    try {
+      customInventory = JSON.parse(stored);
+      console.log('[Admin] Loaded custom inventory:', customInventory.items.length, 'items');
+      return customInventory;
+    } catch (e) {
+      console.error('[Admin] Failed to parse custom inventory:', e);
+    }
+  }
+  // Clone default inventory
+  customInventory = JSON.parse(JSON.stringify(INVENTORY_DATABASE));
+  return customInventory;
+}
+
+// Save custom inventory to localStorage
+function saveCustomInventory() {
+  try {
+    localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(customInventory));
+    console.log('[Admin] Saved custom inventory:', customInventory.items.length, 'items');
+    // Update the global inventory for immediate effect
+    INVENTORY_DATABASE.items = customInventory.items;
+    return true;
+  } catch (e) {
+    console.error('[Admin] Failed to save inventory:', e);
+    alert('Failed to save changes: ' + e.message);
+    return false;
+  }
+}
+
+// Admin toggle button
+adminToggleBtn.addEventListener('click', () => {
+  hapticFeedback('light');
+  if (adminAuthenticated) {
+    openAdminPanel();
+  } else {
+    adminLoginModal.classList.add('active');
+    adminPasswordInput.focus();
+  }
+});
+
+// Admin login
+adminLoginBtn.addEventListener('click', () => {
+  const password = adminPasswordInput.value;
+  if (password === ADMIN_PASSWORD) {
+    adminAuthenticated = true;
+    adminLoginModal.classList.remove('active');
+    adminPasswordInput.value = '';
+    adminLoginError.style.display = 'none';
+    hapticFeedback('success');
+    openAdminPanel();
+  } else {
+    adminLoginError.textContent = 'Incorrect password';
+    adminLoginError.style.display = 'block';
+    hapticFeedback('error');
+    adminPasswordInput.value = '';
+    adminPasswordInput.focus();
+  }
+});
+
+adminCancelBtn.addEventListener('click', () => {
+  adminLoginModal.classList.remove('active');
+  adminPasswordInput.value = '';
+  adminLoginError.style.display = 'none';
+});
+
+// Allow Enter key for login
+adminPasswordInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    adminLoginBtn.click();
+  }
+});
+
+// Open admin panel
+function openAdminPanel() {
+  loadCustomInventory();
+  adminPanel.classList.add('active');
+  renderAdminItemsList();
+}
+
+// Close admin panel
+adminCloseBtn.addEventListener('click', () => {
+  adminPanel.classList.remove('active');
+  adminSearchInput.value = '';
+});
+
+// Render items list
+function renderAdminItemsList(filter = '') {
+  const items = customInventory.items.filter(item => {
+    if (!filter) return true;
+    const search = filter.toLowerCase();
+    return item.name.toLowerCase().includes(search) ||
+           item.location.toLowerCase().includes(search) ||
+           (item.aliases && item.aliases.some(a => a.toLowerCase().includes(search)));
+  });
+
+  adminItemsList.innerHTML = items.map(item => `
+    <div class="admin-item" data-item-id="${item.id}">
+      <div class="admin-item-header">
+        <div>
+          <div class="admin-item-name">${item.name}</div>
+          <div class="admin-item-location">📍 ${item.location}</div>
+        </div>
+        <div class="admin-item-badges">
+          ${item.critical ? '<span class="admin-badge">CRITICAL</span>' : ''}
+          ${item.compartment ? `<span class="admin-badge" style="background: var(--green-600);">${item.compartment}</span>` : ''}
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Add click handlers
+  document.querySelectorAll('.admin-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const itemId = el.dataset.itemId;
+      const item = customInventory.items.find(i => i.id === itemId);
+      if (item) {
+        editItem(item);
+      }
+    });
+  });
+}
+
+// Admin search
+adminSearchInput.addEventListener('input', (e) => {
+  renderAdminItemsList(e.target.value);
+});
+
+// Add new item
+adminAddBtn.addEventListener('click', () => {
+  editItem(null); // null = new item
+});
+
+// Edit item
+function editItem(item) {
+  const isNew = !item;
+  document.getElementById('admin-edit-title').textContent = isNew ? 'Add New Equipment' : 'Edit Equipment';
+
+  if (isNew) {
+    // Clear form for new item
+    document.getElementById('edit-item-id').value = '';
+    document.getElementById('edit-name').value = '';
+    document.getElementById('edit-aliases').value = '';
+    document.getElementById('edit-location').value = '';
+    document.getElementById('edit-compartment').value = '';
+    document.getElementById('edit-color').value = '';
+    document.getElementById('edit-description').value = '';
+    document.getElementById('edit-contents').value = '';
+    document.getElementById('edit-warning').value = '';
+    document.getElementById('edit-driver-note').value = '';
+    document.getElementById('edit-image').value = '';
+    document.getElementById('edit-critical').checked = false;
+    document.getElementById('edit-critical-rank').value = '';
+    adminDeleteBtn.style.display = 'none';
+  } else {
+    // Fill form with item data
+    document.getElementById('edit-item-id').value = item.id;
+    document.getElementById('edit-name').value = item.name || '';
+    document.getElementById('edit-aliases').value = item.aliases ? item.aliases.join(', ') : '';
+    document.getElementById('edit-location').value = item.location || '';
+    document.getElementById('edit-compartment').value = item.compartment || '';
+    document.getElementById('edit-color').value = item.color || '';
+    document.getElementById('edit-description').value = item.description || '';
+    document.getElementById('edit-contents').value = item.contents || '';
+    document.getElementById('edit-warning').value = item.warning || '';
+    document.getElementById('edit-driver-note').value = item.driverNote || '';
+    document.getElementById('edit-image').value = item.image || '';
+    document.getElementById('edit-critical').checked = item.critical || false;
+    document.getElementById('edit-critical-rank').value = item.criticalRank || '';
+    adminDeleteBtn.style.display = 'block';
+  }
+
+  adminEditModal.classList.add('active');
+}
+
+// Save item
+adminSaveBtn.addEventListener('click', () => {
+  const itemId = document.getElementById('edit-item-id').value;
+  const name = document.getElementById('edit-name').value.trim();
+  const location = document.getElementById('edit-location').value.trim();
+
+  if (!name || !location) {
+    alert('Name and Location are required');
+    return;
+  }
+
+  const aliases = document.getElementById('edit-aliases').value
+    .split(',')
+    .map(a => a.trim())
+    .filter(a => a);
+
+  const itemData = {
+    id: itemId || name.toLowerCase().replace(/[^a-z0-9]+/g, '_'),
+    name,
+    aliases,
+    searchText: `${name} ${aliases.join(' ')} ${location}`.toLowerCase(),
+    location,
+    compartment: document.getElementById('edit-compartment').value.trim(),
+    color: document.getElementById('edit-color').value.trim(),
+    critical: document.getElementById('edit-critical').checked,
+    criticalRank: parseInt(document.getElementById('edit-critical-rank').value) || null,
+    description: document.getElementById('edit-description').value.trim(),
+    contents: document.getElementById('edit-contents').value.trim(),
+    warning: document.getElementById('edit-warning').value.trim(),
+    driverNote: document.getElementById('edit-driver-note').value.trim(),
+    image: document.getElementById('edit-image').value.trim()
+  };
+
+  if (itemId) {
+    // Update existing item
+    const index = customInventory.items.findIndex(i => i.id === itemId);
+    if (index >= 0) {
+      customInventory.items[index] = itemData;
+    }
+  } else {
+    // Add new item
+    customInventory.items.push(itemData);
+  }
+
+  if (saveCustomInventory()) {
+    adminEditModal.classList.remove('active');
+    renderAdminItemsList(adminSearchInput.value);
+    hapticFeedback('success');
+  }
+});
+
+// Delete item
+adminDeleteBtn.addEventListener('click', () => {
+  if (!confirm('Are you sure you want to delete this item?')) return;
+
+  const itemId = document.getElementById('edit-item-id').value;
+  customInventory.items = customInventory.items.filter(i => i.id !== itemId);
+
+  if (saveCustomInventory()) {
+    adminEditModal.classList.remove('active');
+    renderAdminItemsList(adminSearchInput.value);
+    hapticFeedback('success');
+  }
+});
+
+// Cancel edit
+adminEditCancelBtn.addEventListener('click', () => {
+  adminEditModal.classList.remove('active');
+});
+
+// Export JSON
+adminExportBtn.addEventListener('click', () => {
+  const dataStr = JSON.stringify(customInventory, null, 2);
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `hnfd-equipment-${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  hapticFeedback('success');
+});
+
+// Import JSON
+adminImportBtn.addEventListener('click', () => {
+  adminImportFile.click();
+});
+
+adminImportFile.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!data.items || !Array.isArray(data.items)) {
+        alert('Invalid JSON format. Must have "items" array.');
+        return;
+      }
+
+      if (confirm(`Import ${data.items.length} items? This will replace all current equipment.`)) {
+        customInventory = data;
+        if (saveCustomInventory()) {
+          renderAdminItemsList();
+          hapticFeedback('success');
+          alert('Import successful!');
+        }
+      }
+    } catch (err) {
+      alert('Failed to parse JSON: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+
+  // Reset file input
+  e.target.value = '';
+});
+
+// Load custom inventory on startup if exists
+if (localStorage.getItem(ADMIN_STORAGE_KEY)) {
+  loadCustomInventory();
+  INVENTORY_DATABASE.items = customInventory.items;
+  console.log('[Admin] Using custom inventory');
+}
+
+console.log('[Admin] Module loaded');
