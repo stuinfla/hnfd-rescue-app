@@ -3,15 +3,23 @@
  * Enables 100% offline operation - CRITICAL for no-cell-service areas
  */
 
-const CACHE_NAME = 'hnfd-rescue-v2.1.0';
+const CACHE_NAME = 'hnfd-rescue-v2.1.1';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
   '/app.js',
   '/manifest.json',
   '/version.json',
+  // All PWA icons (required for offline install)
+  '/icons/icon-72.png',
+  '/icons/icon-96.png',
+  '/icons/icon-128.png',
+  '/icons/icon-144.png',
+  '/icons/icon-152.png',
   '/icons/icon-192.png',
+  '/icons/icon-384.png',
   '/icons/icon-512.png',
+  // Logo and equipment images
   '/images/hnfr-logo.png',
   '/images/trauma_bag_adult.jpg',
   '/images/cabinet_k_overview.jpg',
