@@ -140,7 +140,7 @@ const INVENTORY_DATABASE = {
       description: "Battery-operated suction for on-scene use",
       warning: "CRITICAL: Cord plugged into cigarette lighter at back of cabinet. MUST UNPLUG before removing! Does NOT detach at unit. Like pulling away from gas pump with nozzle in tank!",
       notes: "One of THREE suction types on board",
-      image: "/images/drug_box.jpg"
+      image: "/images/suction.jpg"
     },
     {
       id: "glucometer",
@@ -154,7 +154,7 @@ const INVENTORY_DATABASE = {
       criticalRank: 10,
       description: "Checks blood glucose levels in diabetic patients",
       driverNote: "Little black box, little black pouch - always in same spot",
-      image: "/images/drawer_n_labeled.jpg"
+      image: "/images/glucometer.jpg"
     },
     {
       id: "narcan",
@@ -168,7 +168,7 @@ const INVENTORY_DATABASE = {
       description: "Opioid overdose reversal medication - delivered intranasally",
       warning: "CRITICAL: Nasal ATOMIZER must come with syringe - they are TAPED TOGETHER. Syringe alone is useless! Atomizer screws onto syringe tip.",
       notes: "Old packaging: orange container. New packaging: clear tube (can see syringe). Additional Narcan in Drug Box but Drawer N is fastest.",
-      image: "/images/drawer_n.jpg"
+      image: "/images/narcan.jpg"
     },
     {
       id: "spare_oxygen_tanks",
@@ -208,7 +208,8 @@ const INVENTORY_DATABASE = {
       critical: true,
       criticalRank: 13,
       description: "Mechanical CPR device - delivers consistent chest compressions",
-      notes: "Hit seatbelt release to access. Purchased by Town of Harpswell. MC2 carries it because they're usually first on scene (OBI is 23 minutes away)."
+      notes: "Hit seatbelt release to access. Purchased by Town of Harpswell. MC2 carries it because they're usually first on scene (OBI is 23 minutes away).",
+      image: "/images/lucas_device.jpg"
     },
     {
       id: "saline_bags",
@@ -219,7 +220,8 @@ const INVENTORY_DATABASE = {
       compartment: "D",
       description: "IV fluid for hydration - moved from K for easier access",
       warning: "MUST grab PRIMARY SET (IV tubing) with saline bag - bag is USELESS without tubing!",
-      notes: "Warm saline in heated IV warmer during winter for hypothermic patients. Cabinet doors fold DOWN for easier access."
+      notes: "Warm saline in heated IV warmer during winter for hypothermic patients. Cabinet doors fold DOWN for easier access.",
+      image: "/images/saline_bags.jpg"
     },
     {
       id: "primary_sets",
@@ -228,7 +230,8 @@ const INVENTORY_DATABASE = {
       searchText: "primary sets IV tubing administration drip line saline",
       location: "Cabinet D - right next to saline bags",
       compartment: "D",
-      description: "IV tubing with needle for saline bags - required to administer saline"
+      description: "IV tubing with needle for saline bags - required to administer saline",
+      image: "/images/primary_sets.jpg"
     },
     {
       id: "onboard_suction",
@@ -280,9 +283,190 @@ const INVENTORY_DATABASE = {
 };
 
 // ============================================================================
+// INTELLIGENT VOICE MATCHING - Restrict to valid equipment only
+// ============================================================================
+
+/**
+ * Calculate Levenshtein distance between two strings
+ * Used for fuzzy matching voice input to equipment names
+ */
+function levenshteinDistance(a, b) {
+  const matrix = [];
+
+  for (let i = 0; i <= b.length; i++) {
+    matrix[i] = [i];
+  }
+
+  for (let j = 0; j <= a.length; j++) {
+    matrix[0][j] = j;
+  }
+
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1, // substitution
+          matrix[i][j - 1] + 1,     // insertion
+          matrix[i - 1][j] + 1      // deletion
+        );
+      }
+    }
+  }
+
+  return matrix[b.length][a.length];
+}
+
+/**
+ * Build list of ALL valid search terms from inventory
+ * Returns array of {term, itemId, type} objects
+ */
+function buildValidSearchTerms() {
+  const validTerms = [];
+
+  for (const item of INVENTORY_DATABASE.items) {
+    // Add the official name
+    validTerms.push({
+      term: item.name.toLowerCase(),
+      itemId: item.id,
+      type: 'name',
+      priority: 100
+    });
+
+    // Add all aliases
+    for (const alias of item.aliases || []) {
+      validTerms.push({
+        term: alias.toLowerCase(),
+        itemId: item.id,
+        type: 'alias',
+        priority: 90
+      });
+    }
+
+    // Add individual words from searchText for multi-word queries
+    if (item.searchText) {
+      const words = item.searchText.toLowerCase().split(/\s+/)
+        .filter(w => w.length > 2); // Only words longer than 2 chars
+
+      for (const word of words) {
+        validTerms.push({
+          term: word,
+          itemId: item.id,
+          type: 'keyword',
+          priority: 50
+        });
+      }
+    }
+  }
+
+  return validTerms;
+}
+
+// Build search terms once at startup
+const VALID_SEARCH_TERMS = buildValidSearchTerms();
+
+/**
+ * Smart voice matcher - Find closest valid equipment term
+ * Prevents misheard words like "sailing" instead of "saline"
+ *
+ * @param {string} spokenText - Raw text from speech recognition
+ * @returns {string} - Best matching equipment term or original text
+ */
+function matchToValidEquipment(spokenText) {
+  const cleaned = spokenText.toLowerCase().trim()
+    .replace(/^(where is the |where's the |i need |get me |find |where is |where's |the )/gi, '')
+    .trim();
+
+  if (!cleaned) return spokenText;
+
+  console.log('[Voice Match] Input:', cleaned);
+
+  // Split into words for multi-word matching
+  const spokenWords = cleaned.split(/\s+/);
+  let bestMatches = [];
+
+  // For each spoken word, find best match in valid terms
+  for (const spokenWord of spokenWords) {
+    if (spokenWord.length < 2) continue; // Skip very short words
+
+    let bestMatch = null;
+    let bestScore = Infinity;
+
+    for (const validTerm of VALID_SEARCH_TERMS) {
+      // Calculate similarity score (lower is better)
+      const distance = levenshteinDistance(spokenWord, validTerm.term);
+      const lengthDiff = Math.abs(spokenWord.length - validTerm.term.length);
+
+      // Penalize large length differences
+      const score = distance + (lengthDiff * 0.5);
+
+      // Bonus for exact matches
+      const exactMatch = validTerm.term === spokenWord ? -100 : 0;
+      const finalScore = score + exactMatch;
+
+      // Only consider matches within reasonable distance
+      const maxAllowedDistance = Math.max(2, Math.floor(spokenWord.length * 0.4));
+
+      if (distance <= maxAllowedDistance && finalScore < bestScore) {
+        bestScore = finalScore;
+        bestMatch = {
+          original: spokenWord,
+          matched: validTerm.term,
+          itemId: validTerm.itemId,
+          type: validTerm.type,
+          priority: validTerm.priority,
+          distance: distance,
+          score: finalScore
+        };
+      }
+    }
+
+    if (bestMatch) {
+      bestMatches.push(bestMatch);
+    }
+  }
+
+  if (bestMatches.length === 0) {
+    console.log('[Voice Match] No valid matches found');
+    return cleaned; // Return cleaned original if no matches
+  }
+
+  // Sort by priority and score
+  bestMatches.sort((a, b) => {
+    if (a.priority !== b.priority) return b.priority - a.priority;
+    return a.score - b.score;
+  });
+
+  // Use the best match
+  const topMatch = bestMatches[0];
+
+  console.log('[Voice Match] Best match:', {
+    spoken: topMatch.original,
+    matched: topMatch.matched,
+    type: topMatch.type,
+    distance: topMatch.distance
+  });
+
+  // If we have a very close match, use it
+  if (topMatch.distance <= 2) {
+    return topMatch.matched;
+  }
+
+  // For slightly fuzzy matches, combine all matched terms
+  const matchedTerms = bestMatches
+    .filter(m => m.distance <= 3)
+    .map(m => m.matched)
+    .join(' ');
+
+  console.log('[Voice Match] Final query:', matchedTerms || topMatch.matched);
+  return matchedTerms || topMatch.matched;
+}
+
+// ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.2.0';
+const APP_VERSION = '2.3.0';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
@@ -410,6 +594,7 @@ function startUpdateChecker() {
 // ============================================================================
 let currentResult = null;
 let isListening = false;
+let lastSearchWasVoice = false; // Track if search came from voice
 let recognition = null;
 let synthesis = window.speechSynthesis;
 let modelLoaded = false;
@@ -518,6 +703,7 @@ function showEmergencyMode() {
 // DOM ELEMENTS
 // ============================================================================
 const voiceBtn = document.getElementById('voiceBtn');
+const voiceCancelBtn = document.getElementById('voiceCancelBtn');
 const voiceIcon = document.getElementById('voiceIcon');
 const voiceLabel = document.getElementById('voiceLabel');
 const transcript = document.getElementById('transcript');
@@ -553,6 +739,8 @@ function initSpeechRecognition() {
     voiceLabel.textContent = 'Listening... speak now';
     transcript.textContent = '';
     statusText.textContent = 'Listening';
+    // Show cancel button when listening
+    voiceCancelBtn.style.display = 'flex';
   };
 
   recognition.onresult = (event) => {
@@ -571,7 +759,15 @@ function initSpeechRecognition() {
     transcript.textContent = finalTranscript || interimTranscript;
 
     if (finalTranscript) {
-      search(finalTranscript);
+      console.log('[Speech] Raw input:', finalTranscript);
+
+      // CRITICAL: Match spoken text to valid equipment ONLY
+      // Prevents misheard words like "sailing" instead of "saline"
+      const matchedEquipment = matchToValidEquipment(finalTranscript);
+      console.log('[Speech] Matched to:', matchedEquipment);
+
+      lastSearchWasVoice = true; // Mark this as voice search
+      search(matchedEquipment);
     }
   };
 
@@ -612,6 +808,20 @@ function stopListening() {
   voiceIcon.textContent = '🎤';
   voiceLabel.textContent = 'Tap to ask where something is';
   statusText.textContent = 'Ready';
+  // Hide cancel button when not listening
+  voiceCancelBtn.style.display = 'none';
+}
+
+function cancelListening() {
+  console.log('[Speech] Cancelled by user');
+  if (recognition && isListening) {
+    recognition.stop(); // This will trigger onend which calls stopListening()
+  }
+  transcript.textContent = 'Cancelled';
+  setTimeout(() => {
+    transcript.textContent = '';
+  }, 1500);
+  hapticFeedback('light');
 }
 
 // ============================================================================
@@ -786,10 +996,17 @@ function displayResults(results, query) {
     }
   });
 
-  // Auto-speak first result if voice was used
-  // NOTE: Call directly without setTimeout to maintain user gesture for iOS
-  if (isListening === false && currentResult) {
-    speakResult();
+  // Auto-speak result if search came from voice input
+  // IMPORTANT: Always speak results after voice search (life-threatening situations)
+  if (lastSearchWasVoice && currentResult) {
+    lastSearchWasVoice = false; // Reset flag
+    // Small delay to ensure UI is updated and isListening is false
+    setTimeout(() => {
+      if (currentResult) { // Double-check result still exists
+        initializeAudio(); // Ensure audio is unlocked
+        speakResult();
+      }
+    }, 100);
   }
 }
 
@@ -952,9 +1169,17 @@ voiceBtn.addEventListener('click', () => {
   }
 });
 
+// Cancel button - stop listening and clear transcript
+voiceCancelBtn.addEventListener('click', (e) => {
+  e.stopPropagation(); // Prevent triggering voice section click
+  hapticFeedback('light');
+  cancelListening();
+});
+
 // Large tap zone - anywhere on voice section starts listening
 document.querySelector('.voice-section')?.addEventListener('click', (e) => {
-  if (e.target !== voiceBtn && !isListening) {
+  // Don't trigger if clicking the buttons directly
+  if (e.target !== voiceBtn && e.target !== voiceCancelBtn && !isListening) {
     startListening();
   }
 });
