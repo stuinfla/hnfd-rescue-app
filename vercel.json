@@ -1,9 +1,4 @@
 {
-  "version": 2,
-  "buildCommand": "echo 'No build needed - static files'",
-  "outputDirectory": "public",
-  "cleanUrls": true,
-  "trailingSlash": false,
   "headers": [
     {
       "source": "/sw.js",
@@ -15,15 +10,6 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=0, must-revalidate"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600, must-revalidate"
         }
       ]
     }

@@ -1,0 +1,18 @@
+{
+  "version": "2.3.0",
+  "build": "2025-12-18",
+  "changelog": [
+    "CRITICAL: Intelligent voice matching - prevents 'sailing' for 'saline'",
+    "Voice search now restricted to valid equipment names only",
+    "NEW: Voice search auto-speaks results instantly",
+    "NEW: Cancel button (X) next to microphone during listening",
+    "FIXED: Android PWA installation issues",
+    "FIXED: Updated equipment images with better video frames",
+    "IMPROVED: Levenshtein distance algorithm for fuzzy matching",
+    "IMPROVED: PWA manifest for better Android support",
+    "Equipment images extracted at exact transcript timestamps",
+    "Voice matching uses phonetic similarity scoring",
+    "Cancel button appears only when listening",
+    "Separate 'any' and 'maskable' icons for Android"
+  ]
+}
