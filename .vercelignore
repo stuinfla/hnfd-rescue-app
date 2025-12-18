@@ -1,0 +1,37 @@
+# Large files that should not be deployed
+Ambulance_training_data/
+video_analysis/
+node_modules/
+public/
+src/
+data/
+docs/
+.claude/
+.swarm/
+.vercel/
+.claude-flow/
+
+# Python files
+*.py
+__pycache__/
+*.pyc
+
+# Documentation
+README.md
+CLAUDE.md
+ADMIN_GUIDE.md
+RUVNET_ECOSYSTEM_COMPLETE.md
+*.md
+
+# Git
+.git/
+.gitignore
+
+# System files
+.DS_Store
+.env.local
+
+# Development files
+server.js
+package.json
+package-lock.json
