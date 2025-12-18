@@ -44,7 +44,7 @@ const INVENTORY_DATABASE = {
       criticalRank: 2,
       description: "Complete respiratory treatment kit with oxygen tank inside",
       contents: "Oral airways, nasal airways, oxygen masks, oxygen tank",
-      image: "/images/cabinet_k_overview.jpg"
+      image: "/images/oxygen_kit_adult.jpg"
     },
     {
       id: "oxygen_kit_pediatric",
@@ -58,7 +58,7 @@ const INVENTORY_DATABASE = {
       criticalRank: 3,
       description: "Pediatric respiratory kit - placed FIRST because children primarily have respiratory emergencies",
       notes: "Kids rarely have cardiac problems - respiratory is primary concern. Oxygen for children is PRIMARY importance.",
-      image: "/images/pediatric_bags.jpg"
+      image: "/images/pediatric_oxygen.jpg"
     },
     {
       id: "trauma_bag_pediatric",
@@ -71,7 +71,7 @@ const INVENTORY_DATABASE = {
       critical: true,
       criticalRank: 4,
       description: "Pediatric trauma supplies",
-      image: "/images/pediatric_bags.jpg"
+      image: "/images/pediatric_trauma.jpg"
     },
     {
       id: "intubation_kit",
@@ -97,7 +97,7 @@ const INVENTORY_DATABASE = {
       criticalRank: 6,
       description: "Everything to establish IV access - primarily for paramedic drug administration",
       notes: "Does NOT contain saline bags",
-      image: "/images/cabinet_k_overview.jpg"
+      image: "/images/iv_kit.jpg"
     },
     {
       id: "portable_aed",
@@ -466,7 +466,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.3.0';
+const APP_VERSION = '2.4.3';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
@@ -474,16 +474,26 @@ async function checkForUpdates(showIfCurrent = false) {
   if (!navigator.onLine) return;
 
   try {
-    // Add cache-busting parameter
-    const response = await fetch(`/version.json?t=${Date.now()}`);
+    // CRITICAL: Add cache-busting and force no-cache headers
+    const response = await fetch(`/version.json?t=${Date.now()}`, {
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    });
     if (!response.ok) return;
 
     const data = await response.json();
     const serverVersion = data.version;
     const currentVersion = APP_VERSION;
 
+    console.log(`[Update] Server: v${serverVersion}, Current: v${currentVersion}`);
+
     if (serverVersion !== currentVersion) {
       // New version available
+      console.log('[Update] New version detected - showing notification');
       showUpdateNotification(serverVersion, data.changelog);
     } else if (showIfCurrent) {
       showVersionInfo('App is up to date!');
@@ -574,12 +584,10 @@ function dismissUpdate() {
 
 // Schedule periodic update checks
 function startUpdateChecker() {
-  // Check on startup (after 5 seconds)
-  setTimeout(() => {
-    if (!sessionStorage.getItem('hnfd_update_dismissed')) {
-      checkForUpdates();
-    }
-  }, 5000);
+  // CRITICAL: Check IMMEDIATELY on every page load (no delay, no cache)
+  // Clear any previous dismissal - always check on fresh load
+  sessionStorage.removeItem('hnfd_update_dismissed');
+  checkForUpdates();
 
   // Check periodically
   setInterval(() => {
@@ -793,12 +801,51 @@ function initSpeechRecognition() {
 }
 
 function startListening() {
-  if (!recognition) return;
+  if (!recognition) {
+    transcript.textContent = 'Voice recognition not available';
+    console.error('[Speech] Recognition not initialized');
+    return;
+  }
+
+  if (isListening) {
+    console.log('[Speech] Already listening, stopping first');
+    recognition.stop();
+    return;
+  }
 
   try {
+    console.log('[Speech] Starting recognition...');
+
+    // CRITICAL FIX: Set listening state IMMEDIATELY (iOS Safari doesn't reliably fire onstart)
+    isListening = true;
+    voiceBtn.classList.add('listening');
+    voiceIcon.textContent = '🔴';
+    voiceLabel.textContent = 'Listening... speak now';
+    transcript.textContent = '';
+    statusText.textContent = 'Listening';
+    voiceCancelBtn.style.display = 'flex'; // Show cancel button immediately
+
     recognition.start();
   } catch (e) {
     console.error('[Speech] Could not start recognition:', e);
+
+    // Reset state on error
+    stopListening();
+
+    // If error is "already started", stop and restart
+    if (e.message && e.message.includes('already started')) {
+      try {
+        recognition.stop();
+        setTimeout(() => {
+          startListening(); // Recursive call to restart
+        }, 100);
+      } catch (e2) {
+        console.error('[Speech] Restart failed:', e2);
+        transcript.textContent = 'Microphone error. Refresh page.';
+      }
+    } else {
+      transcript.textContent = 'Please allow microphone access';
+    }
   }
 }
 
@@ -959,8 +1006,8 @@ function displayResults(results, query) {
 
         ${item.image ? `
           <div class="result-image-container">
-            <img src="${item.image}" alt="${item.name}" class="result-image" onclick="toggleImageZoom(this)" />
-            <div class="image-hint">Tap image to enlarge</div>
+            <img src="${getImageUrl(item)}" alt="${item.name}" class="result-image" onclick="toggleImageZoom(this)" />
+            <div class="image-hint">Tap image to enlarge ${getCustomImage(item.id) ? '• Custom Image' : ''}</div>
           </div>
         ` : ''}
 
@@ -1160,7 +1207,8 @@ function toggleImageZoom(imgElement) {
 // ============================================================================
 // EVENT LISTENERS
 // ============================================================================
-voiceBtn.addEventListener('click', () => {
+voiceBtn.addEventListener('click', (e) => {
+  e.stopPropagation(); // Prevent bubbling to voice-section
   hapticFeedback('medium');
   if (isListening) {
     recognition?.stop();
@@ -1178,8 +1226,8 @@ voiceCancelBtn.addEventListener('click', (e) => {
 
 // Large tap zone - anywhere on voice section starts listening
 document.querySelector('.voice-section')?.addEventListener('click', (e) => {
-  // Don't trigger if clicking the buttons directly
-  if (e.target !== voiceBtn && e.target !== voiceCancelBtn && !isListening) {
+  // Don't trigger if clicking inside the button containers
+  if (!e.target.closest('.voice-btn') && !e.target.closest('.voice-cancel-btn') && !isListening) {
     startListening();
   }
 });
@@ -1276,17 +1324,11 @@ function initializeAudio() {
 function requestMicrophonePermission() {
   if (micPermissionRequested || !recognition) return;
 
-  try {
-    // Attempt to start and immediately stop recognition
-    // This triggers the browser's permission prompt
-    recognition.start();
-    recognition.stop();
-    localStorage.setItem('hnfd_mic_permission_requested', 'true');
-    micPermissionRequested = true;
-    console.log('[Mic] Permission requested');
-  } catch (e) {
-    console.error('[Mic] Permission request failed:', e);
-  }
+  // Don't auto-request - let user click mic button first
+  // This prevents conflicts with actual usage
+  micPermissionRequested = true;
+  localStorage.setItem('hnfd_mic_permission_requested', 'true');
+  console.log('[Mic] Ready for user interaction');
 }
 
 // Load voices (needed for some browsers)
@@ -1472,8 +1514,10 @@ console.log('[HNFD] Recent searches:', recentSearches.length);
 
 const ADMIN_PASSWORD = 'hnfd2026admin'; // Admin access password
 const ADMIN_STORAGE_KEY = 'hnfd_equipment_custom';
+const CUSTOM_IMAGES_KEY = 'hnfd_custom_images'; // Store custom images
 let adminAuthenticated = false;
 let customInventory = null;
+let customImages = {}; // { itemId: base64ImageData }
 
 // DOM Elements
 const adminToggleBtn = document.getElementById('admin-toggle');
@@ -1514,6 +1558,145 @@ function loadCustomInventory() {
 
 // Save custom inventory to localStorage
 function saveCustomInventory() {
+  try {
+    localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(customInventory));
+    console.log('[Admin] Saved custom inventory:', customInventory.items.length, 'items');
+  } catch (e) {
+    console.error('[Admin] Failed to save inventory:', e);
+  }
+}
+
+// ============================================================================
+// CUSTOM IMAGE MANAGEMENT - Camera Capture & Storage
+// ============================================================================
+
+// Load custom images from localStorage
+function loadCustomImages() {
+  const stored = localStorage.getItem(CUSTOM_IMAGES_KEY);
+  if (stored) {
+    try {
+      customImages = JSON.parse(stored);
+      console.log('[Images] Loaded custom images:', Object.keys(customImages).length);
+    } catch (e) {
+      console.error('[Images] Failed to load custom images:', e);
+      customImages = {};
+    }
+  }
+}
+
+// Save custom images to localStorage
+function saveCustomImages() {
+  try {
+    localStorage.setItem(CUSTOM_IMAGES_KEY, JSON.stringify(customImages));
+    console.log('[Images] Saved custom images:', Object.keys(customImages).length);
+  } catch (e) {
+    console.error('[Images] Failed to save custom images:', e);
+    alert('Failed to save image - it may be too large');
+  }
+}
+
+// Get custom image for item (returns null if none)
+function getCustomImage(itemId) {
+  return customImages[itemId] || null;
+}
+
+// Get image URL for item (custom or default)
+function getImageUrl(item) {
+  const customImg = getCustomImage(item.id);
+  return customImg || item.image;
+}
+
+// Open camera capture modal
+function openImageCapture(itemId) {
+  const item = customInventory.items.find(i => i.id === itemId);
+  if (!item) return;
+
+  const modal = document.getElementById('image-capture-modal');
+  const itemName = document.getElementById('capture-item-name');
+  const fileInput = document.getElementById('capture-file-input');
+
+  itemName.textContent = item.name;
+  modal.dataset.itemId = itemId;
+  modal.classList.add('active');
+
+  // Trigger file input for camera/gallery
+  fileInput.click();
+}
+
+// Handle image file selection
+function handleImageCapture(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const modal = document.getElementById('image-capture-modal');
+  const itemId = modal.dataset.itemId;
+  const preview = document.getElementById('capture-preview');
+  const previewImg = document.getElementById('capture-preview-img');
+  const controls = document.getElementById('capture-controls');
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    // Show preview
+    previewImg.src = e.target.result;
+    preview.style.display = 'block';
+    controls.style.display = 'flex';
+
+    // Store temporarily for save
+    modal.dataset.imageData = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// Save custom image
+function saveCustomImage() {
+  const modal = document.getElementById('image-capture-modal');
+  const itemId = modal.dataset.itemId;
+  const imageData = modal.dataset.imageData;
+
+  if (!itemId || !imageData) return;
+
+  // Store custom image
+  customImages[itemId] = imageData;
+  saveCustomImages();
+
+  // Close modal and refresh admin list
+  closeImageCapture();
+  renderAdminItemsList();
+
+  hapticFeedback('success');
+  alert('Image saved successfully!');
+}
+
+// Reset to default image
+function resetImage(itemId) {
+  if (confirm('Reset to default image?')) {
+    delete customImages[itemId];
+    saveCustomImages();
+    renderAdminItemsList();
+    hapticFeedback('medium');
+  }
+}
+
+// Close image capture modal
+function closeImageCapture() {
+  const modal = document.getElementById('image-capture-modal');
+  const preview = document.getElementById('capture-preview');
+  const controls = document.getElementById('capture-controls');
+  const fileInput = document.getElementById('capture-file-input');
+
+  modal.classList.remove('active');
+  preview.style.display = 'none';
+  controls.style.display = 'none';
+  fileInput.value = '';
+  delete modal.dataset.imageData;
+  delete modal.dataset.itemId;
+}
+
+// Load custom images on startup
+loadCustomImages();
+
+// Legacy save function - add error handling
+function saveCustomInventoryContinue() {
   try {
     localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(customInventory));
     console.log('[Admin] Saved custom inventory:', customInventory.items.length, 'items');
@@ -1604,6 +1787,12 @@ function renderAdminItemsList(filter = '') {
           ${item.critical ? '<span class="admin-badge">CRITICAL</span>' : ''}
           ${item.compartment ? `<span class="admin-badge" style="background: var(--green-600);">${item.compartment}</span>` : ''}
         </div>
+      </div>
+      <div class="admin-item-actions" style="margin-top: 12px; display: flex; gap: 8px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <button class="admin-btn-small admin-btn-camera" data-item-id="${item.id}" onclick="event.stopPropagation(); openImageCapture('${item.id}')">
+          📷 Replace Image
+        </button>
+        ${getCustomImage(item.id) ? `<button class="admin-btn-small admin-btn-secondary" onclick="event.stopPropagation(); resetImage('${item.id}')">🔄 Reset</button>` : ''}
       </div>
     </div>
   `).join('');

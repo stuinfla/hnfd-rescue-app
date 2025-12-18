@@ -1,18 +1,14 @@
 {
-  "version": "2.3.0",
+  "version": "2.4.3",
   "build": "2025-12-18",
   "changelog": [
-    "CRITICAL: Intelligent voice matching - prevents 'sailing' for 'saline'",
-    "Voice search now restricted to valid equipment names only",
-    "NEW: Voice search auto-speaks results instantly",
-    "NEW: Cancel button (X) next to microphone during listening",
-    "FIXED: Android PWA installation issues",
-    "FIXED: Updated equipment images with better video frames",
-    "IMPROVED: Levenshtein distance algorithm for fuzzy matching",
-    "IMPROVED: PWA manifest for better Android support",
-    "Equipment images extracted at exact transcript timestamps",
-    "Voice matching uses phonetic similarity scoring",
-    "Cancel button appears only when listening",
-    "Separate 'any' and 'maskable' icons for Android"
+    "CRITICAL FIX: Microphone works on iOS Safari (v2.4.3)",
+    "FIXED: Cancel button now appears when mic is active",
+    "FIXED: Red microphone indicator shows immediately",
+    "FIXED: iOS Safari compatibility - doesn't wait for onstart event",
+    "Microphone activates instantly on first click",
+    "---",
+    "Previous fixes: Removed auto-permission request (v2.4.2)",
+    "All equipment images are unique and identifiable (v2.4.1)"
   ]
 }
