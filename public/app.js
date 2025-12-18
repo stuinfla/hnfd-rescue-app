@@ -1470,7 +1470,7 @@ console.log('[HNFD] Recent searches:', recentSearches.length);
 // ADMIN MODE - Equipment Management System
 // ============================================================================
 
-const ADMIN_PASSWORD = 'hnfd2024'; // Change this for production
+const ADMIN_PASSWORD = 'hnfd2026admin'; // Admin access password
 const ADMIN_STORAGE_KEY = 'hnfd_equipment_custom';
 let adminAuthenticated = false;
 let customInventory = null;
