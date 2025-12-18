@@ -1,15 +1,18 @@
 {
-  "version": "2.1.1",
-  "build": "2025-12-17",
+  "version": "2.1.2",
+  "build": "2025-12-18",
   "changelog": [
+    "Fixed text-to-speech on Android and iOS",
+    "Added proper voice loading for Android Chrome",
+    "Fixed iOS audio policy compliance",
+    "Removed setTimeout breaking user gesture chain",
+    "Added audio initialization on first interaction",
+    "Improved TTS error handling and diagnostics",
     "Fixed service worker to cache all 8 PWA icon sizes",
-    "Ensures 100% offline capability for icons",
     "Added automatic update checking",
-    "Added version display",
     "Added emergency mode button",
     "Added night mode",
     "Added recent searches",
-    "Added haptic feedback",
-    "Compressed images for faster loading"
+    "Added haptic feedback"
   ]
 }

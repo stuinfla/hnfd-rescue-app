@@ -282,7 +282,7 @@ const INVENTORY_DATABASE = {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.1.1';
+const APP_VERSION = '2.1.2';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
@@ -415,6 +415,7 @@ let synthesis = window.speechSynthesis;
 let modelLoaded = false;
 let recentSearches = JSON.parse(localStorage.getItem('hnfd_recent_searches') || '[]');
 let nightMode = localStorage.getItem('hnfd_night_mode') === 'true';
+let audioInitialized = false;
 
 // ============================================================================
 // HAPTIC FEEDBACK - Better tactile confirmation in stressful situations
@@ -785,20 +786,70 @@ function displayResults(results, query) {
   });
 
   // Auto-speak first result if voice was used
+  // NOTE: Call directly without setTimeout to maintain user gesture for iOS
   if (isListening === false && currentResult) {
-    // Small delay to let UI update
-    setTimeout(() => speakResult(), 300);
+    speakResult();
   }
 }
 
 // ============================================================================
 // TEXT-TO-SPEECH (100% Offline via native SpeechSynthesis)
 // ============================================================================
-function speakResult() {
-  if (!currentResult || !synthesis) return;
+let voicesLoaded = false;
+let voiceLoadAttempts = 0;
+
+function ensureVoicesLoaded() {
+  return new Promise((resolve) => {
+    const voices = synthesis.getVoices();
+    if (voices.length > 0) {
+      voicesLoaded = true;
+      console.log('[TTS] Voices available:', voices.length);
+      resolve(voices);
+      return;
+    }
+
+    // Android Chrome requires waiting for voiceschanged event
+    if (voiceLoadAttempts < 3) {
+      voiceLoadAttempts++;
+      console.log('[TTS] Waiting for voices... attempt', voiceLoadAttempts);
+
+      const timeout = setTimeout(() => {
+        synthesis.removeEventListener('voiceschanged', voicesHandler);
+        resolve(synthesis.getVoices());
+      }, 1000);
+
+      const voicesHandler = () => {
+        clearTimeout(timeout);
+        voicesLoaded = true;
+        console.log('[TTS] Voices loaded:', synthesis.getVoices().length);
+        resolve(synthesis.getVoices());
+      };
+
+      synthesis.addEventListener('voiceschanged', voicesHandler, { once: true });
+    } else {
+      resolve(voices);
+    }
+  });
+}
+
+async function speakResult() {
+  if (!currentResult || !synthesis) {
+    console.error('[TTS] Missing synthesis or result');
+    return;
+  }
 
   // Cancel any ongoing speech
   synthesis.cancel();
+
+  // Ensure voices are loaded (critical for Android)
+  const voices = await ensureVoicesLoaded();
+
+  if (voices.length === 0) {
+    console.error('[TTS] No voices available');
+    statusText.textContent = 'Audio unavailable';
+    setTimeout(() => statusText.textContent = 'Ready', 2000);
+    return;
+  }
 
   const item = currentResult;
   let text = `${item.name}. `;
@@ -821,33 +872,42 @@ function speakResult() {
   utterance.pitch = 1;
   utterance.volume = 1;
 
-  // Try to use a clear voice
-  const voices = synthesis.getVoices();
+  // Select best available voice
   const preferredVoice = voices.find(v =>
     v.lang.startsWith('en') && (v.name.includes('Enhanced') || v.name.includes('Premium'))
-  ) || voices.find(v => v.lang.startsWith('en-US'));
+  ) || voices.find(v => v.lang.startsWith('en-US')) || voices[0];
 
   if (preferredVoice) {
     utterance.voice = preferredVoice;
+    console.log('[TTS] Using voice:', preferredVoice.name);
   }
 
   utterance.onstart = () => {
     speakBtn.classList.add('speaking');
     statusText.textContent = 'Speaking';
+    console.log('[TTS] Speaking started');
   };
 
   utterance.onend = () => {
     speakBtn.classList.remove('speaking');
     statusText.textContent = 'Ready';
+    console.log('[TTS] Speaking ended');
   };
 
   utterance.onerror = (e) => {
-    console.error('[TTS] Error:', e);
+    console.error('[TTS] Error:', e.error, e);
     speakBtn.classList.remove('speaking');
-    statusText.textContent = 'Ready';
+    statusText.textContent = 'Audio failed - tap speaker to retry';
+    setTimeout(() => statusText.textContent = 'Ready', 3000);
   };
 
-  synthesis.speak(utterance);
+  try {
+    synthesis.speak(utterance);
+  } catch (e) {
+    console.error('[TTS] Exception:', e);
+    statusText.textContent = 'Audio failed';
+    setTimeout(() => statusText.textContent = 'Ready', 2000);
+  }
 }
 
 // ============================================================================
@@ -915,7 +975,10 @@ searchInput.addEventListener('input', (e) => {
   }
 });
 
-speakBtn.addEventListener('click', speakResult);
+speakBtn.addEventListener('click', () => {
+  initializeAudio();  // Ensure audio is unlocked on iOS
+  speakResult();
+});
 
 // Quick access buttons
 document.querySelectorAll('.quick-btn').forEach(btn => {
@@ -967,6 +1030,22 @@ if (!navigator.onLine) {
 // ============================================================================
 initSpeechRecognition();
 
+// Initialize audio on first user interaction (required for iOS)
+function initializeAudio() {
+  if (audioInitialized || !synthesis) return;
+
+  try {
+    // Create a silent utterance to "unlock" audio on iOS
+    const utterance = new SpeechSynthesisUtterance('');
+    utterance.volume = 0;
+    synthesis.speak(utterance);
+    audioInitialized = true;
+    console.log('[TTS] Audio initialized');
+  } catch (e) {
+    console.error('[TTS] Audio init failed:', e);
+  }
+}
+
 // Load voices (needed for some browsers)
 if (synthesis) {
   synthesis.onvoiceschanged = () => {
@@ -974,6 +1053,12 @@ if (synthesis) {
   };
   // Trigger voice loading
   synthesis.getVoices();
+
+  // Initialize audio on any user interaction
+  const initEvents = ['click', 'touchstart', 'keydown'];
+  initEvents.forEach(event => {
+    document.addEventListener(event, initializeAudio, { once: true, passive: true });
+  });
 }
 
 // Register Service Worker for offline support
