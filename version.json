@@ -1,12 +1,16 @@
 {
-  "version": "2.4.4",
+  "version": "2.6.0",
   "build": "2025-12-18",
   "changelog": [
-    "NEW: Share button - EMTs can share app with each other (v2.4.4)",
-    "Uses native phone share (text, AirDrop, email, etc.)",
-    "Falls back to clipboard copy on desktop",
+    "MAJOR: Rotating Location Guide with Gold Dot Markers (v2.6.0)",
+    "NEW: Auto-rotating image viewer shows ambulance→drawer→equipment sequence",
+    "NEW: Gold pulsing dot overlays highlight exact locations",
+    "NEW: Play/Pause controls for image rotation",
+    "NEW: 1740 frames extracted for comprehensive location coverage",
+    "NEW: 8 equipment items now have complete 3-image sequences",
     "---",
-    "Previous: Microphone iOS fix (v2.4.3)",
-    "All equipment images unique (v2.4.1)"
+    "Previous: Multi-image support (v2.5.0)",
+    "Step-by-step location guides",
+    "Share button (v2.4.4)"
   ]
 }

@@ -30,7 +30,24 @@ const INVENTORY_DATABASE = {
       criticalRank: 1,
       description: "Contains all trauma supplies for adult patients",
       notes: "Red tag = inventory tracking. If seal unbroken, contents unchanged.",
-      image: "/images/trauma_bag_adult.jpg"
+      image: "/images/trauma_bag_adult.jpg",
+      images: {
+        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
+        compartmentView: "/images/locations/cabinet_k_overview.jpg",
+        equipmentPhoto: "/images/locations/adult_trauma_bag_closeup.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 45, y: 60, label: "Cabinet K" },
+        compartmentView: { x: 50, y: 70, label: "Middle Drawer" },
+        equipmentPhoto: null
+      },
+      locationSteps: [
+        "Step 1: Go to OUTSIDE of ambulance (driver's side)",
+        "Step 2: Find Cabinet K - main side compartment door",
+        "Step 3: Open Middle Drawer - trauma bag is in FRONT",
+        "Step 4: Grab RED/ORANGE bag - this is the adult trauma bag"
+      ],
+      quickFind: "Outside ambulance → Cabinet K (side door) → Middle drawer → RED bag in front"
     },
     {
       id: "oxygen_kit_adult",
@@ -111,7 +128,24 @@ const INVENTORY_DATABASE = {
       criticalRank: 7,
       description: "Automated External Defibrillator for cardiac emergencies",
       notes: "Check for GREEN FLASH every 8-10 seconds = charged and ready",
-      image: "/images/cabinet_d_aed.jpg"
+      image: "/images/cabinet_d_aed.jpg",
+      images: {
+        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
+        compartmentView: "/images/locations/cabinet_k_overview.jpg",
+        equipmentPhoto: "/images/locations/aed_closeup.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 45, y: 60, label: "Cabinet K" },
+        compartmentView: { x: 50, y: 30, label: "Top Shelf" },
+        equipmentPhoto: null
+      },
+      locationSteps: [
+        "Step 1: Go to OUTSIDE of ambulance (driver's side)",
+        "Step 2: Find Cabinet K - main side compartment door",
+        "Step 3: Open cabinet - AED is on TOP SHELF (further back)",
+        "Step 4: Look for BLACK bag with RED 'AED' lettering"
+      ],
+      quickFind: "Outside ambulance → Cabinet K (side door) → Top shelf (back) → BLACK bag with RED AED letters"
     },
     {
       id: "drug_box",
@@ -126,7 +160,24 @@ const INVENTORY_DATABASE = {
       description: "Contains non-controlled drugs: acetaminophen, magnesium sulfate, etc.",
       driverNote: "ORANGE BOX = DRUG BOX. That's all you need to know.",
       notes: "Blue tags track drug accountability",
-      image: "/images/drug_box.jpg"
+      image: "/images/drug_box.jpg",
+      images: {
+        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
+        compartmentView: "/images/locations/drug_box_cabinet.jpg",
+        equipmentPhoto: "/images/locations/drug_box_closeup.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 25, y: 50, label: "Cabinet J" },
+        compartmentView: { x: 30, y: 50, label: "Orange Box" },
+        equipmentPhoto: null
+      },
+      locationSteps: [
+        "Step 1: Enter patient compartment through side door",
+        "Step 2: Find Cabinet J - located ABOVE Cabinet K, inside",
+        "Step 3: Open cabinet - look for ORANGE box",
+        "Step 4: Grab the ORANGE BOX - that's the Drug Box"
+      ],
+      quickFind: "Inside ambulance → Cabinet J (above K) → ORANGE box"
     },
     {
       id: "portable_suction",
@@ -140,7 +191,25 @@ const INVENTORY_DATABASE = {
       description: "Battery-operated suction for on-scene use",
       warning: "CRITICAL: Cord plugged into cigarette lighter at back of cabinet. MUST UNPLUG before removing! Does NOT detach at unit. Like pulling away from gas pump with nozzle in tank!",
       notes: "One of THREE suction types on board",
-      image: "/images/suction.jpg"
+      image: "/images/suction.jpg",
+      images: {
+        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
+        compartmentView: "/images/locations/drug_box_cabinet.jpg",
+        equipmentPhoto: "/images/suction.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 25, y: 50, label: "Cabinet J" },
+        compartmentView: { x: 60, y: 50, label: "Suction Unit" },
+        equipmentPhoto: null
+      },
+      locationSteps: [
+        "Step 1: Enter patient compartment through side door",
+        "Step 2: Find Cabinet J - located ABOVE Cabinet K, inside",
+        "Step 3: BEFORE grabbing - locate power cord at back of cabinet",
+        "Step 4: UNPLUG cord from cigarette lighter FIRST",
+        "Step 5: Then remove suction unit"
+      ],
+      quickFind: "Inside ambulance → Cabinet J (above K) → UNPLUG FIRST, then grab unit"
     },
     {
       id: "glucometer",
@@ -154,7 +223,24 @@ const INVENTORY_DATABASE = {
       criticalRank: 10,
       description: "Checks blood glucose levels in diabetic patients",
       driverNote: "Little black box, little black pouch - always in same spot",
-      image: "/images/glucometer.jpg"
+      image: "/images/glucometer.jpg",
+      images: {
+        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
+        compartmentView: "/images/locations/drawer_n_open.jpg",
+        equipmentPhoto: "/images/glucometer.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 70, y: 45, label: "Drawer N" },
+        compartmentView: { x: 40, y: 50, label: "Black Pouch" },
+        equipmentPhoto: null
+      },
+      locationSteps: [
+        "Step 1: Enter patient compartment through side door",
+        "Step 2: Look for Drawer N - located on left wall",
+        "Step 3: Open drawer - Glucometer always in SAME spot",
+        "Step 4: Grab small BLACK box/pouch"
+      ],
+      quickFind: "Inside ambulance → Drawer N (left wall) → Small black box/pouch"
     },
     {
       id: "narcan",
@@ -168,7 +254,24 @@ const INVENTORY_DATABASE = {
       description: "Opioid overdose reversal medication - delivered intranasally",
       warning: "CRITICAL: Nasal ATOMIZER must come with syringe - they are TAPED TOGETHER. Syringe alone is useless! Atomizer screws onto syringe tip.",
       notes: "Old packaging: orange container. New packaging: clear tube (can see syringe). Additional Narcan in Drug Box but Drawer N is fastest.",
-      image: "/images/narcan.jpg"
+      image: "/images/narcan.jpg",
+      images: {
+        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
+        compartmentView: "/images/locations/drawer_n_contents.jpg",
+        equipmentPhoto: "/images/locations/narcan_syringe_closeup.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 70, y: 45, label: "Drawer N" },
+        compartmentView: { x: 55, y: 40, label: "Clear Tubes" },
+        equipmentPhoto: null
+      },
+      locationSteps: [
+        "Step 1: Enter patient compartment through side door",
+        "Step 2: Look for Drawer N - located on left wall",
+        "Step 3: Open drawer - Narcan in clear tubes or orange containers",
+        "Step 4: GRAB BOTH syringe AND atomizer (taped together)"
+      ],
+      quickFind: "Inside ambulance → Drawer N (left wall) → Clear tubes or orange containers"
     },
     {
       id: "spare_oxygen_tanks",
@@ -182,7 +285,24 @@ const INVENTORY_DATABASE = {
       description: "2 spare tanks in holder, plus 1 each in adult and pediatric oxygen kits (4 total)",
       warning: "SQUEEZE brackets together to release tank (counterintuitive). At 15 L/min, tank only lasts few minutes.",
       notes: "New Matheson tanks: green top, aluminum, single valve operation. Old steel tanks: two-step process - open valve first, then set flow.",
-      image: "/images/oxygen_tanks.jpg"
+      image: "/images/oxygen_tanks.jpg",
+      images: {
+        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
+        compartmentView: "/images/locations/oxygen_compartment.jpg",
+        equipmentPhoto: "/images/locations/oxygen_tanks_closeup.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 60, y: 70, label: "O2 Compartment" },
+        compartmentView: { x: 50, y: 60, label: "Tank Holder" },
+        equipmentPhoto: null
+      },
+      locationSteps: [
+        "Step 1: Go to SIDE of ambulance",
+        "Step 2: Find side entry door (with steps)",
+        "Step 3: Look NEXT TO the steps - tanks are in holder",
+        "Step 4: SQUEEZE brackets together to release tank"
+      ],
+      quickFind: "Side of ambulance → Next to entry steps → SQUEEZE brackets to release"
     },
     {
       id: "lifepak_15",
@@ -196,7 +316,24 @@ const INVENTORY_DATABASE = {
       description: "Cardiac monitor/defibrillator - $42,000-$62,000 - HANDLE WITH CARE",
       driverNote: "Press GREEN button ONCE briefly when requested to turn on. Do NOT shut off after hospital - EMT needs code summary printout.",
       notes: "Carry with sensitive side (screen) against body. Has extra BP cuffs and batteries on other side. Must press AND HOLD to shut off (prevents accidental shutdown).",
-      image: "/images/lifepak_mounted.jpg"
+      image: "/images/lifepak_mounted.jpg",
+      images: {
+        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
+        compartmentView: "/images/locations/ambulance_interior_overview.jpg",
+        equipmentPhoto: "/images/locations/lifepak_closeup.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 35, y: 55, label: "LifePak Mount" },
+        compartmentView: { x: 35, y: 55, label: "Mounted Here" },
+        equipmentPhoto: null
+      },
+      locationSteps: [
+        "Step 1: Enter patient compartment through side door",
+        "Step 2: Look for mounted unit - obvious location on wall",
+        "Step 3: Press GREEN button ONCE briefly to turn on",
+        "Step 4: Carry with screen facing your body (protect it)"
+      ],
+      quickFind: "Inside ambulance → Mounted on wall → Press GREEN button to turn on"
     },
     {
       id: "lucas_device",
@@ -238,9 +375,28 @@ const INVENTORY_DATABASE = {
       name: "Onboard Suction",
       aliases: ["main suction", "built-in suction", "vacuum suction", "stretcher suction"],
       searchText: "onboard main built-in vacuum suction stretcher transport",
-      location: "Built into patient compartment",
+      location: "Built into patient compartment - wall-mounted unit",
       compartment: "onboard",
-      description: "Vacuum pump driven suction for patients on stretcher during transport"
+      description: "Vacuum pump driven suction for patients on stretcher during transport",
+      notes: "Wall-mounted in patient compartment. Always available when patient is on stretcher.",
+      image: "/images/suction.jpg",
+      images: {
+        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
+        compartmentView: "/images/locations/onboard_suction_area.jpg",
+        equipmentPhoto: "/images/locations/onboard_suction_area.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 15, y: 45, label: "Suction Panel" },
+        compartmentView: { x: 40, y: 35, label: "Wall Unit" },
+        equipmentPhoto: null
+      },
+      locationSteps: [
+        "Step 1: Enter patient compartment",
+        "Step 2: Look at LEFT WALL near head of stretcher",
+        "Step 3: Wall-mounted suction unit with green components",
+        "Step 4: Already connected - ready to use"
+      ],
+      quickFind: "Inside ambulance → Left wall → Green wall-mounted unit"
     }
   ],
   compartments: {
