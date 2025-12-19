@@ -9,7 +9,15 @@
     "init-db": "node src/init-database.js",
     "test": "node src/test-search.js"
   },
-  "keywords": ["ambulance", "emt", "medical", "inventory", "pwa", "offline", "voice"],
+  "keywords": [
+    "ambulance",
+    "emt",
+    "medical",
+    "inventory",
+    "pwa",
+    "offline",
+    "voice"
+  ],
   "author": "HNFD Training",
   "license": "MIT",
   "dependencies": {
@@ -19,5 +27,9 @@
     "agentic-flow": "^2.0.1-alpha.5",
     "claude-flow": "^2.7.47",
     "ruvector": "^0.1.35"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "playwright": "^1.57.0"
   }
 }
