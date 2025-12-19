@@ -622,7 +622,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.6.1';
+const APP_VERSION = '2.6.2';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
@@ -1274,6 +1274,12 @@ function displayResults(results, query) {
           </div>
         ` : ''}
 
+        ${item.images ? `
+          <button class="location-guide-btn" onclick="showLocationGuide('${item.id}')">
+            📍 View Location Guide
+          </button>
+        ` : ''}
+
         <div class="result-location">
           <span class="location-icon">📍</span>
           <span>${item.location}</span>
@@ -1318,6 +1324,198 @@ function displayResults(results, query) {
       }
     }, 100);
   }
+}
+
+// ============================================================================
+// ROTATING LOCATION GUIDE (3-image sequence: ambulance → drawer → equipment)
+// ============================================================================
+let guideInterval = null;
+let guideCurrentStep = 0;
+let guideSteps = [];
+
+function showLocationGuide(itemId) {
+  const item = INVENTORY_DATABASE.items.find(i => i.id === itemId);
+  if (!item || !item.images) {
+    alert('Location guide not available for this item');
+    return;
+  }
+
+  // Build the image steps
+  guideSteps = [];
+  if (item.images.ambulancePosition) {
+    guideSteps.push({
+      url: item.images.ambulancePosition,
+      label: 'Step 1: Find this area on the ambulance',
+      dot: item.goldDots?.ambulancePosition
+    });
+  }
+  if (item.images.compartmentView) {
+    guideSteps.push({
+      url: item.images.compartmentView,
+      label: 'Step 2: Open this drawer/cabinet',
+      dot: item.goldDots?.compartmentView
+    });
+  }
+  if (item.images.equipmentPhoto) {
+    guideSteps.push({
+      url: item.images.equipmentPhoto,
+      label: 'Step 3: Grab this item',
+      dot: item.goldDots?.equipmentPhoto
+    });
+  }
+
+  if (guideSteps.length === 0) {
+    alert('No location images available');
+    return;
+  }
+
+  // Create modal using safe DOM methods
+  const modal = document.createElement('div');
+  modal.id = 'location-guide-modal';
+  modal.className = 'guide-modal';
+
+  const content = document.createElement('div');
+  content.className = 'guide-content';
+
+  // Header
+  const header = document.createElement('div');
+  header.className = 'guide-header';
+  const title = document.createElement('h3');
+  title.textContent = '📍 ' + item.name + ' Location';
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'guide-close-btn';
+  closeBtn.textContent = '✕';
+  closeBtn.onclick = closeLocationGuide;
+  header.appendChild(title);
+  header.appendChild(closeBtn);
+
+  // Image container
+  const imgContainer = document.createElement('div');
+  imgContainer.className = 'guide-image-container';
+  const img = document.createElement('img');
+  img.id = 'guide-image';
+  img.src = guideSteps[0].url;
+  img.alt = 'Location guide';
+  const dot = document.createElement('div');
+  dot.id = 'guide-dot';
+  dot.className = 'guide-dot';
+  dot.style.display = 'none';
+  imgContainer.appendChild(img);
+  imgContainer.appendChild(dot);
+
+  // Label container
+  const labelContainer = document.createElement('div');
+  labelContainer.className = 'guide-label-container';
+  const stepNumber = document.createElement('div');
+  stepNumber.className = 'guide-step-number';
+  stepNumber.id = 'guide-step-number';
+  stepNumber.textContent = 'Step 1 of ' + guideSteps.length;
+  const labelText = document.createElement('div');
+  labelText.className = 'guide-label-text';
+  labelText.id = 'guide-label';
+  labelText.textContent = guideSteps[0].label;
+  labelContainer.appendChild(stepNumber);
+  labelContainer.appendChild(labelText);
+
+  // Progress dots
+  const progress = document.createElement('div');
+  progress.className = 'guide-progress';
+  guideSteps.forEach((_, i) => {
+    const stepDot = document.createElement('span');
+    stepDot.className = 'guide-progress-dot' + (i === 0 ? ' active' : '');
+    stepDot.dataset.step = i;
+    progress.appendChild(stepDot);
+  });
+
+  // Controls
+  const controls = document.createElement('div');
+  controls.className = 'guide-controls';
+  const pauseBtn = document.createElement('button');
+  pauseBtn.className = 'guide-play-btn';
+  pauseBtn.id = 'guide-pause-btn';
+  pauseBtn.textContent = '⏸ Pause';
+  pauseBtn.onclick = toggleGuidePlayback;
+  controls.appendChild(pauseBtn);
+
+  // Assemble
+  content.appendChild(header);
+  content.appendChild(imgContainer);
+  content.appendChild(labelContainer);
+  content.appendChild(progress);
+  content.appendChild(controls);
+  modal.appendChild(content);
+  document.body.appendChild(modal);
+
+  // Position gold dot if available
+  updateGuideDot(guideSteps[0].dot);
+
+  // Start auto-rotation (1.5 seconds per image)
+  guideCurrentStep = 0;
+  startGuideRotation();
+}
+
+function startGuideRotation() {
+  guideInterval = setInterval(() => {
+    guideCurrentStep = (guideCurrentStep + 1) % guideSteps.length;
+    const step = guideSteps[guideCurrentStep];
+
+    const img = document.getElementById('guide-image');
+    const label = document.getElementById('guide-label');
+    const stepNum = document.getElementById('guide-step-number');
+    if (img) img.src = step.url;
+    if (label) label.textContent = step.label;
+    if (stepNum) stepNum.textContent = 'Step ' + (guideCurrentStep + 1) + ' of ' + guideSteps.length;
+    updateGuideDot(step.dot);
+
+    // Update progress dots
+    document.querySelectorAll('.guide-progress-dot').forEach((el, i) => {
+      el.classList.toggle('active', i === guideCurrentStep);
+    });
+  }, 1500);
+}
+
+function updateGuideDot(dotData) {
+  const dotEl = document.getElementById('guide-dot');
+  if (!dotEl) return;
+
+  if (dotData && dotData.x && dotData.y) {
+    dotEl.style.display = 'block';
+    dotEl.style.left = dotData.x + '%';
+    dotEl.style.top = dotData.y + '%';
+    // Clear and add label safely
+    dotEl.textContent = '';
+    if (dotData.label) {
+      const labelSpan = document.createElement('span');
+      labelSpan.className = 'dot-label';
+      labelSpan.textContent = dotData.label;
+      dotEl.appendChild(labelSpan);
+    }
+  } else {
+    dotEl.style.display = 'none';
+  }
+}
+
+function toggleGuidePlayback() {
+  const btn = document.getElementById('guide-pause-btn');
+  if (!btn) return;
+
+  if (guideInterval) {
+    clearInterval(guideInterval);
+    guideInterval = null;
+    btn.textContent = '▶ Play';
+  } else {
+    startGuideRotation();
+    btn.textContent = '⏸ Pause';
+  }
+}
+
+function closeLocationGuide() {
+  if (guideInterval) {
+    clearInterval(guideInterval);
+    guideInterval = null;
+  }
+  const modal = document.getElementById('location-guide-modal');
+  if (modal) modal.remove();
 }
 
 // ============================================================================

@@ -1,20 +1,16 @@
 {
-  "version": "2.6.1",
+  "version": "2.6.2",
   "build": "2025-12-18",
   "changelog": [
-    "CRITICAL: Auto-start listening when app loads (v2.6.1)",
-    "Microphone activates immediately after permission granted",
-    "Triple-backup click handlers ensure button always works",
+    "FEATURE: Rotating Location Guide in MAIN APP (v2.6.2)",
+    "View Location Guide button now appears on search results",
+    "3-image rotation: ambulance position → drawer/cabinet → equipment",
+    "Gold pulsing dot markers show exact locations",
+    "Auto-rotation at 1.5 seconds per image",
+    "Play/Pause controls for image sequence",
     "---",
-    "MAJOR: Rotating Location Guide with Gold Dot Markers (v2.6.0)",
-    "NEW: Auto-rotating image viewer shows ambulance→drawer→equipment sequence",
-    "NEW: Gold pulsing dot overlays highlight exact locations",
-    "NEW: Play/Pause controls for image rotation",
-    "NEW: 1740 frames extracted for comprehensive location coverage",
-    "NEW: 8 equipment items now have complete 3-image sequences",
-    "---",
-    "Previous: Multi-image support (v2.5.0)",
-    "Step-by-step location guides",
-    "Share button (v2.4.4)"
+    "Previous: Auto-start listening (v2.6.1)",
+    "Previous: Rotating Location Guide admin portal (v2.6.0)",
+    "Previous: Share button (v2.4.4)"
   ]
 }
