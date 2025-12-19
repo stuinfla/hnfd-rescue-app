@@ -929,140 +929,197 @@ const statusText = document.getElementById('status-text');
 
 // ============================================================================
 // SPEECH RECOGNITION (Web Speech API - works offline on iOS/Android)
+// CRITICAL: This is life-safety code - must work 100% of the time
 // ============================================================================
+let recognitionInitialized = false;
+let recognitionAttempts = 0;
+const MAX_RECOGNITION_ATTEMPTS = 3;
+
 function initSpeechRecognition() {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  try {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-  if (!SpeechRecognition) {
-    voiceBtn.style.display = 'none';
-    voiceLabel.textContent = 'Voice not supported - use text search';
-    console.log('[Speech] Web Speech API not available');
-    return;
-  }
+    if (!SpeechRecognition) {
+      console.warn('[Speech] Web Speech API not available on this device');
+      if (voiceBtn) voiceBtn.style.display = 'none';
+      if (voiceLabel) voiceLabel.textContent = 'Voice not supported - use text search';
+      return false;
+    }
 
-  recognition = new SpeechRecognition();
-  recognition.continuous = false;
-  recognition.interimResults = true;
-  recognition.lang = 'en-US';
-  recognition.maxAlternatives = 3;
+    // Safety check: Don't re-initialize if already done
+    if (recognition && recognitionInitialized) {
+      console.log('[Speech] Already initialized, skipping');
+      return true;
+    }
 
-  recognition.onstart = () => {
-    isListening = true;
-    voiceBtn.classList.add('listening');
-    voiceIcon.textContent = '🔴';
-    voiceLabel.textContent = 'Listening... speak now';
-    transcript.textContent = '';
-    statusText.textContent = 'Listening';
-    // Show cancel button when listening
-    voiceCancelBtn.style.display = 'flex';
-  };
+    recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+    recognition.maxAlternatives = 3;
 
-  recognition.onresult = (event) => {
-    let interimTranscript = '';
-    let finalTranscript = '';
+    recognition.onstart = () => {
+      console.log('[Speech] Recognition started successfully');
+      isListening = true;
+      recognitionAttempts = 0; // Reset on success
+      if (voiceBtn) voiceBtn.classList.add('listening');
+      if (voiceIcon) voiceIcon.textContent = '🔴';
+      if (voiceLabel) voiceLabel.textContent = 'Listening... speak now';
+      if (transcript) transcript.textContent = '';
+      if (statusText) statusText.textContent = 'Listening';
+      if (voiceCancelBtn) voiceCancelBtn.style.display = 'flex';
+    };
 
-    for (let i = event.resultIndex; i < event.results.length; i++) {
-      const result = event.results[i];
-      if (result.isFinal) {
-        finalTranscript += result[0].transcript;
-      } else {
-        interimTranscript += result[0].transcript;
+    recognition.onresult = (event) => {
+      let interimTranscript = '';
+      let finalTranscript = '';
+
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const result = event.results[i];
+        if (result.isFinal) {
+          finalTranscript += result[0].transcript;
+        } else {
+          interimTranscript += result[0].transcript;
+        }
       }
-    }
 
-    transcript.textContent = finalTranscript || interimTranscript;
+      if (transcript) transcript.textContent = finalTranscript || interimTranscript;
 
-    if (finalTranscript) {
-      console.log('[Speech] Raw input:', finalTranscript);
+      if (finalTranscript) {
+        console.log('[Speech] Raw input:', finalTranscript);
 
-      // CRITICAL: Match spoken text to valid equipment ONLY
-      // Prevents misheard words like "sailing" instead of "saline"
-      const matchedEquipment = matchToValidEquipment(finalTranscript);
-      console.log('[Speech] Matched to:', matchedEquipment);
+        // CRITICAL: Match spoken text to valid equipment ONLY
+        const matchedEquipment = matchToValidEquipment(finalTranscript);
+        console.log('[Speech] Matched to:', matchedEquipment);
 
-      lastSearchWasVoice = true; // Mark this as voice search
-      search(matchedEquipment);
-    }
-  };
+        lastSearchWasVoice = true;
+        search(matchedEquipment);
+      }
+    };
 
-  recognition.onerror = (event) => {
-    console.error('[Speech] Recognition error:', event.error);
-    stopListening();
+    recognition.onerror = (event) => {
+      console.error('[Speech] Recognition error:', event.error);
 
-    if (event.error === 'no-speech') {
-      transcript.textContent = 'No speech detected. Tap to try again.';
-    } else if (event.error === 'not-allowed') {
-      transcript.textContent = 'Microphone access denied. Please enable in settings.';
-    } else if (event.error === 'network') {
-      // Offline - this is expected
-      transcript.textContent = 'Voice requires network. Use text search offline.';
-    }
-  };
+      // Handle specific errors
+      if (event.error === 'no-speech') {
+        if (transcript) transcript.textContent = 'No speech detected. Tap to try again.';
+      } else if (event.error === 'not-allowed' || event.error === 'permission-denied') {
+        if (transcript) transcript.textContent = 'Microphone access denied. Please enable in settings.';
+      } else if (event.error === 'network') {
+        if (transcript) transcript.textContent = 'Voice requires network. Use text search offline.';
+      } else if (event.error === 'aborted') {
+        // User cancelled - this is normal
+        console.log('[Speech] Recognition aborted by user');
+      } else {
+        // Unknown error - try to recover
+        console.error('[Speech] Unknown error:', event.error);
+        if (transcript) transcript.textContent = 'Voice error. Tap to try again.';
+      }
 
-  recognition.onend = () => {
-    stopListening();
-  };
+      stopListening();
+    };
 
-  console.log('[Speech] Web Speech API initialized');
+    recognition.onend = () => {
+      console.log('[Speech] Recognition ended');
+      stopListening();
+    };
+
+    recognitionInitialized = true;
+    console.log('[Speech] Web Speech API initialized successfully');
+    return true;
+
+  } catch (e) {
+    console.error('[Speech] Failed to initialize:', e);
+    if (voiceLabel) voiceLabel.textContent = 'Voice unavailable';
+    return false;
+  }
 }
 
 function startListening() {
-  if (!recognition) {
-    transcript.textContent = 'Voice recognition not available';
-    console.error('[Speech] Recognition not initialized');
+  console.log('[Speech] startListening called, recognitionInitialized:', recognitionInitialized);
+
+  // Auto-initialize if not done yet
+  if (!recognition || !recognitionInitialized) {
+    console.log('[Speech] Recognition not ready, attempting initialization...');
+    const success = initSpeechRecognition();
+    if (!success) {
+      if (transcript) transcript.textContent = 'Voice not available on this device';
+      console.error('[Speech] Could not initialize recognition');
+      return;
+    }
+  }
+
+  // If already listening, stop first
+  if (isListening) {
+    console.log('[Speech] Already listening, stopping first');
+    try {
+      recognition.stop();
+    } catch (e) {
+      console.warn('[Speech] Error stopping:', e);
+    }
     return;
   }
 
-  if (isListening) {
-    console.log('[Speech] Already listening, stopping first');
-    recognition.stop();
-    return;
-  }
+  // Set UI state IMMEDIATELY (iOS Safari doesn't reliably fire onstart)
+  isListening = true;
+  if (voiceBtn) voiceBtn.classList.add('listening');
+  if (voiceIcon) voiceIcon.textContent = '🔴';
+  if (voiceLabel) voiceLabel.textContent = 'Listening... speak now';
+  if (transcript) transcript.textContent = '';
+  if (statusText) statusText.textContent = 'Listening';
+  if (voiceCancelBtn) voiceCancelBtn.style.display = 'flex';
 
   try {
     console.log('[Speech] Starting recognition...');
-
-    // CRITICAL FIX: Set listening state IMMEDIATELY (iOS Safari doesn't reliably fire onstart)
-    isListening = true;
-    voiceBtn.classList.add('listening');
-    voiceIcon.textContent = '🔴';
-    voiceLabel.textContent = 'Listening... speak now';
-    transcript.textContent = '';
-    statusText.textContent = 'Listening';
-    voiceCancelBtn.style.display = 'flex'; // Show cancel button immediately
-
     recognition.start();
+    console.log('[Speech] recognition.start() called successfully');
   } catch (e) {
-    console.error('[Speech] Could not start recognition:', e);
+    console.error('[Speech] Could not start recognition:', e.message);
 
-    // Reset state on error
-    stopListening();
-
-    // If error is "already started", stop and restart
+    // Handle "already started" error
     if (e.message && e.message.includes('already started')) {
+      console.log('[Speech] Recognition already running, attempting restart...');
       try {
         recognition.stop();
-        setTimeout(() => {
-          startListening(); // Recursive call to restart
-        }, 100);
+        recognitionAttempts++;
+        if (recognitionAttempts < MAX_RECOGNITION_ATTEMPTS) {
+          setTimeout(() => startListening(), 150);
+        } else {
+          stopListening();
+          if (transcript) transcript.textContent = 'Voice error. Please refresh page.';
+        }
       } catch (e2) {
         console.error('[Speech] Restart failed:', e2);
-        transcript.textContent = 'Microphone error. Refresh page.';
+        stopListening();
+        if (transcript) transcript.textContent = 'Microphone error. Refresh page.';
       }
+    } else if (e.message && e.message.includes('not-allowed')) {
+      stopListening();
+      if (transcript) transcript.textContent = 'Please allow microphone access in settings.';
     } else {
-      transcript.textContent = 'Please allow microphone access';
+      // Unknown error - try to recover by re-initializing
+      stopListening();
+      recognitionInitialized = false;
+      recognition = null;
+      recognitionAttempts++;
+
+      if (recognitionAttempts < MAX_RECOGNITION_ATTEMPTS) {
+        console.log('[Speech] Attempting recovery, attempt:', recognitionAttempts);
+        setTimeout(() => startListening(), 200);
+      } else {
+        if (transcript) transcript.textContent = 'Voice unavailable. Use text search.';
+      }
     }
   }
 }
 
 function stopListening() {
   isListening = false;
-  voiceBtn.classList.remove('listening');
-  voiceIcon.textContent = '🎤';
-  voiceLabel.textContent = 'Tap to ask where something is';
-  statusText.textContent = 'Ready';
-  // Hide cancel button when not listening
-  voiceCancelBtn.style.display = 'none';
+  if (voiceBtn) voiceBtn.classList.remove('listening');
+  if (voiceIcon) voiceIcon.textContent = '🎤';
+  if (voiceLabel) voiceLabel.textContent = 'Tap to ask where something is';
+  if (statusText) statusText.textContent = 'Ready';
+  if (voiceCancelBtn) voiceCancelBtn.style.display = 'none';
 }
 
 function cancelListening() {
