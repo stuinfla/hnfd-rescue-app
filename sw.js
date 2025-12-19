@@ -3,7 +3,7 @@
  * Enables 100% offline operation - CRITICAL for no-cell-service areas
  */
 
-const CACHE_NAME = 'hnfd-rescue-v2.6.2';
+const CACHE_NAME = 'hnfd-rescue-v2.6.3';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',

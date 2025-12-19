@@ -1,16 +1,15 @@
 {
-  "version": "2.6.2",
+  "version": "2.6.3",
   "build": "2025-12-18",
   "changelog": [
-    "FEATURE: Rotating Location Guide in MAIN APP (v2.6.2)",
-    "View Location Guide button now appears on search results",
-    "3-image rotation: ambulance position → drawer/cabinet → equipment",
-    "Gold pulsing dot markers show exact locations",
-    "Auto-rotation at 1.5 seconds per image",
-    "Play/Pause controls for image sequence",
+    "CRITICAL: Bulletproof microphone with auto-recovery (v2.6.3)",
+    "FIX: Replaced bad images (person's head) with actual equipment",
+    "FIX: Cabinet K labeled image shows compartment labels clearly",
+    "FIX: Drawer N image shows actual drawer contents",
+    "Location Guide: 3-image rotation now uses correct images",
+    "Speech recognition: 5 retry attempts with auto-recovery",
     "---",
-    "Previous: Auto-start listening (v2.6.1)",
-    "Previous: Rotating Location Guide admin portal (v2.6.0)",
-    "Previous: Share button (v2.4.4)"
+    "Previous: Rotating Location Guide (v2.6.2)",
+    "Previous: Auto-start listening (v2.6.1)"
   ]
 }

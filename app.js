@@ -32,7 +32,7 @@ const INVENTORY_DATABASE = {
       notes: "Red tag = inventory tracking. If seal unbroken, contents unchanged.",
       image: "/images/trauma_bag_adult.jpg",
       images: {
-        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
+        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
         compartmentView: "/images/locations/cabinet_k_overview.jpg",
         equipmentPhoto: "/images/locations/adult_trauma_bag_closeup.jpg"
       },
@@ -130,7 +130,7 @@ const INVENTORY_DATABASE = {
       notes: "Check for GREEN FLASH every 8-10 seconds = charged and ready",
       image: "/images/cabinet_d_aed.jpg",
       images: {
-        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
+        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
         compartmentView: "/images/locations/cabinet_k_overview.jpg",
         equipmentPhoto: "/images/locations/aed_closeup.jpg"
       },
@@ -162,7 +162,7 @@ const INVENTORY_DATABASE = {
       notes: "Blue tags track drug accountability",
       image: "/images/drug_box.jpg",
       images: {
-        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
+        ambulancePosition: "/images/locations/drawer_n_open.jpg",
         compartmentView: "/images/locations/drug_box_cabinet.jpg",
         equipmentPhoto: "/images/locations/drug_box_closeup.jpg"
       },
@@ -193,7 +193,7 @@ const INVENTORY_DATABASE = {
       notes: "One of THREE suction types on board",
       image: "/images/suction.jpg",
       images: {
-        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
+        ambulancePosition: "/images/locations/drawer_n_open.jpg",
         compartmentView: "/images/locations/drug_box_cabinet.jpg",
         equipmentPhoto: "/images/suction.jpg"
       },
@@ -225,7 +225,7 @@ const INVENTORY_DATABASE = {
       driverNote: "Little black box, little black pouch - always in same spot",
       image: "/images/glucometer.jpg",
       images: {
-        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
+        ambulancePosition: "/images/locations/drawer_n_open.jpg",
         compartmentView: "/images/locations/drawer_n_open.jpg",
         equipmentPhoto: "/images/glucometer.jpg"
       },
@@ -256,7 +256,7 @@ const INVENTORY_DATABASE = {
       notes: "Old packaging: orange container. New packaging: clear tube (can see syringe). Additional Narcan in Drug Box but Drawer N is fastest.",
       image: "/images/narcan.jpg",
       images: {
-        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
+        ambulancePosition: "/images/locations/drawer_n_open.jpg",
         compartmentView: "/images/locations/drawer_n_contents.jpg",
         equipmentPhoto: "/images/locations/narcan_syringe_closeup.jpg"
       },
@@ -287,7 +287,7 @@ const INVENTORY_DATABASE = {
       notes: "New Matheson tanks: green top, aluminum, single valve operation. Old steel tanks: two-step process - open valve first, then set flow.",
       image: "/images/oxygen_tanks.jpg",
       images: {
-        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
+        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
         compartmentView: "/images/locations/oxygen_compartment.jpg",
         equipmentPhoto: "/images/locations/oxygen_tanks_closeup.jpg"
       },
@@ -318,8 +318,8 @@ const INVENTORY_DATABASE = {
       notes: "Carry with sensitive side (screen) against body. Has extra BP cuffs and batteries on other side. Must press AND HOLD to shut off (prevents accidental shutdown).",
       image: "/images/lifepak_mounted.jpg",
       images: {
-        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
-        compartmentView: "/images/locations/ambulance_interior_overview.jpg",
+        ambulancePosition: "/images/locations/drawer_n_open.jpg",
+        compartmentView: "/images/locations/lifepak_closeup.jpg",
         equipmentPhoto: "/images/locations/lifepak_closeup.jpg"
       },
       goldDots: {
@@ -381,7 +381,7 @@ const INVENTORY_DATABASE = {
       notes: "Wall-mounted in patient compartment. Always available when patient is on stretcher.",
       image: "/images/suction.jpg",
       images: {
-        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
+        ambulancePosition: "/images/locations/drawer_n_open.jpg",
         compartmentView: "/images/locations/onboard_suction_area.jpg",
         equipmentPhoto: "/images/locations/onboard_suction_area.jpg"
       },
@@ -622,7 +622,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.6.2';
+const APP_VERSION = '2.6.3';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
@@ -933,8 +933,14 @@ const statusText = document.getElementById('status-text');
 // ============================================================================
 let recognitionInitialized = false;
 let recognitionAttempts = 0;
-const MAX_RECOGNITION_ATTEMPTS = 3;
+const MAX_RECOGNITION_ATTEMPTS = 5;
+let recognitionStarting = false; // Prevent race conditions
+let recognitionCleanupTimer = null;
 
+/**
+ * Initialize speech recognition with bulletproof error handling
+ * This MUST work on iOS Safari in emergency situations
+ */
 function initSpeechRecognition() {
   try {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -946,10 +952,15 @@ function initSpeechRecognition() {
       return false;
     }
 
-    // Safety check: Don't re-initialize if already done
-    if (recognition && recognitionInitialized) {
-      console.log('[Speech] Already initialized, skipping');
-      return true;
+    // CRITICAL: Always recreate recognition object to avoid stale state
+    // iOS Safari can get into bad states if we reuse the object
+    if (recognition) {
+      try {
+        recognition.abort();
+      } catch (e) {
+        console.log('[Speech] Could not abort old recognition:', e);
+      }
+      recognition = null;
     }
 
     recognition = new SpeechRecognition();
@@ -959,9 +970,18 @@ function initSpeechRecognition() {
     recognition.maxAlternatives = 3;
 
     recognition.onstart = () => {
-      console.log('[Speech] Recognition started successfully');
+      console.log('[Speech] ✅ Recognition started successfully');
       isListening = true;
+      recognitionStarting = false;
       recognitionAttempts = 0; // Reset on success
+
+      // Clear any pending cleanup
+      if (recognitionCleanupTimer) {
+        clearTimeout(recognitionCleanupTimer);
+        recognitionCleanupTimer = null;
+      }
+
+      // Update UI
       if (voiceBtn) voiceBtn.classList.add('listening');
       if (voiceIcon) voiceIcon.textContent = '🔴';
       if (voiceLabel) voiceLabel.textContent = 'Listening... speak now';
@@ -998,22 +1018,50 @@ function initSpeechRecognition() {
     };
 
     recognition.onerror = (event) => {
-      console.error('[Speech] Recognition error:', event.error);
+      console.error('[Speech] ❌ Recognition error:', event.error);
+      recognitionStarting = false;
 
-      // Handle specific errors
+      // Handle specific errors with clear user guidance
       if (event.error === 'no-speech') {
         if (transcript) transcript.textContent = 'No speech detected. Tap to try again.';
+        // Auto-recover: restart after brief delay
+        recognitionCleanupTimer = setTimeout(() => {
+          if (!isListening) {
+            console.log('[Speech] Auto-recovering from no-speech...');
+            startListening();
+          }
+        }, 2000);
       } else if (event.error === 'not-allowed' || event.error === 'permission-denied') {
-        if (transcript) transcript.textContent = 'Microphone access denied. Please enable in settings.';
+        if (transcript) transcript.textContent = 'Microphone blocked. Enable in Settings > Safari > Microphone.';
+        recognitionInitialized = false; // Force re-init on next attempt
       } else if (event.error === 'network') {
-        if (transcript) transcript.textContent = 'Voice requires network. Use text search offline.';
+        if (transcript) transcript.textContent = 'Network error. Checking connection...';
+        // Auto-retry network errors
+        recognitionCleanupTimer = setTimeout(() => {
+          console.log('[Speech] Retrying after network error...');
+          startListening();
+        }, 1500);
       } else if (event.error === 'aborted') {
-        // User cancelled - this is normal
+        // User cancelled - this is normal, don't show error
         console.log('[Speech] Recognition aborted by user');
+      } else if (event.error === 'audio-capture') {
+        if (transcript) transcript.textContent = 'Microphone unavailable. Check if another app is using it.';
       } else {
         // Unknown error - try to recover
         console.error('[Speech] Unknown error:', event.error);
-        if (transcript) transcript.textContent = 'Voice error. Tap to try again.';
+        if (transcript) transcript.textContent = 'Voice error. Retrying...';
+
+        // Force re-initialization
+        recognitionInitialized = false;
+        recognition = null;
+
+        // Auto-retry unknown errors
+        if (recognitionAttempts < MAX_RECOGNITION_ATTEMPTS) {
+          recognitionCleanupTimer = setTimeout(() => {
+            console.log('[Speech] Auto-recovering from unknown error...');
+            startListening();
+          }, 1000);
+        }
       }
 
       stopListening();
@@ -1021,116 +1069,208 @@ function initSpeechRecognition() {
 
     recognition.onend = () => {
       console.log('[Speech] Recognition ended');
+      recognitionStarting = false;
+
+      // CRITICAL: Always reset state when recognition ends
       stopListening();
+
+      // iOS Safari workaround: Sometimes onend fires without onerror
+      // If we were listening and expected to continue, restart
+      if (isListening) {
+        console.log('[Speech] Unexpected end while listening - auto-restarting');
+        recognitionCleanupTimer = setTimeout(() => {
+          startListening();
+        }, 300);
+      }
     };
 
     recognitionInitialized = true;
-    console.log('[Speech] Web Speech API initialized successfully');
+    console.log('[Speech] ✅ Web Speech API initialized successfully');
     return true;
 
   } catch (e) {
-    console.error('[Speech] Failed to initialize:', e);
+    console.error('[Speech] ❌ Failed to initialize:', e);
     if (voiceLabel) voiceLabel.textContent = 'Voice unavailable';
+    recognitionInitialized = false;
+    recognitionStarting = false;
     return false;
   }
 }
 
+/**
+ * Start listening with comprehensive error handling and recovery
+ * MUST work reliably on iOS Safari for emergency situations
+ */
 function startListening() {
-  console.log('[Speech] startListening called, recognitionInitialized:', recognitionInitialized);
+  console.log('[Speech] 🎤 startListening called, isListening:', isListening, 'recognitionStarting:', recognitionStarting);
 
-  // Auto-initialize if not done yet
-  if (!recognition || !recognitionInitialized) {
-    console.log('[Speech] Recognition not ready, attempting initialization...');
-    const success = initSpeechRecognition();
-    if (!success) {
-      if (transcript) transcript.textContent = 'Voice not available on this device';
-      console.error('[Speech] Could not initialize recognition');
-      return;
-    }
+  // Prevent race conditions
+  if (recognitionStarting) {
+    console.log('[Speech] Already starting, ignoring duplicate call');
+    return;
   }
 
-  // If already listening, stop first
+  // If already listening, this is a toggle to stop
   if (isListening) {
-    console.log('[Speech] Already listening, stopping first');
+    console.log('[Speech] Already listening, stopping');
     try {
-      recognition.stop();
+      if (recognition) recognition.stop();
     } catch (e) {
       console.warn('[Speech] Error stopping:', e);
+      // Force state reset
+      stopListening();
     }
     return;
   }
 
-  // Set UI state IMMEDIATELY (iOS Safari doesn't reliably fire onstart)
-  isListening = true;
+  recognitionStarting = true;
+
+  // Auto-initialize if not done yet OR if we had errors
+  if (!recognition || !recognitionInitialized) {
+    console.log('[Speech] Recognition not ready, initializing...');
+    const success = initSpeechRecognition();
+    if (!success) {
+      if (transcript) transcript.textContent = 'Voice not available on this device';
+      console.error('[Speech] ❌ Could not initialize recognition');
+      recognitionStarting = false;
+      return;
+    }
+  }
+
+  // Set UI state BEFORE starting (iOS Safari requirement)
   if (voiceBtn) voiceBtn.classList.add('listening');
   if (voiceIcon) voiceIcon.textContent = '🔴';
-  if (voiceLabel) voiceLabel.textContent = 'Listening... speak now';
+  if (voiceLabel) voiceLabel.textContent = 'Starting microphone...';
   if (transcript) transcript.textContent = '';
-  if (statusText) statusText.textContent = 'Listening';
+  if (statusText) statusText.textContent = 'Starting...';
   if (voiceCancelBtn) voiceCancelBtn.style.display = 'flex';
 
   try {
-    console.log('[Speech] Starting recognition...');
+    console.log('[Speech] 🚀 Starting recognition...');
     recognition.start();
-    console.log('[Speech] recognition.start() called successfully');
-  } catch (e) {
-    console.error('[Speech] Could not start recognition:', e.message);
+    console.log('[Speech] ✅ recognition.start() called successfully');
 
-    // Handle "already started" error
+    // Safety timeout: If onstart doesn't fire within 3 seconds, something is wrong
+    const startTimeout = setTimeout(() => {
+      if (recognitionStarting && !isListening) {
+        console.error('[Speech] ⏰ Timeout waiting for recognition to start');
+        recognitionStarting = false;
+        stopListening();
+        if (transcript) transcript.textContent = 'Microphone timeout. Tap to retry.';
+
+        // Force re-init
+        recognitionInitialized = false;
+        recognition = null;
+      }
+    }, 3000);
+
+    // Clear timeout if we start successfully
+    recognition.addEventListener('start', () => {
+      clearTimeout(startTimeout);
+    }, { once: true });
+
+  } catch (e) {
+    console.error('[Speech] ❌ Could not start recognition:', e.message);
+    recognitionStarting = false;
+
+    // Handle "already started" error - iOS Safari edge case
     if (e.message && e.message.includes('already started')) {
-      console.log('[Speech] Recognition already running, attempting restart...');
+      console.log('[Speech] Recognition already running, forcing restart...');
       try {
-        recognition.stop();
+        recognition.abort(); // Use abort instead of stop for force-kill
         recognitionAttempts++;
         if (recognitionAttempts < MAX_RECOGNITION_ATTEMPTS) {
-          setTimeout(() => startListening(), 150);
+          setTimeout(() => {
+            recognitionStarting = false;
+            startListening();
+          }, 200);
         } else {
           stopListening();
-          if (transcript) transcript.textContent = 'Voice error. Please refresh page.';
+          if (transcript) transcript.textContent = 'Voice stuck. Refresh page to fix.';
         }
       } catch (e2) {
         console.error('[Speech] Restart failed:', e2);
         stopListening();
-        if (transcript) transcript.textContent = 'Microphone error. Refresh page.';
+        if (transcript) transcript.textContent = 'Voice error. Refresh page.';
       }
     } else if (e.message && e.message.includes('not-allowed')) {
       stopListening();
-      if (transcript) transcript.textContent = 'Please allow microphone access in settings.';
+      if (transcript) transcript.textContent = 'Allow microphone in Settings > Safari.';
     } else {
-      // Unknown error - try to recover by re-initializing
+      // Unknown error - full recovery sequence
       stopListening();
       recognitionInitialized = false;
       recognition = null;
       recognitionAttempts++;
 
       if (recognitionAttempts < MAX_RECOGNITION_ATTEMPTS) {
-        console.log('[Speech] Attempting recovery, attempt:', recognitionAttempts);
-        setTimeout(() => startListening(), 200);
+        console.log('[Speech] 🔄 Attempting recovery, attempt:', recognitionAttempts);
+        if (transcript) transcript.textContent = `Retrying... (${recognitionAttempts}/${MAX_RECOGNITION_ATTEMPTS})`;
+        setTimeout(() => {
+          recognitionStarting = false;
+          startListening();
+        }, 500);
       } else {
-        if (transcript) transcript.textContent = 'Voice unavailable. Use text search.';
+        if (transcript) transcript.textContent = 'Voice unavailable. Use text search or refresh page.';
+        // Reset attempts after showing error
+        setTimeout(() => {
+          recognitionAttempts = 0;
+        }, 5000);
       }
     }
   }
 }
 
+/**
+ * Stop listening and reset all state
+ */
 function stopListening() {
+  console.log('[Speech] 🛑 Stopping listening');
   isListening = false;
+  recognitionStarting = false;
+
   if (voiceBtn) voiceBtn.classList.remove('listening');
   if (voiceIcon) voiceIcon.textContent = '🎤';
   if (voiceLabel) voiceLabel.textContent = 'Tap to ask where something is';
   if (statusText) statusText.textContent = 'Ready';
   if (voiceCancelBtn) voiceCancelBtn.style.display = 'none';
+
+  // Clear any pending cleanup timers
+  if (recognitionCleanupTimer) {
+    clearTimeout(recognitionCleanupTimer);
+    recognitionCleanupTimer = null;
+  }
 }
 
+/**
+ * User-initiated cancellation
+ */
 function cancelListening() {
-  console.log('[Speech] Cancelled by user');
-  if (recognition && isListening) {
-    recognition.stop(); // This will trigger onend which calls stopListening()
+  console.log('[Speech] 🚫 Cancelled by user');
+
+  // Clear any auto-recovery timers
+  if (recognitionCleanupTimer) {
+    clearTimeout(recognitionCleanupTimer);
+    recognitionCleanupTimer = null;
   }
-  transcript.textContent = 'Cancelled';
-  setTimeout(() => {
-    transcript.textContent = '';
-  }, 1500);
+
+  if (recognition && (isListening || recognitionStarting)) {
+    try {
+      recognition.abort(); // Use abort for immediate stop
+    } catch (e) {
+      console.warn('[Speech] Error aborting:', e);
+    }
+  }
+
+  stopListening();
+
+  if (transcript) {
+    transcript.textContent = 'Cancelled';
+    setTimeout(() => {
+      transcript.textContent = '';
+    }, 1500);
+  }
+
   hapticFeedback('light');
 }
 
@@ -1666,14 +1806,34 @@ function toggleImageZoom(imgElement) {
 }
 
 // ============================================================================
-// EVENT LISTENERS
+// EVENT LISTENERS - CRITICAL: Single handlers only to prevent race conditions
 // ============================================================================
+
+/**
+ * Voice button click handler - MUST be reliable for emergency situations
+ * Uses addEventListener instead of onclick to properly handle event propagation
+ */
 voiceBtn.addEventListener('click', (e) => {
+  e.preventDefault();
   e.stopPropagation(); // Prevent bubbling to voice-section
+
+  console.log('[VoiceBtn] Click handler triggered, isListening:', isListening, 'recognitionStarting:', recognitionStarting);
+
   hapticFeedback('medium');
-  if (isListening) {
-    recognition?.stop();
+
+  // Toggle: Stop if listening, start if not
+  if (isListening || recognitionStarting) {
+    console.log('[VoiceBtn] Stopping recognition');
+    if (recognition) {
+      try {
+        recognition.stop();
+      } catch (e) {
+        console.warn('[VoiceBtn] Error stopping:', e);
+        stopListening(); // Force state reset
+      }
+    }
   } else {
+    console.log('[VoiceBtn] Starting recognition');
     startListening();
   }
 });
@@ -1783,62 +1943,84 @@ function initializeAudio() {
   }
 }
 
+// ============================================================================
 // AUTO-START LISTENING when app loads
-// This is CRITICAL for emergency situations - no extra taps needed
+// CRITICAL for emergency situations - voice must work immediately
+// ============================================================================
 async function autoStartListening() {
-  console.log('[AutoStart] Checking microphone permission...');
+  console.log('[AutoStart] 🚀 Checking microphone permission...');
 
+  // iOS Safari workaround: Permissions API doesn't work reliably
+  // We'll try to detect if we have permission by attempting to initialize
   try {
-    // Check if we already have permission
-    const permissionStatus = await navigator.permissions.query({ name: 'microphone' });
-    console.log('[AutoStart] Permission status:', permissionStatus.state);
-
-    if (permissionStatus.state === 'granted') {
-      // We have permission - start listening immediately!
-      console.log('[AutoStart] Permission granted - starting listening NOW');
-      setTimeout(() => {
-        startListening();
-      }, 500); // Small delay to ensure UI is ready
-    } else if (permissionStatus.state === 'prompt') {
-      // Need to request permission - do it now
-      console.log('[AutoStart] Requesting permission...');
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        stream.getTracks().forEach(track => track.stop()); // Release immediately
-        console.log('[AutoStart] Permission granted after request - starting listening');
-        setTimeout(() => {
-          startListening();
-        }, 500);
-      } catch (e) {
-        console.log('[AutoStart] Permission denied or error:', e);
-        if (transcript) transcript.textContent = 'Tap microphone to enable voice search';
-      }
-    } else {
-      console.log('[AutoStart] Permission denied - user must tap mic button');
-      if (transcript) transcript.textContent = 'Tap microphone to enable voice search';
+    // First, ensure speech recognition is available
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      console.log('[AutoStart] ❌ Speech recognition not supported');
+      if (transcript) transcript.textContent = 'Voice not supported - use text search';
+      return;
     }
 
-    // Listen for permission changes
-    permissionStatus.addEventListener('change', () => {
-      console.log('[AutoStart] Permission changed to:', permissionStatus.state);
-      if (permissionStatus.state === 'granted' && !isListening) {
+    // Try permissions API first (not supported on iOS Safari)
+    if (navigator.permissions && navigator.permissions.query) {
+      try {
+        const permissionStatus = await navigator.permissions.query({ name: 'microphone' });
+        console.log('[AutoStart] Permission status:', permissionStatus.state);
+
+        if (permissionStatus.state === 'granted') {
+          console.log('[AutoStart] ✅ Permission already granted - auto-starting');
+          setTimeout(() => {
+            if (!isListening && !recognitionStarting) {
+              startListening();
+            }
+          }, 800); // Delay to ensure UI is fully loaded
+        } else if (permissionStatus.state === 'prompt') {
+          console.log('[AutoStart] ℹ️  Permission needed - waiting for user tap');
+          if (transcript) transcript.textContent = 'Tap microphone to enable voice search';
+        } else {
+          console.log('[AutoStart] ❌ Permission denied');
+          if (transcript) transcript.textContent = 'Microphone blocked. Enable in Settings > Safari.';
+        }
+
+        // Monitor permission changes
+        permissionStatus.addEventListener('change', () => {
+          console.log('[AutoStart] 🔄 Permission changed to:', permissionStatus.state);
+          if (permissionStatus.state === 'granted' && !isListening && !recognitionStarting) {
+            setTimeout(() => startListening(), 300);
+          }
+        });
+
+        return; // Exit early if permissions API worked
+      } catch (permError) {
+        console.log('[AutoStart] Permissions API failed (likely iOS Safari):', permError.message);
+        // Fall through to iOS Safari workaround below
+      }
+    }
+
+    // iOS Safari workaround: Can't use permissions API
+    // Instead, initialize recognition and let it fail gracefully if no permission
+    console.log('[AutoStart] 📱 Using iOS Safari auto-start approach');
+
+    // Initialize speech recognition (doesn't require permission)
+    const initSuccess = initSpeechRecognition();
+    if (!initSuccess) {
+      console.log('[AutoStart] ❌ Could not initialize speech recognition');
+      if (transcript) transcript.textContent = 'Tap microphone to start voice search';
+      return;
+    }
+
+    // Try to start listening - will auto-prompt for permission on iOS
+    // If permission was previously granted, this will work immediately
+    setTimeout(() => {
+      if (!isListening && !recognitionStarting) {
+        console.log('[AutoStart] 🎤 Attempting auto-start (will prompt if needed)');
         startListening();
       }
-    });
+    }, 1000); // Longer delay for iOS Safari to be ready
 
   } catch (e) {
-    // permissions.query not supported (older browsers) - try direct approach
-    console.log('[AutoStart] Permissions API not available, trying direct request');
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      stream.getTracks().forEach(track => track.stop());
-      setTimeout(() => {
-        startListening();
-      }, 500);
-    } catch (e2) {
-      console.log('[AutoStart] Could not auto-start:', e2);
-      if (transcript) transcript.textContent = 'Tap microphone to start';
-    }
+    console.error('[AutoStart] ❌ Unexpected error:', e);
+    if (transcript) transcript.textContent = 'Tap microphone to start';
   }
 }
 
@@ -1850,45 +2032,46 @@ if (synthesis) {
   synthesis.getVoices();
 }
 
-// START LISTENING AUTOMATICALLY when page loads
-// For iOS Safari, we need user interaction first, so we also set up a one-tap start
+// ============================================================================
+// INITIALIZATION SEQUENCE
+// ============================================================================
+
+/**
+ * Primary initialization - Try auto-start when DOM is ready
+ */
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('[Init] DOM loaded, attempting auto-start...');
-  // Try to auto-start (works if permission already granted)
-  setTimeout(autoStartListening, 1000);
+  console.log('[Init] 📱 DOM loaded, attempting auto-start...');
+
+  // Initialize audio context unlock for iOS
+  initializeAudio();
+
+  // Try to auto-start speech recognition
+  // This works immediately if permission was previously granted
+  setTimeout(autoStartListening, 1200);
 });
 
-// BACKUP: If auto-start doesn't work, start on FIRST TAP anywhere on page
-let hasStartedOnce = false;
+/**
+ * Fallback initialization - Start on first user interaction
+ * iOS Safari requires user interaction before audio/microphone can start
+ */
+let hasAttemptedFirstTapStart = false;
 document.addEventListener('click', () => {
-  if (!hasStartedOnce && !isListening) {
-    hasStartedOnce = true;
-    console.log('[Init] First tap detected - ensuring listening starts');
+  if (!hasAttemptedFirstTapStart && !isListening && !recognitionStarting) {
+    hasAttemptedFirstTapStart = true;
+    console.log('[Init] 👆 First tap detected - attempting to start listening');
+
+    // Unlock audio context (iOS requirement)
     initializeAudio();
+
+    // Try to start speech recognition
     setTimeout(() => {
-      if (!isListening) {
+      if (!isListening && !recognitionStarting) {
+        console.log('[Init] Starting speech recognition after first tap');
         startListening();
       }
-    }, 100);
+    }, 150);
   }
 }, { once: true });
-
-// TRIPLE BACKUP: Direct click handler on voice button (most reliable)
-if (voiceBtn) {
-  voiceBtn.onclick = function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log('[VoiceBtn] Direct onclick triggered, isListening:', isListening);
-
-    if (isListening) {
-      console.log('[VoiceBtn] Stopping...');
-      if (recognition) recognition.stop();
-    } else {
-      console.log('[VoiceBtn] Starting...');
-      startListening();
-    }
-  };
-}
 
 // Register Service Worker for offline support
 if ('serviceWorker' in navigator) {
