@@ -1,7 +1,11 @@
 {
-  "version": "2.6.0",
+  "version": "2.6.1",
   "build": "2025-12-18",
   "changelog": [
+    "CRITICAL: Auto-start listening when app loads (v2.6.1)",
+    "Microphone activates immediately after permission granted",
+    "Triple-backup click handlers ensure button always works",
+    "---",
     "MAJOR: Rotating Location Guide with Gold Dot Markers (v2.6.0)",
     "NEW: Auto-rotating image viewer shows ambulance→drawer→equipment sequence",
     "NEW: Gold pulsing dot overlays highlight exact locations",

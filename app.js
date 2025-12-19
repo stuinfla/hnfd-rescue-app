@@ -622,7 +622,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.6.0';
+const APP_VERSION = '2.6.1';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
@@ -1566,7 +1566,7 @@ if (!navigator.onLine) {
 }
 
 // ============================================================================
-// INITIALIZATION
+// INITIALIZATION - CRITICAL: Auto-start listening for life-safety
 // ============================================================================
 initSpeechRecognition();
 
@@ -1575,7 +1575,6 @@ function initializeAudio() {
   if (audioInitialized || !synthesis) return;
 
   try {
-    // Create a silent utterance to "unlock" audio on iOS
     const utterance = new SpeechSynthesisUtterance('');
     utterance.volume = 0;
     synthesis.speak(utterance);
@@ -1586,15 +1585,63 @@ function initializeAudio() {
   }
 }
 
-// Request microphone permission on first interaction (one-time setup)
-function requestMicrophonePermission() {
-  if (micPermissionRequested || !recognition) return;
+// AUTO-START LISTENING when app loads
+// This is CRITICAL for emergency situations - no extra taps needed
+async function autoStartListening() {
+  console.log('[AutoStart] Checking microphone permission...');
 
-  // Don't auto-request - let user click mic button first
-  // This prevents conflicts with actual usage
-  micPermissionRequested = true;
-  localStorage.setItem('hnfd_mic_permission_requested', 'true');
-  console.log('[Mic] Ready for user interaction');
+  try {
+    // Check if we already have permission
+    const permissionStatus = await navigator.permissions.query({ name: 'microphone' });
+    console.log('[AutoStart] Permission status:', permissionStatus.state);
+
+    if (permissionStatus.state === 'granted') {
+      // We have permission - start listening immediately!
+      console.log('[AutoStart] Permission granted - starting listening NOW');
+      setTimeout(() => {
+        startListening();
+      }, 500); // Small delay to ensure UI is ready
+    } else if (permissionStatus.state === 'prompt') {
+      // Need to request permission - do it now
+      console.log('[AutoStart] Requesting permission...');
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        stream.getTracks().forEach(track => track.stop()); // Release immediately
+        console.log('[AutoStart] Permission granted after request - starting listening');
+        setTimeout(() => {
+          startListening();
+        }, 500);
+      } catch (e) {
+        console.log('[AutoStart] Permission denied or error:', e);
+        if (transcript) transcript.textContent = 'Tap microphone to enable voice search';
+      }
+    } else {
+      console.log('[AutoStart] Permission denied - user must tap mic button');
+      if (transcript) transcript.textContent = 'Tap microphone to enable voice search';
+    }
+
+    // Listen for permission changes
+    permissionStatus.addEventListener('change', () => {
+      console.log('[AutoStart] Permission changed to:', permissionStatus.state);
+      if (permissionStatus.state === 'granted' && !isListening) {
+        startListening();
+      }
+    });
+
+  } catch (e) {
+    // permissions.query not supported (older browsers) - try direct approach
+    console.log('[AutoStart] Permissions API not available, trying direct request');
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach(track => track.stop());
+      setTimeout(() => {
+        startListening();
+      }, 500);
+    } catch (e2) {
+      console.log('[AutoStart] Could not auto-start:', e2);
+      if (transcript) transcript.textContent = 'Tap microphone to start';
+    }
+  }
 }
 
 // Load voices (needed for some browsers)
@@ -1602,17 +1649,47 @@ if (synthesis) {
   synthesis.onvoiceschanged = () => {
     console.log('[TTS] Voices loaded:', synthesis.getVoices().length);
   };
-  // Trigger voice loading
   synthesis.getVoices();
+}
 
-  // Initialize audio AND request mic permission on any user interaction
-  const initEvents = ['click', 'touchstart', 'keydown'];
-  initEvents.forEach(event => {
-    document.addEventListener(event, () => {
-      initializeAudio();
-      requestMicrophonePermission();
-    }, { once: true, passive: true });
-  });
+// START LISTENING AUTOMATICALLY when page loads
+// For iOS Safari, we need user interaction first, so we also set up a one-tap start
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('[Init] DOM loaded, attempting auto-start...');
+  // Try to auto-start (works if permission already granted)
+  setTimeout(autoStartListening, 1000);
+});
+
+// BACKUP: If auto-start doesn't work, start on FIRST TAP anywhere on page
+let hasStartedOnce = false;
+document.addEventListener('click', () => {
+  if (!hasStartedOnce && !isListening) {
+    hasStartedOnce = true;
+    console.log('[Init] First tap detected - ensuring listening starts');
+    initializeAudio();
+    setTimeout(() => {
+      if (!isListening) {
+        startListening();
+      }
+    }, 100);
+  }
+}, { once: true });
+
+// TRIPLE BACKUP: Direct click handler on voice button (most reliable)
+if (voiceBtn) {
+  voiceBtn.onclick = function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('[VoiceBtn] Direct onclick triggered, isListening:', isListening);
+
+    if (isListening) {
+      console.log('[VoiceBtn] Stopping...');
+      if (recognition) recognition.stop();
+    } else {
+      console.log('[VoiceBtn] Starting...');
+      startListening();
+    }
+  };
 }
 
 // Register Service Worker for offline support
