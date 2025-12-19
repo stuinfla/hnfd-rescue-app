@@ -1,15 +1,13 @@
 {
-  "version": "2.6.3",
+  "version": "2.6.4",
   "build": "2025-12-18",
   "changelog": [
-    "CRITICAL: Bulletproof microphone with auto-recovery (v2.6.3)",
-    "FIX: Replaced bad images (person's head) with actual equipment",
-    "FIX: Cabinet K labeled image shows compartment labels clearly",
-    "FIX: Drawer N image shows actual drawer contents",
-    "Location Guide: 3-image rotation now uses correct images",
-    "Speech recognition: 5 retry attempts with auto-recovery",
+    "FIX: ALL equipment items now have 3-image location guides (v2.6.4)",
+    "Added images to: Adult Oxygen, Peds Oxygen, Peds Trauma, Intubation, IV Kit",
+    "Added images to: LUCAS, Saline Bags, Primary Sets",
+    "Every item now shows: Cabinet position → Compartment → Equipment",
     "---",
-    "Previous: Rotating Location Guide (v2.6.2)",
-    "Previous: Auto-start listening (v2.6.1)"
+    "Previous: Bulletproof microphone (v2.6.3)",
+    "Previous: Rotating Location Guide (v2.6.2)"
   ]
 }

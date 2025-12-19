@@ -61,7 +61,17 @@ const INVENTORY_DATABASE = {
       criticalRank: 2,
       description: "Complete respiratory treatment kit with oxygen tank inside",
       contents: "Oral airways, nasal airways, oxygen masks, oxygen tank",
-      image: "/images/oxygen_kit_adult.jpg"
+      image: "/images/oxygen_kit_adult.jpg",
+      images: {
+        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        compartmentView: "/images/locations/cabinet_k_overview.jpg",
+        equipmentPhoto: "/images/oxygen_kit_adult.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 45, y: 60, label: "Cabinet K" },
+        compartmentView: { x: 50, y: 55, label: "Middle Drawer" },
+        equipmentPhoto: null
+      }
     },
     {
       id: "oxygen_kit_pediatric",
@@ -75,7 +85,17 @@ const INVENTORY_DATABASE = {
       criticalRank: 3,
       description: "Pediatric respiratory kit - placed FIRST because children primarily have respiratory emergencies",
       notes: "Kids rarely have cardiac problems - respiratory is primary concern. Oxygen for children is PRIMARY importance.",
-      image: "/images/pediatric_oxygen.jpg"
+      image: "/images/pediatric_oxygen.jpg",
+      images: {
+        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        compartmentView: "/images/locations/cabinet_k_overview.jpg",
+        equipmentPhoto: "/images/pediatric_oxygen.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 45, y: 60, label: "Cabinet K" },
+        compartmentView: { x: 50, y: 70, label: "Lower Drawer" },
+        equipmentPhoto: null
+      }
     },
     {
       id: "trauma_bag_pediatric",
@@ -88,7 +108,17 @@ const INVENTORY_DATABASE = {
       critical: true,
       criticalRank: 4,
       description: "Pediatric trauma supplies",
-      image: "/images/pediatric_trauma.jpg"
+      image: "/images/pediatric_trauma.jpg",
+      images: {
+        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        compartmentView: "/images/locations/cabinet_k_overview.jpg",
+        equipmentPhoto: "/images/pediatric_trauma.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 45, y: 60, label: "Cabinet K" },
+        compartmentView: { x: 50, y: 70, label: "Lower Drawer" },
+        equipmentPhoto: null
+      }
     },
     {
       id: "intubation_kit",
@@ -101,7 +131,17 @@ const INVENTORY_DATABASE = {
       critical: true,
       criticalRank: 5,
       description: "Complete intubation equipment for advanced airway management",
-      image: "/images/intubation_kit.jpg"
+      image: "/images/intubation_kit.jpg",
+      images: {
+        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        compartmentView: "/images/locations/cabinet_k_overview.jpg",
+        equipmentPhoto: "/images/locations/intubation_bag_blue.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 45, y: 60, label: "Cabinet K" },
+        compartmentView: { x: 50, y: 30, label: "Top Shelf" },
+        equipmentPhoto: null
+      }
     },
     {
       id: "iv_bag",
@@ -114,7 +154,17 @@ const INVENTORY_DATABASE = {
       criticalRank: 6,
       description: "Everything to establish IV access - primarily for paramedic drug administration",
       notes: "Does NOT contain saline bags",
-      image: "/images/iv_kit.jpg"
+      image: "/images/iv_kit.jpg",
+      images: {
+        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        compartmentView: "/images/locations/cabinet_k_overview.jpg",
+        equipmentPhoto: "/images/locations/iv_kit_closeup.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 45, y: 60, label: "Cabinet K" },
+        compartmentView: { x: 50, y: 30, label: "Top Shelf" },
+        equipmentPhoto: null
+      }
     },
     {
       id: "portable_aed",
@@ -346,7 +396,17 @@ const INVENTORY_DATABASE = {
       criticalRank: 13,
       description: "Mechanical CPR device - delivers consistent chest compressions",
       notes: "Hit seatbelt release to access. Purchased by Town of Harpswell. MC2 carries it because they're usually first on scene (OBI is 23 minutes away).",
-      image: "/images/lucas_device.jpg"
+      image: "/images/lucas_device.jpg",
+      images: {
+        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        compartmentView: "/images/lucas_device.jpg",
+        equipmentPhoto: "/images/lucas_device.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 70, y: 50, label: "MC2 Vehicle" },
+        compartmentView: { x: 50, y: 50, label: "Back Seat" },
+        equipmentPhoto: null
+      }
     },
     {
       id: "saline_bags",
@@ -358,7 +418,17 @@ const INVENTORY_DATABASE = {
       description: "IV fluid for hydration - moved from K for easier access",
       warning: "MUST grab PRIMARY SET (IV tubing) with saline bag - bag is USELESS without tubing!",
       notes: "Warm saline in heated IV warmer during winter for hypothermic patients. Cabinet doors fold DOWN for easier access.",
-      image: "/images/saline_bags.jpg"
+      image: "/images/saline_bags.jpg",
+      images: {
+        ambulancePosition: "/images/locations/drawer_n_open.jpg",
+        compartmentView: "/images/saline_bags.jpg",
+        equipmentPhoto: "/images/saline_bags.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 30, y: 50, label: "Cabinet D" },
+        compartmentView: { x: 50, y: 50, label: "Saline Bags" },
+        equipmentPhoto: null
+      }
     },
     {
       id: "primary_sets",
@@ -368,7 +438,17 @@ const INVENTORY_DATABASE = {
       location: "Cabinet D - right next to saline bags",
       compartment: "D",
       description: "IV tubing with needle for saline bags - required to administer saline",
-      image: "/images/primary_sets.jpg"
+      image: "/images/primary_sets.jpg",
+      images: {
+        ambulancePosition: "/images/locations/drawer_n_open.jpg",
+        compartmentView: "/images/primary_sets.jpg",
+        equipmentPhoto: "/images/primary_sets.jpg"
+      },
+      goldDots: {
+        ambulancePosition: { x: 30, y: 50, label: "Cabinet D" },
+        compartmentView: { x: 50, y: 50, label: "IV Tubing" },
+        equipmentPhoto: null
+      }
     },
     {
       id: "onboard_suction",
@@ -622,7 +702,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.6.3';
+const APP_VERSION = '2.6.4';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
