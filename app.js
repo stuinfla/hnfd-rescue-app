@@ -759,7 +759,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.9.6';
+const APP_VERSION = '2.9.7';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
@@ -1590,13 +1590,27 @@ function displayResults(results, query) {
   // IMPORTANT: Always speak results after voice search (life-threatening situations)
   if (lastSearchWasVoice && currentResult) {
     lastSearchWasVoice = false; // Reset flag
-    // Small delay to ensure UI is updated and isListening is false
+    console.log('[TTS] Voice search completed - will speak result');
+
+    // Longer delay to ensure:
+    // 1. Speech recognition is fully stopped (iOS requirement)
+    // 2. UI is rendered
+    // 3. Audio context is ready
     setTimeout(() => {
-      if (currentResult) { // Double-check result still exists
-        initializeAudio(); // Ensure audio is unlocked
+      if (currentResult) {
+        console.log('[TTS] Speaking result for:', currentResult.name);
+        // Cancel any lingering speech recognition
+        if (recognition) {
+          try { recognition.abort(); } catch(e) {}
+        }
+        isListening = false;
+        recognitionStarting = false;
+
+        // Initialize audio and speak
+        initializeAudio();
         speakResult();
       }
-    }, 100);
+    }, 500); // Increased delay for iOS
   }
 }
 
@@ -1837,14 +1851,24 @@ function ensureVoicesLoaded() {
   });
 }
 
-async function speakResult() {
-  if (!currentResult || !synthesis) {
-    console.error('[TTS] Missing synthesis or result');
+async function speakResult(retryCount = 0) {
+  if (!currentResult) {
+    console.error('[TTS] No result to speak');
     return;
   }
 
+  if (!synthesis) {
+    console.error('[TTS] Speech synthesis not available');
+    return;
+  }
+
+  console.log('[TTS] speakResult called, retry:', retryCount);
+
   // Cancel any ongoing speech
   synthesis.cancel();
+
+  // Small delay after cancel to ensure clean state
+  await new Promise(resolve => setTimeout(resolve, 100));
 
   // Ensure voices are loaded (critical for Android)
   const voices = await ensureVoicesLoaded();
@@ -1902,16 +1926,29 @@ async function speakResult() {
   utterance.onerror = (e) => {
     console.error('[TTS] Error:', e.error, e);
     speakBtn.classList.remove('speaking');
-    statusText.textContent = 'Audio failed - tap speaker to retry';
-    setTimeout(() => statusText.textContent = 'Ready', 3000);
+
+    // Retry up to 2 times on error
+    if (retryCount < 2) {
+      console.log('[TTS] Retrying speech...');
+      setTimeout(() => speakResult(retryCount + 1), 300);
+    } else {
+      statusText.textContent = 'Tap speaker to hear location';
+      setTimeout(() => statusText.textContent = 'Ready', 3000);
+    }
   };
 
   try {
+    console.log('[TTS] Calling synthesis.speak()');
     synthesis.speak(utterance);
   } catch (e) {
     console.error('[TTS] Exception:', e);
-    statusText.textContent = 'Audio failed';
-    setTimeout(() => statusText.textContent = 'Ready', 2000);
+    // Retry on exception
+    if (retryCount < 2) {
+      setTimeout(() => speakResult(retryCount + 1), 300);
+    } else {
+      statusText.textContent = 'Tap speaker to hear location';
+      setTimeout(() => statusText.textContent = 'Ready', 2000);
+    }
   }
 }
 

@@ -21,3 +21,10 @@ But right now you're asking me to do an upgrade and then you're asking me again 
 
 Also when it comes time to look for the three image sequence for the locator that should be full screen so that I can see the images full or at least shrink the images down so that they're the full image not just a section of the image. That has the same problem you had before where you were showing me only pieces of an image and that's not acceptable 
 
+
+## Human
+
+Whenever I speak to it I expect it to tell me back the answer. For some reason that stopped happening. Whenever you take the input and you understand what it is you need to absolutely read back the answer as to where I find it and then anything else I need to know about it.
+
+Please fix 
+
