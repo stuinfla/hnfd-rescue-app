@@ -477,6 +477,415 @@ const INVENTORY_DATABASE = {
         "Step 4: Already connected - ready to use"
       ],
       quickFind: "Inside ambulance → Left wall → Green wall-mounted unit"
+    },
+    // === COMPARTMENT A - BASIC SUPPLIES ===
+    {
+      id: "bandaids",
+      name: "Bandaids",
+      aliases: ["band-aids", "band aids", "adhesive bandages", "plasters"],
+      searchText: "bandaids band aids adhesive bandages plasters small wounds",
+      location: "Compartment A - Basic Supplies",
+      compartment: "A",
+      description: "Adhesive bandages for small wounds",
+      image: "/images/compartments/compartment-a-supplies.jpg",
+      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      id: "cold_packs",
+      name: "Cold Packs",
+      aliases: ["ice packs", "instant cold", "cold compress"],
+      searchText: "cold packs ice instant compress cooling",
+      location: "Compartment A - Basic Supplies",
+      compartment: "A",
+      description: "Instant cold packs for swelling and injuries",
+      image: "/images/compartments/compartment-a-supplies.jpg",
+      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      id: "hot_packs",
+      name: "Hot Packs",
+      aliases: ["heat packs", "instant heat", "warm packs"],
+      searchText: "hot packs heat instant warm warming",
+      location: "Compartment A - Basic Supplies",
+      compartment: "A",
+      description: "Instant heat packs",
+      image: "/images/compartments/compartment-a-supplies.jpg",
+      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      id: "triangle_bandages",
+      name: "Triangle Bandages",
+      aliases: ["triangular bandage", "sling", "cravat"],
+      searchText: "triangle triangular bandages sling cravat arm sling",
+      location: "Compartment A - Basic Supplies",
+      compartment: "A",
+      description: "Triangle bandages for slings and cravats",
+      image: "/images/compartments/compartment-a-supplies.jpg",
+      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      id: "gauze",
+      name: "Gauze",
+      aliases: ["gauze pads", "gauze dressings", "gauze rolls"],
+      searchText: "gauze pads dressings rolls wound care",
+      location: "Compartment A - Basic Supplies",
+      compartment: "A",
+      description: "Gauze for wound care",
+      image: "/images/compartments/compartment-a-supplies.jpg",
+      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      id: "kling",
+      name: "Kling",
+      aliases: ["kling bandage", "kerlix", "roller gauze", "conforming bandage"],
+      searchText: "kling kerlix roller gauze conforming bandage wrap",
+      location: "Compartment A - Basic Supplies",
+      compartment: "A",
+      description: "Conforming roller bandage for securing dressings",
+      image: "/images/compartments/compartment-a-supplies.jpg",
+      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      id: "sam_splints",
+      name: "SAM Splints",
+      aliases: ["sam splint", "malleable splint", "aluminum splint"],
+      searchText: "SAM splint malleable aluminum foam splint fracture",
+      location: "Compartment A - Basic Supplies",
+      compartment: "A",
+      description: "SAM malleable splints for fractures",
+      image: "/images/compartments/compartment-a-supplies.jpg",
+      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      id: "flexall_splints",
+      name: "Flex-All Splints",
+      aliases: ["flexall", "flex all splint", "cardboard splint"],
+      searchText: "flex all flexall splint cardboard fracture immobilization",
+      location: "Compartment A - Basic Supplies",
+      compartment: "A",
+      description: "Flex-All splints for fracture immobilization",
+      image: "/images/compartments/compartment-a-supplies.jpg",
+      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      id: "tocs",
+      name: "T.O.C.S. (Chest Seal)",
+      aliases: ["TOCS", "occlusive dressing", "chest seal", "occlusive chest seal"],
+      searchText: "TOCS occlusive chest seal dressing pneumothorax sucking wound",
+      location: "Compartment A - Basic Supplies",
+      compartment: "A",
+      critical: true,
+      description: "Occlusive chest seal for sucking chest wounds",
+      image: "/images/compartments/compartment-a-supplies.jpg",
+      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    // === COMPARTMENT B - TRAUMA & BURN ===
+    {
+      id: "burn_dressings",
+      name: "Burn Dressings",
+      aliases: ["burn pads", "burn sheets", "water-jel"],
+      searchText: "burn dressings pads sheets water-jel thermal burns",
+      location: "Compartment B - Trauma & Burn Supplies",
+      compartment: "B",
+      description: "Specialized dressings for burn injuries",
+      image: "/images/compartments/compartment-b-trauma.jpg",
+      quickFind: "Outside ambulance → Compartment B → Trauma & Burn area"
+    },
+    {
+      id: "abd_pads",
+      name: "ABD Pads",
+      aliases: ["abdominal pads", "combine pads", "trauma pads", "large pads"],
+      searchText: "ABD abdominal pads combine trauma large absorbent dressing",
+      location: "Compartment B - Trauma & Burn Supplies",
+      compartment: "B",
+      description: "Large absorbent dressings for major wounds",
+      image: "/images/compartments/compartment-b-trauma.jpg",
+      quickFind: "Outside ambulance → Compartment B → Trauma & Burn area"
+    },
+    {
+      id: "multitrauma_dressing",
+      name: "Multi-Trauma Dressing",
+      aliases: ["trauma dressing", "MTD", "10x30"],
+      searchText: "multi trauma dressing MTD 10x30 large wound coverage",
+      location: "Compartment B - Trauma & Burn Supplies",
+      compartment: "B",
+      description: "Large multi-trauma dressings for extensive wounds",
+      image: "/images/compartments/compartment-b-trauma.jpg",
+      quickFind: "Outside ambulance → Compartment B → Trauma & Burn area"
+    },
+    {
+      id: "eye_pads",
+      name: "Eye Pads",
+      aliases: ["eye dressings", "eye patches"],
+      searchText: "eye pads dressings patches ocular injury",
+      location: "Compartment B - Trauma & Burn Supplies",
+      compartment: "B",
+      description: "Sterile eye pads for eye injuries",
+      image: "/images/compartments/compartment-b-trauma.jpg",
+      quickFind: "Outside ambulance → Compartment B → Trauma & Burn area"
+    },
+    {
+      id: "morgan_lens",
+      name: "Morgan Lens",
+      aliases: ["eye irrigation", "eye wash lens"],
+      searchText: "morgan lens eye irrigation wash chemical burn flush",
+      location: "Compartment B - Trauma & Burn Supplies",
+      compartment: "B",
+      description: "Morgan Lens for continuous eye irrigation",
+      image: "/images/compartments/compartment-b-trauma.jpg",
+      quickFind: "Outside ambulance → Compartment B → Trauma & Burn area"
+    },
+    {
+      id: "hemostatic_dressings",
+      name: "Hemostatic Dressings",
+      aliases: ["quikclot", "celox", "hemostatic gauze", "bleeding control"],
+      searchText: "hemostatic dressings quikclot celox gauze bleeding control hemorrhage",
+      location: "Compartment B - Trauma & Burn Supplies",
+      compartment: "B",
+      critical: true,
+      description: "Hemostatic agents for severe bleeding control",
+      image: "/images/compartments/compartment-b-trauma.jpg",
+      quickFind: "Outside ambulance → Compartment B → Trauma & Burn area"
+    },
+    // === COMPARTMENT C - CERVICAL COLLARS ===
+    {
+      id: "cervical_collars",
+      name: "Cervical Collars",
+      aliases: ["c-collar", "neck collar", "c collar", "cervical spine collar"],
+      searchText: "cervical collar c-collar neck collar spine immobilization",
+      location: "Compartment C - Cervical Collars & Saline",
+      compartment: "C",
+      critical: true,
+      description: "Cervical spine immobilization collars",
+      image: "/images/compartments/compartment-c-collars.jpg",
+      quickFind: "Outside ambulance → Compartment C → Collars area"
+    },
+    // === COMPARTMENT D (OB) - OB KIT & LINENS ===
+    {
+      id: "ob_kit",
+      name: "OB Kit",
+      aliases: ["obstetrics kit", "delivery kit", "childbirth kit", "curaplex OB"],
+      searchText: "OB obstetrics delivery kit childbirth curaplex labor",
+      location: "Compartment D (OB) - Inside glass cabinet",
+      compartment: "OB",
+      critical: true,
+      description: "Complete obstetrics kit for emergency delivery",
+      image: "/images/compartments/compartment-d-ob-linens.jpg",
+      quickFind: "Inside ambulance → Glass cabinet → OB Kit"
+    },
+    {
+      id: "emesis_bags",
+      name: "Emesis Bags",
+      aliases: ["vomit bags", "barf bags", "sick bags"],
+      searchText: "emesis bags vomit barf sick nausea",
+      location: "Compartment D (OB) - Inside glass cabinet",
+      compartment: "OB",
+      description: "Emesis bags for nausea/vomiting",
+      image: "/images/compartments/compartment-d-ob-linens.jpg",
+      quickFind: "Inside ambulance → Glass cabinet → Near linens"
+    },
+    {
+      id: "blankets",
+      name: "Blankets",
+      aliases: ["linens", "sheets", "patient blankets"],
+      searchText: "blankets linens sheets patient warming hypothermia",
+      location: "Compartment D (OB) - Inside glass cabinet",
+      compartment: "OB",
+      description: "Patient blankets for warmth and comfort",
+      image: "/images/compartments/compartment-d-ob-linens.jpg",
+      quickFind: "Inside ambulance → Glass cabinet → Linens area"
+    },
+    // === COMPARTMENT F - PPE SUPPLIES ===
+    {
+      id: "ppe_supplies",
+      name: "PPE Supplies",
+      aliases: ["personal protective equipment", "protective gear", "PPE"],
+      searchText: "PPE personal protective equipment gear infection control",
+      location: "Compartment F - Inside upper cabinet",
+      compartment: "F",
+      description: "Personal Protective Equipment supplies",
+      image: "/images/compartments/compartment-f-ppe.jpg",
+      quickFind: "Inside ambulance → Upper cabinet → PPE area"
+    },
+    {
+      id: "gowns",
+      name: "Gowns",
+      aliases: ["isolation gowns", "protective gowns"],
+      searchText: "gowns isolation protective PPE infection control",
+      location: "Compartment F - PPE Supplies",
+      compartment: "F",
+      description: "Protective gowns for infection control",
+      image: "/images/compartments/compartment-f-ppe.jpg",
+      quickFind: "Inside ambulance → Compartment F → PPE area"
+    },
+    {
+      id: "n95_masks",
+      name: "N95 Masks",
+      aliases: ["N95", "respirator", "N95 respirator"],
+      searchText: "N95 masks respirator respiratory protection airborne",
+      location: "Compartment F - PPE Supplies",
+      compartment: "F",
+      description: "N95 respirator masks for airborne protection",
+      image: "/images/compartments/compartment-f-ppe.jpg",
+      quickFind: "Inside ambulance → Compartment F → PPE area"
+    },
+    {
+      id: "surgical_masks",
+      name: "Surgical Masks",
+      aliases: ["face masks", "procedure masks"],
+      searchText: "surgical masks face procedure masks droplet protection",
+      location: "Compartment F - PPE Supplies",
+      compartment: "F",
+      description: "Surgical face masks",
+      image: "/images/compartments/compartment-f-ppe.jpg",
+      quickFind: "Inside ambulance → Compartment F → PPE area"
+    },
+    {
+      id: "protective_eyewear",
+      name: "Protective Eyewear",
+      aliases: ["safety glasses", "goggles", "eye protection"],
+      searchText: "protective eyewear safety glasses goggles eye protection splash",
+      location: "Compartment F - PPE Supplies",
+      compartment: "F",
+      description: "Protective eyewear for splash protection",
+      image: "/images/compartments/compartment-f-ppe.jpg",
+      quickFind: "Inside ambulance → Compartment F → PPE area"
+    },
+    {
+      id: "face_shields",
+      name: "Face Shields",
+      aliases: ["full face shield", "face visor"],
+      searchText: "face shields visor full face protection splash",
+      location: "Compartment F - PPE Supplies",
+      compartment: "F",
+      description: "Full face shields for protection",
+      image: "/images/compartments/compartment-f-ppe.jpg",
+      quickFind: "Inside ambulance → Compartment F → PPE area"
+    },
+    // === COMPARTMENT G - AIRWAY SUPPLIES ===
+    {
+      id: "airway_supplies",
+      name: "Airway Supplies",
+      aliases: ["airway equipment", "respiratory supplies"],
+      searchText: "airway supplies equipment respiratory management",
+      location: "Compartment G - Glass cabinet labeled 'AIRWAY SUPPLIES'",
+      compartment: "G",
+      description: "Complete airway management supplies",
+      image: "/images/compartments/compartment-g-airway.jpg",
+      quickFind: "Inside ambulance → Glass cabinet → 'AIRWAY SUPPLIES' label"
+    },
+    {
+      id: "nasal_airways",
+      name: "Nasal Airways (NPA)",
+      aliases: ["NPA", "nasal trumpet", "nasopharyngeal airway"],
+      searchText: "nasal airways NPA trumpet nasopharyngeal airway",
+      location: "Compartment G - Airway Supplies cabinet",
+      compartment: "G",
+      description: "Nasopharyngeal airways (NPA) - various sizes",
+      image: "/images/compartments/compartment-g-airway.jpg",
+      quickFind: "Inside ambulance → Compartment G → Airway cabinet"
+    },
+    {
+      id: "oral_airways",
+      name: "Oral Airways (OPA)",
+      aliases: ["OPA", "oropharyngeal airway", "guedel airway"],
+      searchText: "oral airways OPA oropharyngeal guedel airway",
+      location: "Compartment G - Airway Supplies cabinet",
+      compartment: "G",
+      description: "Oropharyngeal airways (OPA) - various sizes",
+      image: "/images/compartments/compartment-g-airway.jpg",
+      quickFind: "Inside ambulance → Compartment G → Airway cabinet"
+    },
+    {
+      id: "king_airways",
+      name: "King Airways",
+      aliases: ["king LT", "supraglottic airway", "King tube"],
+      searchText: "king airways LT supraglottic tube advanced airway",
+      location: "Compartment G - Airway Supplies cabinet",
+      compartment: "G",
+      critical: true,
+      description: "King supraglottic airways for advanced airway management",
+      image: "/images/compartments/compartment-g-airway.jpg",
+      quickFind: "Inside ambulance → Compartment G → Airway cabinet"
+    },
+    {
+      id: "non_rebreather_masks",
+      name: "Non-Rebreather Masks",
+      aliases: ["NRB", "high flow mask", "oxygen mask", "NRM"],
+      searchText: "non rebreather masks NRB NRM high flow oxygen mask",
+      location: "Compartment G - Airway Supplies cabinet",
+      compartment: "G",
+      description: "Non-rebreather oxygen masks for high flow O2",
+      image: "/images/compartments/compartment-g-airway.jpg",
+      quickFind: "Inside ambulance → Compartment G → Airway cabinet"
+    },
+    {
+      id: "nasal_cannulas",
+      name: "Nasal Cannulas",
+      aliases: ["nasal prongs", "NC", "oxygen cannula"],
+      searchText: "nasal cannula NC prongs oxygen low flow",
+      location: "Compartment G - Airway Supplies cabinet",
+      compartment: "G",
+      description: "Nasal cannulas for oxygen delivery",
+      image: "/images/compartments/compartment-g-airway.jpg",
+      quickFind: "Inside ambulance → Compartment G → Airway cabinet"
+    },
+    {
+      id: "nebulizers",
+      name: "Nebulizers",
+      aliases: ["nebulizer mask", "aerosol mask", "SVN"],
+      searchText: "nebulizer nebulizers mask aerosol SVN breathing treatment",
+      location: "Compartment G - Airway Supplies cabinet",
+      compartment: "G",
+      description: "Nebulizer masks for medication delivery",
+      image: "/images/compartments/compartment-g-airway.jpg",
+      quickFind: "Inside ambulance → Compartment G → Airway cabinet"
+    },
+    {
+      id: "end_tidal_co2",
+      name: "End Tidal CO2",
+      aliases: ["ETCO2", "capnography", "CO2 detector"],
+      searchText: "end tidal CO2 ETCO2 capnography detector waveform",
+      location: "Compartment G - Airway Supplies cabinet",
+      compartment: "G",
+      description: "End tidal CO2 detection for airway confirmation",
+      image: "/images/compartments/compartment-g-airway.jpg",
+      quickFind: "Inside ambulance → Compartment G → Airway cabinet"
+    },
+    // === COMPARTMENT H - BVM & VENTILATION ===
+    {
+      id: "bvm",
+      name: "Bag Valve Mask (BVM)",
+      aliases: ["BVM", "ambu bag", "bag mask", "manual resuscitator"],
+      searchText: "BVM bag valve mask ambu manual resuscitator ventilation",
+      location: "Compartment H - Glass cabinet labeled 'BAG VALVE MASKS'",
+      compartment: "H",
+      critical: true,
+      description: "Bag valve masks for manual ventilation",
+      image: "/images/compartments/compartment-h-bvm.jpg",
+      quickFind: "Inside ambulance → Glass cabinet → 'BAG VALVE MASKS' label"
+    },
+    {
+      id: "bvm_face_masks",
+      name: "BVM Face Masks",
+      aliases: ["face masks for BVM", "ventilation masks"],
+      searchText: "BVM face masks ventilation masks sizes",
+      location: "Compartment H - With BVM equipment",
+      compartment: "H",
+      description: "Face masks for BVM - various sizes",
+      image: "/images/compartments/compartment-h-bvm.jpg",
+      quickFind: "Inside ambulance → Compartment H → With BVM"
+    },
+    {
+      id: "suction_catheters",
+      name: "Suction Catheters",
+      aliases: ["yankauer", "suction tip", "tonsil tip"],
+      searchText: "suction catheters yankauer tip tonsil",
+      location: "Compartment H - With BVM/Ventilation equipment",
+      compartment: "H",
+      description: "Suction catheters including Yankauer tips",
+      image: "/images/compartments/compartment-h-bvm.jpg",
+      quickFind: "Inside ambulance → Compartment H → With ventilation gear"
     }
   ],
   compartments: {
@@ -759,7 +1168,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.9.8';
+const APP_VERSION = '2.9.9';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically

@@ -1,9 +1,9 @@
 {
-  "version": "2.9.8",
+  "version": "2.9.9",
   "build": "2025-12-20",
   "changelog": [
-    "FIX: Simplified voice recognition - works like v1/v2",
-    "FIX: Removed permission pre-checking that blocked microphone",
-    "FIX: Direct startListening on tap - browser handles permission"
+    "NEW: Added 38 equipment items from compartments A-H",
+    "NEW: PPE, Airway, BVM, Trauma supplies now searchable",
+    "NEW: Voice search for all compartment items"
   ]
 }
