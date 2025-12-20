@@ -1,9 +1,9 @@
 {
-  "version": "2.9.7",
+  "version": "2.9.8",
   "build": "2025-12-20",
   "changelog": [
-    "FIX: Voice results now spoken automatically",
-    "FIX: TTS retry logic for iOS reliability",
-    "FIX: Longer delay after voice recognition"
+    "FIX: Simplified voice recognition - works like v1/v2",
+    "FIX: Removed permission pre-checking that blocked microphone",
+    "FIX: Direct startListening on tap - browser handles permission"
   ]
 }

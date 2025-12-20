@@ -759,7 +759,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.9.7';
+const APP_VERSION = '2.9.8';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
@@ -2009,22 +2009,10 @@ voiceBtn.addEventListener('click', (e) => {
       }
     }
   } else {
-    // SMART PERMISSION FLOW: Check permission status before starting
-    const permissionStatus = localStorage.getItem(MIC_PERMISSION_KEY);
-
-    if (permissionStatus === 'denied') {
-      // Permission was previously denied - show help modal
-      console.log('[VoiceBtn] Permission denied - showing help modal');
-      showMicBlockedModal();
-    } else if (permissionStatus === 'skipped') {
-      // User skipped - offer to enable again
-      console.log('[VoiceBtn] User had skipped - showing onboarding');
-      showMicOnboardingModal();
-    } else {
-      // Permission granted or unknown - try to start
-      console.log('[VoiceBtn] Starting recognition');
-      startListening();
-    }
+    // SIMPLIFIED: Just start listening directly - let the browser handle permission prompts
+    // This is how v1/v2 worked and it was reliable
+    console.log('[VoiceBtn] Starting recognition directly');
+    startListening();
   }
 });
 
@@ -2121,34 +2109,13 @@ const MIC_SETUP_SHOWN_KEY = 'hnfd-mic-setup-shown';
 
 /**
  * Check if this is the first time the user is using the app
- * Show onboarding modal if needed
+ * SIMPLIFIED: Don't show onboarding modals - let browser handle permission prompts naturally
+ * This is how v1/v2 worked and was reliable on iOS Safari
  */
 function checkMicrophoneSetup() {
-  const setupShown = localStorage.getItem(MIC_SETUP_SHOWN_KEY);
-  const permissionStatus = localStorage.getItem(MIC_PERMISSION_KEY);
-
-  console.log('[MicPerm] Setup shown:', setupShown, 'Permission:', permissionStatus);
-
-  // If user already granted or skipped, don't show onboarding
-  if (permissionStatus === 'granted' || permissionStatus === 'skipped') {
-    return false;
-  }
-
-  // If setup was never shown, show onboarding
-  if (!setupShown) {
-    // Small delay to let app load
-    setTimeout(() => {
-      showMicOnboardingModal();
-    }, 1500);
-    return true;
-  }
-
-  // If permission was denied, check if user might have changed settings
-  if (permissionStatus === 'denied') {
-    // Don't auto-show blocked modal, let them tap mic button
-    return false;
-  }
-
+  // DISABLED: The modal-based permission flow was blocking speech recognition
+  // Just let the browser handle permission prompts when user taps the microphone
+  console.log('[MicPerm] Skipping setup check - using direct browser permission flow');
   return false;
 }
 
@@ -2363,15 +2330,12 @@ function initializeAudio() {
 
 // ============================================================================
 // AUTO-START LISTENING when app loads
-// CRITICAL for emergency situations - voice must work immediately
+// SIMPLIFIED: Just initialize and wait for user to tap microphone
 // ============================================================================
 async function autoStartListening() {
-  console.log('[AutoStart] 🚀 Checking microphone permission...');
+  console.log('[AutoStart] 🚀 Initializing speech recognition...');
 
-  // iOS Safari workaround: Permissions API doesn't work reliably
-  // We'll try to detect if we have permission by attempting to initialize
   try {
-    // First, ensure speech recognition is available
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
       console.log('[AutoStart] ❌ Speech recognition not supported');
@@ -2379,65 +2343,17 @@ async function autoStartListening() {
       return;
     }
 
-    // Try permissions API first (not supported on iOS Safari)
-    if (navigator.permissions && navigator.permissions.query) {
-      try {
-        const permissionStatus = await navigator.permissions.query({ name: 'microphone' });
-        console.log('[AutoStart] Permission status:', permissionStatus.state);
-
-        if (permissionStatus.state === 'granted') {
-          console.log('[AutoStart] ✅ Permission already granted - auto-starting');
-          setTimeout(() => {
-            if (!isListening && !recognitionStarting) {
-              startListening();
-            }
-          }, 800); // Delay to ensure UI is fully loaded
-        } else if (permissionStatus.state === 'prompt') {
-          console.log('[AutoStart] ℹ️  Permission needed - waiting for user tap');
-          if (transcript) transcript.textContent = 'Tap microphone to enable voice search';
-        } else {
-          console.log('[AutoStart] ❌ Permission denied');
-          if (transcript) transcript.textContent = 'Microphone blocked. Enable in Settings > Safari.';
-        }
-
-        // Monitor permission changes
-        permissionStatus.addEventListener('change', () => {
-          console.log('[AutoStart] 🔄 Permission changed to:', permissionStatus.state);
-          if (permissionStatus.state === 'granted' && !isListening && !recognitionStarting) {
-            setTimeout(() => startListening(), 300);
-          }
-        });
-
-        return; // Exit early if permissions API worked
-      } catch (permError) {
-        console.log('[AutoStart] Permissions API failed (likely iOS Safari):', permError.message);
-        // Fall through to iOS Safari workaround below
-      }
-    }
-
-    // iOS Safari workaround: Can't use permissions API
-    // Instead, initialize recognition and let it fail gracefully if no permission
-    console.log('[AutoStart] 📱 Using iOS Safari auto-start approach');
-
-    // Initialize speech recognition (doesn't require permission)
+    // Just initialize - let user tap microphone to start
     const initSuccess = initSpeechRecognition();
-    if (!initSuccess) {
-      console.log('[AutoStart] ❌ Could not initialize speech recognition');
-      if (transcript) transcript.textContent = 'Tap microphone to start voice search';
-      return;
+    if (initSuccess) {
+      console.log('[AutoStart] ✅ Ready - waiting for user to tap microphone');
+      if (transcript) transcript.textContent = 'Tap microphone to search by voice';
+    } else {
+      console.log('[AutoStart] ❌ Could not initialize');
+      if (transcript) transcript.textContent = 'Tap microphone to try voice search';
     }
-
-    // Try to start listening - will auto-prompt for permission on iOS
-    // If permission was previously granted, this will work immediately
-    setTimeout(() => {
-      if (!isListening && !recognitionStarting) {
-        console.log('[AutoStart] 🎤 Attempting auto-start (will prompt if needed)');
-        startListening();
-      }
-    }, 1000); // Longer delay for iOS Safari to be ready
-
   } catch (e) {
-    console.error('[AutoStart] ❌ Unexpected error:', e);
+    console.error('[AutoStart] ❌ Error:', e);
     if (transcript) transcript.textContent = 'Tap microphone to start';
   }
 }
@@ -2455,62 +2371,27 @@ if (synthesis) {
 // ============================================================================
 
 /**
- * Primary initialization - Try auto-start when DOM is ready
+ * Primary initialization - SIMPLIFIED: Just initialize, wait for user tap
  */
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('[Init] 📱 DOM loaded, attempting auto-start...');
+  console.log('[Init] 📱 DOM loaded, initializing...');
 
   // Initialize audio context unlock for iOS
   initializeAudio();
 
-  // SMART PERMISSION FLOW: Check if we need to show onboarding modal
-  const needsSetup = checkMicrophoneSetup();
-
-  // Only try to auto-start if permission was previously granted
-  if (!needsSetup) {
-    const permissionStatus = localStorage.getItem(MIC_PERMISSION_KEY);
-    if (permissionStatus === 'granted') {
-      // Permission already granted - auto-start
-      setTimeout(autoStartListening, 1200);
-    } else if (permissionStatus === 'skipped' || permissionStatus === 'denied') {
-      // User chose text search - don't auto-prompt
-      const transcript = document.getElementById('transcript');
-      if (transcript) {
-        transcript.textContent = 'Type equipment name below to search';
-      }
-    } else {
-      // Unknown - wait for user interaction
-      setTimeout(autoStartListening, 1200);
-    }
-  }
+  // Initialize speech recognition (will show "Tap microphone to search by voice")
+  setTimeout(autoStartListening, 800);
 });
 
 /**
- * Fallback initialization - Start on first user interaction
- * iOS Safari requires user interaction before audio/microphone can start
+ * First user interaction - unlock audio for iOS Safari
  */
-let hasAttemptedFirstTapStart = false;
+let hasUnlockedAudio = false;
 document.addEventListener('click', () => {
-  if (!hasAttemptedFirstTapStart && !isListening && !recognitionStarting) {
-    hasAttemptedFirstTapStart = true;
-    console.log('[Init] 👆 First tap detected');
-
-    // Unlock audio context (iOS requirement)
+  if (!hasUnlockedAudio) {
+    hasUnlockedAudio = true;
+    console.log('[Init] 👆 First tap - unlocking audio');
     initializeAudio();
-
-    // SMART PERMISSION FLOW: Only auto-start if permission was granted
-    const permissionStatus = localStorage.getItem(MIC_PERMISSION_KEY);
-    if (permissionStatus === 'granted') {
-      // Permission already granted - try to start
-      setTimeout(() => {
-        if (!isListening && !recognitionStarting) {
-          console.log('[Init] Starting speech recognition after first tap (permission granted)');
-          startListening();
-        }
-      }, 150);
-    } else {
-      console.log('[Init] Permission not granted, waiting for user to enable microphone');
-    }
   }
 }, { once: true });
 

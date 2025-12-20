@@ -28,3 +28,10 @@ Whenever I speak to it I expect it to tell me back the answer. For some reason t
 
 Please fix 
 
+
+## Human
+
+Okay, I want you to do an ironclad test. Build a test to test everything in there, and I want you to snapshot the visuals, and I want you to grade everything one to a hundred based on how effective it is, how, how effective you're doing using the mobile screen space.
+
+I want you always ensuring that you're only testing on the mobile setup. So test your Playwright setup for a mobile screen design, and then let me know what the output is. Look for opportunities for improvement of the UI. Also look for opportunities to improve the images you're showing 
+
