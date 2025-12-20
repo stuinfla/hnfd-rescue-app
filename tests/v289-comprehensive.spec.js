@@ -235,7 +235,7 @@ test.describe('v2.8.9 Comprehensive Tests', () => {
     await page.waitForTimeout(500);
 
     const versionText = await page.locator('#settings-version').textContent();
-    expect(versionText).toContain('2.9.1');
+    expect(versionText).toContain('2.9.4');
     console.log(`✅ Version displayed: ${versionText}`);
     console.log('✅ TEST PASSED: Correct version displayed');
   });
