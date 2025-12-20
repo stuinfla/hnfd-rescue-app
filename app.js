@@ -759,7 +759,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.9.4';
+const APP_VERSION = '2.9.5';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
@@ -1066,32 +1066,6 @@ let recognitionCleanupTimer = null;
  */
 function initSpeechRecognition() {
   try {
-    // CRITICAL: Detect iOS PWA mode - Speech Recognition is BLOCKED by Apple
-    // See: https://bugs.webkit.org/show_bug.cgi?id=225298
-    // Safari Mobile WebView triggers error immediately without asking for mic
-    const isPWA = window.matchMedia('(display-mode: standalone)').matches ||
-                  window.navigator.standalone === true;
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-    if (isPWA && isIOS) {
-      console.warn('[Speech] iOS PWA mode detected - Speech Recognition not supported by Apple');
-      if (voiceBtn) {
-        voiceBtn.style.opacity = '0.5';
-        voiceBtn.style.pointerEvents = 'none';
-      }
-      if (voiceLabel) {
-        voiceLabel.innerHTML = '<span style="color: #ff6b6b;">Voice unavailable in home screen app</span><br><small>Open in Safari browser for voice search</small>';
-      }
-      // Show a one-time alert for clarity
-      if (!localStorage.getItem('pwaVoiceWarningShown')) {
-        setTimeout(() => {
-          alert('Voice Search Unavailable\n\nApple does not allow speech recognition in home screen apps.\n\nTo use voice search, open this app in Safari browser instead.');
-          localStorage.setItem('pwaVoiceWarningShown', 'true');
-        }, 1000);
-      }
-      return false;
-    }
-
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
