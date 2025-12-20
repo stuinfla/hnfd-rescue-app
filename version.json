@@ -1,9 +1,9 @@
 {
-  "version": "2.9.9",
+  "version": "2.10.0",
   "build": "2025-12-20",
   "changelog": [
-    "NEW: Added 38 equipment items from compartments A-H",
-    "NEW: PPE, Airway, BVM, Trauma supplies now searchable",
-    "NEW: Voice search for all compartment items"
+    "UI: Fixed duplicate icons - Oxygen (lungs), Suction (swirl)",
+    "UI: Added BVM and C-Collar to Quick Find buttons",
+    "UI: Added compartments A-H to location map"
   ]
 }
