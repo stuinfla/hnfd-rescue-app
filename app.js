@@ -702,7 +702,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.9.0';
+const APP_VERSION = '2.9.1';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically

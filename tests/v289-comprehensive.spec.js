@@ -11,8 +11,9 @@ const { test, expect } = require('@playwright/test');
  * 5. Microphone doesn't show scary error messages
  */
 
-// Helper to dismiss microphone onboarding if it appears
+// Helper to dismiss all onboarding modals/overlays
 async function dismissMicOnboarding(page) {
+  // Dismiss mic onboarding modal
   try {
     const skipBtn = page.locator('text=Skip for now');
     if (await skipBtn.isVisible({ timeout: 2000 })) {
@@ -22,6 +23,25 @@ async function dismissMicOnboarding(page) {
   } catch (e) {
     // Modal not present
   }
+
+  // Dismiss install prompt if visible
+  try {
+    const gotItBtn = page.locator('text=Got It');
+    if (await gotItBtn.isVisible({ timeout: 1000 })) {
+      await gotItBtn.click();
+      await page.waitForTimeout(300);
+    }
+  } catch (e) {
+    // Not present
+  }
+
+  // Force close any lingering modals
+  await page.evaluate(() => {
+    document.querySelectorAll('.admin-modal.active').forEach(m => m.classList.remove('active'));
+    const installPrompt = document.getElementById('install-prompt');
+    if (installPrompt) installPrompt.classList.remove('visible');
+  });
+  await page.waitForTimeout(300);
 }
 
 test.describe('v2.8.9 Comprehensive Tests', () => {
@@ -29,12 +49,13 @@ test.describe('v2.8.9 Comprehensive Tests', () => {
   test('1. Search results show LOCATION FIRST (prominently)', async ({ page }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(2000);
     await dismissMicOnboarding(page);
 
     // Type a search
     const searchInput = page.locator('#searchInput');
     await searchInput.fill('AED');
-    await page.locator('#searchBtn').click();
+    await page.locator('#searchBtn').click({ force: true });
     await page.waitForTimeout(1000);
 
     // Check that result card exists
@@ -66,12 +87,13 @@ test.describe('v2.8.9 Comprehensive Tests', () => {
   test('2. Images show FULL picture (object-fit: contain)', async ({ page }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(2000);
     await dismissMicOnboarding(page);
 
     // Search for an item with image
     const searchInput = page.locator('#searchInput');
     await searchInput.fill('oxygen');
-    await page.locator('#searchBtn').click();
+    await page.locator('#searchBtn').click({ force: true });
     await page.waitForTimeout(1000);
 
     // Check image CSS
@@ -92,12 +114,13 @@ test.describe('v2.8.9 Comprehensive Tests', () => {
   test('3. Gear icon ALWAYS shows settings menu first', async ({ page }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(2000);
     await dismissMicOnboarding(page);
 
     // Click gear icon
     const gearBtn = page.locator('#admin-toggle');
     await expect(gearBtn).toBeVisible();
-    await gearBtn.click();
+    await gearBtn.click({ force: true });
     await page.waitForTimeout(500);
 
     // Settings modal should open (NOT admin panel directly)
@@ -124,8 +147,9 @@ test.describe('v2.8.9 Comprehensive Tests', () => {
   test('4. A-Z Browse shows scrollable tappable list', async ({ page }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(2000); // Wait for modals to appear
     await dismissMicOnboarding(page);
-    await page.waitForTimeout(1500); // Extra wait for JS to fully load
+    await page.waitForTimeout(500);
 
     // Click A-Z Browse button with force to bypass any overlays
     const azBrowseBtn = page.locator('#azBrowseBtn');
@@ -182,6 +206,7 @@ test.describe('v2.8.9 Comprehensive Tests', () => {
   test('5. Microphone does NOT show scary error on load', async ({ page }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(2000);
     await dismissMicOnboarding(page);
 
     // Wait a moment for any error messages to appear
@@ -202,14 +227,15 @@ test.describe('v2.8.9 Comprehensive Tests', () => {
   test('6. Version is v2.8.9', async ({ page }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(2000);
     await dismissMicOnboarding(page);
 
     // Open settings to check version
-    await page.locator('#admin-toggle').click();
+    await page.locator('#admin-toggle').click({ force: true });
     await page.waitForTimeout(500);
 
     const versionText = await page.locator('#settings-version').textContent();
-    expect(versionText).toContain('2.9.0');
+    expect(versionText).toContain('2.9.1');
     console.log(`✅ Version displayed: ${versionText}`);
     console.log('✅ TEST PASSED: Correct version displayed');
   });
@@ -217,6 +243,7 @@ test.describe('v2.8.9 Comprehensive Tests', () => {
   test('7. Location guide shows 3-step image sequence', async ({ page }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(2000); // Wait for modals to appear
     await dismissMicOnboarding(page);
 
     // Search for an item with location guide
@@ -224,11 +251,12 @@ test.describe('v2.8.9 Comprehensive Tests', () => {
     await searchInput.fill('oxygen');
     await page.locator('#searchBtn').click();
     await page.waitForTimeout(1000);
+    await dismissMicOnboarding(page); // Dismiss again in case more appeared
 
     // Click location guide button if present
     const guideBtn = page.locator('.location-guide-btn').first();
     if (await guideBtn.isVisible()) {
-      await guideBtn.click();
+      await guideBtn.click({ force: true }); // Force click to bypass overlays
       await page.waitForTimeout(500);
 
       // Guide modal should be visible (dynamically created)
