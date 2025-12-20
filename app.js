@@ -3909,3 +3909,4 @@ function saveGuideEditor() {
 }
 
 console.log('[GuideEditor] Module loaded');
+// Force deploy Fri Dec 19 21:10:08 EST 2025
