@@ -514,6 +514,63 @@ const INVENTORY_DATABASE = {
       name: "MC2 Vehicle",
       description: "Chase vehicle",
       access: "Back/passenger seat"
+    },
+    // === NEW HNFR COMPARTMENTS A-H (from Dec 2024 photos) ===
+    "A": {
+      name: "Compartment A",
+      description: "Basic Supplies - bandages, splints, cold/hot packs",
+      access: "Outside - side compartment",
+      image: "/images/compartments/compartment-a-supplies.jpg",
+      contents: ["Bandaids", "Cold Packs", "Hot Packs", "Triangle Bandages", "Gauze", "Kling", "SAM Splints", "Flex-All Splints", "Gloves", "Stethoscope", "T.O.C.S. (Occlusive Chest Seal)"]
+    },
+    "B": {
+      name: "Compartment B",
+      description: "Trauma & Burn Supplies",
+      access: "Outside - side compartment",
+      image: "/images/compartments/compartment-b-trauma.jpg",
+      contents: ["Stuffed Animals", "Burn Dressings", "ABD Pads", "Multi-Trauma Dressing", "Eye Pads", "Morgan Lens", "Hemostatic Dressings"]
+    },
+    "C": {
+      name: "Compartment C",
+      description: "Cervical Collars & Saline",
+      access: "Outside - side compartment",
+      image: "/images/compartments/compartment-c-collars.jpg",
+      contents: ["Cervical Collars", "Saline", "Stretcher Battery"]
+    },
+    "OB": {
+      name: "Compartment D (OB/Linens)",
+      description: "OB Kit, Linens, Emesis Bags",
+      access: "Inside - glass cabinet",
+      image: "/images/compartments/compartment-d-ob-linens.jpg",
+      contents: ["OB Kit (Curaplex)", "Emesis Bags", "Linens", "Sharps Container", "Blankets"]
+    },
+    "E": {
+      name: "Compartment E",
+      description: "Protocols & Reference Materials",
+      access: "Inside - cabinet with lock",
+      image: "/images/compartments/compartment-e-protocols.jpg",
+      contents: ["ME EMS Protocols", "Drug Log", "LIFEPAK 15 Manual", "SCBA Binder", "LVAD Info"]
+    },
+    "F": {
+      name: "Compartment F",
+      description: "PPE Supplies",
+      access: "Inside - upper cabinet",
+      image: "/images/compartments/compartment-f-ppe.jpg",
+      contents: ["Gowns", "N95 Masks", "Surgical Masks", "Protective Eyewear", "Face Shields"]
+    },
+    "G": {
+      name: "Compartment G",
+      description: "Airway Supplies",
+      access: "Inside - glass cabinet with 'AIRWAY SUPPLIES' label",
+      image: "/images/compartments/compartment-g-airway.jpg",
+      contents: ["Nasal Airways (NPA)", "Oral Airways (OPA)", "King Airways", "Tube Holders", "CO2 Adapters", "Non-Rebreather Masks", "End Tidal CO2", "Adult Oxygen Nasal Cannulas", "Nebulizers"]
+    },
+    "H": {
+      name: "Compartment H",
+      description: "BVM & Ventilation",
+      access: "Inside - glass cabinet with 'BAG VALVE MASKS' label",
+      image: "/images/compartments/compartment-h-bvm.jpg",
+      contents: ["Bag Valve Masks (BVM)", "Face Masks for BVM", "Suction Catheters", "Suction Tubing"]
     }
   }
 };
@@ -2520,6 +2577,76 @@ function closeAZBrowse() {
     modal.classList.remove('active');
     document.body.style.overflow = '';
   }
+}
+
+/**
+ * Open the Compartment Browse modal with visual compartment cards
+ */
+function openCompartmentBrowse() {
+  const modal = document.getElementById('compartment-modal');
+  const listEl = document.getElementById('compartment-list');
+  if (!modal || !listEl) return;
+
+  // Get compartments that have images (the new HNFR ones)
+  const compartmentsWithImages = ['A', 'B', 'C', 'OB', 'E', 'F', 'G', 'H'];
+
+  let html = '';
+  compartmentsWithImages.forEach(key => {
+    const comp = INVENTORY_DATABASE.compartments[key];
+    if (!comp || !comp.image) return;
+
+    const contentsPreview = comp.contents ? comp.contents.slice(0, 4).join(', ') + (comp.contents.length > 4 ? '...' : '') : '';
+
+    html += `
+      <div class="compartment-card" onclick="showCompartmentDetail('${key}')">
+        <img src="${comp.image}" alt="${comp.name}" class="compartment-thumb">
+        <div class="compartment-info">
+          <div class="compartment-name">${comp.name}</div>
+          <div class="compartment-desc">${comp.description}</div>
+          <div class="compartment-contents">${contentsPreview}</div>
+        </div>
+      </div>
+    `;
+  });
+
+  listEl.innerHTML = html;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCompartmentBrowse() {
+  const modal = document.getElementById('compartment-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function showCompartmentDetail(key) {
+  const comp = INVENTORY_DATABASE.compartments[key];
+  if (!comp) return;
+
+  closeCompartmentBrowse();
+
+  // Show full-screen image with contents overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'compartment-detail-overlay';
+  overlay.innerHTML = `
+    <div class="compartment-detail-content">
+      <button class="compartment-detail-close" onclick="this.parentElement.parentElement.remove()">✕</button>
+      <img src="${comp.image}" alt="${comp.name}" class="compartment-detail-img">
+      <div class="compartment-detail-info">
+        <h3>${comp.name}</h3>
+        <p class="compartment-access"><strong>Access:</strong> ${comp.access}</p>
+        <div class="compartment-contents-list">
+          <strong>Contents:</strong>
+          <ul>${comp.contents ? comp.contents.map(c => `<li>${c}</li>`).join('') : ''}</ul>
+        </div>
+      </div>
+    </div>
+  `;
+  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+  document.body.appendChild(overlay);
 }
 
 /**

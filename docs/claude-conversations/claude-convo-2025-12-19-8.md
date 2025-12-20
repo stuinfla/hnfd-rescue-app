@@ -7,3 +7,8 @@
 
 ---
 
+
+## Human
+
+'/Users/stuartkerr/Code/AMBUILANCE_INVENTORY/Ambulance_training_data/HNFR-images'  These were a bunch of other higher quality stills that were just sent over by the head of the EMTs for Harpswell Neck Fire and Rescue. Please look through them and see which of those you might choose to opt in. Use your AI vision to see which of those might be the best thing to load into the solution. 
+

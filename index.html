@@ -1858,24 +1858,116 @@
       transform: translateY(0);
     }
 
-    /* ===== BROWSE A-Z BUTTON - Prominent placement ===== */
+    /* ===== BROWSE BUTTONS ROW ===== */
+    .browse-buttons-row {
+      display: flex;
+      gap: 10px;
+      margin: 8px 0 16px 0;
+    }
+
     .browse-az-btn {
-      width: 100%;
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 14px 20px;
-      margin: 8px 0 16px 0;
+      gap: 8px;
+      padding: 14px 16px;
       background: var(--gray-800);
       border: 2px solid var(--green-600);
       border-radius: 12px;
       color: white;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
     }
+
+    .browse-compartment-btn {
+      border-color: #f59e0b;
+    }
+
+    .browse-compartment-btn .browse-az-text {
+      color: #f59e0b;
+    }
+
+    .browse-compartment-btn:hover {
+      background: #f59e0b;
+      border-color: #fbbf24;
+    }
+
+    .browse-compartment-btn:hover .browse-az-text {
+      color: white;
+    }
+
+    /* Compartment Cards */
+    .compartment-card {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      background: var(--gray-800);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .compartment-card:hover { border-color: #f59e0b; }
+    .compartment-thumb {
+      width: 80px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .compartment-info { flex: 1; }
+    .compartment-name { font-weight: 700; color: #f59e0b; margin-bottom: 4px; }
+    .compartment-desc { font-size: 13px; color: #9ca3af; margin-bottom: 4px; }
+    .compartment-contents { font-size: 11px; color: #6b7280; }
+
+    /* Compartment Detail Overlay */
+    .compartment-detail-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .compartment-detail-content {
+      max-width: 500px;
+      width: 100%;
+      position: relative;
+    }
+    .compartment-detail-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    .compartment-detail-img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+    .compartment-detail-info {
+      background: var(--gray-800);
+      padding: 16px;
+      border-radius: 12px;
+    }
+    .compartment-detail-info h3 { color: #f59e0b; margin-bottom: 8px; }
+    .compartment-access { color: #9ca3af; font-size: 14px; margin-bottom: 12px; }
+    .compartment-contents-list ul {
+      margin: 8px 0 0 20px;
+      color: #e5e7eb;
+      font-size: 14px;
+    }
+    .compartment-contents-list li { margin-bottom: 4px; }
 
     .browse-az-btn:hover {
       background: var(--green-600);
@@ -2063,11 +2155,17 @@
       <div class="recent-searches" id="recent-searches"></div>
     </section>
 
-    <!-- Browse A-Z Button - Prominent placement -->
-    <button class="browse-az-btn" id="azBrowseBtn" onclick="openAZBrowse()">
-      <span class="browse-az-icon">📋</span>
-      <span class="browse-az-text">Browse All Equipment A-Z</span>
-    </button>
+    <!-- Browse Buttons - A-Z and Compartments -->
+    <div class="browse-buttons-row">
+      <button class="browse-az-btn" id="azBrowseBtn" onclick="openAZBrowse()">
+        <span class="browse-az-icon">📋</span>
+        <span class="browse-az-text">A-Z List</span>
+      </button>
+      <button class="browse-az-btn browse-compartment-btn" id="compartmentBrowseBtn" onclick="openCompartmentBrowse()">
+        <span class="browse-az-icon">🚑</span>
+        <span class="browse-az-text">By Compartment</span>
+      </button>
+    </div>
 
     <!-- Results -->
     <section class="results-section" id="results">
@@ -2601,6 +2699,18 @@ Example for Narcan:
       <div style="display: flex; gap: 10px; margin-top: 20px;">
         <button class="admin-btn admin-btn-cancel" onclick="closeImageLibrary()">Cancel</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Compartment Browse Modal -->
+  <div class="az-modal" id="compartment-modal">
+    <div class="az-simple-container">
+      <div class="az-simple-header" style="background: #f59e0b;">
+        <h2>Browse by Compartment</h2>
+        <button class="az-close-btn" onclick="closeCompartmentBrowse()">✕</button>
+      </div>
+      <div class="az-count">Tap a compartment to see contents</div>
+      <div class="az-list-container" id="compartment-list"></div>
     </div>
   </div>
 
