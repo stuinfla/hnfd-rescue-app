@@ -1,13 +1,11 @@
 {
-  "version": "2.6.4",
-  "build": "2025-12-18",
+  "version": "2.9.0",
+  "build": "2025-12-19",
   "changelog": [
-    "FIX: ALL equipment items now have 3-image location guides (v2.6.4)",
-    "Added images to: Adult Oxygen, Peds Oxygen, Peds Trauma, Intubation, IV Kit",
-    "Added images to: LUCAS, Saline Bags, Primary Sets",
-    "Every item now shows: Cabinet position → Compartment → Equipment",
-    "---",
-    "Previous: Bulletproof microphone (v2.6.3)",
-    "Previous: Rotating Location Guide (v2.6.2)"
+    "FIXED: Location now shown FIRST in search results",
+    "FIXED: Images show FULL picture (not cropped)",
+    "FIXED: A-Z Browse scrollable list works properly",
+    "FIXED: Gear icon always shows settings menu first",
+    "FIXED: Location guide 3-step sequence working"
   ]
 }

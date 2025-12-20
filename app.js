@@ -32,7 +32,7 @@ const INVENTORY_DATABASE = {
       notes: "Red tag = inventory tracking. If seal unbroken, contents unchanged.",
       image: "/images/trauma_bag_adult.jpg",
       images: {
-        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
         compartmentView: "/images/locations/cabinet_k_overview.jpg",
         equipmentPhoto: "/images/locations/adult_trauma_bag_closeup.jpg"
       },
@@ -63,7 +63,7 @@ const INVENTORY_DATABASE = {
       contents: "Oral airways, nasal airways, oxygen masks, oxygen tank",
       image: "/images/oxygen_kit_adult.jpg",
       images: {
-        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
         compartmentView: "/images/locations/cabinet_k_overview.jpg",
         equipmentPhoto: "/images/oxygen_kit_adult.jpg"
       },
@@ -87,7 +87,7 @@ const INVENTORY_DATABASE = {
       notes: "Kids rarely have cardiac problems - respiratory is primary concern. Oxygen for children is PRIMARY importance.",
       image: "/images/pediatric_oxygen.jpg",
       images: {
-        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
         compartmentView: "/images/locations/cabinet_k_overview.jpg",
         equipmentPhoto: "/images/pediatric_oxygen.jpg"
       },
@@ -110,7 +110,7 @@ const INVENTORY_DATABASE = {
       description: "Pediatric trauma supplies",
       image: "/images/pediatric_trauma.jpg",
       images: {
-        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
         compartmentView: "/images/locations/cabinet_k_overview.jpg",
         equipmentPhoto: "/images/pediatric_trauma.jpg"
       },
@@ -133,7 +133,7 @@ const INVENTORY_DATABASE = {
       description: "Complete intubation equipment for advanced airway management",
       image: "/images/intubation_kit.jpg",
       images: {
-        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
         compartmentView: "/images/locations/cabinet_k_overview.jpg",
         equipmentPhoto: "/images/locations/intubation_bag_blue.jpg"
       },
@@ -156,7 +156,7 @@ const INVENTORY_DATABASE = {
       notes: "Does NOT contain saline bags",
       image: "/images/iv_kit.jpg",
       images: {
-        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
         compartmentView: "/images/locations/cabinet_k_overview.jpg",
         equipmentPhoto: "/images/locations/iv_kit_closeup.jpg"
       },
@@ -180,7 +180,7 @@ const INVENTORY_DATABASE = {
       notes: "Check for GREEN FLASH every 8-10 seconds = charged and ready",
       image: "/images/cabinet_d_aed.jpg",
       images: {
-        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
         compartmentView: "/images/locations/cabinet_k_overview.jpg",
         equipmentPhoto: "/images/locations/aed_closeup.jpg"
       },
@@ -212,7 +212,7 @@ const INVENTORY_DATABASE = {
       notes: "Blue tags track drug accountability",
       image: "/images/drug_box.jpg",
       images: {
-        ambulancePosition: "/images/locations/drawer_n_open.jpg",
+        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
         compartmentView: "/images/locations/drug_box_cabinet.jpg",
         equipmentPhoto: "/images/locations/drug_box_closeup.jpg"
       },
@@ -243,7 +243,7 @@ const INVENTORY_DATABASE = {
       notes: "One of THREE suction types on board",
       image: "/images/suction.jpg",
       images: {
-        ambulancePosition: "/images/locations/drawer_n_open.jpg",
+        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
         compartmentView: "/images/locations/drug_box_cabinet.jpg",
         equipmentPhoto: "/images/suction.jpg"
       },
@@ -275,7 +275,7 @@ const INVENTORY_DATABASE = {
       driverNote: "Little black box, little black pouch - always in same spot",
       image: "/images/glucometer.jpg",
       images: {
-        ambulancePosition: "/images/locations/drawer_n_open.jpg",
+        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
         compartmentView: "/images/locations/drawer_n_open.jpg",
         equipmentPhoto: "/images/glucometer.jpg"
       },
@@ -306,7 +306,7 @@ const INVENTORY_DATABASE = {
       notes: "Old packaging: orange container. New packaging: clear tube (can see syringe). Additional Narcan in Drug Box but Drawer N is fastest.",
       image: "/images/narcan.jpg",
       images: {
-        ambulancePosition: "/images/locations/drawer_n_open.jpg",
+        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
         compartmentView: "/images/locations/drawer_n_contents.jpg",
         equipmentPhoto: "/images/locations/narcan_syringe_closeup.jpg"
       },
@@ -337,7 +337,7 @@ const INVENTORY_DATABASE = {
       notes: "New Matheson tanks: green top, aluminum, single valve operation. Old steel tanks: two-step process - open valve first, then set flow.",
       image: "/images/oxygen_tanks.jpg",
       images: {
-        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
         compartmentView: "/images/locations/oxygen_compartment.jpg",
         equipmentPhoto: "/images/locations/oxygen_tanks_closeup.jpg"
       },
@@ -368,7 +368,7 @@ const INVENTORY_DATABASE = {
       notes: "Carry with sensitive side (screen) against body. Has extra BP cuffs and batteries on other side. Must press AND HOLD to shut off (prevents accidental shutdown).",
       image: "/images/lifepak_mounted.jpg",
       images: {
-        ambulancePosition: "/images/locations/drawer_n_open.jpg",
+        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
         compartmentView: "/images/locations/lifepak_closeup.jpg",
         equipmentPhoto: "/images/locations/lifepak_closeup.jpg"
       },
@@ -398,7 +398,7 @@ const INVENTORY_DATABASE = {
       notes: "Hit seatbelt release to access. Purchased by Town of Harpswell. MC2 carries it because they're usually first on scene (OBI is 23 minutes away).",
       image: "/images/lucas_device.jpg",
       images: {
-        ambulancePosition: "/images/locations/cabinet_k_labeled.jpg",
+        ambulancePosition: "/images/lucas_device.jpg",
         compartmentView: "/images/lucas_device.jpg",
         equipmentPhoto: "/images/lucas_device.jpg"
       },
@@ -420,7 +420,7 @@ const INVENTORY_DATABASE = {
       notes: "Warm saline in heated IV warmer during winter for hypothermic patients. Cabinet doors fold DOWN for easier access.",
       image: "/images/saline_bags.jpg",
       images: {
-        ambulancePosition: "/images/locations/drawer_n_open.jpg",
+        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
         compartmentView: "/images/saline_bags.jpg",
         equipmentPhoto: "/images/saline_bags.jpg"
       },
@@ -440,7 +440,7 @@ const INVENTORY_DATABASE = {
       description: "IV tubing with needle for saline bags - required to administer saline",
       image: "/images/primary_sets.jpg",
       images: {
-        ambulancePosition: "/images/locations/drawer_n_open.jpg",
+        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
         compartmentView: "/images/primary_sets.jpg",
         equipmentPhoto: "/images/primary_sets.jpg"
       },
@@ -461,7 +461,7 @@ const INVENTORY_DATABASE = {
       notes: "Wall-mounted in patient compartment. Always available when patient is on stretcher.",
       image: "/images/suction.jpg",
       images: {
-        ambulancePosition: "/images/locations/drawer_n_open.jpg",
+        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
         compartmentView: "/images/locations/onboard_suction_area.jpg",
         equipmentPhoto: "/images/locations/onboard_suction_area.jpg"
       },
@@ -702,7 +702,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.6.4';
+const APP_VERSION = '2.9.0';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
@@ -740,31 +740,17 @@ async function checkForUpdates(showIfCurrent = false) {
 }
 
 function showUpdateNotification(newVersion, changelog) {
-  // Remove any existing notification
-  const existing = document.getElementById('update-notification');
-  if (existing) existing.remove();
+  // AUTO-UPDATE: Don't prompt - just apply the update immediately
+  console.log(`[Update] Auto-applying update to v${newVersion}`);
 
-  const notification = document.createElement('div');
-  notification.id = 'update-notification';
-  notification.innerHTML = `
-    <div class="update-content">
-      <div class="update-header">
-        <span class="update-icon">🔄</span>
-        <strong>Update Available: v${newVersion}</strong>
-      </div>
-      <div class="update-changes">
-        ${changelog ? changelog.slice(0, 3).map(c => `• ${c}`).join('<br>') : ''}
-      </div>
-      <div class="update-buttons">
-        <button class="update-btn update-now" onclick="applyUpdate()">Update Now</button>
-        <button class="update-btn update-later" onclick="dismissUpdate()">Later</button>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(notification);
+  // Show brief "Updating..." message
+  const statusText = document.getElementById('status-text');
+  if (statusText) {
+    statusText.textContent = `Updating to v${newVersion}...`;
+  }
 
-  // Auto-show
-  setTimeout(() => notification.classList.add('visible'), 100);
+  // Apply update after brief delay so user sees message
+  setTimeout(() => applyUpdate(), 500);
 }
 
 function showVersionInfo(message) {
@@ -1112,7 +1098,8 @@ function initSpeechRecognition() {
           }
         }, 2000);
       } else if (event.error === 'not-allowed' || event.error === 'permission-denied') {
-        if (transcript) transcript.textContent = 'Microphone blocked. Enable in Settings > Safari > Microphone.';
+        // SMART PERMISSION HANDLING: Show helpful modal instead of text error
+        handleMicrophoneError(event.error);
         recognitionInitialized = false; // Force re-init on next attempt
       } else if (event.error === 'network') {
         if (transcript) transcript.textContent = 'Network error. Checking connection...';
@@ -1125,7 +1112,9 @@ function initSpeechRecognition() {
         // User cancelled - this is normal, don't show error
         console.log('[Speech] Recognition aborted by user');
       } else if (event.error === 'audio-capture') {
-        if (transcript) transcript.textContent = 'Microphone unavailable. Check if another app is using it.';
+        // Don't show scary error - just reset to ready state
+        if (transcript) transcript.textContent = 'Tap microphone to try again';
+        console.log('[Speech] Audio capture issue - mic may be in use by another app');
       } else {
         // Unknown error - try to recover
         console.error('[Speech] Unknown error:', event.error);
@@ -1275,7 +1264,8 @@ function startListening() {
       }
     } else if (e.message && e.message.includes('not-allowed')) {
       stopListening();
-      if (transcript) transcript.textContent = 'Allow microphone in Settings > Safari.';
+      // SMART PERMISSION HANDLING: Show helpful modal instead of text error
+      handleMicrophoneError('not-allowed');
     } else {
       // Unknown error - full recovery sequence
       stopListening();
@@ -1487,25 +1477,25 @@ function displayResults(results, query) {
           ${item.critical ? `<span class="result-badge badge-critical">Critical #${item.criticalRank}</span>` : ''}
         </div>
 
+        <!-- LOCATION FIRST - Most important info up front -->
+        <div class="result-location-primary">
+          <span class="location-icon-large">📍</span>
+          <span class="location-text-large">${item.location}</span>
+        </div>
+        ${item.color ? `<div class="result-color-inline">Color: <strong>${item.color}</strong></div>` : ''}
+
+        ${item.images ? `
+          <button class="location-guide-btn" onclick="showLocationGuide('${item.id}')">
+            📍 View Location Guide (3 Steps)
+          </button>
+        ` : ''}
+
         ${item.image ? `
           <div class="result-image-container">
             <img src="${getImageUrl(item)}" alt="${item.name}" class="result-image" onclick="toggleImageZoom(this)" />
             <div class="image-hint">Tap image to enlarge ${getCustomImage(item.id) ? '• Custom Image' : ''}</div>
           </div>
         ` : ''}
-
-        ${item.images ? `
-          <button class="location-guide-btn" onclick="showLocationGuide('${item.id}')">
-            📍 View Location Guide
-          </button>
-        ` : ''}
-
-        <div class="result-location">
-          <span class="location-icon">📍</span>
-          <span>${item.location}</span>
-        </div>
-
-        ${item.color ? `<div class="result-color">Color: ${item.color}</div>` : ''}
 
         <div class="result-details">
           ${item.description || ''}
@@ -1514,6 +1504,13 @@ function displayResults(results, query) {
         </div>
 
         ${item.warning ? `<div class="result-warning">⚠️ ${item.warning}</div>` : ''}
+
+        ${item.usageNotes ? `
+          <div class="result-usage-notes">
+            <div class="usage-notes-header">📋 EMT Reference Notes</div>
+            <div class="usage-notes-content">${item.usageNotes.replace(/\n/g, '<br>')}</div>
+          </div>
+        ` : ''}
 
         ${compartment.access ? `
           <div class="result-details" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1);">
@@ -1738,6 +1735,10 @@ function closeLocationGuide() {
   if (modal) modal.remove();
 }
 
+// Make location guide functions globally accessible for onclick handlers
+window.showLocationGuide = showLocationGuide;
+window.closeLocationGuide = closeLocationGuide;
+
 // ============================================================================
 // TEXT-TO-SPEECH (100% Offline via native SpeechSynthesis)
 // ============================================================================
@@ -1913,8 +1914,22 @@ voiceBtn.addEventListener('click', (e) => {
       }
     }
   } else {
-    console.log('[VoiceBtn] Starting recognition');
-    startListening();
+    // SMART PERMISSION FLOW: Check permission status before starting
+    const permissionStatus = localStorage.getItem(MIC_PERMISSION_KEY);
+
+    if (permissionStatus === 'denied') {
+      // Permission was previously denied - show help modal
+      console.log('[VoiceBtn] Permission denied - showing help modal');
+      showMicBlockedModal();
+    } else if (permissionStatus === 'skipped') {
+      // User skipped - offer to enable again
+      console.log('[VoiceBtn] User had skipped - showing onboarding');
+      showMicOnboardingModal();
+    } else {
+      // Permission granted or unknown - try to start
+      console.log('[VoiceBtn] Starting recognition');
+      startListening();
+    }
   }
 });
 
@@ -2001,6 +2016,234 @@ window.addEventListener('offline', () => {
 if (!navigator.onLine) {
   document.body.classList.add('offline');
   statusText.textContent = 'Offline';
+}
+
+// ============================================================================
+// MICROPHONE PERMISSION MANAGEMENT - Smart permission flow
+// ============================================================================
+const MIC_PERMISSION_KEY = 'hnfd-mic-permission-status';
+const MIC_SETUP_SHOWN_KEY = 'hnfd-mic-setup-shown';
+
+/**
+ * Check if this is the first time the user is using the app
+ * Show onboarding modal if needed
+ */
+function checkMicrophoneSetup() {
+  const setupShown = localStorage.getItem(MIC_SETUP_SHOWN_KEY);
+  const permissionStatus = localStorage.getItem(MIC_PERMISSION_KEY);
+
+  console.log('[MicPerm] Setup shown:', setupShown, 'Permission:', permissionStatus);
+
+  // If user already granted or skipped, don't show onboarding
+  if (permissionStatus === 'granted' || permissionStatus === 'skipped') {
+    return false;
+  }
+
+  // If setup was never shown, show onboarding
+  if (!setupShown) {
+    // Small delay to let app load
+    setTimeout(() => {
+      showMicOnboardingModal();
+    }, 1500);
+    return true;
+  }
+
+  // If permission was denied, check if user might have changed settings
+  if (permissionStatus === 'denied') {
+    // Don't auto-show blocked modal, let them tap mic button
+    return false;
+  }
+
+  return false;
+}
+
+/**
+ * Show the microphone onboarding modal for first-time users
+ */
+function showMicOnboardingModal() {
+  const modal = document.getElementById('mic-onboarding-modal');
+  if (modal) {
+    modal.classList.add('active');
+    localStorage.setItem(MIC_SETUP_SHOWN_KEY, 'true');
+    console.log('[MicPerm] Showing onboarding modal');
+  }
+}
+
+/**
+ * Show the microphone blocked help modal
+ */
+function showMicBlockedModal() {
+  const modal = document.getElementById('mic-blocked-modal');
+  if (modal) {
+    modal.classList.add('active');
+    console.log('[MicPerm] Showing blocked help modal');
+  }
+}
+
+/**
+ * Close the onboarding modal
+ */
+function closeMicOnboardingModal() {
+  const modal = document.getElementById('mic-onboarding-modal');
+  if (modal) {
+    modal.classList.remove('active');
+  }
+}
+
+/**
+ * Close the blocked help modal
+ */
+function closeMicBlockedModal() {
+  const modal = document.getElementById('mic-blocked-modal');
+  if (modal) {
+    modal.classList.remove('active');
+  }
+  // Update transcript to show text search is available
+  const transcript = document.getElementById('transcript');
+  if (transcript) {
+    transcript.textContent = 'Voice disabled - type equipment name below';
+  }
+}
+
+/**
+ * Request microphone permission - triggered by user clicking Enable button
+ */
+async function requestMicrophonePermission() {
+  console.log('[MicPerm] User requesting microphone permission');
+
+  closeMicOnboardingModal();
+
+  // Show feedback in UI
+  const transcript = document.getElementById('transcript');
+  if (transcript) {
+    transcript.textContent = 'Requesting microphone access...';
+  }
+
+  try {
+    // Try to get microphone stream - this triggers the permission prompt
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+    // Permission granted! Stop the stream immediately
+    stream.getTracks().forEach(track => track.stop());
+
+    console.log('[MicPerm] ✅ Permission granted!');
+    localStorage.setItem(MIC_PERMISSION_KEY, 'granted');
+
+    // Update UI
+    if (transcript) {
+      transcript.textContent = '✓ Voice search enabled! Tap microphone to speak.';
+    }
+
+    // Auto-start listening after a brief delay
+    setTimeout(() => {
+      if (!isListening && !recognitionStarting) {
+        startListening();
+      }
+    }, 800);
+
+    return true;
+  } catch (err) {
+    console.error('[MicPerm] ❌ Permission denied or error:', err.name, err.message);
+
+    // Store denied status
+    localStorage.setItem(MIC_PERMISSION_KEY, 'denied');
+
+    // Check if it's a permission denied error
+    if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+      // Show the help modal with steps to enable
+      showMicBlockedModal();
+    } else {
+      // Some other error - don't show scary message
+      if (transcript) {
+        transcript.textContent = 'Tap microphone to try again';
+      }
+    }
+
+    return false;
+  }
+}
+
+/**
+ * User chooses to skip microphone setup
+ */
+function skipMicrophoneSetup() {
+  console.log('[MicPerm] User skipped microphone setup');
+  localStorage.setItem(MIC_PERMISSION_KEY, 'skipped');
+  closeMicOnboardingModal();
+
+  const transcript = document.getElementById('transcript');
+  if (transcript) {
+    transcript.textContent = 'Type equipment name below to search';
+  }
+}
+
+/**
+ * Retry microphone permission after user changed settings
+ */
+async function retryMicrophonePermission() {
+  console.log('[MicPerm] Retrying microphone permission');
+  closeMicBlockedModal();
+
+  // Clear the denied status so we can try again
+  localStorage.removeItem(MIC_PERMISSION_KEY);
+
+  // Request permission again
+  const success = await requestMicrophonePermission();
+
+  if (!success) {
+    // Still denied - show blocked modal again
+    setTimeout(() => {
+      showMicBlockedModal();
+    }, 500);
+  }
+}
+
+/**
+ * Check if microphone permission is currently granted
+ */
+async function isMicrophonePermissionGranted() {
+  // Check localStorage first
+  const stored = localStorage.getItem(MIC_PERMISSION_KEY);
+  if (stored === 'granted') {
+    return true;
+  }
+  if (stored === 'denied' || stored === 'skipped') {
+    return false;
+  }
+
+  // Try permissions API (doesn't work on iOS Safari)
+  if (navigator.permissions && navigator.permissions.query) {
+    try {
+      const result = await navigator.permissions.query({ name: 'microphone' });
+      if (result.state === 'granted') {
+        localStorage.setItem(MIC_PERMISSION_KEY, 'granted');
+        return true;
+      }
+      if (result.state === 'denied') {
+        localStorage.setItem(MIC_PERMISSION_KEY, 'denied');
+        return false;
+      }
+    } catch (e) {
+      // Permissions API not supported
+    }
+  }
+
+  return null; // Unknown - need to ask
+}
+
+/**
+ * Handle microphone error - show modal instead of text error
+ */
+function handleMicrophoneError(error) {
+  console.log('[MicPerm] Handling error:', error);
+
+  if (error === 'not-allowed' || error === 'permission-denied') {
+    localStorage.setItem(MIC_PERMISSION_KEY, 'denied');
+    showMicBlockedModal();
+    return true; // Handled
+  }
+
+  return false; // Not a permission error
 }
 
 // ============================================================================
@@ -2125,9 +2368,26 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize audio context unlock for iOS
   initializeAudio();
 
-  // Try to auto-start speech recognition
-  // This works immediately if permission was previously granted
-  setTimeout(autoStartListening, 1200);
+  // SMART PERMISSION FLOW: Check if we need to show onboarding modal
+  const needsSetup = checkMicrophoneSetup();
+
+  // Only try to auto-start if permission was previously granted
+  if (!needsSetup) {
+    const permissionStatus = localStorage.getItem(MIC_PERMISSION_KEY);
+    if (permissionStatus === 'granted') {
+      // Permission already granted - auto-start
+      setTimeout(autoStartListening, 1200);
+    } else if (permissionStatus === 'skipped' || permissionStatus === 'denied') {
+      // User chose text search - don't auto-prompt
+      const transcript = document.getElementById('transcript');
+      if (transcript) {
+        transcript.textContent = 'Type equipment name below to search';
+      }
+    } else {
+      // Unknown - wait for user interaction
+      setTimeout(autoStartListening, 1200);
+    }
+  }
 });
 
 /**
@@ -2138,18 +2398,24 @@ let hasAttemptedFirstTapStart = false;
 document.addEventListener('click', () => {
   if (!hasAttemptedFirstTapStart && !isListening && !recognitionStarting) {
     hasAttemptedFirstTapStart = true;
-    console.log('[Init] 👆 First tap detected - attempting to start listening');
+    console.log('[Init] 👆 First tap detected');
 
     // Unlock audio context (iOS requirement)
     initializeAudio();
 
-    // Try to start speech recognition
-    setTimeout(() => {
-      if (!isListening && !recognitionStarting) {
-        console.log('[Init] Starting speech recognition after first tap');
-        startListening();
-      }
-    }, 150);
+    // SMART PERMISSION FLOW: Only auto-start if permission was granted
+    const permissionStatus = localStorage.getItem(MIC_PERMISSION_KEY);
+    if (permissionStatus === 'granted') {
+      // Permission already granted - try to start
+      setTimeout(() => {
+        if (!isListening && !recognitionStarting) {
+          console.log('[Init] Starting speech recognition after first tap (permission granted)');
+          startListening();
+        }
+      }, 150);
+    } else {
+      console.log('[Init] Permission not granted, waiting for user to enable microphone');
+    }
   }
 }, { once: true });
 
@@ -2183,6 +2449,100 @@ const versionDisplay = document.getElementById('version-display');
 if (versionDisplay) {
   versionDisplay.textContent = `v${APP_VERSION}`;
   versionDisplay.addEventListener('click', () => checkForUpdates(true));
+}
+
+// ============================================================================
+// A-Z BROWSE FEATURE - Alphabetical equipment list
+// ============================================================================
+
+/**
+ * Open the A-Z browse modal with scrollable tappable list
+ */
+function openAZBrowse() {
+  const modal = document.getElementById('az-modal');
+  const listEl = document.getElementById('az-list');
+  const countEl = document.getElementById('az-count');
+
+  if (!modal || !listEl) return;
+
+  // Sort equipment alphabetically by name
+  const sortedEquipment = [...INVENTORY_DATABASE.items].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
+  // Build scrollable button list
+  let html = '';
+  sortedEquipment.forEach(item => {
+    const criticalClass = item.critical ? ' az-item-critical' : '';
+    html += `<button class="az-item${criticalClass}" onclick="selectAZItem('${item.id}')">${item.name}</button>`;
+  });
+
+  listEl.innerHTML = html;
+  countEl.textContent = `${sortedEquipment.length} items - tap to select`;
+
+  // Show modal
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Close the A-Z browse modal
+ */
+function closeAZBrowse() {
+  const modal = document.getElementById('az-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+/**
+ * Select an item from the A-Z list and show its details
+ */
+function selectAZItem(itemId) {
+  if (!itemId) return;
+
+  closeAZBrowse();
+
+  // Find the item
+  const item = INVENTORY_DATABASE.items.find(e => e.id === itemId);
+  if (!item) return;
+
+  // Display the result
+  displayResults([item]);
+
+  // Scroll to results
+  const resultsSection = document.getElementById('results');
+  if (resultsSection) {
+    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// Make A-Z functions globally accessible for onclick handlers
+window.openAZBrowse = openAZBrowse;
+window.selectAZItem = selectAZItem;
+window.closeAZBrowse = closeAZBrowse;
+
+// A-Z Browse button click handler
+const azBrowseBtn = document.getElementById('azBrowseBtn');
+if (azBrowseBtn) {
+  azBrowseBtn.addEventListener('click', openAZBrowse);
+}
+
+// A-Z Close button click handler
+const azCloseBtn = document.getElementById('az-close-btn');
+if (azCloseBtn) {
+  azCloseBtn.addEventListener('click', closeAZBrowse);
+}
+
+// Close A-Z modal on background click
+const azModal = document.getElementById('az-modal');
+if (azModal) {
+  azModal.addEventListener('click', (e) => {
+    if (e.target === azModal) {
+      closeAZBrowse();
+    }
+  });
 }
 
 // ============================================================================
@@ -2514,15 +2874,140 @@ function saveCustomInventoryContinue() {
   }
 }
 
-// Admin toggle button
+// ============================================================================
+// SETTINGS MENU (User-facing settings with version info, updates, share)
+// ============================================================================
+
+const settingsModal = document.getElementById('settings-modal');
+
+function openSettingsModal() {
+  // Load version info
+  loadVersionInfo();
+  settingsModal.classList.add('active');
+}
+
+function closeSettingsModal() {
+  settingsModal.classList.remove('active');
+}
+
+function loadVersionInfo() {
+  // Display current version
+  document.getElementById('settings-version').textContent = `v${APP_VERSION}`;
+
+  // Fetch version.json for full details
+  fetch('/version.json?' + Date.now())
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('settings-build-date').textContent = data.build || '--';
+
+      // Display changelog
+      const changelog = document.getElementById('settings-changelog');
+      if (data.changelog && data.changelog.length > 0) {
+        changelog.innerHTML = data.changelog.map(item => {
+          if (item === '---') return '<hr style="border-color: var(--gray-700); margin: 8px 0;">';
+          return `<div style="margin-bottom: 6px; color: var(--gray-300);">• ${item}</div>`;
+        }).join('');
+      }
+
+      // Check if on latest
+      checkVersionStatus(data.version);
+    })
+    .catch(err => {
+      console.error('[Settings] Failed to load version info:', err);
+      document.getElementById('settings-update-status').innerHTML =
+        '<span style="color: var(--yellow-400);">⚠️ Could not check version</span>';
+    });
+}
+
+function checkVersionStatus(latestVersion) {
+  const statusEl = document.getElementById('settings-update-status');
+
+  if (latestVersion === APP_VERSION) {
+    statusEl.innerHTML = '<span style="color: var(--green-500);">✓ You\'re on the latest version!</span>';
+  } else {
+    statusEl.innerHTML = `<span style="color: var(--yellow-400);">⚠️ Update available: v${latestVersion}</span>`;
+  }
+}
+
+async function checkForUpdates() {
+  const statusEl = document.getElementById('settings-update-status');
+  statusEl.innerHTML = '<span style="color: var(--gray-400);">🔄 Checking for updates...</span>';
+
+  try {
+    // Force fetch fresh version.json
+    const response = await fetch('/version.json?' + Date.now());
+    const data = await response.json();
+
+    if (data.version !== APP_VERSION) {
+      statusEl.innerHTML = `<span style="color: var(--yellow-400);">⚠️ New version v${data.version} available!</span>`;
+
+      // Show update prompt
+      if (confirm(`Update available! (v${data.version})\n\nWould you like to reload to get the latest version?`)) {
+        // Clear service worker cache and reload
+        if ('serviceWorker' in navigator) {
+          const registration = await navigator.serviceWorker.ready;
+          await registration.unregister();
+        }
+
+        // Clear caches
+        if ('caches' in window) {
+          const cacheNames = await caches.keys();
+          await Promise.all(cacheNames.map(name => caches.delete(name)));
+        }
+
+        // Force reload
+        window.location.reload(true);
+      }
+    } else {
+      statusEl.innerHTML = '<span style="color: var(--green-500);">✓ You\'re on the latest version!</span>';
+      hapticFeedback('success');
+    }
+  } catch (err) {
+    console.error('[Settings] Update check failed:', err);
+    statusEl.innerHTML = '<span style="color: var(--red-600);">❌ Could not check for updates</span>';
+  }
+}
+
+function shareApp() {
+  const shareData = {
+    title: 'HNFD Rescue - Equipment Finder',
+    text: 'Quick voice-enabled app to find equipment locations on the ambulance. Works offline!',
+    url: window.location.origin
+  };
+
+  if (navigator.share) {
+    navigator.share(shareData)
+      .then(() => {
+        hapticFeedback('success');
+        console.log('[Share] App shared successfully');
+      })
+      .catch(err => {
+        console.log('[Share] Share cancelled or failed:', err);
+      });
+  } else {
+    // Fallback: Copy to clipboard
+    navigator.clipboard.writeText(window.location.origin)
+      .then(() => {
+        hapticFeedback('success');
+        alert('Link copied to clipboard!\n\nShare this with other EMTs:\n' + window.location.origin);
+      })
+      .catch(() => {
+        alert('Share this app:\n' + window.location.origin);
+      });
+  }
+}
+
+function openAdminLogin() {
+  closeSettingsModal();
+  adminLoginModal.classList.add('active');
+  adminPasswordInput.focus();
+}
+
+// Gear button - ALWAYS opens settings modal first (with all options)
 adminToggleBtn.addEventListener('click', () => {
   hapticFeedback('light');
-  if (adminAuthenticated) {
-    openAdminPanel();
-  } else {
-    adminLoginModal.classList.add('active');
-    adminPasswordInput.focus();
-  }
+  // Always show settings menu - user can choose what they want to do
+  openSettingsModal();
 });
 
 // Admin login
@@ -2592,7 +3077,10 @@ function renderAdminItemsList(filter = '') {
           ${item.compartment ? `<span class="admin-badge" style="background: var(--green-600);">${item.compartment}</span>` : ''}
         </div>
       </div>
-      <div class="admin-item-actions" style="margin-top: 12px; display: flex; gap: 8px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1);">
+      <div class="admin-item-actions" style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <button class="admin-btn-small" style="background: var(--green-600);" data-item-id="${item.id}" onclick="event.stopPropagation(); openGuideEditor('${item.id}')">
+          🎯 Edit Location Guide
+        </button>
         <button class="admin-btn-small admin-btn-camera" data-item-id="${item.id}" onclick="event.stopPropagation(); openImageCapture('${item.id}')">
           📷 Replace Image
         </button>
@@ -2640,10 +3128,15 @@ function editItem(item) {
     document.getElementById('edit-contents').value = '';
     document.getElementById('edit-warning').value = '';
     document.getElementById('edit-driver-note').value = '';
+    document.getElementById('edit-usage-notes').value = '';
     document.getElementById('edit-image').value = '';
     document.getElementById('edit-critical').checked = false;
     document.getElementById('edit-critical-rank').value = '';
     adminDeleteBtn.style.display = 'none';
+    // Clear image preview
+    updateImagePreview('');
+    // Clear location guide preview
+    updateEditGuidePreview(null);
   } else {
     // Fill form with item data
     document.getElementById('edit-item-id').value = item.id;
@@ -2656,14 +3149,230 @@ function editItem(item) {
     document.getElementById('edit-contents').value = item.contents || '';
     document.getElementById('edit-warning').value = item.warning || '';
     document.getElementById('edit-driver-note').value = item.driverNote || '';
+    document.getElementById('edit-usage-notes').value = item.usageNotes || '';
     document.getElementById('edit-image').value = item.image || '';
     document.getElementById('edit-critical').checked = item.critical || false;
     document.getElementById('edit-critical-rank').value = item.criticalRank || '';
     adminDeleteBtn.style.display = 'block';
+    // Show image preview
+    updateImagePreview(item.image || '');
+    // Show location guide preview
+    updateEditGuidePreview(item);
   }
 
   adminEditModal.classList.add('active');
 }
+
+// ============================================================================
+// ADMIN PHOTO UPLOAD FUNCTIONS - iPhone-friendly
+// ============================================================================
+
+/**
+ * Update the image preview in the admin form
+ */
+function updateImagePreview(imagePath) {
+  const previewBox = document.getElementById('edit-image-preview');
+  if (!previewBox) return;
+
+  if (imagePath) {
+    previewBox.innerHTML = `<img src="${imagePath}" alt="Preview" onerror="this.onerror=null; this.parentNode.innerHTML='<span class=\\'image-preview-placeholder\\'>Image not found</span>';" />`;
+  } else {
+    previewBox.innerHTML = '<span class="image-preview-placeholder">No image</span>';
+  }
+}
+
+/**
+ * Trigger camera to take a new photo
+ */
+function takeEquipmentPhoto() {
+  const cameraInput = document.getElementById('edit-image-camera');
+  if (cameraInput) {
+    cameraInput.click();
+  }
+}
+
+/**
+ * Open photo library to choose existing photo
+ */
+function chooseEquipmentPhoto() {
+  const libraryInput = document.getElementById('edit-image-library');
+  if (libraryInput) {
+    libraryInput.click();
+  }
+}
+
+/**
+ * Handle when user selects a photo (from camera or library)
+ */
+function handleEquipmentPhotoSelect(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  // Create a local URL for preview
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const dataUrl = e.target.result;
+
+    // Show preview
+    const previewBox = document.getElementById('edit-image-preview');
+    if (previewBox) {
+      previewBox.innerHTML = `<img src="${dataUrl}" alt="Preview" />`;
+    }
+
+    // For now, store a placeholder path
+    // In a real app, you'd upload to a server and get a URL back
+    const fileName = file.name.toLowerCase().replace(/[^a-z0-9.]/g, '_');
+    const imagePath = `/images/${fileName}`;
+    document.getElementById('edit-image').value = imagePath;
+
+    // Show a note about the upload
+    alert(`Photo selected: ${file.name}\n\nNote: In this version, the photo is shown as a preview but you'll need to manually upload it to /images/ folder on the server.`);
+  };
+
+  reader.readAsDataURL(file);
+
+  // Reset input so same file can be selected again
+  event.target.value = '';
+}
+
+/**
+ * Clear the equipment photo
+ */
+function clearEquipmentPhoto() {
+  document.getElementById('edit-image').value = '';
+  updateImagePreview('');
+}
+
+// ============================================================================
+// LOCATION GUIDE PREVIEW IN EDIT FORM
+// ============================================================================
+
+let editGuidePreviewInterval = null;
+let editGuideCurrentStep = 1;
+let editGuideImages = [];
+
+/**
+ * Update the location guide thumbnails and preview in the edit form
+ */
+function updateEditGuidePreview(item) {
+  // Clear existing preview
+  editGuideImages = [];
+  pauseEditGuidePreview();
+
+  // Get thumbnail containers
+  const thumb1 = document.getElementById('edit-thumb-img1');
+  const thumb2 = document.getElementById('edit-thumb-img2');
+  const thumb3 = document.getElementById('edit-thumb-img3');
+  const previewImg = document.getElementById('edit-guide-preview-img');
+  const placeholder = document.getElementById('edit-guide-preview-placeholder');
+  const dotsContainer = document.getElementById('edit-guide-preview-dots');
+
+  if (!thumb1 || !thumb2 || !thumb3) return;
+
+  // Reset thumbnails
+  [thumb1, thumb2, thumb3].forEach((thumb, i) => {
+    thumb.innerHTML = '<span class="guide-thumb-placeholder">No image</span>';
+    thumb.classList.remove('has-image');
+  });
+
+  if (!item || !item.images) {
+    // No item or no images - show empty state
+    if (previewImg) previewImg.style.display = 'none';
+    if (placeholder) placeholder.style.display = 'block';
+    if (dotsContainer) dotsContainer.style.display = 'none';
+    return;
+  }
+
+  // Update thumbnails
+  const images = item.images;
+  if (images.ambulancePosition) {
+    thumb1.innerHTML = `<img src="${images.ambulancePosition}" alt="Step 1" />`;
+    thumb1.classList.add('has-image');
+    editGuideImages.push({ url: images.ambulancePosition, step: 1 });
+  }
+  if (images.compartmentView) {
+    thumb2.innerHTML = `<img src="${images.compartmentView}" alt="Step 2" />`;
+    thumb2.classList.add('has-image');
+    editGuideImages.push({ url: images.compartmentView, step: 2 });
+  }
+  if (images.equipmentPhoto) {
+    thumb3.innerHTML = `<img src="${images.equipmentPhoto}" alt="Step 3" />`;
+    thumb3.classList.add('has-image');
+    editGuideImages.push({ url: images.equipmentPhoto, step: 3 });
+  }
+
+  // Show preview if any images exist
+  if (editGuideImages.length > 0) {
+    if (previewImg) {
+      previewImg.src = editGuideImages[0].url;
+      previewImg.style.display = 'block';
+    }
+    if (placeholder) placeholder.style.display = 'none';
+    if (dotsContainer) dotsContainer.style.display = editGuideImages.length > 1 ? 'flex' : 'none';
+    updateEditGuideDots(editGuideImages[0].step);
+  } else {
+    if (previewImg) previewImg.style.display = 'none';
+    if (placeholder) placeholder.style.display = 'block';
+    if (dotsContainer) dotsContainer.style.display = 'none';
+  }
+}
+
+/**
+ * Update the preview dots to show current step
+ */
+function updateEditGuideDots(step) {
+  const dots = document.querySelectorAll('#edit-guide-preview-dots .preview-dot');
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', (i + 1) === step);
+  });
+}
+
+/**
+ * Play the rotation preview animation
+ */
+function playEditGuidePreview() {
+  if (editGuideImages.length < 2) return;
+  if (editGuidePreviewInterval) return; // Already playing
+
+  editGuideCurrentStep = 0;
+  editGuidePreviewInterval = setInterval(() => {
+    editGuideCurrentStep = (editGuideCurrentStep + 1) % editGuideImages.length;
+    const img = editGuideImages[editGuideCurrentStep];
+    const previewImg = document.getElementById('edit-guide-preview-img');
+    if (previewImg && img) {
+      previewImg.src = img.url;
+      updateEditGuideDots(img.step);
+    }
+  }, 2000);
+}
+
+/**
+ * Pause the rotation preview animation
+ */
+function pauseEditGuidePreview() {
+  if (editGuidePreviewInterval) {
+    clearInterval(editGuidePreviewInterval);
+    editGuidePreviewInterval = null;
+  }
+}
+
+/**
+ * Wire up the Edit Guide button to open the guide editor
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const editGuideBtn = document.getElementById('edit-location-guide-btn');
+  if (editGuideBtn) {
+    editGuideBtn.addEventListener('click', () => {
+      const itemId = document.getElementById('edit-item-id').value;
+      if (!itemId) {
+        alert('Please save the item first before editing the location guide.');
+        return;
+      }
+      // Open the guide editor for this item
+      openGuideEditor(itemId);
+    });
+  }
+});
 
 // Save item
 adminSaveBtn.addEventListener('click', () => {
@@ -2681,6 +3390,9 @@ adminSaveBtn.addEventListener('click', () => {
     .map(a => a.trim())
     .filter(a => a);
 
+  // CRITICAL: Preserve existing images/goldDots data when updating
+  const existingItem = itemId ? getAllItems().find(i => i.id === itemId) : null;
+
   const itemData = {
     id: itemId || name.toLowerCase().replace(/[^a-z0-9]+/g, '_'),
     name,
@@ -2695,7 +3407,13 @@ adminSaveBtn.addEventListener('click', () => {
     contents: document.getElementById('edit-contents').value.trim(),
     warning: document.getElementById('edit-warning').value.trim(),
     driverNote: document.getElementById('edit-driver-note').value.trim(),
-    image: document.getElementById('edit-image').value.trim()
+    usageNotes: document.getElementById('edit-usage-notes').value.trim(),
+    image: document.getElementById('edit-image').value.trim(),
+    // Preserve location guide data if it exists
+    images: existingItem?.images || {},
+    goldDots: existingItem?.goldDots || {},
+    locationSteps: existingItem?.locationSteps || [],
+    quickFind: existingItem?.quickFind || ''
   };
 
   if (itemId) {
@@ -2730,9 +3448,16 @@ adminDeleteBtn.addEventListener('click', () => {
   }
 });
 
+// Close admin edit modal (called from X button and Cancel button)
+function closeAdminEditModal() {
+  adminEditModal.classList.remove('active');
+}
+// Make it globally available for onclick
+window.closeAdminEditModal = closeAdminEditModal;
+
 // Cancel edit
 adminEditCancelBtn.addEventListener('click', () => {
-  adminEditModal.classList.remove('active');
+  closeAdminEditModal();
 });
 
 // Export JSON
@@ -2792,3 +3517,395 @@ if (localStorage.getItem(ADMIN_STORAGE_KEY)) {
 }
 
 console.log('[Admin] Module loaded');
+
+// ============================================================================
+// LOCATION GUIDE EDITOR
+// Allows editing 3-image location guides with draggable gold dots
+// ============================================================================
+
+let guideEditorItemId = null;
+let guideEditorData = {
+  step1: { image: null, dot: { x: 50, y: 50, label: '' } },
+  step2: { image: null, dot: { x: 50, y: 50, label: '' } },
+  step3: { image: null, dot: null } // Step 3 has no dot
+};
+let currentGuideStep = 1;
+let rotationInterval = null;
+let isDraggingDot = false;
+
+const STEP_DESCRIPTIONS = {
+  1: 'Show where on the ambulance to find this',
+  2: 'Show the cabinet/drawer where it\'s located',
+  3: 'Show the equipment itself (no dot needed)'
+};
+
+const STEP_IMAGE_KEYS = {
+  1: 'ambulancePosition',
+  2: 'compartmentView',
+  3: 'equipmentPhoto'
+};
+
+// Available images in the library
+const IMAGE_LIBRARY = [
+  '/images/locations/cabinet_k_labeled.jpg',
+  '/images/locations/cabinet_k_overview.jpg',
+  '/images/locations/ambulance_exterior_side.jpg',
+  '/images/locations/ambulance_interior_overview.jpg',
+  '/images/locations/drawer_n_open.jpg',
+  '/images/locations/drawer_n_contents.jpg',
+  '/images/locations/oxygen_compartment.jpg',
+  '/images/locations/drug_box_cabinet.jpg',
+  '/images/locations/adult_trauma_bag_closeup.jpg',
+  '/images/locations/aed_closeup.jpg',
+  '/images/locations/drug_box_closeup.jpg',
+  '/images/locations/lifepak_closeup.jpg',
+  '/images/locations/narcan_syringe_closeup.jpg',
+  '/images/locations/oxygen_tanks_closeup.jpg',
+  '/images/locations/iv_kit_closeup.jpg',
+  '/images/locations/intubation_bag_blue.jpg',
+  '/images/trauma_bag_adult.jpg',
+  '/images/cabinet_k_overview.jpg',
+  '/images/intubation_kit.jpg',
+  '/images/pediatric_bags.jpg',
+  '/images/drug_box.jpg',
+  '/images/lifepak_bag.jpg',
+  '/images/lifepak_mounted.jpg',
+  '/images/drawer_n.jpg',
+  '/images/drawer_n_labeled.jpg',
+  '/images/oxygen_tanks.jpg',
+  '/images/cabinet_d_aed.jpg'
+];
+
+function openGuideEditor(itemId) {
+  guideEditorItemId = itemId;
+  const item = getAllItems().find(i => i.id === itemId);
+
+  if (!item) {
+    alert('Item not found');
+    return;
+  }
+
+  // Load existing data
+  guideEditorData = {
+    step1: {
+      image: item.images?.ambulancePosition || null,
+      dot: item.goldDots?.ambulancePosition ? { ...item.goldDots.ambulancePosition } : { x: 50, y: 50, label: '' }
+    },
+    step2: {
+      image: item.images?.compartmentView || null,
+      dot: item.goldDots?.compartmentView ? { ...item.goldDots.compartmentView } : { x: 50, y: 50, label: '' }
+    },
+    step3: {
+      image: item.images?.equipmentPhoto || null,
+      dot: null
+    }
+  };
+
+  // Set item name
+  document.getElementById('guide-editor-item-name').textContent = item.name;
+
+  // Update tab states
+  updateTabStates();
+
+  // Select first step
+  currentGuideStep = 1;
+  selectGuideStep(1);
+
+  // Show modal
+  document.getElementById('guide-editor-modal').classList.add('active');
+
+  // Start preview
+  updateRotationPreview();
+}
+
+function closeGuideEditor() {
+  document.getElementById('guide-editor-modal').classList.remove('active');
+  pauseRotationPreview();
+  guideEditorItemId = null;
+}
+
+function selectGuideStep(step) {
+  currentGuideStep = step;
+
+  // Update tab active states
+  document.querySelectorAll('.guide-editor-tab').forEach(tab => {
+    tab.classList.toggle('active', parseInt(tab.dataset.step) === step);
+  });
+
+  // Update step info
+  document.getElementById('current-step-badge').textContent = `Step ${step}`;
+  document.getElementById('current-step-text').textContent = STEP_DESCRIPTIONS[step];
+
+  // Update image preview
+  const stepData = guideEditorData[`step${step}`];
+  const previewImg = document.getElementById('guide-preview-img');
+  const placeholder = document.getElementById('guide-image-placeholder');
+  const dotEditor = document.getElementById('guide-dot-editor');
+  const dotControls = document.getElementById('dot-controls');
+
+  if (stepData.image) {
+    previewImg.src = stepData.image;
+    previewImg.style.display = 'block';
+    placeholder.style.display = 'none';
+
+    // Show dot for steps 1 and 2 only
+    if (step <= 2 && stepData.dot) {
+      dotEditor.classList.add('visible');
+      dotEditor.style.left = `${stepData.dot.x}%`;
+      dotEditor.style.top = `${stepData.dot.y}%`;
+      dotControls.style.display = 'block';
+      document.getElementById('dot-label-input').value = stepData.dot.label || '';
+      updateDotPositionDisplay(stepData.dot.x, stepData.dot.y);
+    } else {
+      dotEditor.classList.remove('visible');
+      dotControls.style.display = 'none';
+    }
+  } else {
+    previewImg.style.display = 'none';
+    placeholder.style.display = 'block';
+    dotEditor.classList.remove('visible');
+    dotControls.style.display = 'none';
+  }
+}
+
+function updateTabStates() {
+  document.querySelectorAll('.guide-editor-tab').forEach(tab => {
+    const step = parseInt(tab.dataset.step);
+    const stepData = guideEditorData[`step${step}`];
+    tab.classList.toggle('has-image', !!stepData.image);
+  });
+}
+
+function openImageLibrary() {
+  const grid = document.getElementById('image-library-grid');
+  grid.innerHTML = IMAGE_LIBRARY.map(img => `
+    <div style="cursor: pointer; border: 2px solid transparent; border-radius: 8px; overflow: hidden;"
+         onclick="selectLibraryImage('${img}')"
+         onmouseover="this.style.borderColor='var(--green-500)'"
+         onmouseout="this.style.borderColor='transparent'">
+      <img src="${img}" style="width: 100%; aspect-ratio: 4/3; object-fit: cover;" onerror="this.parentElement.style.display='none'" />
+    </div>
+  `).join('');
+
+  document.getElementById('image-library-modal').classList.add('active');
+}
+
+function closeImageLibrary() {
+  document.getElementById('image-library-modal').classList.remove('active');
+}
+
+function selectLibraryImage(imagePath) {
+  guideEditorData[`step${currentGuideStep}`].image = imagePath;
+  closeImageLibrary();
+  updateTabStates();
+  selectGuideStep(currentGuideStep);
+  updateRotationPreview();
+}
+
+function uploadGuideImage() {
+  document.getElementById('guide-image-upload').click();
+}
+
+function handleGuideImageUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    // Store as base64 for custom uploads
+    guideEditorData[`step${currentGuideStep}`].image = e.target.result;
+    updateTabStates();
+    selectGuideStep(currentGuideStep);
+    updateRotationPreview();
+  };
+  reader.readAsDataURL(file);
+  event.target.value = '';
+}
+
+function clearGuideImage() {
+  guideEditorData[`step${currentGuideStep}`].image = null;
+  updateTabStates();
+  selectGuideStep(currentGuideStep);
+  updateRotationPreview();
+}
+
+function updateDotLabel() {
+  const label = document.getElementById('dot-label-input').value;
+  if (guideEditorData[`step${currentGuideStep}`].dot) {
+    guideEditorData[`step${currentGuideStep}`].dot.label = label;
+  }
+}
+
+function updateDotPositionDisplay(x, y) {
+  document.getElementById('dot-position-display').textContent = `Position: ${Math.round(x)}%, ${Math.round(y)}%`;
+}
+
+// Initialize dot dragging
+document.addEventListener('DOMContentLoaded', () => {
+  const dotEditor = document.getElementById('guide-dot-editor');
+  const previewContainer = document.getElementById('guide-image-preview');
+
+  if (dotEditor && previewContainer) {
+    // Mouse events
+    dotEditor.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      isDraggingDot = true;
+      dotEditor.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isDraggingDot) return;
+      updateDotPosition(e.clientX, e.clientY, previewContainer, dotEditor);
+    });
+
+    document.addEventListener('mouseup', () => {
+      isDraggingDot = false;
+      if (dotEditor) dotEditor.style.cursor = 'grab';
+    });
+
+    // Touch events for mobile
+    dotEditor.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      isDraggingDot = true;
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!isDraggingDot) return;
+      const touch = e.touches[0];
+      updateDotPosition(touch.clientX, touch.clientY, previewContainer, dotEditor);
+    });
+
+    document.addEventListener('touchend', () => {
+      isDraggingDot = false;
+    });
+  }
+});
+
+function updateDotPosition(clientX, clientY, container, dot) {
+  const rect = container.getBoundingClientRect();
+  let x = ((clientX - rect.left) / rect.width) * 100;
+  let y = ((clientY - rect.top) / rect.height) * 100;
+
+  // Clamp to container
+  x = Math.max(5, Math.min(95, x));
+  y = Math.max(5, Math.min(95, y));
+
+  dot.style.left = `${x}%`;
+  dot.style.top = `${y}%`;
+
+  // Save to data
+  if (guideEditorData[`step${currentGuideStep}`].dot) {
+    guideEditorData[`step${currentGuideStep}`].dot.x = x;
+    guideEditorData[`step${currentGuideStep}`].dot.y = y;
+  }
+
+  updateDotPositionDisplay(x, y);
+}
+
+function updateRotationPreview() {
+  const images = [
+    guideEditorData.step1.image,
+    guideEditorData.step2.image,
+    guideEditorData.step3.image
+  ].filter(Boolean);
+
+  const previewImg = document.getElementById('gif-preview-img');
+  const placeholder = document.getElementById('gif-placeholder');
+
+  if (images.length > 0) {
+    previewImg.src = images[0];
+    previewImg.style.display = 'block';
+    placeholder.style.display = 'none';
+  } else {
+    previewImg.style.display = 'none';
+    placeholder.style.display = 'block';
+  }
+}
+
+let previewStep = 0;
+function playRotationPreview() {
+  pauseRotationPreview();
+
+  const images = [
+    guideEditorData.step1.image,
+    guideEditorData.step2.image,
+    guideEditorData.step3.image
+  ];
+
+  const validImages = images.filter(Boolean);
+  if (validImages.length === 0) return;
+
+  previewStep = 0;
+  const previewImg = document.getElementById('gif-preview-img');
+  const dots = document.querySelectorAll('.guide-rotation-dot');
+
+  function showNextImage() {
+    const validIndices = images.map((img, i) => img ? i : -1).filter(i => i >= 0);
+    const currentIndex = validIndices[previewStep % validIndices.length];
+
+    previewImg.src = images[currentIndex];
+    previewImg.style.display = 'block';
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+
+    previewStep++;
+  }
+
+  showNextImage();
+  rotationInterval = setInterval(showNextImage, 2000);
+}
+
+function pauseRotationPreview() {
+  if (rotationInterval) {
+    clearInterval(rotationInterval);
+    rotationInterval = null;
+  }
+}
+
+function saveGuideEditor() {
+  if (!guideEditorItemId) return;
+
+  const item = getAllItems().find(i => i.id === guideEditorItemId);
+  if (!item) {
+    alert('Item not found');
+    return;
+  }
+
+  // Update item with new guide data
+  item.images = {
+    ambulancePosition: guideEditorData.step1.image,
+    compartmentView: guideEditorData.step2.image,
+    equipmentPhoto: guideEditorData.step3.image
+  };
+
+  item.goldDots = {
+    ambulancePosition: guideEditorData.step1.dot ? {
+      x: guideEditorData.step1.dot.x,
+      y: guideEditorData.step1.dot.y,
+      label: guideEditorData.step1.dot.label
+    } : null,
+    compartmentView: guideEditorData.step2.dot ? {
+      x: guideEditorData.step2.dot.x,
+      y: guideEditorData.step2.dot.y,
+      label: guideEditorData.step2.dot.label
+    } : null,
+    equipmentPhoto: null
+  };
+
+  // Save to custom inventory
+  if (!customInventory.items.find(i => i.id === item.id)) {
+    customInventory.items.push(item);
+  }
+  saveCustomInventory();
+
+  // Close editor
+  closeGuideEditor();
+  renderAdminItemsList();
+
+  hapticFeedback('success');
+  alert('Location guide saved!');
+}
+
+console.log('[GuideEditor] Module loaded');

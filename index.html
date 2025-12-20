@@ -303,6 +303,30 @@
       font-size: 14px;
     }
 
+    .result-usage-notes {
+      margin-top: 16px;
+      padding: 16px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid var(--green-600);
+      border-radius: 12px;
+    }
+
+    .usage-notes-header {
+      font-weight: 700;
+      color: var(--green-500);
+      font-size: 14px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .usage-notes-content {
+      font-size: 13px;
+      color: var(--gray-200);
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
     .result-color {
       display: inline-block;
       margin-top: 8px;
@@ -324,11 +348,41 @@
       width: 100%;
       height: auto;
       max-height: 200px;
-      object-fit: cover;
+      object-fit: contain;
+      background: var(--gray-900);
       cursor: pointer;
       border-radius: 12px;
       border: 2px solid var(--gray-800);
       transition: transform 0.2s, border-color 0.2s;
+    }
+
+    /* Prominent location display - FIRST thing users see */
+    .result-location-primary {
+      background: var(--red-600);
+      padding: 14px 16px;
+      border-radius: 10px;
+      margin: 12px 0 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .location-icon-large {
+      font-size: 24px;
+    }
+
+    .location-text-large {
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      line-height: 1.3;
+    }
+
+    .result-color-inline {
+      font-size: 14px;
+      color: var(--gray-300);
+      margin-bottom: 10px;
+      padding-left: 4px;
     }
 
     .result-image:active {
@@ -899,20 +953,107 @@
     .admin-modal-content {
       background: var(--gray-800);
       border-radius: 12px;
-      padding: 24px;
       max-width: 400px;
       width: 90%;
       max-height: 90vh;
-      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
 
     .admin-modal-large {
       max-width: 600px;
     }
 
+    /* Sticky header with close button */
+    .admin-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--gray-700);
+      background: var(--gray-800);
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .admin-modal-header h2 {
+      margin: 0;
+      font-size: 20px;
+      color: white;
+    }
+
+    .admin-modal-close-btn {
+      background: var(--gray-700);
+      border: none;
+      color: white;
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .admin-modal-close-btn:hover {
+      background: var(--red-600);
+    }
+
+    /* Scrollable body */
+    .admin-modal-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Sticky footer */
+    .admin-modal-footer {
+      display: flex;
+      gap: 10px;
+      padding: 16px 20px;
+      border-top: 1px solid var(--gray-700);
+      background: var(--gray-800);
+      flex-shrink: 0;
+    }
+
     .admin-modal-content h2 {
       margin: 0 0 16px 0;
       font-size: 22px;
+    }
+
+    /* Mobile-specific admin modal fixes */
+    @media (max-width: 480px) {
+      .admin-modal-content {
+        width: 100%;
+        max-width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+      }
+
+      .admin-modal-header {
+        padding: 12px 16px;
+      }
+
+      .admin-modal-body {
+        padding: 16px;
+      }
+
+      .admin-modal-footer {
+        padding: 12px 16px;
+      }
+
+      .admin-modal-close-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 24px;
+      }
     }
 
     .admin-input, .admin-textarea {
@@ -965,6 +1106,144 @@
       background: transparent;
       border: 1px solid var(--gray-200);
       color: white;
+    }
+
+    /* ===== Image Upload Section (Admin) ===== */
+    .image-upload-section {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin: 8px 0;
+    }
+
+    .image-preview-box {
+      width: 100px;
+      height: 100px;
+      border-radius: 12px;
+      background: var(--gray-900);
+      border: 2px dashed var(--gray-600);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .image-preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: var(--gray-900);
+    }
+
+    .image-preview-placeholder {
+      color: var(--gray-500);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .image-upload-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .admin-btn-photo {
+      background: var(--green-600);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 16px;
+    }
+
+    .admin-btn-photo:hover {
+      background: var(--green-500);
+    }
+
+    .admin-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 16px;
+      padding-right: 40px;
+    }
+
+    /* ===== Location Guide Thumbnails in Edit Form ===== */
+    .location-guide-thumbnails {
+      display: flex;
+      gap: 8px;
+    }
+
+    .guide-thumb {
+      flex: 1;
+      text-align: center;
+    }
+
+    .guide-thumb-label {
+      font-size: 10px;
+      color: var(--gray-400);
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .guide-thumb-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--gray-900);
+      border: 2px dashed var(--gray-600);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .guide-thumb-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: var(--gray-900);
+    }
+
+    .guide-thumb-image.has-image {
+      border-style: solid;
+      border-color: var(--green-600);
+    }
+
+    .guide-thumb-placeholder {
+      font-size: 10px;
+      color: var(--gray-500);
+    }
+
+    .guide-preview-container {
+      background: var(--gray-900);
+      border-radius: 12px;
+      padding: 8px;
+      position: relative;
+    }
+
+    .guide-preview-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .preview-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gray-600);
+    }
+
+    .preview-dot.active {
+      background: var(--green-500);
     }
 
     .admin-btn-small {
@@ -1121,6 +1400,257 @@
       color: var(--gray-200);
       font-weight: 600;
       margin-bottom: -8px;
+    }
+
+    /* ===== ADMIN LOCATION GUIDE EDITOR ===== */
+    .admin-modal-fullscreen {
+      max-width: 100%;
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+      border-radius: 0;
+      overflow-y: auto;
+    }
+
+    .guide-editor {
+      padding: 16px;
+    }
+
+    .guide-editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      background: var(--red-700);
+      margin: -16px -16px 16px -16px;
+    }
+
+    .guide-editor-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .guide-editor-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .guide-editor-tab {
+      flex: 1;
+      padding: 12px 8px;
+      background: var(--gray-800);
+      border: 2px solid var(--gray-700);
+      border-radius: 8px;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .guide-editor-tab.active {
+      background: var(--green-600);
+      border-color: var(--green-500);
+    }
+
+    .guide-editor-tab.has-image {
+      border-color: var(--green-600);
+    }
+
+    .guide-editor-tab .tab-icon {
+      font-size: 20px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .guide-image-editor {
+      background: var(--gray-800);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .guide-image-preview {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--gray-900);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .guide-image-preview img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .guide-image-placeholder {
+      text-align: center;
+      color: var(--gray-400);
+    }
+
+    .guide-image-placeholder .placeholder-icon {
+      font-size: 48px;
+      margin-bottom: 8px;
+    }
+
+    .guide-dot-editor {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--yellow-400);
+      border: 3px solid white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5), 0 0 20px rgba(250, 204, 21, 0.5);
+      cursor: grab;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      display: none;
+    }
+
+    .guide-dot-editor:active {
+      cursor: grabbing;
+    }
+
+    .guide-dot-editor.visible {
+      display: block;
+    }
+
+    .guide-dot-label-input {
+      position: absolute;
+      background: rgba(0,0,0,0.8);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      color: white;
+      white-space: nowrap;
+      transform: translateX(-50%);
+      top: calc(100% + 8px);
+      left: 50%;
+      border: 1px solid var(--yellow-400);
+    }
+
+    .guide-image-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .guide-image-actions button {
+      flex: 1;
+      min-width: 100px;
+    }
+
+    .guide-preview-section {
+      background: var(--gray-800);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .guide-preview-section h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--green-500);
+    }
+
+    .guide-gif-preview {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--gray-900);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .guide-gif-preview img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .guide-rotation-indicator {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+    }
+
+    .guide-rotation-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transition: all 0.3s;
+    }
+
+    .guide-rotation-dot.active {
+      background: var(--green-500);
+      transform: scale(1.2);
+    }
+
+    .guide-step-info {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .guide-step-badge {
+      background: var(--green-600);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .guide-step-text {
+      color: var(--gray-200);
+      font-size: 14px;
+      flex: 1;
+    }
+
+    .dot-controls {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--gray-700);
+    }
+
+    .dot-controls label {
+      display: block;
+      font-size: 12px;
+      color: var(--gray-400);
+      margin-bottom: 8px;
+    }
+
+    .dot-controls input {
+      width: 100%;
+      padding: 8px 12px;
+      background: var(--gray-900);
+      border: 1px solid var(--gray-700);
+      border-radius: 6px;
+      color: white;
+      font-size: 14px;
+    }
+
+    .dot-position-display {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-top: 4px;
     }
 
     /* ===== LOCATION GUIDE MODAL ===== */
@@ -1327,6 +1857,151 @@
     .location-guide-btn:active {
       transform: translateY(0);
     }
+
+    /* ===== BROWSE A-Z BUTTON - Prominent placement ===== */
+    .browse-az-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      margin: 8px 0 16px 0;
+      background: var(--gray-800);
+      border: 2px solid var(--green-600);
+      border-radius: 12px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .browse-az-btn:hover {
+      background: var(--green-600);
+      border-color: var(--green-500);
+    }
+
+    .browse-az-btn:active {
+      transform: scale(0.98);
+    }
+
+    .browse-az-icon {
+      font-size: 20px;
+    }
+
+    .browse-az-text {
+      color: var(--green-500);
+    }
+
+    .browse-az-btn:hover .browse-az-text {
+      color: white;
+    }
+
+    /* ===== A-Z BROWSE MODAL - SIMPLE SELECT ===== */
+    .az-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .az-modal.active {
+      display: flex;
+    }
+
+    .az-simple-container {
+      background: var(--gray-900);
+      border-radius: 16px;
+      padding: 20px;
+      width: 100%;
+      max-width: 400px;
+      max-height: 90vh;
+      border: 2px solid var(--red-600);
+    }
+
+    .az-simple-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .az-simple-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      margin: 0;
+    }
+
+    .az-close-btn {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .az-count {
+      font-size: 13px;
+      color: var(--gray-400);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .az-list-container {
+      max-height: 60vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 2px solid var(--gray-600);
+      border-radius: 8px;
+      background: var(--gray-800);
+    }
+
+    .az-item {
+      display: block;
+      width: 100%;
+      padding: 14px 16px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--gray-700);
+      color: white;
+      font-size: 16px;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .az-item:last-child {
+      border-bottom: none;
+    }
+
+    .az-item:active,
+    .az-item:hover {
+      background: var(--red-600);
+    }
+
+    .az-item-critical {
+      color: var(--red-400);
+      font-weight: 600;
+    }
+
+    .az-item-critical::before {
+      content: '⚠️ ';
+    }
   </style>
 </head>
 <body>
@@ -1387,6 +2062,12 @@
       <!-- Recent Searches -->
       <div class="recent-searches" id="recent-searches"></div>
     </section>
+
+    <!-- Browse A-Z Button - Prominent placement -->
+    <button class="browse-az-btn" id="azBrowseBtn" onclick="openAZBrowse()">
+      <span class="browse-az-icon">📋</span>
+      <span class="browse-az-text">Browse All Equipment A-Z</span>
+    </button>
 
     <!-- Results -->
     <section class="results-section" id="results">
@@ -1467,6 +2148,118 @@
     🔊
   </button>
 
+  <!-- Microphone Permission Onboarding Modal -->
+  <div class="admin-modal" id="mic-onboarding-modal">
+    <div class="admin-modal-content" style="text-align: center;">
+      <div style="font-size: 64px; margin-bottom: 16px;">🎤</div>
+      <h2 style="margin-bottom: 12px;">Enable Voice Search</h2>
+      <p style="color: var(--gray-200); font-size: 15px; line-height: 1.6; margin-bottom: 24px;">
+        This app lets you <strong>speak</strong> the name of equipment to find it instantly - perfect for emergencies when your hands are busy.
+      </p>
+      <p style="color: var(--green-500); font-size: 14px; margin-bottom: 24px;">
+        Tap the button below, then tap <strong>"Allow"</strong> when prompted.
+      </p>
+      <button class="admin-btn admin-btn-primary" onclick="requestMicrophonePermission()" style="width: 100%; padding: 16px; font-size: 18px;">
+        🎤 Enable Voice Search
+      </button>
+      <button class="admin-btn" onclick="skipMicrophoneSetup()" style="width: 100%; margin-top: 12px; background: transparent; border: 1px solid var(--gray-600);">
+        Skip for now (use text search)
+      </button>
+    </div>
+  </div>
+
+  <!-- Microphone Blocked Help Modal -->
+  <div class="admin-modal" id="mic-blocked-modal">
+    <div class="admin-modal-content">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="font-size: 48px;">🔒</div>
+        <h2 style="margin: 12px 0;">Microphone Access Needed</h2>
+      </div>
+
+      <p style="color: var(--gray-200); font-size: 14px; margin-bottom: 20px;">
+        Voice search is blocked. Follow these steps to enable it:
+      </p>
+
+      <div style="background: var(--gray-900); border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+          <span style="background: var(--green-600); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">1</span>
+          <span style="color: white; font-size: 15px;">Open iPhone <strong>Settings</strong> app</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+          <span style="background: var(--green-600); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">2</span>
+          <span style="color: white; font-size: 15px;">Scroll down and tap <strong>Safari</strong></span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+          <span style="background: var(--green-600); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">3</span>
+          <span style="color: white; font-size: 15px;">Tap <strong>Microphone</strong></span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="background: var(--green-600); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">4</span>
+          <span style="color: white; font-size: 15px;">Select <strong>Allow</strong> or <strong>Ask</strong></span>
+        </div>
+      </div>
+
+      <p style="color: var(--yellow-400); font-size: 13px; margin-bottom: 20px;">
+        💡 After changing settings, come back here and tap "Try Again"
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <button class="admin-btn admin-btn-primary" onclick="retryMicrophonePermission()" style="width: 100%;">
+          🎤 Try Again
+        </button>
+        <button class="admin-btn" onclick="closeMicBlockedModal()" style="width: 100%;">
+          Use Text Search Instead
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Menu Modal (for regular users) -->
+  <div class="admin-modal" id="settings-modal">
+    <div class="admin-modal-content">
+      <h2 style="display: flex; align-items: center; gap: 10px;">⚙️ Settings</h2>
+
+      <!-- Version Info Box -->
+      <div style="background: var(--gray-900); border-radius: 12px; padding: 16px; margin: 16px 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <span style="color: var(--gray-400); font-size: 12px;">CURRENT VERSION</span>
+          <span id="settings-version" style="font-size: 18px; font-weight: 700; color: var(--green-500);">v2.8.3</span>
+        </div>
+        <div id="settings-update-status" style="font-size: 13px; color: var(--gray-400);">
+          Checking for updates...
+        </div>
+        <div style="font-size: 11px; color: var(--gray-500); margin-top: 8px;">
+          Last updated: <span id="settings-build-date">--</span>
+        </div>
+      </div>
+
+      <!-- Changelog -->
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; color: var(--gray-400); margin-bottom: 8px;">WHAT'S NEW</div>
+        <div id="settings-changelog" style="background: var(--gray-900); border-radius: 8px; padding: 12px; font-size: 13px; max-height: 120px; overflow-y: auto;">
+          Loading...
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <button class="admin-btn admin-btn-primary" onclick="checkForUpdates()" style="width: 100%;">
+          🔄 Check for Updates
+        </button>
+        <button class="admin-btn" onclick="shareApp()" style="width: 100%;">
+          📤 Share App with EMTs
+        </button>
+        <button class="admin-btn" onclick="openAdminLogin()" style="width: 100%; background: var(--gray-700);">
+          🔐 Admin Access
+        </button>
+      </div>
+
+      <div style="margin-top: 20px; text-align: center;">
+        <button class="admin-btn admin-btn-cancel" onclick="closeSettingsModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Admin Login Modal -->
   <div class="admin-modal" id="admin-login-modal">
     <div class="admin-modal-content">
@@ -1507,7 +2300,12 @@
   <!-- Admin Edit Modal -->
   <div class="admin-modal" id="admin-edit-modal">
     <div class="admin-modal-content admin-modal-large">
-      <h2 id="admin-edit-title">Edit Equipment</h2>
+      <!-- Sticky header with X close button for mobile -->
+      <div class="admin-modal-header">
+        <h2 id="admin-edit-title">Edit Equipment</h2>
+        <button class="admin-modal-close-btn" onclick="closeAdminEditModal()">✕</button>
+      </div>
+      <div class="admin-modal-body">
       <div class="admin-form">
         <input type="hidden" id="edit-item-id" />
 
@@ -1521,7 +2319,26 @@
         <input type="text" id="edit-location" class="admin-input" required />
 
         <label>Compartment</label>
-        <input type="text" id="edit-compartment" class="admin-input" placeholder="K, J, N, D, etc." />
+        <select id="edit-compartment" class="admin-input admin-select">
+          <option value="">-- Select Compartment --</option>
+          <option value="A">A - Front Left</option>
+          <option value="B">B - Front Right</option>
+          <option value="C">C - Side Front</option>
+          <option value="D">D - Side (AED/Defibrillator)</option>
+          <option value="E">E - Side</option>
+          <option value="F">F - Side</option>
+          <option value="G">G - Side</option>
+          <option value="H">H - Side</option>
+          <option value="I">I - Side</option>
+          <option value="J">J - Side (Cot/Stretcher)</option>
+          <option value="K">K - Main Side Compartment</option>
+          <option value="L">L - Rear</option>
+          <option value="M">M - Rear</option>
+          <option value="N">N - Interior Drawer</option>
+          <option value="O">O - Oxygen Compartment</option>
+          <option value="INSIDE">Inside Patient Compartment</option>
+          <option value="CAB">Driver's Cab</option>
+        </select>
 
         <label>Color</label>
         <input type="text" id="edit-color" class="admin-input" placeholder="Red/Orange, GREEN, etc." />
@@ -1538,10 +2355,91 @@
         <label>Driver Note</label>
         <input type="text" id="edit-driver-note" class="admin-input" />
 
-        <label>Image Path</label>
-        <input type="text" id="edit-image" class="admin-input" placeholder="/images/item.jpg" />
+        <label>Usage Notes / Dosage Info (EMT Reference)</label>
+        <textarea id="edit-usage-notes" class="admin-textarea" rows="4" placeholder="Add dosage information, usage instructions, or other medical notes here. This will be shown to EMTs when they look up this equipment.
 
-        <div style="display: flex; gap: 10px; align-items: center;">
+Example for Narcan:
+- Adult: 0.4-2mg IV/IM/SC, repeat every 2-3 min if needed
+- Pediatric: 0.01mg/kg IV/IM/SC
+- Elderly: Start with lower dose"></textarea>
+
+        <label>Equipment Image</label>
+        <div class="image-upload-section">
+          <!-- Thumbnail preview -->
+          <div id="edit-image-preview" class="image-preview-box">
+            <span class="image-preview-placeholder">No image</span>
+          </div>
+          <!-- iPhone-friendly upload buttons -->
+          <div class="image-upload-buttons">
+            <button type="button" class="admin-btn admin-btn-photo" onclick="takeEquipmentPhoto()">
+              📷 Take Photo
+            </button>
+            <button type="button" class="admin-btn admin-btn-photo" onclick="chooseEquipmentPhoto()">
+              📁 Choose from Library
+            </button>
+            <button type="button" class="admin-btn" onclick="clearEquipmentPhoto()" style="background: transparent; border: 1px solid var(--gray-600);">
+              ✕ Clear Image
+            </button>
+          </div>
+          <!-- Hidden file inputs -->
+          <input type="file" id="edit-image-camera" accept="image/*" capture="environment" style="display: none;" onchange="handleEquipmentPhotoSelect(event)" />
+          <input type="file" id="edit-image-library" accept="image/*" style="display: none;" onchange="handleEquipmentPhotoSelect(event)" />
+          <input type="hidden" id="edit-image" />
+        </div>
+
+        <!-- Location Guide Section -->
+        <div class="location-guide-section" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--gray-700);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <label style="font-size: 16px; font-weight: 600; color: var(--green-500);">📍 Location Guide (3 Images)</label>
+            <button type="button" class="admin-btn admin-btn-primary" id="edit-location-guide-btn" style="padding: 8px 16px;">
+              🎯 Edit Guide
+            </button>
+          </div>
+
+          <!-- 3 Image Thumbnails -->
+          <div class="location-guide-thumbnails" id="edit-guide-thumbnails">
+            <div class="guide-thumb" id="edit-thumb-step1">
+              <div class="guide-thumb-label">Step 1: Ambulance</div>
+              <div class="guide-thumb-image" id="edit-thumb-img1">
+                <span class="guide-thumb-placeholder">No image</span>
+              </div>
+            </div>
+            <div class="guide-thumb" id="edit-thumb-step2">
+              <div class="guide-thumb-label">Step 2: Cabinet</div>
+              <div class="guide-thumb-image" id="edit-thumb-img2">
+                <span class="guide-thumb-placeholder">No image</span>
+              </div>
+            </div>
+            <div class="guide-thumb" id="edit-thumb-step3">
+              <div class="guide-thumb-label">Step 3: Equipment</div>
+              <div class="guide-thumb-image" id="edit-thumb-img3">
+                <span class="guide-thumb-placeholder">No image</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rotation Preview -->
+          <div class="location-guide-preview" style="margin-top: 16px;">
+            <div style="font-size: 12px; color: var(--gray-400); margin-bottom: 8px;">📽️ Preview (how users see it)</div>
+            <div class="guide-preview-container" id="edit-guide-preview">
+              <img id="edit-guide-preview-img" style="display: none; width: 100%; border-radius: 8px;" />
+              <div id="edit-guide-preview-placeholder" style="text-align: center; padding: 30px; color: var(--gray-500);">
+                Add images to see preview
+              </div>
+              <div class="guide-preview-dots" id="edit-guide-preview-dots" style="display: none;">
+                <span class="preview-dot active" data-step="1"></span>
+                <span class="preview-dot" data-step="2"></span>
+                <span class="preview-dot" data-step="3"></span>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; margin-top: 8px;">
+              <button type="button" class="admin-btn admin-btn-small" onclick="playEditGuidePreview()">▶️ Play</button>
+              <button type="button" class="admin-btn admin-btn-small" onclick="pauseEditGuidePreview()">⏸️ Pause</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; align-items: center; margin-top: 16px;">
           <input type="checkbox" id="edit-critical" />
           <label for="edit-critical" style="margin: 0;">Critical Item</label>
         </div>
@@ -1550,7 +2448,9 @@
         <input type="number" id="edit-critical-rank" class="admin-input" min="1" max="10" />
       </div>
 
-      <div style="display: flex; gap: 10px; margin-top: 20px;">
+      </div><!-- end admin-modal-body -->
+      <!-- Sticky footer buttons -->
+      <div class="admin-modal-footer">
         <button class="admin-btn admin-btn-danger" id="admin-delete-btn">🗑️ Delete</button>
         <div style="flex: 1;"></div>
         <button class="admin-btn admin-btn-cancel" id="admin-edit-cancel-btn">Cancel</button>
@@ -1592,6 +2492,128 @@
         <p style="font-size: 48px; margin: 0;">📷</p>
         <p>Camera will open automatically...</p>
         <button class="admin-btn admin-btn-cancel" onclick="closeImageCapture()" style="margin-top: 20px;">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Location Guide Editor Modal -->
+  <div class="admin-modal" id="guide-editor-modal">
+    <div class="admin-modal-content admin-modal-fullscreen">
+      <div class="guide-editor">
+        <div class="guide-editor-header">
+          <h2 id="guide-editor-title">Location Guide Editor</h2>
+          <button class="admin-close-btn" onclick="closeGuideEditor()">✕</button>
+        </div>
+
+        <!-- Item Name Display -->
+        <p id="guide-editor-item-name" style="color: var(--green-500); font-size: 18px; font-weight: 600; margin-bottom: 16px;"></p>
+
+        <!-- Image Tabs -->
+        <div class="guide-editor-tabs">
+          <button class="guide-editor-tab active" data-step="1" onclick="selectGuideStep(1)">
+            <span class="tab-icon">🚑</span>
+            Step 1: Ambulance
+          </button>
+          <button class="guide-editor-tab" data-step="2" onclick="selectGuideStep(2)">
+            <span class="tab-icon">🗄️</span>
+            Step 2: Cabinet
+          </button>
+          <button class="guide-editor-tab" data-step="3" onclick="selectGuideStep(3)">
+            <span class="tab-icon">🎒</span>
+            Step 3: Equipment
+          </button>
+        </div>
+
+        <!-- Step Info -->
+        <div class="guide-step-info">
+          <span class="guide-step-badge" id="current-step-badge">Step 1</span>
+          <span class="guide-step-text" id="current-step-text">Show where on the ambulance to find this</span>
+        </div>
+
+        <!-- Image Editor -->
+        <div class="guide-image-editor">
+          <div class="guide-image-preview" id="guide-image-preview">
+            <img id="guide-preview-img" style="display: none;" />
+            <div class="guide-image-placeholder" id="guide-image-placeholder">
+              <div class="placeholder-icon">📷</div>
+              <p>No image set</p>
+              <p style="font-size: 12px; margin-top: 4px;">Select from library or upload</p>
+            </div>
+            <div class="guide-dot-editor" id="guide-dot-editor"></div>
+          </div>
+
+          <div class="guide-image-actions">
+            <button class="admin-btn admin-btn-primary" onclick="openImageLibrary()">📁 Image Library</button>
+            <button class="admin-btn" onclick="uploadGuideImage()">📤 Upload New</button>
+            <button class="admin-btn admin-btn-secondary" onclick="clearGuideImage()">🗑️ Clear</button>
+          </div>
+
+          <input type="file" id="guide-image-upload" accept="image/*" style="display: none;" onchange="handleGuideImageUpload(event)" />
+
+          <!-- Dot Position Controls -->
+          <div class="dot-controls" id="dot-controls" style="display: none;">
+            <label>Dot Label (shown on hover)</label>
+            <input type="text" id="dot-label-input" placeholder="e.g., Cabinet K, Middle Drawer" oninput="updateDotLabel()" />
+            <div class="dot-position-display" id="dot-position-display">Position: -- , --</div>
+            <p style="font-size: 11px; color: var(--gray-500); margin-top: 8px;">
+              💡 Drag the yellow dot to position it on the image. Step 3 (Equipment) has no dot.
+            </p>
+          </div>
+        </div>
+
+        <!-- Preview Section -->
+        <div class="guide-preview-section">
+          <h3>📽️ Rotation Preview (How users will see it)</h3>
+          <div class="guide-gif-preview" id="guide-gif-preview">
+            <img id="gif-preview-img" style="display: none;" />
+            <div class="guide-rotation-indicator">
+              <div class="guide-rotation-dot active" data-step="1"></div>
+              <div class="guide-rotation-dot" data-step="2"></div>
+              <div class="guide-rotation-dot" data-step="3"></div>
+            </div>
+            <div id="gif-placeholder" style="text-align: center; color: var(--gray-400);">
+              <p>Add images to see preview</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 12px;">
+            <button class="admin-btn" onclick="playRotationPreview()">▶️ Play Preview</button>
+            <button class="admin-btn" onclick="pauseRotationPreview()">⏸️ Pause</button>
+          </div>
+        </div>
+
+        <!-- Save/Cancel -->
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+          <button class="admin-btn admin-btn-cancel" onclick="closeGuideEditor()">Cancel</button>
+          <button class="admin-btn admin-btn-primary" onclick="saveGuideEditor()" style="flex: 1;">💾 Save Location Guide</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Library Modal -->
+  <div class="admin-modal" id="image-library-modal">
+    <div class="admin-modal-content admin-modal-large">
+      <h2>Select Image</h2>
+      <p style="color: var(--gray-400); font-size: 14px; margin-bottom: 16px;">Choose from existing images in the library</p>
+      <div id="image-library-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-height: 400px; overflow-y: auto;">
+        <!-- Images populated by JS -->
+      </div>
+      <div style="display: flex; gap: 10px; margin-top: 20px;">
+        <button class="admin-btn admin-btn-cancel" onclick="closeImageLibrary()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- A-Z Browse Modal - Simple Scrollable List -->
+  <div class="az-modal" id="az-modal">
+    <div class="az-simple-container">
+      <div class="az-simple-header">
+        <h2>Browse Equipment A-Z</h2>
+        <button class="az-close-btn" id="az-close-btn">✕</button>
+      </div>
+      <div class="az-count" id="az-count"></div>
+      <div class="az-list-container" id="az-list">
+        <!-- Items populated by JS -->
       </div>
     </div>
   </div>
