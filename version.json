@@ -1,9 +1,12 @@
 {
-  "version": "2.10.0",
+  "version": "2.10.1",
   "build": "2025-12-20",
   "changelog": [
-    "UI: Fixed duplicate icons - Oxygen (lungs), Suction (swirl)",
-    "UI: Added BVM and C-Collar to Quick Find buttons",
-    "UI: Added compartments A-H to location map"
+    "FIX: Corrected Narcan image (was showing oxygen tanks)",
+    "FIX: Corrected onboard suction image",
+    "FIX: Updated saline bags image to show Cabinet D",
+    "UI: Added Compartment D to location map",
+    "UI: Changed BVM icon to breath symbol (was heart)",
+    "UI: Fixed version display sync"
   ]
 }

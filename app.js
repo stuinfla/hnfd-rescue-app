@@ -304,7 +304,7 @@ const INVENTORY_DATABASE = {
       description: "Opioid overdose reversal medication - delivered intranasally",
       warning: "CRITICAL: Nasal ATOMIZER must come with syringe - they are TAPED TOGETHER. Syringe alone is useless! Atomizer screws onto syringe tip.",
       notes: "Old packaging: orange container. New packaging: clear tube (can see syringe). Additional Narcan in Drug Box but Drawer N is fastest.",
-      image: "/images/narcan.jpg",
+      image: "/images/locations/narcan_syringe_closeup.jpg",
       images: {
         ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
         compartmentView: "/images/locations/drawer_n_contents.jpg",
@@ -418,11 +418,11 @@ const INVENTORY_DATABASE = {
       description: "IV fluid for hydration - moved from K for easier access",
       warning: "MUST grab PRIMARY SET (IV tubing) with saline bag - bag is USELESS without tubing!",
       notes: "Warm saline in heated IV warmer during winter for hypothermic patients. Cabinet doors fold DOWN for easier access.",
-      image: "/images/saline_bags.jpg",
+      image: "/images/compartments/compartment-d-ob-linens.jpg",
       images: {
         ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
-        compartmentView: "/images/saline_bags.jpg",
-        equipmentPhoto: "/images/saline_bags.jpg"
+        compartmentView: "/images/compartments/compartment-d-ob-linens.jpg",
+        equipmentPhoto: "/images/compartments/compartment-d-ob-linens.jpg"
       },
       goldDots: {
         ambulancePosition: { x: 30, y: 50, label: "Cabinet D" },
@@ -459,7 +459,7 @@ const INVENTORY_DATABASE = {
       compartment: "onboard",
       description: "Vacuum pump driven suction for patients on stretcher during transport",
       notes: "Wall-mounted in patient compartment. Always available when patient is on stretcher.",
-      image: "/images/suction.jpg",
+      image: "/images/locations/onboard_suction_area.jpg",
       images: {
         ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
         compartmentView: "/images/locations/onboard_suction_area.jpg",
@@ -1168,7 +1168,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.10.0';
+const APP_VERSION = '2.10.1';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
