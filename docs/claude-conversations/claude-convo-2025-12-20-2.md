@@ -22,3 +22,8 @@ Okay make that improvement now and lock it down and then let me know if you thin
 
 first push all to github.   then Why don't you start this as another branch create a branch called multi-tenant 
 
+
+## Human
+
+Okay do the full test and confirm everything is working 
+

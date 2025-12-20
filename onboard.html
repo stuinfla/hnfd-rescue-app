@@ -874,21 +874,40 @@
     <!-- Step 3: Equipment -->
     <section class="step-section" data-step="3">
       <h2 class="step-title">Equipment List</h2>
-      <p class="step-description">Add all the equipment on your apparatus. You can import from CSV or enter manually.</p>
+      <p class="step-description">Import your existing inventory spreadsheet - fastest way to get started!</p>
 
-      <div class="csv-import">
-        <h3>Import from Spreadsheet</h3>
-        <p class="form-hint">Download our template, fill it in, and upload it here.</p>
+      <!-- Spreadsheet Import - Primary Method -->
+      <div class="csv-import" style="border: 2px solid var(--accent); background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);">
+        <h3 style="color: var(--accent);">&#128203; Import from Excel or CSV (Recommended)</h3>
+        <p class="form-hint">Most departments already have their inventory in a spreadsheet. Just upload it!</p>
+
         <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
-          <button class="btn btn-secondary" id="download-template-btn">Download Template</button>
-          <label class="btn btn-primary" style="cursor: pointer;">
-            Upload CSV
-            <input type="file" id="csv-input" accept=".csv" style="display: none;">
+          <button class="btn btn-accent" id="download-excel-btn" style="flex: 1; min-width: 140px;">
+            &#128196; Download Excel Template
+          </button>
+          <label class="btn btn-primary" style="cursor: pointer; flex: 1; min-width: 140px;">
+            &#128194; Upload Spreadsheet
+            <input type="file" id="spreadsheet-input" accept=".xlsx,.xls,.csv" style="display: none;">
           </label>
+        </div>
+
+        <div style="margin-top: 15px; padding: 12px; background: var(--bg); border-radius: 8px;">
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">Supported formats:</p>
+          <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <span style="font-size: 13px;">&#9989; Excel (.xlsx, .xls)</span>
+            <span style="font-size: 13px;">&#9989; CSV (.csv)</span>
+          </div>
+        </div>
+
+        <div id="import-status" style="margin-top: 15px; display: none;">
+          <div style="padding: 12px; background: var(--success); border-radius: 8px; color: white;">
+            <strong>&#10003; Import successful!</strong>
+            <span id="import-count"></span>
+          </div>
         </div>
       </div>
 
-      <div class="or-divider">OR</div>
+      <div class="or-divider">OR ENTER MANUALLY</div>
 
       <div class="equipment-section">
         <div class="equipment-header">
@@ -1015,6 +1034,7 @@
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
   <script>
     (function() {
@@ -1062,8 +1082,8 @@
 
         // Equipment buttons
         document.getElementById('add-row-btn').addEventListener('click', function() { addEquipmentRow(); });
-        document.getElementById('download-template-btn').addEventListener('click', function() { downloadTemplate(); });
-        document.getElementById('csv-input').addEventListener('change', function(e) { importCSV(e); });
+        document.getElementById('download-excel-btn').addEventListener('click', function() { downloadExcelTemplate(); });
+        document.getElementById('spreadsheet-input').addEventListener('change', function(e) { importSpreadsheet(e); });
 
         // Download and share
         document.getElementById('download-zip-btn').addEventListener('click', function() { downloadZip(); });
@@ -1342,53 +1362,159 @@
         });
       }
 
-      function downloadTemplate() {
-        var template = 'name,location,quantity,critical,category\n' +
-          'AED,Cabinet A,1,true,cardiac\n' +
-          'Oxygen Tank,Compartment B,2,true,breathing\n' +
-          'Trauma Bag,Main Compartment,1,true,trauma\n' +
-          'BVM Adult,Airway Cabinet,1,true,airway\n' +
-          'Bandages,Supply Drawer,10,false,supplies';
+      function downloadExcelTemplate() {
+        // Create sample data for the template
+        var templateData = [
+          { name: 'AED / Defibrillator', location: 'Cabinet D', quantity: 1, critical: 'YES', category: 'cardiac' },
+          { name: 'Oxygen Tank (large)', location: 'Compartment B', quantity: 2, critical: 'YES', category: 'breathing' },
+          { name: 'Oxygen Tank (portable)', location: 'Side Cabinet', quantity: 1, critical: 'YES', category: 'breathing' },
+          { name: 'Adult Trauma Bag', location: 'Main Compartment K', quantity: 1, critical: 'YES', category: 'trauma' },
+          { name: 'Pediatric Trauma Bag', location: 'Main Compartment K', quantity: 1, critical: 'YES', category: 'pediatric' },
+          { name: 'BVM Adult', location: 'Airway Cabinet', quantity: 1, critical: 'YES', category: 'airway' },
+          { name: 'BVM Pediatric', location: 'Airway Cabinet', quantity: 1, critical: 'YES', category: 'airway' },
+          { name: 'Narcan / Naloxone', location: 'Drug Box', quantity: 2, critical: 'YES', category: 'medication' },
+          { name: 'Epinephrine Auto-Injector', location: 'Drug Box', quantity: 2, critical: 'YES', category: 'medication' },
+          { name: 'Suction Unit (portable)', location: 'Side Cabinet', quantity: 1, critical: 'YES', category: 'airway' },
+          { name: 'Cervical Collars (assorted)', location: 'Drawer N', quantity: 5, critical: 'NO', category: 'trauma' },
+          { name: 'Backboard', location: 'Side Compartment', quantity: 1, critical: 'NO', category: 'trauma' },
+          { name: 'Splints (SAM)', location: 'Drawer N', quantity: 4, critical: 'NO', category: 'trauma' },
+          { name: 'Bandages (4x4)', location: 'Supply Drawer', quantity: 20, critical: 'NO', category: 'supplies' },
+          { name: 'Bandages (roller)', location: 'Supply Drawer', quantity: 10, critical: 'NO', category: 'supplies' },
+          { name: 'Blood Pressure Cuff', location: 'Vitals Bag', quantity: 1, critical: 'NO', category: 'monitoring' },
+          { name: 'Stethoscope', location: 'Vitals Bag', quantity: 1, critical: 'NO', category: 'monitoring' },
+          { name: 'Pulse Oximeter', location: 'Vitals Bag', quantity: 1, critical: 'NO', category: 'monitoring' },
+          { name: 'Glucometer', location: 'Drug Box', quantity: 1, critical: 'NO', category: 'monitoring' },
+          { name: 'IV Start Kit', location: 'IV Box', quantity: 3, critical: 'NO', category: 'circulation' }
+        ];
 
-        var blob = new Blob([template], { type: 'text/csv' });
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = 'equipment-template.csv';
-        a.click();
-        URL.revokeObjectURL(url);
+        // Create worksheet
+        var ws = XLSX.utils.json_to_sheet(templateData);
+
+        // Set column widths
+        ws['!cols'] = [
+          { wch: 30 },  // name
+          { wch: 25 },  // location
+          { wch: 10 },  // quantity
+          { wch: 10 },  // critical
+          { wch: 15 }   // category
+        ];
+
+        // Create workbook
+        var wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Equipment');
+
+        // Add instructions sheet
+        var instructionsData = [
+          { 'Instructions': 'HOW TO USE THIS TEMPLATE' },
+          { 'Instructions': '' },
+          { 'Instructions': '1. Fill in your equipment on the "Equipment" sheet' },
+          { 'Instructions': '2. Required columns: name, location' },
+          { 'Instructions': '3. Optional columns: quantity (default 1), critical (YES/NO), category' },
+          { 'Instructions': '' },
+          { 'Instructions': 'COLUMN DESCRIPTIONS:' },
+          { 'Instructions': '- name: Equipment item name (e.g., "AED", "Oxygen Tank")' },
+          { 'Instructions': '- location: Where to find it (e.g., "Cabinet A", "Side Compartment")' },
+          { 'Instructions': '- quantity: How many (number)' },
+          { 'Instructions': '- critical: Is this a life-saving item? (YES or NO)' },
+          { 'Instructions': '- category: airway, breathing, cardiac, circulation, trauma, medication, pediatric, monitoring, safety, supplies, other' },
+          { 'Instructions': '' },
+          { 'Instructions': 'TIPS:' },
+          { 'Instructions': '- Delete the sample rows and add your own equipment' },
+          { 'Instructions': '- Be consistent with location names (e.g., always use "Cabinet A" not "Cab A" or "cabinet a")' },
+          { 'Instructions': '- Mark all life-saving items as critical=YES for quick access during emergencies' }
+        ];
+        var wsInstructions = XLSX.utils.json_to_sheet(instructionsData);
+        wsInstructions['!cols'] = [{ wch: 80 }];
+        XLSX.utils.book_append_sheet(wb, wsInstructions, 'Instructions');
+
+        // Download
+        XLSX.writeFile(wb, 'equipment-template.xlsx');
       }
 
-      function importCSV(event) {
+      function importSpreadsheet(event) {
         var file = event.target.files[0];
         if (!file) return;
 
         var reader = new FileReader();
         reader.onload = function(e) {
-          var text = e.target.result;
-          var lines = text.split('\n').filter(function(line) { return line.trim(); });
+          var data = e.target.result;
+          var items = [];
 
-          document.getElementById('equipment-tbody').textContent = '';
+          // Check if it's a CSV or Excel file
+          if (file.name.endsWith('.csv')) {
+            // Parse CSV
+            var text = data;
+            var lines = text.split('\n').filter(function(line) { return line.trim(); });
 
-          for (var i = 1; i < lines.length; i++) {
-            var cols = lines[i].split(',').map(function(c) {
-              return c.trim().replace(/^"|"$/g, '');
-            });
-            if (cols[0] && cols[1]) {
-              addEquipmentRow({
-                name: cols[0],
-                location: cols[1],
-                quantity: parseInt(cols[2]) || 1,
-                critical: cols[3] && cols[3].toLowerCase() === 'true',
-                category: cols[4] || 'supplies'
+            for (var i = 1; i < lines.length; i++) {
+              var cols = lines[i].split(',').map(function(c) {
+                return c.trim().replace(/^"|"$/g, '');
               });
+              if (cols[0] && cols[1]) {
+                items.push({
+                  name: cols[0],
+                  location: cols[1],
+                  quantity: parseInt(cols[2]) || 1,
+                  critical: cols[3] && (cols[3].toLowerCase() === 'true' || cols[3].toLowerCase() === 'yes'),
+                  category: cols[4] || 'supplies'
+                });
+              }
             }
+          } else {
+            // Parse Excel
+            var workbook = XLSX.read(data, { type: 'array' });
+            var firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+            var rows = XLSX.utils.sheet_to_json(firstSheet);
+
+            rows.forEach(function(row) {
+              // Handle various column name formats
+              var name = row.name || row.Name || row.NAME || row['Item Name'] || row['item name'] || '';
+              var location = row.location || row.Location || row.LOCATION || row['Compartment'] || row['compartment'] || '';
+
+              if (name && location) {
+                var criticalVal = row.critical || row.Critical || row.CRITICAL || '';
+                var isCritical = criticalVal === true ||
+                                 criticalVal === 'YES' ||
+                                 criticalVal === 'yes' ||
+                                 criticalVal === 'Yes' ||
+                                 criticalVal === 'true' ||
+                                 criticalVal === 'TRUE' ||
+                                 criticalVal === 1;
+
+                items.push({
+                  name: String(name).trim(),
+                  location: String(location).trim(),
+                  quantity: parseInt(row.quantity || row.Quantity || row.QUANTITY || row.qty || row.Qty || 1) || 1,
+                  critical: isCritical,
+                  category: String(row.category || row.Category || row.CATEGORY || 'supplies').toLowerCase()
+                });
+              }
+            });
           }
 
-          var count = document.querySelectorAll('#equipment-tbody tr').length;
-          alert('Imported ' + count + ' items!');
+          // Clear existing rows and add imported items
+          document.getElementById('equipment-tbody').textContent = '';
+
+          items.forEach(function(item) {
+            addEquipmentRow(item);
+          });
+
+          // Show success message
+          var importStatus = document.getElementById('import-status');
+          var importCount = document.getElementById('import-count');
+          importStatus.style.display = 'block';
+          importCount.textContent = ' - ' + items.length + ' items loaded';
+
+          // Update item count
+          updateItemCount();
         };
-        reader.readAsText(file);
+
+        // Read as text for CSV, as array buffer for Excel
+        if (file.name.endsWith('.csv')) {
+          reader.readAsText(file);
+        } else {
+          reader.readAsArrayBuffer(file);
+        }
       }
 
       function updatePreview() {

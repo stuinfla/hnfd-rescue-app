@@ -1,11 +1,11 @@
 {
-  "version": "3.0.0-beta.2",
+  "version": "3.0.0-beta.3",
   "build": "2025-12-20",
   "changelog": [
-    "NEW: Self-service onboarding for other departments",
-    "NEW: Share setup link from Settings menu",
-    "Onboarding wizard with CSV import",
-    "Generates downloadable tenant package (ZIP)",
-    "10-minute setup process for new departments"
+    "NEW: Excel (.xlsx) import for equipment lists",
+    "Downloadable Excel template with 20 sample items",
+    "Instructions sheet included in template",
+    "Smart column name detection (handles Name, name, NAME, etc.)",
+    "Critical items: supports YES/NO, true/false, 1/0"
   ]
 }
