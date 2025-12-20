@@ -13,6 +13,9 @@ const ASSETS_TO_CACHE = [
   '/version.js',
   '/manifest.json',
   '/version.json',
+  // Tenant configuration (default tenant)
+  '/tenants/hnfd/config.json',
+  '/tenants/hnfd/equipment.json',
   // All PWA icons (required for offline install)
   '/icons/icon-72.png',
   '/icons/icon-96.png',

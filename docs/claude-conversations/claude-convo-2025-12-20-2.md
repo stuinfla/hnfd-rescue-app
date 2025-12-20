@@ -17,3 +17,8 @@ Okay make that improvement now and lock it down and then let me know if you thin
 
 '/Users/stuartkerr/Code/AMBUILANCE_INVENTORY/Ambulance_training_data/HNFR-images/DSC_0776.JPG' Also the first time somebody loads it can you load this image as a splash screen I don't want it to show up each time as it will take too much time but at least the first time 
 
+
+## Human
+
+first push all to github.   then Why don't you start this as another branch create a branch called multi-tenant 
+

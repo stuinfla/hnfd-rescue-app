@@ -1,22 +1,140 @@
 /**
- * Harpswell Neck Fire & Rescue - Equipment Finder
- * Voice-enabled search for HNFD ambulance equipment locations
+ * Multi-Tenant Ambulance Equipment Finder
+ * Voice-enabled search for ambulance equipment locations
  *
  * CRITICAL: This application is used by EMTs in life-threatening situations
- * All data is verified from official HNFD training materials
+ * All data is verified from official training materials
  *
- * Architecture (per Planningdoc.md):
- * - Speech-to-Text: Web Speech API (native) with Whisper fallback planned
- * - Vector Search: Client-side fuzzy matching (Ruvector for server-side)
+ * Architecture:
+ * - Multi-tenant: Config and equipment loaded per organization
+ * - Speech-to-Text: Web Speech API (native)
  * - Text-to-Speech: Native SpeechSynthesis API (100% offline)
- * - Storage: IndexedDB for model caching, embedded JSON for inventory
+ * - Storage: Equipment JSON cached for offline operation
  */
 
 // ============================================================================
-// COMPLETE INVENTORY DATABASE - EMBEDDED FOR 100% OFFLINE OPERATION
-// Source: HNFD Training Video - "Where Everything Is In The Ambulance"
+// MULTI-TENANT SYSTEM
 // ============================================================================
-const INVENTORY_DATABASE = {
+const DEFAULT_TENANT = 'hnfd';
+
+// Global state - populated by tenant loader
+let TENANT_CONFIG = null;
+let INVENTORY_DATABASE = null;
+
+/**
+ * Detect tenant from URL
+ * Supports: ?org=hnfd, subdomain (hnfd.app.com), or path (/hnfd/)
+ */
+function detectTenant() {
+  // Check URL parameter first
+  const urlParams = new URLSearchParams(window.location.search);
+  const orgParam = urlParams.get('org');
+  if (orgParam) return orgParam.toLowerCase();
+
+  // Check subdomain
+  const hostname = window.location.hostname;
+  const subdomain = hostname.split('.')[0];
+  if (subdomain && subdomain !== 'www' && subdomain !== 'localhost') {
+    // Could be a tenant subdomain - check if it exists
+    // For now, just use default if not a known pattern
+  }
+
+  // Default tenant
+  return DEFAULT_TENANT;
+}
+
+/**
+ * Load tenant configuration and equipment data
+ */
+async function loadTenant(tenantId) {
+  console.log(`[Tenant] Loading tenant: ${tenantId}`);
+
+  try {
+    // Load config
+    const configResponse = await fetch(`/tenants/${tenantId}/config.json`);
+    if (!configResponse.ok) {
+      throw new Error(`Tenant config not found: ${tenantId}`);
+    }
+    TENANT_CONFIG = await configResponse.json();
+    console.log(`[Tenant] Loaded config for: ${TENANT_CONFIG.name}`);
+
+    // Load equipment database
+    const equipmentResponse = await fetch(`/tenants/${tenantId}/equipment.json`);
+    if (!equipmentResponse.ok) {
+      throw new Error(`Tenant equipment not found: ${tenantId}`);
+    }
+    INVENTORY_DATABASE = await equipmentResponse.json();
+    console.log(`[Tenant] Loaded ${INVENTORY_DATABASE.items.length} equipment items`);
+
+    // Apply tenant branding
+    applyTenantBranding();
+
+    return true;
+  } catch (error) {
+    console.error('[Tenant] Failed to load tenant:', error);
+
+    // Fall back to default tenant if not already trying it
+    if (tenantId !== DEFAULT_TENANT) {
+      console.log(`[Tenant] Falling back to default: ${DEFAULT_TENANT}`);
+      return loadTenant(DEFAULT_TENANT);
+    }
+
+    throw error;
+  }
+}
+
+/**
+ * Apply tenant-specific branding to the UI
+ */
+function applyTenantBranding() {
+  if (!TENANT_CONFIG) return;
+
+  // Update header
+  const headerTitle = document.querySelector('.header-brand h1');
+  if (headerTitle) {
+    headerTitle.textContent = TENANT_CONFIG.shortName || TENANT_CONFIG.name;
+  }
+
+  // Update logo
+  const logo = document.querySelector('.header-logo');
+  if (logo && TENANT_CONFIG.logo) {
+    logo.src = TENANT_CONFIG.logo;
+    logo.alt = `${TENANT_CONFIG.name} Logo`;
+  }
+
+  // Update splash screen if still visible
+  const splash = document.getElementById('splash-screen');
+  if (splash && TENANT_CONFIG.splash) {
+    const splashImg = splash.querySelector('.splash-image');
+    const splashTitle = splash.querySelector('.splash-title');
+    const splashSubtitle = splash.querySelector('.splash-subtitle');
+    const splashTagline = splash.querySelector('.splash-tagline');
+
+    if (splashImg && TENANT_CONFIG.splash.image) splashImg.src = TENANT_CONFIG.splash.image;
+    if (splashTitle && TENANT_CONFIG.splash.title) splashTitle.textContent = TENANT_CONFIG.splash.title;
+    if (splashSubtitle && TENANT_CONFIG.splash.subtitle) splashSubtitle.textContent = TENANT_CONFIG.splash.subtitle;
+    if (splashTagline && TENANT_CONFIG.splash.tagline) splashTagline.textContent = TENANT_CONFIG.splash.tagline;
+  }
+
+  // Apply theme colors if specified
+  if (TENANT_CONFIG.theme) {
+    const root = document.documentElement;
+    if (TENANT_CONFIG.theme.primary) {
+      root.style.setProperty('--red-600', TENANT_CONFIG.theme.primary);
+    }
+    if (TENANT_CONFIG.theme.accent) {
+      root.style.setProperty('--accent-color', TENANT_CONFIG.theme.accent);
+    }
+  }
+
+  console.log(`[Tenant] Applied branding for: ${TENANT_CONFIG.name}`);
+}
+
+// ============================================================================
+// LEGACY EMBEDDED DATABASE (fallback if tenant loading fails)
+// This will be removed once multi-tenant is fully tested
+// ============================================================================
+const FALLBACK_DATABASE = {
   items: [
     {
       id: "trauma_bag_adult",
@@ -2783,8 +2901,18 @@ if (synthesis) {
 /**
  * Primary initialization - SIMPLIFIED: Just initialize, wait for user tap
  */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   console.log('[Init] 📱 DOM loaded, initializing...');
+
+  // Load tenant data first
+  try {
+    const tenantId = detectTenant();
+    await loadTenant(tenantId);
+    console.log('[Init] ✅ Tenant loaded successfully');
+  } catch (error) {
+    console.warn('[Init] ⚠️ Tenant loading failed, using fallback database');
+    INVENTORY_DATABASE = FALLBACK_DATABASE;
+  }
 
   // Initialize audio context unlock for iOS
   initializeAudio();

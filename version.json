@@ -1,9 +1,11 @@
 {
-  "version": "2.10.3",
+  "version": "3.0.0-beta.1",
   "build": "2025-12-20",
   "changelog": [
-    "NEW: First-time splash screen with R7 ambulance photo",
-    "Splash auto-dismisses after 4 seconds or on tap",
-    "Only shows on first visit (localStorage)"
+    "MAJOR: Multi-tenant architecture",
+    "Equipment data now loaded from JSON files",
+    "Tenant config supports custom branding",
+    "Supports ?org= parameter for tenant selection",
+    "HNFD remains default tenant - no behavior change"
   ]
 }

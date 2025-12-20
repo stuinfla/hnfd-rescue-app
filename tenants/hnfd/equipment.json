@@ -1,0 +1,1421 @@
+{
+  "items": [
+    {
+      "id": "trauma_bag_adult",
+      "name": "Adult Trauma Bag",
+      "aliases": [
+        "trauma back",
+        "first-in bag",
+        "first end bag",
+        "trauma bag",
+        "adult trauma",
+        "red bag",
+        "trauma"
+      ],
+      "searchText": "adult trauma bag trauma back first in first end bag red orange",
+      "location": "Cabinet K - Middle Drawer (FRONT)",
+      "compartment": "K",
+      "color": "Red/Orange",
+      "critical": true,
+      "criticalRank": 1,
+      "description": "Contains all trauma supplies for adult patients",
+      "notes": "Red tag = inventory tracking. If seal unbroken, contents unchanged.",
+      "image": "/images/trauma_bag_adult.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_exterior_side.jpg",
+        "compartmentView": "/images/locations/cabinet_k_overview.jpg",
+        "equipmentPhoto": "/images/locations/adult_trauma_bag_closeup.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 45,
+          "y": 60,
+          "label": "Cabinet K"
+        },
+        "compartmentView": {
+          "x": 50,
+          "y": 70,
+          "label": "Middle Drawer"
+        },
+        "equipmentPhoto": null
+      },
+      "locationSteps": [
+        "Step 1: Go to OUTSIDE of ambulance (driver's side)",
+        "Step 2: Find Cabinet K - main side compartment door",
+        "Step 3: Open Middle Drawer - trauma bag is in FRONT",
+        "Step 4: Grab RED/ORANGE bag - this is the adult trauma bag"
+      ],
+      "quickFind": "Outside ambulance → Cabinet K (side door) → Middle drawer → RED bag in front"
+    },
+    {
+      "id": "oxygen_kit_adult",
+      "name": "Adult Oxygen Kit",
+      "aliases": [
+        "green oxygen bag",
+        "O2 kit",
+        "respiratory kit",
+        "adult oxygen",
+        "oxygen kit",
+        "oxygen",
+        "O2",
+        "adult O2"
+      ],
+      "searchText": "adult oxygen kit O2 green bag respiratory oral nasal airways masks tank",
+      "location": "Cabinet K - Middle Drawer (BEHIND trauma bag)",
+      "compartment": "K",
+      "color": "GREEN bag",
+      "critical": true,
+      "criticalRank": 2,
+      "description": "Complete respiratory treatment kit with oxygen tank inside",
+      "contents": "Oral airways, nasal airways, oxygen masks, oxygen tank",
+      "image": "/images/oxygen_kit_adult.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_exterior_side.jpg",
+        "compartmentView": "/images/locations/cabinet_k_overview.jpg",
+        "equipmentPhoto": "/images/oxygen_kit_adult.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 45,
+          "y": 60,
+          "label": "Cabinet K"
+        },
+        "compartmentView": {
+          "x": 50,
+          "y": 55,
+          "label": "Middle Drawer"
+        },
+        "equipmentPhoto": null
+      }
+    },
+    {
+      "id": "oxygen_kit_pediatric",
+      "name": "Pediatric Oxygen Kit",
+      "aliases": [
+        "peds oxygen",
+        "child oxygen kit",
+        "pediatric O2",
+        "kids oxygen",
+        "peds O2",
+        "child O2",
+        "pediatric oxygen"
+      ],
+      "searchText": "pediatric peds child kids oxygen O2 kit blue respiratory",
+      "location": "Cabinet K - Lower Drawer (FRONT - oxygen first for kids!)",
+      "compartment": "K",
+      "color": "BLUE bag",
+      "critical": true,
+      "criticalRank": 3,
+      "description": "Pediatric respiratory kit - placed FIRST because children primarily have respiratory emergencies",
+      "notes": "Kids rarely have cardiac problems - respiratory is primary concern. Oxygen for children is PRIMARY importance.",
+      "image": "/images/pediatric_oxygen.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_exterior_side.jpg",
+        "compartmentView": "/images/locations/cabinet_k_overview.jpg",
+        "equipmentPhoto": "/images/pediatric_oxygen.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 45,
+          "y": 60,
+          "label": "Cabinet K"
+        },
+        "compartmentView": {
+          "x": 50,
+          "y": 70,
+          "label": "Lower Drawer"
+        },
+        "equipmentPhoto": null
+      }
+    },
+    {
+      "id": "trauma_bag_pediatric",
+      "name": "Pediatric Trauma Bag",
+      "aliases": [
+        "peds trauma",
+        "pediatric first-in bag",
+        "child trauma bag",
+        "kids trauma",
+        "peds bag",
+        "pediatric trauma"
+      ],
+      "searchText": "pediatric peds child kids trauma bag first in blue ferno",
+      "location": "Cabinet K - Lower Drawer (BEHIND oxygen kit)",
+      "compartment": "K",
+      "color": "BLUE (FERNO brand)",
+      "critical": true,
+      "criticalRank": 4,
+      "description": "Pediatric trauma supplies",
+      "image": "/images/pediatric_trauma.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_exterior_side.jpg",
+        "compartmentView": "/images/locations/cabinet_k_overview.jpg",
+        "equipmentPhoto": "/images/pediatric_trauma.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 45,
+          "y": 60,
+          "label": "Cabinet K"
+        },
+        "compartmentView": {
+          "x": 50,
+          "y": 70,
+          "label": "Lower Drawer"
+        },
+        "equipmentPhoto": null
+      }
+    },
+    {
+      "id": "intubation_kit",
+      "name": "Intubation Kit",
+      "aliases": [
+        "airway kit",
+        "intubation bag",
+        "intubation",
+        "tube kit",
+        "airway"
+      ],
+      "searchText": "intubation kit airway bag tube advanced airway labeled",
+      "location": "Cabinet K - Top Shelf",
+      "compartment": "K",
+      "color": "Large bag - LABELED",
+      "critical": true,
+      "criticalRank": 5,
+      "description": "Complete intubation equipment for advanced airway management",
+      "image": "/images/intubation_kit.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_exterior_side.jpg",
+        "compartmentView": "/images/locations/cabinet_k_overview.jpg",
+        "equipmentPhoto": "/images/locations/intubation_bag_blue.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 45,
+          "y": 60,
+          "label": "Cabinet K"
+        },
+        "compartmentView": {
+          "x": 50,
+          "y": 30,
+          "label": "Top Shelf"
+        },
+        "equipmentPhoto": null
+      }
+    },
+    {
+      "id": "iv_bag",
+      "name": "IV Kit",
+      "aliases": [
+        "IV access kit",
+        "IV supplies",
+        "IV bag",
+        "intravenous kit",
+        "IV access"
+      ],
+      "searchText": "IV kit intravenous access supplies bag medication drug administration",
+      "location": "Cabinet K - Top Shelf",
+      "compartment": "K",
+      "critical": true,
+      "criticalRank": 6,
+      "description": "Everything to establish IV access - primarily for paramedic drug administration",
+      "notes": "Does NOT contain saline bags",
+      "image": "/images/iv_kit.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_exterior_side.jpg",
+        "compartmentView": "/images/locations/cabinet_k_overview.jpg",
+        "equipmentPhoto": "/images/locations/iv_kit_closeup.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 45,
+          "y": 60,
+          "label": "Cabinet K"
+        },
+        "compartmentView": {
+          "x": 50,
+          "y": 30,
+          "label": "Top Shelf"
+        },
+        "equipmentPhoto": null
+      }
+    },
+    {
+      "id": "portable_aed",
+      "name": "Portable AED",
+      "aliases": [
+        "AED",
+        "defibrillator",
+        "defib",
+        "automated external defibrillator",
+        "heart",
+        "cardiac arrest"
+      ],
+      "searchText": "AED defibrillator defib automated external portable cardiac arrest heart black yellow green",
+      "location": "Cabinet K - Top Shelf (further back)",
+      "compartment": "K",
+      "color": "BLACK bag with RED 'AED' lettering, YELLOW-GREEN reflective strip",
+      "critical": true,
+      "criticalRank": 7,
+      "description": "Automated External Defibrillator for cardiac emergencies",
+      "notes": "Check for GREEN FLASH every 8-10 seconds = charged and ready",
+      "image": "/images/cabinet_d_aed.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_exterior_side.jpg",
+        "compartmentView": "/images/locations/cabinet_k_overview.jpg",
+        "equipmentPhoto": "/images/locations/aed_closeup.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 45,
+          "y": 60,
+          "label": "Cabinet K"
+        },
+        "compartmentView": {
+          "x": 50,
+          "y": 30,
+          "label": "Top Shelf"
+        },
+        "equipmentPhoto": null
+      },
+      "locationSteps": [
+        "Step 1: Go to OUTSIDE of ambulance (driver's side)",
+        "Step 2: Find Cabinet K - main side compartment door",
+        "Step 3: Open cabinet - AED is on TOP SHELF (further back)",
+        "Step 4: Look for BLACK bag with RED 'AED' lettering"
+      ],
+      "quickFind": "Outside ambulance → Cabinet K (side door) → Top shelf (back) → BLACK bag with RED AED letters"
+    },
+    {
+      "id": "drug_box",
+      "name": "Drug Box",
+      "aliases": [
+        "orange box",
+        "medication box",
+        "orange drug box",
+        "meds box",
+        "drugs",
+        "medications",
+        "meds"
+      ],
+      "searchText": "drug box orange medication meds acetaminophen magnesium sulfate non-controlled",
+      "location": "Cabinet J (above Cabinet K, inside ambulance)",
+      "compartment": "J",
+      "color": "ORANGE - very distinctive",
+      "critical": true,
+      "criticalRank": 8,
+      "description": "Contains non-controlled drugs: acetaminophen, magnesium sulfate, etc.",
+      "driverNote": "ORANGE BOX = DRUG BOX. That's all you need to know.",
+      "notes": "Blue tags track drug accountability",
+      "image": "/images/drug_box.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_interior_overview.jpg",
+        "compartmentView": "/images/locations/drug_box_cabinet.jpg",
+        "equipmentPhoto": "/images/locations/drug_box_closeup.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 25,
+          "y": 50,
+          "label": "Cabinet J"
+        },
+        "compartmentView": {
+          "x": 30,
+          "y": 50,
+          "label": "Orange Box"
+        },
+        "equipmentPhoto": null
+      },
+      "locationSteps": [
+        "Step 1: Enter patient compartment through side door",
+        "Step 2: Find Cabinet J - located ABOVE Cabinet K, inside",
+        "Step 3: Open cabinet - look for ORANGE box",
+        "Step 4: Grab the ORANGE BOX - that's the Drug Box"
+      ],
+      "quickFind": "Inside ambulance → Cabinet J (above K) → ORANGE box"
+    },
+    {
+      "id": "portable_suction",
+      "name": "Portable Suction",
+      "aliases": [
+        "suction",
+        "portable suction unit",
+        "battery suction",
+        "suction unit",
+        "suctioning"
+      ],
+      "searchText": "portable suction battery scene suctioning unit",
+      "location": "Cabinet J",
+      "compartment": "J",
+      "critical": true,
+      "criticalRank": 9,
+      "description": "Battery-operated suction for on-scene use",
+      "warning": "CRITICAL: Cord plugged into cigarette lighter at back of cabinet. MUST UNPLUG before removing! Does NOT detach at unit. Like pulling away from gas pump with nozzle in tank!",
+      "notes": "One of THREE suction types on board",
+      "image": "/images/suction.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_interior_overview.jpg",
+        "compartmentView": "/images/locations/drug_box_cabinet.jpg",
+        "equipmentPhoto": "/images/suction.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 25,
+          "y": 50,
+          "label": "Cabinet J"
+        },
+        "compartmentView": {
+          "x": 60,
+          "y": 50,
+          "label": "Suction Unit"
+        },
+        "equipmentPhoto": null
+      },
+      "locationSteps": [
+        "Step 1: Enter patient compartment through side door",
+        "Step 2: Find Cabinet J - located ABOVE Cabinet K, inside",
+        "Step 3: BEFORE grabbing - locate power cord at back of cabinet",
+        "Step 4: UNPLUG cord from cigarette lighter FIRST",
+        "Step 5: Then remove suction unit"
+      ],
+      "quickFind": "Inside ambulance → Cabinet J (above K) → UNPLUG FIRST, then grab unit"
+    },
+    {
+      "id": "glucometer",
+      "name": "Glucometer",
+      "aliases": [
+        "glucose meter",
+        "blood sugar meter",
+        "diabetic meter",
+        "blood glucose",
+        "sugar",
+        "diabetes",
+        "diabetic"
+      ],
+      "searchText": "glucometer glucose meter blood sugar diabetic diabetes black pouch",
+      "location": "Drawer N - Always in exact same spot",
+      "compartment": "N",
+      "color": "Small BLACK box/pouch",
+      "critical": true,
+      "criticalRank": 10,
+      "description": "Checks blood glucose levels in diabetic patients",
+      "driverNote": "Little black box, little black pouch - always in same spot",
+      "image": "/images/glucometer.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_interior_overview.jpg",
+        "compartmentView": "/images/locations/drawer_n_open.jpg",
+        "equipmentPhoto": "/images/glucometer.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 70,
+          "y": 45,
+          "label": "Drawer N"
+        },
+        "compartmentView": {
+          "x": 40,
+          "y": 50,
+          "label": "Black Pouch"
+        },
+        "equipmentPhoto": null
+      },
+      "locationSteps": [
+        "Step 1: Enter patient compartment through side door",
+        "Step 2: Look for Drawer N - located on left wall",
+        "Step 3: Open drawer - Glucometer always in SAME spot",
+        "Step 4: Grab small BLACK box/pouch"
+      ],
+      "quickFind": "Inside ambulance → Drawer N (left wall) → Small black box/pouch"
+    },
+    {
+      "id": "narcan",
+      "name": "Narcan",
+      "aliases": [
+        "naloxone",
+        "opioid reversal",
+        "overdose medication",
+        "narcan spray",
+        "overdose",
+        "opioid"
+      ],
+      "searchText": "narcan naloxone opioid overdose reversal medication nasal atomizer syringe",
+      "location": "Drawer N - readily accessible, 3 on board",
+      "compartment": "N",
+      "critical": true,
+      "criticalRank": 11,
+      "description": "Opioid overdose reversal medication - delivered intranasally",
+      "warning": "CRITICAL: Nasal ATOMIZER must come with syringe - they are TAPED TOGETHER. Syringe alone is useless! Atomizer screws onto syringe tip.",
+      "notes": "Old packaging: orange container. New packaging: clear tube (can see syringe). Additional Narcan in Drug Box but Drawer N is fastest.",
+      "image": "/images/locations/narcan_syringe_closeup.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_interior_overview.jpg",
+        "compartmentView": "/images/locations/drawer_n_contents.jpg",
+        "equipmentPhoto": "/images/locations/narcan_syringe_closeup.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 70,
+          "y": 45,
+          "label": "Drawer N"
+        },
+        "compartmentView": {
+          "x": 55,
+          "y": 40,
+          "label": "Clear Tubes"
+        },
+        "equipmentPhoto": null
+      },
+      "locationSteps": [
+        "Step 1: Enter patient compartment through side door",
+        "Step 2: Look for Drawer N - located on left wall",
+        "Step 3: Open drawer - Narcan in clear tubes or orange containers",
+        "Step 4: GRAB BOTH syringe AND atomizer (taped together)"
+      ],
+      "quickFind": "Inside ambulance → Drawer N (left wall) → Clear tubes or orange containers"
+    },
+    {
+      "id": "spare_oxygen_tanks",
+      "name": "Spare Oxygen Tanks",
+      "aliases": [
+        "O2 tanks",
+        "spare O2",
+        "backup oxygen",
+        "oxygen cylinders",
+        "oxygen bottles",
+        "spare tanks",
+        "extra oxygen"
+      ],
+      "searchText": "spare oxygen O2 tanks bottles cylinders backup extra matheson green aluminum",
+      "location": "Next to steps on side entry of ambulance",
+      "compartment": "oxygen_storage",
+      "critical": true,
+      "criticalRank": 12,
+      "description": "2 spare tanks in holder, plus 1 each in adult and pediatric oxygen kits (4 total)",
+      "warning": "SQUEEZE brackets together to release tank (counterintuitive). At 15 L/min, tank only lasts few minutes.",
+      "notes": "New Matheson tanks: green top, aluminum, single valve operation. Old steel tanks: two-step process - open valve first, then set flow.",
+      "image": "/images/oxygen_tanks.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_exterior_side.jpg",
+        "compartmentView": "/images/locations/oxygen_compartment.jpg",
+        "equipmentPhoto": "/images/locations/oxygen_tanks_closeup.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 60,
+          "y": 70,
+          "label": "O2 Compartment"
+        },
+        "compartmentView": {
+          "x": 50,
+          "y": 60,
+          "label": "Tank Holder"
+        },
+        "equipmentPhoto": null
+      },
+      "locationSteps": [
+        "Step 1: Go to SIDE of ambulance",
+        "Step 2: Find side entry door (with steps)",
+        "Step 3: Look NEXT TO the steps - tanks are in holder",
+        "Step 4: SQUEEZE brackets together to release tank"
+      ],
+      "quickFind": "Side of ambulance → Next to entry steps → SQUEEZE brackets to release"
+    },
+    {
+      "id": "lifepak_15",
+      "name": "LifePak 15",
+      "aliases": [
+        "life pack",
+        "monitor",
+        "cardiac monitor",
+        "lifepak",
+        "life pak",
+        "heart monitor",
+        "vitals"
+      ],
+      "searchText": "lifepak life pack 15 monitor cardiac vitals EKG pulse ox blood pressure expensive",
+      "location": "Mounted position in patient compartment - obvious location",
+      "compartment": "lifepak_mount",
+      "critical": true,
+      "criticalRank": 13,
+      "description": "Cardiac monitor/defibrillator - $42,000-$62,000 - HANDLE WITH CARE",
+      "driverNote": "Press GREEN button ONCE briefly when requested to turn on. Do NOT shut off after hospital - EMT needs code summary printout.",
+      "notes": "Carry with sensitive side (screen) against body. Has extra BP cuffs and batteries on other side. Must press AND HOLD to shut off (prevents accidental shutdown).",
+      "image": "/images/lifepak_mounted.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_interior_overview.jpg",
+        "compartmentView": "/images/locations/lifepak_closeup.jpg",
+        "equipmentPhoto": "/images/locations/lifepak_closeup.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 35,
+          "y": 55,
+          "label": "LifePak Mount"
+        },
+        "compartmentView": {
+          "x": 35,
+          "y": 55,
+          "label": "Mounted Here"
+        },
+        "equipmentPhoto": null
+      },
+      "locationSteps": [
+        "Step 1: Enter patient compartment through side door",
+        "Step 2: Look for mounted unit - obvious location on wall",
+        "Step 3: Press GREEN button ONCE briefly to turn on",
+        "Step 4: Carry with screen facing your body (protect it)"
+      ],
+      "quickFind": "Inside ambulance → Mounted on wall → Press GREEN button to turn on"
+    },
+    {
+      "id": "lucas_device",
+      "name": "LUCAS Device",
+      "aliases": [
+        "LUCAS",
+        "CPR machine",
+        "mechanical CPR",
+        "automatic CPR",
+        "lucas cpr",
+        "chest compressions"
+      ],
+      "searchText": "lucas device CPR machine mechanical automatic chest compressions MC2",
+      "location": "MC2 back seat - secured with seatbelt only",
+      "compartment": "mc2",
+      "critical": true,
+      "criticalRank": 13,
+      "description": "Mechanical CPR device - delivers consistent chest compressions",
+      "notes": "Hit seatbelt release to access. Purchased by Town of Harpswell. MC2 carries it because they're usually first on scene (OBI is 23 minutes away).",
+      "image": "/images/lucas_device.jpg",
+      "images": {
+        "ambulancePosition": "/images/lucas_device.jpg",
+        "compartmentView": "/images/lucas_device.jpg",
+        "equipmentPhoto": "/images/lucas_device.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 70,
+          "y": 50,
+          "label": "MC2 Vehicle"
+        },
+        "compartmentView": {
+          "x": 50,
+          "y": 50,
+          "label": "Back Seat"
+        },
+        "equipmentPhoto": null
+      }
+    },
+    {
+      "id": "saline_bags",
+      "name": "Saline Bags",
+      "aliases": [
+        "IV saline",
+        "normal saline",
+        "NS",
+        "saline solution",
+        "IV fluid",
+        "saline",
+        "fluids",
+        "IV fluids"
+      ],
+      "searchText": "saline bags IV fluid normal NS solution hydration warm heated",
+      "location": "Cabinet D - 6 bags available",
+      "compartment": "D",
+      "description": "IV fluid for hydration - moved from K for easier access",
+      "warning": "MUST grab PRIMARY SET (IV tubing) with saline bag - bag is USELESS without tubing!",
+      "notes": "Warm saline in heated IV warmer during winter for hypothermic patients. Cabinet doors fold DOWN for easier access.",
+      "image": "/images/compartments/compartment-d-ob-linens.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_interior_overview.jpg",
+        "compartmentView": "/images/compartments/compartment-d-ob-linens.jpg",
+        "equipmentPhoto": "/images/compartments/compartment-d-ob-linens.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 30,
+          "y": 50,
+          "label": "Cabinet D"
+        },
+        "compartmentView": {
+          "x": 50,
+          "y": 50,
+          "label": "Saline Bags"
+        },
+        "equipmentPhoto": null
+      }
+    },
+    {
+      "id": "primary_sets",
+      "name": "Primary Sets",
+      "aliases": [
+        "IV tubing",
+        "IV administration set",
+        "drip set",
+        "IV line",
+        "tubing"
+      ],
+      "searchText": "primary sets IV tubing administration drip line saline",
+      "location": "Cabinet D - right next to saline bags",
+      "compartment": "D",
+      "description": "IV tubing with needle for saline bags - required to administer saline",
+      "image": "/images/primary_sets.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_interior_overview.jpg",
+        "compartmentView": "/images/primary_sets.jpg",
+        "equipmentPhoto": "/images/primary_sets.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 30,
+          "y": 50,
+          "label": "Cabinet D"
+        },
+        "compartmentView": {
+          "x": 50,
+          "y": 50,
+          "label": "IV Tubing"
+        },
+        "equipmentPhoto": null
+      }
+    },
+    {
+      "id": "onboard_suction",
+      "name": "Onboard Suction",
+      "aliases": [
+        "main suction",
+        "built-in suction",
+        "vacuum suction",
+        "stretcher suction"
+      ],
+      "searchText": "onboard main built-in vacuum suction stretcher transport",
+      "location": "Built into patient compartment - wall-mounted unit",
+      "compartment": "onboard",
+      "description": "Vacuum pump driven suction for patients on stretcher during transport",
+      "notes": "Wall-mounted in patient compartment. Always available when patient is on stretcher.",
+      "image": "/images/locations/onboard_suction_area.jpg",
+      "images": {
+        "ambulancePosition": "/images/locations/ambulance_interior_overview.jpg",
+        "compartmentView": "/images/locations/onboard_suction_area.jpg",
+        "equipmentPhoto": "/images/locations/onboard_suction_area.jpg"
+      },
+      "goldDots": {
+        "ambulancePosition": {
+          "x": 15,
+          "y": 45,
+          "label": "Suction Panel"
+        },
+        "compartmentView": {
+          "x": 40,
+          "y": 35,
+          "label": "Wall Unit"
+        },
+        "equipmentPhoto": null
+      },
+      "locationSteps": [
+        "Step 1: Enter patient compartment",
+        "Step 2: Look at LEFT WALL near head of stretcher",
+        "Step 3: Wall-mounted suction unit with green components",
+        "Step 4: Already connected - ready to use"
+      ],
+      "quickFind": "Inside ambulance → Left wall → Green wall-mounted unit"
+    },
+    {
+      "id": "bandaids",
+      "name": "Bandaids",
+      "aliases": [
+        "band-aids",
+        "band aids",
+        "adhesive bandages",
+        "plasters"
+      ],
+      "searchText": "bandaids band aids adhesive bandages plasters small wounds",
+      "location": "Compartment A - Basic Supplies",
+      "compartment": "A",
+      "description": "Adhesive bandages for small wounds",
+      "image": "/images/compartments/compartment-a-supplies.jpg",
+      "quickFind": "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      "id": "cold_packs",
+      "name": "Cold Packs",
+      "aliases": [
+        "ice packs",
+        "instant cold",
+        "cold compress"
+      ],
+      "searchText": "cold packs ice instant compress cooling",
+      "location": "Compartment A - Basic Supplies",
+      "compartment": "A",
+      "description": "Instant cold packs for swelling and injuries",
+      "image": "/images/compartments/compartment-a-supplies.jpg",
+      "quickFind": "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      "id": "hot_packs",
+      "name": "Hot Packs",
+      "aliases": [
+        "heat packs",
+        "instant heat",
+        "warm packs"
+      ],
+      "searchText": "hot packs heat instant warm warming",
+      "location": "Compartment A - Basic Supplies",
+      "compartment": "A",
+      "description": "Instant heat packs",
+      "image": "/images/compartments/compartment-a-supplies.jpg",
+      "quickFind": "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      "id": "triangle_bandages",
+      "name": "Triangle Bandages",
+      "aliases": [
+        "triangular bandage",
+        "sling",
+        "cravat"
+      ],
+      "searchText": "triangle triangular bandages sling cravat arm sling",
+      "location": "Compartment A - Basic Supplies",
+      "compartment": "A",
+      "description": "Triangle bandages for slings and cravats",
+      "image": "/images/compartments/compartment-a-supplies.jpg",
+      "quickFind": "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      "id": "gauze",
+      "name": "Gauze",
+      "aliases": [
+        "gauze pads",
+        "gauze dressings",
+        "gauze rolls"
+      ],
+      "searchText": "gauze pads dressings rolls wound care",
+      "location": "Compartment A - Basic Supplies",
+      "compartment": "A",
+      "description": "Gauze for wound care",
+      "image": "/images/compartments/compartment-a-supplies.jpg",
+      "quickFind": "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      "id": "kling",
+      "name": "Kling",
+      "aliases": [
+        "kling bandage",
+        "kerlix",
+        "roller gauze",
+        "conforming bandage"
+      ],
+      "searchText": "kling kerlix roller gauze conforming bandage wrap",
+      "location": "Compartment A - Basic Supplies",
+      "compartment": "A",
+      "description": "Conforming roller bandage for securing dressings",
+      "image": "/images/compartments/compartment-a-supplies.jpg",
+      "quickFind": "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      "id": "sam_splints",
+      "name": "SAM Splints",
+      "aliases": [
+        "sam splint",
+        "malleable splint",
+        "aluminum splint"
+      ],
+      "searchText": "SAM splint malleable aluminum foam splint fracture",
+      "location": "Compartment A - Basic Supplies",
+      "compartment": "A",
+      "description": "SAM malleable splints for fractures",
+      "image": "/images/compartments/compartment-a-supplies.jpg",
+      "quickFind": "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      "id": "flexall_splints",
+      "name": "Flex-All Splints",
+      "aliases": [
+        "flexall",
+        "flex all splint",
+        "cardboard splint"
+      ],
+      "searchText": "flex all flexall splint cardboard fracture immobilization",
+      "location": "Compartment A - Basic Supplies",
+      "compartment": "A",
+      "description": "Flex-All splints for fracture immobilization",
+      "image": "/images/compartments/compartment-a-supplies.jpg",
+      "quickFind": "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      "id": "tocs",
+      "name": "T.O.C.S. (Chest Seal)",
+      "aliases": [
+        "TOCS",
+        "occlusive dressing",
+        "chest seal",
+        "occlusive chest seal"
+      ],
+      "searchText": "TOCS occlusive chest seal dressing pneumothorax sucking wound",
+      "location": "Compartment A - Basic Supplies",
+      "compartment": "A",
+      "critical": true,
+      "description": "Occlusive chest seal for sucking chest wounds",
+      "image": "/images/compartments/compartment-a-supplies.jpg",
+      "quickFind": "Outside ambulance → Compartment A → Basic Supplies area"
+    },
+    {
+      "id": "burn_dressings",
+      "name": "Burn Dressings",
+      "aliases": [
+        "burn pads",
+        "burn sheets",
+        "water-jel"
+      ],
+      "searchText": "burn dressings pads sheets water-jel thermal burns",
+      "location": "Compartment B - Trauma & Burn Supplies",
+      "compartment": "B",
+      "description": "Specialized dressings for burn injuries",
+      "image": "/images/compartments/compartment-b-trauma.jpg",
+      "quickFind": "Outside ambulance → Compartment B → Trauma & Burn area"
+    },
+    {
+      "id": "abd_pads",
+      "name": "ABD Pads",
+      "aliases": [
+        "abdominal pads",
+        "combine pads",
+        "trauma pads",
+        "large pads"
+      ],
+      "searchText": "ABD abdominal pads combine trauma large absorbent dressing",
+      "location": "Compartment B - Trauma & Burn Supplies",
+      "compartment": "B",
+      "description": "Large absorbent dressings for major wounds",
+      "image": "/images/compartments/compartment-b-trauma.jpg",
+      "quickFind": "Outside ambulance → Compartment B → Trauma & Burn area"
+    },
+    {
+      "id": "multitrauma_dressing",
+      "name": "Multi-Trauma Dressing",
+      "aliases": [
+        "trauma dressing",
+        "MTD",
+        "10x30"
+      ],
+      "searchText": "multi trauma dressing MTD 10x30 large wound coverage",
+      "location": "Compartment B - Trauma & Burn Supplies",
+      "compartment": "B",
+      "description": "Large multi-trauma dressings for extensive wounds",
+      "image": "/images/compartments/compartment-b-trauma.jpg",
+      "quickFind": "Outside ambulance → Compartment B → Trauma & Burn area"
+    },
+    {
+      "id": "eye_pads",
+      "name": "Eye Pads",
+      "aliases": [
+        "eye dressings",
+        "eye patches"
+      ],
+      "searchText": "eye pads dressings patches ocular injury",
+      "location": "Compartment B - Trauma & Burn Supplies",
+      "compartment": "B",
+      "description": "Sterile eye pads for eye injuries",
+      "image": "/images/compartments/compartment-b-trauma.jpg",
+      "quickFind": "Outside ambulance → Compartment B → Trauma & Burn area"
+    },
+    {
+      "id": "morgan_lens",
+      "name": "Morgan Lens",
+      "aliases": [
+        "eye irrigation",
+        "eye wash lens"
+      ],
+      "searchText": "morgan lens eye irrigation wash chemical burn flush",
+      "location": "Compartment B - Trauma & Burn Supplies",
+      "compartment": "B",
+      "description": "Morgan Lens for continuous eye irrigation",
+      "image": "/images/compartments/compartment-b-trauma.jpg",
+      "quickFind": "Outside ambulance → Compartment B → Trauma & Burn area"
+    },
+    {
+      "id": "hemostatic_dressings",
+      "name": "Hemostatic Dressings",
+      "aliases": [
+        "quikclot",
+        "celox",
+        "hemostatic gauze",
+        "bleeding control"
+      ],
+      "searchText": "hemostatic dressings quikclot celox gauze bleeding control hemorrhage",
+      "location": "Compartment B - Trauma & Burn Supplies",
+      "compartment": "B",
+      "critical": true,
+      "description": "Hemostatic agents for severe bleeding control",
+      "image": "/images/compartments/compartment-b-trauma.jpg",
+      "quickFind": "Outside ambulance → Compartment B → Trauma & Burn area"
+    },
+    {
+      "id": "cervical_collars",
+      "name": "Cervical Collars",
+      "aliases": [
+        "c-collar",
+        "neck collar",
+        "c collar",
+        "cervical spine collar"
+      ],
+      "searchText": "cervical collar c-collar neck collar spine immobilization",
+      "location": "Compartment C - Cervical Collars & Saline",
+      "compartment": "C",
+      "critical": true,
+      "description": "Cervical spine immobilization collars",
+      "image": "/images/compartments/compartment-c-collars.jpg",
+      "quickFind": "Outside ambulance → Compartment C → Collars area"
+    },
+    {
+      "id": "ob_kit",
+      "name": "OB Kit",
+      "aliases": [
+        "obstetrics kit",
+        "delivery kit",
+        "childbirth kit",
+        "curaplex OB"
+      ],
+      "searchText": "OB obstetrics delivery kit childbirth curaplex labor",
+      "location": "Compartment D (OB) - Inside glass cabinet",
+      "compartment": "OB",
+      "critical": true,
+      "description": "Complete obstetrics kit for emergency delivery",
+      "image": "/images/compartments/compartment-d-ob-linens.jpg",
+      "quickFind": "Inside ambulance → Glass cabinet → OB Kit"
+    },
+    {
+      "id": "emesis_bags",
+      "name": "Emesis Bags",
+      "aliases": [
+        "vomit bags",
+        "barf bags",
+        "sick bags"
+      ],
+      "searchText": "emesis bags vomit barf sick nausea",
+      "location": "Compartment D (OB) - Inside glass cabinet",
+      "compartment": "OB",
+      "description": "Emesis bags for nausea/vomiting",
+      "image": "/images/compartments/compartment-d-ob-linens.jpg",
+      "quickFind": "Inside ambulance → Glass cabinet → Near linens"
+    },
+    {
+      "id": "blankets",
+      "name": "Blankets",
+      "aliases": [
+        "linens",
+        "sheets",
+        "patient blankets"
+      ],
+      "searchText": "blankets linens sheets patient warming hypothermia",
+      "location": "Compartment D (OB) - Inside glass cabinet",
+      "compartment": "OB",
+      "description": "Patient blankets for warmth and comfort",
+      "image": "/images/compartments/compartment-d-ob-linens.jpg",
+      "quickFind": "Inside ambulance → Glass cabinet → Linens area"
+    },
+    {
+      "id": "ppe_supplies",
+      "name": "PPE Supplies",
+      "aliases": [
+        "personal protective equipment",
+        "protective gear",
+        "PPE"
+      ],
+      "searchText": "PPE personal protective equipment gear infection control",
+      "location": "Compartment F - Inside upper cabinet",
+      "compartment": "F",
+      "description": "Personal Protective Equipment supplies",
+      "image": "/images/compartments/compartment-f-ppe.jpg",
+      "quickFind": "Inside ambulance → Upper cabinet → PPE area"
+    },
+    {
+      "id": "gowns",
+      "name": "Gowns",
+      "aliases": [
+        "isolation gowns",
+        "protective gowns"
+      ],
+      "searchText": "gowns isolation protective PPE infection control",
+      "location": "Compartment F - PPE Supplies",
+      "compartment": "F",
+      "description": "Protective gowns for infection control",
+      "image": "/images/compartments/compartment-f-ppe.jpg",
+      "quickFind": "Inside ambulance → Compartment F → PPE area"
+    },
+    {
+      "id": "n95_masks",
+      "name": "N95 Masks",
+      "aliases": [
+        "N95",
+        "respirator",
+        "N95 respirator"
+      ],
+      "searchText": "N95 masks respirator respiratory protection airborne",
+      "location": "Compartment F - PPE Supplies",
+      "compartment": "F",
+      "description": "N95 respirator masks for airborne protection",
+      "image": "/images/compartments/compartment-f-ppe.jpg",
+      "quickFind": "Inside ambulance → Compartment F → PPE area"
+    },
+    {
+      "id": "surgical_masks",
+      "name": "Surgical Masks",
+      "aliases": [
+        "face masks",
+        "procedure masks"
+      ],
+      "searchText": "surgical masks face procedure masks droplet protection",
+      "location": "Compartment F - PPE Supplies",
+      "compartment": "F",
+      "description": "Surgical face masks",
+      "image": "/images/compartments/compartment-f-ppe.jpg",
+      "quickFind": "Inside ambulance → Compartment F → PPE area"
+    },
+    {
+      "id": "protective_eyewear",
+      "name": "Protective Eyewear",
+      "aliases": [
+        "safety glasses",
+        "goggles",
+        "eye protection"
+      ],
+      "searchText": "protective eyewear safety glasses goggles eye protection splash",
+      "location": "Compartment F - PPE Supplies",
+      "compartment": "F",
+      "description": "Protective eyewear for splash protection",
+      "image": "/images/compartments/compartment-f-ppe.jpg",
+      "quickFind": "Inside ambulance → Compartment F → PPE area"
+    },
+    {
+      "id": "face_shields",
+      "name": "Face Shields",
+      "aliases": [
+        "full face shield",
+        "face visor"
+      ],
+      "searchText": "face shields visor full face protection splash",
+      "location": "Compartment F - PPE Supplies",
+      "compartment": "F",
+      "description": "Full face shields for protection",
+      "image": "/images/compartments/compartment-f-ppe.jpg",
+      "quickFind": "Inside ambulance → Compartment F → PPE area"
+    },
+    {
+      "id": "airway_supplies",
+      "name": "Airway Supplies",
+      "aliases": [
+        "airway equipment",
+        "respiratory supplies"
+      ],
+      "searchText": "airway supplies equipment respiratory management",
+      "location": "Compartment G - Glass cabinet labeled 'AIRWAY SUPPLIES'",
+      "compartment": "G",
+      "description": "Complete airway management supplies",
+      "image": "/images/compartments/compartment-g-airway.jpg",
+      "quickFind": "Inside ambulance → Glass cabinet → 'AIRWAY SUPPLIES' label"
+    },
+    {
+      "id": "nasal_airways",
+      "name": "Nasal Airways (NPA)",
+      "aliases": [
+        "NPA",
+        "nasal trumpet",
+        "nasopharyngeal airway"
+      ],
+      "searchText": "nasal airways NPA trumpet nasopharyngeal airway",
+      "location": "Compartment G - Airway Supplies cabinet",
+      "compartment": "G",
+      "description": "Nasopharyngeal airways (NPA) - various sizes",
+      "image": "/images/compartments/compartment-g-airway.jpg",
+      "quickFind": "Inside ambulance → Compartment G → Airway cabinet"
+    },
+    {
+      "id": "oral_airways",
+      "name": "Oral Airways (OPA)",
+      "aliases": [
+        "OPA",
+        "oropharyngeal airway",
+        "guedel airway"
+      ],
+      "searchText": "oral airways OPA oropharyngeal guedel airway",
+      "location": "Compartment G - Airway Supplies cabinet",
+      "compartment": "G",
+      "description": "Oropharyngeal airways (OPA) - various sizes",
+      "image": "/images/compartments/compartment-g-airway.jpg",
+      "quickFind": "Inside ambulance → Compartment G → Airway cabinet"
+    },
+    {
+      "id": "king_airways",
+      "name": "King Airways",
+      "aliases": [
+        "king LT",
+        "supraglottic airway",
+        "King tube"
+      ],
+      "searchText": "king airways LT supraglottic tube advanced airway",
+      "location": "Compartment G - Airway Supplies cabinet",
+      "compartment": "G",
+      "critical": true,
+      "description": "King supraglottic airways for advanced airway management",
+      "image": "/images/compartments/compartment-g-airway.jpg",
+      "quickFind": "Inside ambulance → Compartment G → Airway cabinet"
+    },
+    {
+      "id": "non_rebreather_masks",
+      "name": "Non-Rebreather Masks",
+      "aliases": [
+        "NRB",
+        "high flow mask",
+        "oxygen mask",
+        "NRM"
+      ],
+      "searchText": "non rebreather masks NRB NRM high flow oxygen mask",
+      "location": "Compartment G - Airway Supplies cabinet",
+      "compartment": "G",
+      "description": "Non-rebreather oxygen masks for high flow O2",
+      "image": "/images/compartments/compartment-g-airway.jpg",
+      "quickFind": "Inside ambulance → Compartment G → Airway cabinet"
+    },
+    {
+      "id": "nasal_cannulas",
+      "name": "Nasal Cannulas",
+      "aliases": [
+        "nasal prongs",
+        "NC",
+        "oxygen cannula"
+      ],
+      "searchText": "nasal cannula NC prongs oxygen low flow",
+      "location": "Compartment G - Airway Supplies cabinet",
+      "compartment": "G",
+      "description": "Nasal cannulas for oxygen delivery",
+      "image": "/images/compartments/compartment-g-airway.jpg",
+      "quickFind": "Inside ambulance → Compartment G → Airway cabinet"
+    },
+    {
+      "id": "nebulizers",
+      "name": "Nebulizers",
+      "aliases": [
+        "nebulizer mask",
+        "aerosol mask",
+        "SVN"
+      ],
+      "searchText": "nebulizer nebulizers mask aerosol SVN breathing treatment",
+      "location": "Compartment G - Airway Supplies cabinet",
+      "compartment": "G",
+      "description": "Nebulizer masks for medication delivery",
+      "image": "/images/compartments/compartment-g-airway.jpg",
+      "quickFind": "Inside ambulance → Compartment G → Airway cabinet"
+    },
+    {
+      "id": "end_tidal_co2",
+      "name": "End Tidal CO2",
+      "aliases": [
+        "ETCO2",
+        "capnography",
+        "CO2 detector"
+      ],
+      "searchText": "end tidal CO2 ETCO2 capnography detector waveform",
+      "location": "Compartment G - Airway Supplies cabinet",
+      "compartment": "G",
+      "description": "End tidal CO2 detection for airway confirmation",
+      "image": "/images/compartments/compartment-g-airway.jpg",
+      "quickFind": "Inside ambulance → Compartment G → Airway cabinet"
+    },
+    {
+      "id": "bvm",
+      "name": "Bag Valve Mask (BVM)",
+      "aliases": [
+        "BVM",
+        "ambu bag",
+        "bag mask",
+        "manual resuscitator"
+      ],
+      "searchText": "BVM bag valve mask ambu manual resuscitator ventilation",
+      "location": "Compartment H - Glass cabinet labeled 'BAG VALVE MASKS'",
+      "compartment": "H",
+      "critical": true,
+      "description": "Bag valve masks for manual ventilation",
+      "image": "/images/compartments/compartment-h-bvm.jpg",
+      "quickFind": "Inside ambulance → Glass cabinet → 'BAG VALVE MASKS' label"
+    },
+    {
+      "id": "bvm_face_masks",
+      "name": "BVM Face Masks",
+      "aliases": [
+        "face masks for BVM",
+        "ventilation masks"
+      ],
+      "searchText": "BVM face masks ventilation masks sizes",
+      "location": "Compartment H - With BVM equipment",
+      "compartment": "H",
+      "description": "Face masks for BVM - various sizes",
+      "image": "/images/compartments/compartment-h-bvm.jpg",
+      "quickFind": "Inside ambulance → Compartment H → With BVM"
+    },
+    {
+      "id": "suction_catheters",
+      "name": "Suction Catheters",
+      "aliases": [
+        "yankauer",
+        "suction tip",
+        "tonsil tip"
+      ],
+      "searchText": "suction catheters yankauer tip tonsil",
+      "location": "Compartment H - With BVM/Ventilation equipment",
+      "compartment": "H",
+      "description": "Suction catheters including Yankauer tips",
+      "image": "/images/compartments/compartment-h-bvm.jpg",
+      "quickFind": "Inside ambulance → Compartment H → With ventilation gear"
+    }
+  ],
+  "compartments": {
+    "K": {
+      "name": "Cabinet K",
+      "description": "Main critical equipment - 7 of 12 critical items",
+      "access": "OUTSIDE door on ambulance side (primary on-scene access) or glass doors from inside"
+    },
+    "J": {
+      "name": "Cabinet J",
+      "description": "Above Cabinet K inside ambulance",
+      "access": "Inside patient compartment"
+    },
+    "N": {
+      "name": "Drawer N",
+      "description": "EMT medications and diagnostic equipment",
+      "access": "Inside patient compartment"
+    },
+    "D": {
+      "name": "Cabinet D",
+      "description": "Saline and IV supplies",
+      "access": "Inside - walk around foot of stretcher. Doors fold DOWN for easier access."
+    },
+    "oxygen_storage": {
+      "name": "Oxygen Tank Storage",
+      "description": "Spare oxygen tanks",
+      "access": "Next to steps on side entry"
+    },
+    "lifepak_mount": {
+      "name": "LifePak Mount",
+      "description": "Cardiac monitor station",
+      "access": "Mounted in patient compartment - obvious position"
+    },
+    "mc2": {
+      "name": "MC2 Vehicle",
+      "description": "Chase vehicle",
+      "access": "Back/passenger seat"
+    },
+    "A": {
+      "name": "Compartment A",
+      "description": "Basic Supplies - bandages, splints, cold/hot packs",
+      "access": "Outside - side compartment",
+      "image": "/images/compartments/compartment-a-supplies.jpg",
+      "contents": [
+        "Bandaids",
+        "Cold Packs",
+        "Hot Packs",
+        "Triangle Bandages",
+        "Gauze",
+        "Kling",
+        "SAM Splints",
+        "Flex-All Splints",
+        "Gloves",
+        "Stethoscope",
+        "T.O.C.S. (Occlusive Chest Seal)"
+      ]
+    },
+    "B": {
+      "name": "Compartment B",
+      "description": "Trauma & Burn Supplies",
+      "access": "Outside - side compartment",
+      "image": "/images/compartments/compartment-b-trauma.jpg",
+      "contents": [
+        "Stuffed Animals",
+        "Burn Dressings",
+        "ABD Pads",
+        "Multi-Trauma Dressing",
+        "Eye Pads",
+        "Morgan Lens",
+        "Hemostatic Dressings"
+      ]
+    },
+    "C": {
+      "name": "Compartment C",
+      "description": "Cervical Collars & Saline",
+      "access": "Outside - side compartment",
+      "image": "/images/compartments/compartment-c-collars.jpg",
+      "contents": [
+        "Cervical Collars",
+        "Saline",
+        "Stretcher Battery"
+      ]
+    },
+    "OB": {
+      "name": "Compartment D (OB/Linens)",
+      "description": "OB Kit, Linens, Emesis Bags",
+      "access": "Inside - glass cabinet",
+      "image": "/images/compartments/compartment-d-ob-linens.jpg",
+      "contents": [
+        "OB Kit (Curaplex)",
+        "Emesis Bags",
+        "Linens",
+        "Sharps Container",
+        "Blankets"
+      ]
+    },
+    "E": {
+      "name": "Compartment E",
+      "description": "Protocols & Reference Materials",
+      "access": "Inside - cabinet with lock",
+      "image": "/images/compartments/compartment-e-protocols.jpg",
+      "contents": [
+        "ME EMS Protocols",
+        "Drug Log",
+        "LIFEPAK 15 Manual",
+        "SCBA Binder",
+        "LVAD Info"
+      ]
+    },
+    "F": {
+      "name": "Compartment F",
+      "description": "PPE Supplies",
+      "access": "Inside - upper cabinet",
+      "image": "/images/compartments/compartment-f-ppe.jpg",
+      "contents": [
+        "Gowns",
+        "N95 Masks",
+        "Surgical Masks",
+        "Protective Eyewear",
+        "Face Shields"
+      ]
+    },
+    "G": {
+      "name": "Compartment G",
+      "description": "Airway Supplies",
+      "access": "Inside - glass cabinet with 'AIRWAY SUPPLIES' label",
+      "image": "/images/compartments/compartment-g-airway.jpg",
+      "contents": [
+        "Nasal Airways (NPA)",
+        "Oral Airways (OPA)",
+        "King Airways",
+        "Tube Holders",
+        "CO2 Adapters",
+        "Non-Rebreather Masks",
+        "End Tidal CO2",
+        "Adult Oxygen Nasal Cannulas",
+        "Nebulizers"
+      ]
+    },
+    "H": {
+      "name": "Compartment H",
+      "description": "BVM & Ventilation",
+      "access": "Inside - glass cabinet with 'BAG VALVE MASKS' label",
+      "image": "/images/compartments/compartment-h-bvm.jpg",
+      "contents": [
+        "Bag Valve Masks (BVM)",
+        "Face Masks for BVM",
+        "Suction Catheters",
+        "Suction Tubing"
+      ]
+    }
+  }
+}

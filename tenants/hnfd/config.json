@@ -1,0 +1,22 @@
+{
+  "id": "hnfd",
+  "name": "Harpswell Neck Fire & Rescue",
+  "shortName": "HNFR RESCUE",
+  "unit": "R7",
+  "logo": "/images/hnfr-logo.png",
+  "splash": {
+    "image": "/images/splash-ambulance.jpg",
+    "title": "HARPSWELL NECK",
+    "subtitle": "FIRE & RESCUE",
+    "tagline": "Equipment Finder"
+  },
+  "theme": {
+    "primary": "#dc2626",
+    "accent": "#FFD700",
+    "background": "#111111"
+  },
+  "contact": {
+    "station": "Harpswell Neck Fire Department",
+    "address": "Harpswell, Maine"
+  }
+}
