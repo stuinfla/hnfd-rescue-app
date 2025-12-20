@@ -1,9 +1,9 @@
 {
-  "version": "2.9.5",
+  "version": "2.9.6",
   "build": "2025-12-20",
   "changelog": [
-    "FIX: Voice search now works in PWA (home screen) mode",
-    "FIX: Removed incorrect PWA speech blocking",
-    "Mic permission persists after first grant"
+    "FIX: Voice search works in PWA mode",
+    "FIX: Auto-update without prompts",
+    "FIX: Location guide shows FULL images"
   ]
 }

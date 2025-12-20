@@ -759,7 +759,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.9.5';
+const APP_VERSION = '2.9.6';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
@@ -1668,6 +1668,7 @@ function showLocationGuide(itemId) {
   imgContainer.className = 'guide-image-container';
   const img = document.createElement('img');
   img.id = 'guide-image';
+  img.className = 'guide-image'; // CRITICAL: Apply CSS class for object-fit: contain
   img.src = guideSteps[0].url;
   img.alt = 'Location guide';
   const dot = document.createElement('div');
@@ -3066,25 +3067,25 @@ async function checkForUpdates() {
     const data = await response.json();
 
     if (data.version !== APP_VERSION) {
-      statusEl.innerHTML = `<span style="color: var(--yellow-400);">⚠️ New version v${data.version} available!</span>`;
+      statusEl.innerHTML = `<span style="color: var(--green-500);">🔄 Updating to v${data.version}...</span>`;
 
-      // Show update prompt
-      if (confirm(`Update available! (v${data.version})\n\nWould you like to reload to get the latest version?`)) {
-        // Clear service worker cache and reload
-        if ('serviceWorker' in navigator) {
-          const registration = await navigator.serviceWorker.ready;
-          await registration.unregister();
-        }
+      // AUTO-UPDATE: Don't ask, just do it
+      console.log(`[Update] Auto-updating from v${APP_VERSION} to v${data.version}`);
 
-        // Clear caches
-        if ('caches' in window) {
-          const cacheNames = await caches.keys();
-          await Promise.all(cacheNames.map(name => caches.delete(name)));
-        }
-
-        // Force reload
-        window.location.reload(true);
+      // Clear service worker cache and reload
+      if ('serviceWorker' in navigator) {
+        const registration = await navigator.serviceWorker.ready;
+        await registration.unregister();
       }
+
+      // Clear caches
+      if ('caches' in window) {
+        const cacheNames = await caches.keys();
+        await Promise.all(cacheNames.map(name => caches.delete(name)));
+      }
+
+      // Force reload
+      window.location.reload(true);
     } else {
       statusEl.innerHTML = '<span style="color: var(--green-500);">✓ You\'re on the latest version!</span>';
       hapticFeedback('success');
