@@ -1,0 +1,104 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - img "HNFR Logo" [ref=e4]
+      - generic [ref=e5]:
+        - heading "HNFR RESCUE" [level=1] [ref=e6]
+        - text: v2.9.1
+    - generic [ref=e7]:
+      - button "📤" [ref=e8] [cursor=pointer]
+      - button "⚙️" [ref=e9] [cursor=pointer]
+      - button "🌙" [ref=e10] [cursor=pointer]
+      - generic [ref=e13]: Ready
+  - main [ref=e14]:
+    - button "🚨 SHOW ALL CRITICAL ITEMS" [ref=e15] [cursor=pointer]:
+      - generic [ref=e16]: 🚨
+      - text: SHOW ALL CRITICAL ITEMS
+    - generic [ref=e17]:
+      - button "Press to speak" [ref=e19] [cursor=pointer]:
+        - generic [ref=e20]: 🎤
+      - paragraph [ref=e21]: Tap to ask where something is
+      - generic [ref=e22]: Type equipment name below to search
+    - generic [ref=e24]:
+      - textbox "Type item name (e.g., AED, Narcan, oxygen)" [ref=e25]
+      - button "Find" [ref=e26] [cursor=pointer]
+    - generic [ref=e27]:
+      - button "📋 A-Z List" [ref=e28] [cursor=pointer]:
+        - generic [ref=e29]: 📋
+        - generic [ref=e30]: A-Z List
+      - button "🚑 By Compartment" [ref=e31] [cursor=pointer]:
+        - generic [ref=e32]: 🚑
+        - generic [ref=e33]: By Compartment
+    - generic [ref=e34]:
+      - heading "Quick Find - Critical Items" [level=2] [ref=e35]
+      - generic [ref=e36]:
+        - button "⚡ AED / Defibrillator" [ref=e37] [cursor=pointer]:
+          - generic [ref=e38]: ⚡
+          - text: AED / Defibrillator
+        - button "💉 Narcan" [ref=e39] [cursor=pointer]:
+          - generic [ref=e40]: 💉
+          - text: Narcan
+        - button "💨 Oxygen" [ref=e41] [cursor=pointer]:
+          - generic [ref=e42]: 💨
+          - text: Oxygen
+        - button "🎒 Trauma Bag" [ref=e43] [cursor=pointer]:
+          - generic [ref=e44]: 🎒
+          - text: Trauma Bag
+        - button "💊 Drug Box" [ref=e45] [cursor=pointer]:
+          - generic [ref=e46]: 💊
+          - text: Drug Box
+        - button "🔧 Suction" [ref=e47] [cursor=pointer]:
+          - generic [ref=e48]: 🔧
+          - text: Suction
+        - button "🩸 Glucometer" [ref=e49] [cursor=pointer]:
+          - generic [ref=e50]: 🩸
+          - text: Glucometer
+        - button "💧 Saline / IV" [ref=e51] [cursor=pointer]:
+          - generic [ref=e52]: 💧
+          - text: Saline / IV
+    - generic [ref=e53]:
+      - heading "Compartment Locations" [level=2] [ref=e54]
+      - generic [ref=e55] [cursor=pointer]:
+        - generic [ref=e56]: K
+        - generic [ref=e57]:
+          - strong [ref=e58]: Cabinet K
+          - text: "- Outside access, 7 critical items"
+      - generic [ref=e59] [cursor=pointer]:
+        - generic [ref=e60]: J
+        - generic [ref=e61]:
+          - strong [ref=e62]: Cabinet J
+          - text: "- Drug box, Portable suction"
+      - generic [ref=e63] [cursor=pointer]:
+        - generic [ref=e64]: "N"
+        - generic [ref=e65]:
+          - strong [ref=e66]: Drawer N
+          - text: "- Glucometer, Narcan"
+      - generic [ref=e67] [cursor=pointer]:
+        - generic [ref=e68]: D
+        - generic [ref=e69]:
+          - strong [ref=e70]: Cabinet D
+          - text: "- Saline, IV supplies"
+  - generic [ref=e72]:
+    - generic [ref=e73]:
+      - generic [ref=e74]: 📲
+      - strong [ref=e75]: Install HNFD Rescue App
+    - generic [ref=e76]:
+      - paragraph [ref=e77]: "For offline access anywhere:"
+      - list [ref=e78]:
+        - listitem [ref=e79]:
+          - text: Tap the
+          - strong [ref=e80]: Share
+          - text: button
+          - generic [ref=e81]: ⬆️
+        - listitem [ref=e82]:
+          - text: Scroll down and tap
+          - strong [ref=e83]: "\"Add to Home Screen\""
+        - listitem [ref=e84]:
+          - text: Tap
+          - strong [ref=e85]: "\"Add\""
+          - text: in the top right
+    - button "Got It" [ref=e87] [cursor=pointer]
+```

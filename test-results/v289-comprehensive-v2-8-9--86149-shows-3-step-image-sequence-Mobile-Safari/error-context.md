@@ -1,0 +1,216 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - img "HNFR Logo" [ref=e4]
+      - generic [ref=e5]:
+        - heading "HNFR RESCUE" [level=1] [ref=e6]
+        - text: v2.9.1
+    - generic [ref=e7]:
+      - button "📤" [ref=e8] [cursor=pointer]
+      - button "⚙️" [ref=e9] [cursor=pointer]
+      - button "🌙" [ref=e10] [cursor=pointer]
+      - generic [ref=e13]: Ready
+  - main [ref=e14]:
+    - button "🚨 SHOW ALL CRITICAL ITEMS" [ref=e15] [cursor=pointer]:
+      - generic [ref=e16]: 🚨
+      - text: SHOW ALL CRITICAL ITEMS
+    - generic [ref=e17]:
+      - button "Press to speak" [ref=e19] [cursor=pointer]:
+        - generic [ref=e20]: 🎤
+      - paragraph [ref=e21]: Tap to ask where something is
+      - generic [ref=e22]: Type equipment name below to search
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - textbox "Type item name (e.g., AED, Narcan, oxygen)" [ref=e25]: oxygen
+        - button "Find" [ref=e26] [cursor=pointer]
+      - generic [ref=e27]:
+        - generic [ref=e28]: "Recent:"
+        - button "oxygen" [ref=e29] [cursor=pointer]
+    - generic [ref=e30]:
+      - button "📋 A-Z List" [ref=e31] [cursor=pointer]:
+        - generic [ref=e32]: 📋
+        - generic [ref=e33]: A-Z List
+      - button "🚑 By Compartment" [ref=e34] [cursor=pointer]:
+        - generic [ref=e35]: 🚑
+        - generic [ref=e36]: By Compartment
+    - generic [ref=e37]:
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - generic [ref=e40]: Adult Oxygen Kit
+          - generic [ref=e41]: "Critical #2"
+        - generic [ref=e42]:
+          - generic [ref=e43]: 📍
+          - generic [ref=e44]: Cabinet K - Middle Drawer (BEHIND trauma bag)
+        - generic [ref=e45]:
+          - text: "Color:"
+          - strong [ref=e46]: GREEN bag
+        - button "📍 View Location Guide (3 Steps)" [ref=e47] [cursor=pointer]
+        - generic [ref=e48]:
+          - img "Adult Oxygen Kit" [ref=e49] [cursor=pointer]
+          - generic [ref=e50]: Tap image to enlarge
+        - generic [ref=e51]: Complete respiratory treatment kit with oxygen tank inside
+        - generic [ref=e52]:
+          - strong [ref=e53]: "Access:"
+          - text: OUTSIDE door on ambulance side (primary on-scene access) or glass doors from inside
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - generic [ref=e56]: Spare Oxygen Tanks
+          - generic [ref=e57]: "Critical #12"
+        - generic [ref=e58]:
+          - generic [ref=e59]: 📍
+          - generic [ref=e60]: Next to steps on side entry of ambulance
+        - button "📍 View Location Guide (3 Steps)" [ref=e61] [cursor=pointer]
+        - generic [ref=e62]:
+          - img "Spare Oxygen Tanks" [ref=e63] [cursor=pointer]
+          - generic [ref=e64]: Tap image to enlarge
+        - generic [ref=e65]:
+          - text: 2 spare tanks in holder, plus 1 each in adult and pediatric oxygen kits (4 total)
+          - text: "New Matheson tanks: green top, aluminum, single valve operation. Old steel tanks: two-step process - open valve first, then set flow."
+        - generic [ref=e66]: ⚠️ SQUEEZE brackets together to release tank (counterintuitive). At 15 L/min, tank only lasts few minutes.
+        - generic [ref=e67]:
+          - strong [ref=e68]: "Access:"
+          - text: Next to steps on side entry
+      - generic [ref=e69]:
+        - generic [ref=e70]:
+          - generic [ref=e71]: Pediatric Oxygen Kit
+          - generic [ref=e72]: "Critical #3"
+        - generic [ref=e73]:
+          - generic [ref=e74]: 📍
+          - generic [ref=e75]: Cabinet K - Lower Drawer (FRONT - oxygen first for kids!)
+        - generic [ref=e76]:
+          - text: "Color:"
+          - strong [ref=e77]: BLUE bag
+        - button "📍 View Location Guide (3 Steps)" [ref=e78] [cursor=pointer]
+        - generic [ref=e79]:
+          - img "Pediatric Oxygen Kit" [ref=e80] [cursor=pointer]
+          - generic [ref=e81]: Tap image to enlarge
+        - generic [ref=e82]:
+          - text: Pediatric respiratory kit - placed FIRST because children primarily have respiratory emergencies
+          - text: Kids rarely have cardiac problems - respiratory is primary concern. Oxygen for children is PRIMARY importance.
+        - generic [ref=e83]:
+          - strong [ref=e84]: "Access:"
+          - text: OUTSIDE door on ambulance side (primary on-scene access) or glass doors from inside
+      - generic [ref=e85]:
+        - generic [ref=e86]:
+          - generic [ref=e87]: LifePak 15
+          - generic [ref=e88]: "Critical #13"
+        - generic [ref=e89]:
+          - generic [ref=e90]: 📍
+          - generic [ref=e91]: Mounted position in patient compartment - obvious location
+        - button "📍 View Location Guide (3 Steps)" [ref=e92] [cursor=pointer]
+        - generic [ref=e93]:
+          - img "LifePak 15" [ref=e94] [cursor=pointer]
+          - generic [ref=e95]: Tap image to enlarge
+        - generic [ref=e96]:
+          - text: Cardiac monitor/defibrillator - $42,000-$62,000 - HANDLE WITH CARE
+          - strong [ref=e97]: "Driver Note:"
+          - text: Press GREEN button ONCE briefly when requested to turn on. Do NOT shut off after hospital - EMT needs code summary printout.
+          - text: Carry with sensitive side (screen) against body. Has extra BP cuffs and batteries on other side. Must press AND HOLD to shut off (prevents accidental shutdown).
+        - generic [ref=e98]:
+          - strong [ref=e99]: "Access:"
+          - text: Mounted in patient compartment - obvious position
+      - generic [ref=e100]:
+        - generic [ref=e101]:
+          - generic [ref=e102]: Adult Trauma Bag
+          - generic [ref=e103]: "Critical #1"
+        - generic [ref=e104]:
+          - generic [ref=e105]: 📍
+          - generic [ref=e106]: Cabinet K - Middle Drawer (FRONT)
+        - generic [ref=e107]:
+          - text: "Color:"
+          - strong [ref=e108]: Red/Orange
+        - button "📍 View Location Guide (3 Steps)" [ref=e109] [cursor=pointer]
+        - generic [ref=e110]:
+          - img "Adult Trauma Bag" [ref=e111] [cursor=pointer]
+          - generic [ref=e112]: Tap image to enlarge
+        - generic [ref=e113]:
+          - text: Contains all trauma supplies for adult patients
+          - text: Red tag = inventory tracking. If seal unbroken, contents unchanged.
+        - generic [ref=e114]:
+          - strong [ref=e115]: "Access:"
+          - text: OUTSIDE door on ambulance side (primary on-scene access) or glass doors from inside
+    - generic [ref=e116]:
+      - heading "Quick Find - Critical Items" [level=2] [ref=e117]
+      - generic [ref=e118]:
+        - button "⚡ AED / Defibrillator" [ref=e119] [cursor=pointer]:
+          - generic [ref=e120]: ⚡
+          - text: AED / Defibrillator
+        - button "💉 Narcan" [ref=e121] [cursor=pointer]:
+          - generic [ref=e122]: 💉
+          - text: Narcan
+        - button "💨 Oxygen" [ref=e123] [cursor=pointer]:
+          - generic [ref=e124]: 💨
+          - text: Oxygen
+        - button "🎒 Trauma Bag" [ref=e125] [cursor=pointer]:
+          - generic [ref=e126]: 🎒
+          - text: Trauma Bag
+        - button "💊 Drug Box" [ref=e127] [cursor=pointer]:
+          - generic [ref=e128]: 💊
+          - text: Drug Box
+        - button "🔧 Suction" [ref=e129] [cursor=pointer]:
+          - generic [ref=e130]: 🔧
+          - text: Suction
+        - button "🩸 Glucometer" [ref=e131] [cursor=pointer]:
+          - generic [ref=e132]: 🩸
+          - text: Glucometer
+        - button "💧 Saline / IV" [ref=e133] [cursor=pointer]:
+          - generic [ref=e134]: 💧
+          - text: Saline / IV
+    - generic [ref=e135]:
+      - heading "Compartment Locations" [level=2] [ref=e136]
+      - generic [ref=e137] [cursor=pointer]:
+        - generic [ref=e138]: K
+        - generic [ref=e139]:
+          - strong [ref=e140]: Cabinet K
+          - text: "- Outside access, 7 critical items"
+      - generic [ref=e141] [cursor=pointer]:
+        - generic [ref=e142]: J
+        - generic [ref=e143]:
+          - strong [ref=e144]: Cabinet J
+          - text: "- Drug box, Portable suction"
+      - generic [ref=e145] [cursor=pointer]:
+        - generic [ref=e146]: "N"
+        - generic [ref=e147]:
+          - strong [ref=e148]: Drawer N
+          - text: "- Glucometer, Narcan"
+      - generic [ref=e149] [cursor=pointer]:
+        - generic [ref=e150]: D
+        - generic [ref=e151]:
+          - strong [ref=e152]: Cabinet D
+          - text: "- Saline, IV supplies"
+  - button "Speak result" [ref=e153] [cursor=pointer]: 🔊
+  - generic [ref=e155]:
+    - generic [ref=e156]:
+      - heading "📍 Adult Oxygen Kit Location" [level=3] [ref=e157]
+      - button "✕" [ref=e158] [cursor=pointer]
+    - generic [ref=e159]:
+      - img "Location guide" [ref=e160]
+      - generic [ref=e161]: Cabinet K
+    - generic [ref=e162]:
+      - generic [ref=e163]: Step 1 of 3
+      - generic [ref=e164]: "Step 1: Find this area on the ambulance"
+    - button "⏸ Pause" [ref=e170] [cursor=pointer]
+  - generic [ref=e172]:
+    - generic [ref=e173]:
+      - generic [ref=e174]: 📲
+      - strong [ref=e175]: Install HNFD Rescue App
+    - generic [ref=e176]:
+      - paragraph [ref=e177]: "For offline access anywhere:"
+      - list [ref=e178]:
+        - listitem [ref=e179]:
+          - text: Tap the
+          - strong [ref=e180]: Share
+          - text: button
+          - generic [ref=e181]: ⬆️
+        - listitem [ref=e182]:
+          - text: Scroll down and tap
+          - strong [ref=e183]: "\"Add to Home Screen\""
+        - listitem [ref=e184]:
+          - text: Tap
+          - strong [ref=e185]: "\"Add\""
+          - text: in the top right
+    - button "Got It" [ref=e187] [cursor=pointer]
+```
