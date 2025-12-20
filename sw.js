@@ -3,11 +3,14 @@
  * Enables 100% offline operation - CRITICAL for no-cell-service areas
  */
 
-const CACHE_NAME = 'hnfd-rescue-v2.10.1';
+// Import version from single source of truth
+importScripts('/version.js');
+const CACHE_NAME = 'hnfd-rescue-v' + APP_VERSION;
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
   '/app.js',
+  '/version.js',
   '/manifest.json',
   '/version.json',
   // All PWA icons (required for offline install)

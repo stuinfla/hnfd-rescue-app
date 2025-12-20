@@ -1,12 +1,9 @@
 {
-  "version": "2.10.1",
+  "version": "2.10.2",
   "build": "2025-12-20",
   "changelog": [
-    "FIX: Corrected Narcan image (was showing oxygen tanks)",
-    "FIX: Corrected onboard suction image",
-    "FIX: Updated saline bags image to show Cabinet D",
-    "UI: Added Compartment D to location map",
-    "UI: Changed BVM icon to breath symbol (was heart)",
-    "UI: Fixed version display sync"
+    "ARCH: Single source of truth for version (version.js)",
+    "ARCH: SW and app.js both read from version.js",
+    "Preparing for multi-tenant architecture"
   ]
 }

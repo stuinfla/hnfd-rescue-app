@@ -1168,7 +1168,8 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-const APP_VERSION = '2.10.1';
+// APP_VERSION is loaded from /version.js (single source of truth)
+// It's included in index.html before this script
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
