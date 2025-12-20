@@ -1,12 +1,9 @@
 {
-  "version": "2.9.1",
+  "version": "2.9.2",
   "build": "2025-12-19",
   "changelog": [
-    "FIXED: A-Z Browse data reference bug",
-    "FIXED: Location now shown FIRST in search results",
-    "FIXED: Images show FULL picture (not cropped)",
-    "FIXED: A-Z Browse scrollable list works properly",
-    "FIXED: Gear icon always shows settings menu first",
-    "FIXED: Location guide 3-step sequence working"
+    "FIXED: PWA mode detection - shows clear message when voice unavailable",
+    "INFO: Apple blocks Speech Recognition in home screen apps (iOS PWA)",
+    "INFO: Users directed to open in Safari browser for voice search"
   ]
 }
