@@ -9,6 +9,7 @@ const CACHE_NAME = 'hnfd-rescue-v' + APP_VERSION;
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
+  '/onboard.html',
   '/app.js',
   '/version.js',
   '/manifest.json',

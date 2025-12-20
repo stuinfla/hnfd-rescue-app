@@ -3587,6 +3587,29 @@ function openAdminLogin() {
   adminPasswordInput.focus();
 }
 
+// Open onboarding page for other departments
+function openOnboarding() {
+  hapticFeedback('light');
+  closeSettingsModal();
+
+  const onboardUrl = window.location.origin + '/onboard.html';
+
+  // Try native share first for mobile
+  if (navigator.share) {
+    navigator.share({
+      title: 'Equipment Finder - Setup Your Department',
+      text: 'Set up your own Equipment Finder in about 10 minutes! Voice-enabled, works offline.',
+      url: onboardUrl
+    }).catch(function() {
+      // If share fails/cancelled, just open the page
+      window.open(onboardUrl, '_blank');
+    });
+  } else {
+    // Desktop: open in new tab
+    window.open(onboardUrl, '_blank');
+  }
+}
+
 // Gear button - ALWAYS opens settings modal first (with all options)
 adminToggleBtn.addEventListener('click', () => {
   hapticFeedback('light');

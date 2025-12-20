@@ -1,11 +1,11 @@
 {
-  "version": "3.0.0-beta.1",
+  "version": "3.0.0-beta.2",
   "build": "2025-12-20",
   "changelog": [
-    "MAJOR: Multi-tenant architecture",
-    "Equipment data now loaded from JSON files",
-    "Tenant config supports custom branding",
-    "Supports ?org= parameter for tenant selection",
-    "HNFD remains default tenant - no behavior change"
+    "NEW: Self-service onboarding for other departments",
+    "NEW: Share setup link from Settings menu",
+    "Onboarding wizard with CSV import",
+    "Generates downloadable tenant package (ZIP)",
+    "10-minute setup process for new departments"
   ]
 }

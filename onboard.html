@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Equipment Finder - New Department Setup</title>
+  <link rel="icon" type="image/png" href="/icons/icon-192.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #dc2626;
+      --primary-dark: #b91c1c;
+      --accent: #FFD700;
+      --bg: #111111;
+      --bg-card: #1a1a1a;
+      --bg-input: #222222;
+      --text: #ffffff;
+      --text-muted: #888888;
+      --border: #333333;
+      --success: #22c55e;
+      --error: #ef4444;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .header p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .progress-container {
+      background: var(--bg-card);
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .progress-steps::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: var(--border);
+    }
+
+    .progress-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-input);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .progress-step.active .step-number {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .progress-step.completed .step-number {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    .step-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .progress-step.active .step-label {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .step-section {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .step-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+
+    .step-description {
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    .form-label .required {
+      color: var(--primary);
+    }
+
+    .form-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--bg-input);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 1rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .form-input.error {
+      border-color: var(--error);
+    }
+
+    .error-message {
+      color: var(--error);
+      font-size: 0.85rem;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .form-input.error + .form-hint + .error-message,
+    .form-input.error + .error-message {
+      display: block;
+    }
+
+    .image-upload {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: var(--bg-input);
+    }
+
+    .image-upload:hover {
+      border-color: var(--primary);
+      background: rgba(220, 38, 38, 0.1);
+    }
+
+    .image-upload.has-image {
+      padding: 10px;
+    }
+
+    .image-upload input {
+      display: none;
+    }
+
+    .upload-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .upload-text {
+      color: var(--text-muted);
+    }
+
+    .upload-text strong {
+      color: var(--primary);
+    }
+
+    .image-preview {
+      max-width: 200px;
+      max-height: 200px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .image-upload.has-image .image-preview {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .image-upload.has-image .upload-placeholder {
+      display: none;
+    }
+
+    .remove-image {
+      background: var(--error);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .equipment-section {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .equipment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .equipment-count {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .equipment-count strong {
+      color: var(--accent);
+    }
+
+    .equipment-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .equipment-table th {
+      text-align: left;
+      padding: 12px;
+      background: var(--bg-input);
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-bottom: 2px solid var(--border);
+    }
+
+    .equipment-table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .equipment-table input,
+    .equipment-table select {
+      width: 100%;
+      padding: 8px 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    .equipment-table input:focus,
+    .equipment-table select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .critical-toggle {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    .delete-row {
+      background: transparent;
+      border: none;
+      color: var(--error);
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 5px;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .delete-row:hover {
+      opacity: 1;
+    }
+
+    .add-row-btn {
+      width: 100%;
+      padding: 14px;
+      background: transparent;
+      border: 2px dashed var(--border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      margin-top: 15px;
+    }
+
+    .add-row-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .csv-import {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .csv-import h3 {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .or-divider {
+      text-align: center;
+      color: var(--text-muted);
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .or-divider::before,
+    .or-divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .or-divider::before { left: 0; }
+    .or-divider::after { right: 0; }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:disabled {
+      background: var(--border);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .btn-accent:hover {
+      background: #e6c200;
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .preview-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .preview-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .preview-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .preview-logo img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .preview-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .preview-body {
+      padding: 20px;
+    }
+
+    .preview-stat {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .preview-stat:last-child {
+      border-bottom: none;
+    }
+
+    .preview-stat-label {
+      color: var(--text-muted);
+    }
+
+    .preview-stat-value {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .success-screen {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .success-icon {
+      font-size: 5rem;
+      margin-bottom: 20px;
+    }
+
+    .success-title {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: var(--success);
+    }
+
+    .success-message {
+      color: var(--text-muted);
+      margin-bottom: 30px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .download-package {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 30px;
+      margin: 30px 0;
+    }
+
+    .download-package h3 {
+      margin-bottom: 20px;
+    }
+
+    .file-list {
+      text-align: left;
+      background: var(--bg-input);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+
+    .file-list div {
+      padding: 5px 0;
+      color: var(--text-muted);
+    }
+
+    .file-list .folder {
+      color: var(--accent);
+    }
+
+    .file-list .file {
+      padding-left: 20px;
+    }
+
+    .url-display {
+      background: var(--bg-input);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px 0;
+      font-family: monospace;
+      word-break: break-all;
+      color: var(--accent);
+    }
+
+    .copy-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-left: 10px;
+      font-size: 0.85rem;
+    }
+
+    .copy-btn:hover {
+      background: var(--border);
+    }
+
+    @media (max-width: 600px) {
+      .equipment-table {
+        font-size: 0.85rem;
+      }
+
+      .equipment-table th,
+      .equipment-table td {
+        padding: 8px 6px;
+      }
+
+      .step-label {
+        display: none;
+      }
+
+      .navigation-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .navigation-buttons .btn {
+        width: 100%;
+      }
+    }
+
+    .template-section {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .template-section h4 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .compartment-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .compartment-item {
+      background: var(--bg-input);
+      border-radius: 8px;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .compartment-name {
+      font-weight: 600;
+    }
+
+    .compartment-count {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .share-section {
+      background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+      border: 1px solid var(--primary);
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .share-section h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .share-section p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .share-url {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 15px;
+      font-family: monospace;
+      color: var(--accent);
+      margin-bottom: 15px;
+      word-break: break-all;
+    }
+
+    .time-estimate {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      text-align: center;
+      border: 1px solid var(--accent);
+    }
+
+    .time-estimate-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .time-estimate-text {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .welcome-message {
+      background: linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(185, 28, 28, 0.15) 100%);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .welcome-message h3 {
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .welcome-message p {
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Equipment Finder Setup</h1>
+    <p>Get your department's equipment finder ready in minutes</p>
+  </header>
+
+  <div class="progress-container">
+    <div class="progress-steps">
+      <div class="progress-step active" data-step="1">
+        <div class="step-number">1</div>
+        <span class="step-label">Basics</span>
+      </div>
+      <div class="progress-step" data-step="2">
+        <div class="step-number">2</div>
+        <span class="step-label">Branding</span>
+      </div>
+      <div class="progress-step" data-step="3">
+        <div class="step-number">3</div>
+        <span class="step-label">Equipment</span>
+      </div>
+      <div class="progress-step" data-step="4">
+        <div class="step-number">4</div>
+        <span class="step-label">Review</span>
+      </div>
+      <div class="progress-step" data-step="5">
+        <div class="step-number">5</div>
+        <span class="step-label">Complete</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="main">
+    <!-- Step 1: Basic Info -->
+    <section class="step-section active" data-step="1">
+      <div class="welcome-message">
+        <h3>Welcome! We're excited to have you.</h3>
+        <p>We understand you'd like to use the Equipment Finder for your department. This quick onboarding will get you set up with your own custom URL that you can share with your crew.</p>
+      </div>
+
+      <div class="time-estimate">
+        <div class="time-estimate-icon">&#9201;</div>
+        <div class="time-estimate-text">About 10 minutes to complete</div>
+      </div>
+
+      <h2 class="step-title">Department Information</h2>
+      <p class="step-description">Let's start with the basics about your fire department or rescue squad.</p>
+
+      <div class="form-group">
+        <label class="form-label">
+          Department Name <span class="required">*</span>
+        </label>
+        <input type="text" class="form-input" id="dept-name" placeholder="e.g., Brunswick Fire Department" required>
+        <p class="form-hint">Full official name of your department</p>
+        <p class="error-message">Please enter your department name</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          Short Name <span class="required">*</span>
+        </label>
+        <input type="text" class="form-input" id="short-name" placeholder="e.g., BRUNSWICK FD" maxlength="20" required>
+        <p class="form-hint">Abbreviated name for the header (max 20 characters)</p>
+        <p class="error-message">Please enter a short name</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          Unit/Apparatus Name <span class="required">*</span>
+        </label>
+        <input type="text" class="form-input" id="unit-name" placeholder="e.g., Rescue 7, Engine 1, Medic 3">
+        <p class="form-hint">Which vehicle is this equipment list for?</p>
+        <p class="error-message">Please enter the unit name</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          Contact Email <span class="required">*</span>
+        </label>
+        <input type="email" class="form-input" id="contact-email" placeholder="chief@yourdept.org">
+        <p class="form-hint">We'll send setup instructions here</p>
+        <p class="error-message">Please enter a valid email</p>
+      </div>
+
+      <div class="navigation-buttons">
+        <div></div>
+        <button class="btn btn-primary" id="step1-next">Continue &#8594;</button>
+      </div>
+    </section>
+
+    <!-- Step 2: Branding -->
+    <section class="step-section" data-step="2">
+      <h2 class="step-title">Branding &amp; Images</h2>
+      <p class="step-description">Add your department's logo and optionally a splash screen image.</p>
+
+      <div class="form-group">
+        <label class="form-label">
+          Department Logo <span class="required">*</span>
+        </label>
+        <div class="image-upload" id="logo-upload">
+          <input type="file" id="logo-input" accept="image/*">
+          <div class="upload-placeholder">
+            <div class="upload-icon">&#127963;</div>
+            <p class="upload-text"><strong>Click to upload</strong> or drag and drop</p>
+            <p class="form-hint">PNG or JPG, recommended 200x200px</p>
+          </div>
+          <img class="image-preview" id="logo-preview" alt="Logo preview">
+          <button type="button" class="remove-image" id="logo-remove">Remove</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          Splash Screen Image (Optional)
+        </label>
+        <div class="image-upload" id="splash-upload">
+          <input type="file" id="splash-input" accept="image/*">
+          <div class="upload-placeholder">
+            <div class="upload-icon">&#128657;</div>
+            <p class="upload-text"><strong>Click to upload</strong> or drag and drop</p>
+            <p class="form-hint">Photo of your apparatus - shown on first launch</p>
+          </div>
+          <img class="image-preview" id="splash-preview" alt="Splash preview">
+          <button type="button" class="remove-image" id="splash-remove">Remove</button>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button class="btn btn-secondary" id="step2-back">&#8592; Back</button>
+        <button class="btn btn-primary" id="step2-next">Continue &#8594;</button>
+      </div>
+    </section>
+
+    <!-- Step 3: Equipment -->
+    <section class="step-section" data-step="3">
+      <h2 class="step-title">Equipment List</h2>
+      <p class="step-description">Add all the equipment on your apparatus. You can import from CSV or enter manually.</p>
+
+      <div class="csv-import">
+        <h3>Import from Spreadsheet</h3>
+        <p class="form-hint">Download our template, fill it in, and upload it here.</p>
+        <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+          <button class="btn btn-secondary" id="download-template-btn">Download Template</button>
+          <label class="btn btn-primary" style="cursor: pointer;">
+            Upload CSV
+            <input type="file" id="csv-input" accept=".csv" style="display: none;">
+          </label>
+        </div>
+      </div>
+
+      <div class="or-divider">OR</div>
+
+      <div class="equipment-section">
+        <div class="equipment-header">
+          <h3>Manual Entry</h3>
+          <span class="equipment-count"><strong id="item-count">0</strong> items</span>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="equipment-table">
+            <thead>
+              <tr>
+                <th style="width: 30%">Item Name</th>
+                <th style="width: 25%">Location</th>
+                <th style="width: 15%">Qty</th>
+                <th style="width: 10%">Critical</th>
+                <th style="width: 20%">Category</th>
+                <th style="width: 40px"></th>
+              </tr>
+            </thead>
+            <tbody id="equipment-tbody">
+            </tbody>
+          </table>
+        </div>
+
+        <button class="add-row-btn" id="add-row-btn">+ Add Equipment Item</button>
+      </div>
+
+      <div class="navigation-buttons">
+        <button class="btn btn-secondary" id="step3-back">&#8592; Back</button>
+        <button class="btn btn-primary" id="step3-next">Continue &#8594;</button>
+      </div>
+    </section>
+
+    <!-- Step 4: Review -->
+    <section class="step-section" data-step="4">
+      <h2 class="step-title">Review Your Setup</h2>
+      <p class="step-description">Make sure everything looks correct before we generate your files.</p>
+
+      <div class="preview-card">
+        <div class="preview-header">
+          <div class="preview-logo" id="preview-logo-container">
+            <span style="font-size: 1.5rem;">&#128658;</span>
+          </div>
+          <div>
+            <div class="preview-title" id="preview-short-name">YOUR DEPT</div>
+            <div style="font-size: 0.85rem; opacity: 0.9;" id="preview-unit">Unit Name</div>
+          </div>
+        </div>
+        <div class="preview-body">
+          <div class="preview-stat">
+            <span class="preview-stat-label">Full Name</span>
+            <span class="preview-stat-value" id="preview-full-name">-</span>
+          </div>
+          <div class="preview-stat">
+            <span class="preview-stat-label">Total Equipment Items</span>
+            <span class="preview-stat-value" id="preview-item-count">0</span>
+          </div>
+          <div class="preview-stat">
+            <span class="preview-stat-label">Critical Items</span>
+            <span class="preview-stat-value" id="preview-critical-count">0</span>
+          </div>
+          <div class="preview-stat">
+            <span class="preview-stat-label">Compartments/Locations</span>
+            <span class="preview-stat-value" id="preview-compartment-count">0</span>
+          </div>
+          <div class="preview-stat">
+            <span class="preview-stat-label">Contact Email</span>
+            <span class="preview-stat-value" id="preview-email">-</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="equipment-section">
+        <h3>Locations Found</h3>
+        <div class="compartment-list" id="compartment-summary">
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button class="btn btn-secondary" id="step4-back">&#8592; Back</button>
+        <button class="btn btn-success" id="step4-generate">&#10003; Generate My Equipment Finder</button>
+      </div>
+    </section>
+
+    <!-- Step 5: Complete -->
+    <section class="step-section" data-step="5">
+      <div class="success-screen">
+        <div class="success-icon">&#127881;</div>
+        <h2 class="success-title">Setup Complete!</h2>
+        <p class="success-message">Your equipment finder has been configured. Download your files below.</p>
+
+        <div class="download-package">
+          <h3>Your Tenant Package</h3>
+          <div class="file-list" id="file-list">
+            <div class="folder" id="folder-display"></div>
+            <div class="file">&#9500;&#9472;&#9472; config.json</div>
+            <div class="file">&#9500;&#9472;&#9472; equipment.json</div>
+            <div class="file">&#9500;&#9472;&#9472; logo.png</div>
+            <div class="file" id="splash-file-line">&#9492;&#9472;&#9472; splash.jpg (if provided)</div>
+          </div>
+          <button class="btn btn-accent" id="download-zip-btn" style="width: 100%;">
+            Download Package (.zip)
+          </button>
+        </div>
+
+        <div class="template-section">
+          <h4>Next Steps</h4>
+          <ol style="text-align: left; padding-left: 20px; color: var(--text-muted);">
+            <li>Download the ZIP file above</li>
+            <li>Send it to your Equipment Finder administrator</li>
+            <li>They'll add your files to the system</li>
+            <li>You'll receive your custom URL</li>
+          </ol>
+        </div>
+
+        <div class="share-section">
+          <h3>Know Another Department?</h3>
+          <p>Share this setup link with them!</p>
+          <div class="share-url" id="share-url"></div>
+          <button class="btn btn-primary" id="copy-share-btn">Copy Link</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // State
+      let currentStep = 1;
+      const totalSteps = 5;
+      let formData = {
+        deptName: '',
+        shortName: '',
+        unitName: '',
+        contactEmail: '',
+        logo: null,
+        logoName: '',
+        splash: null,
+        splashName: '',
+        equipment: []
+      };
+
+      const categories = [
+        'airway', 'breathing', 'cardiac', 'circulation', 'trauma',
+        'medication', 'pediatric', 'monitoring', 'safety', 'supplies', 'other'
+      ];
+
+      // Initialize
+      document.addEventListener('DOMContentLoaded', function() {
+        setupEventListeners();
+        setupImageUploads();
+        addEquipmentRow();
+        addEquipmentRow();
+        addEquipmentRow();
+        updateShareUrl();
+      });
+
+      function setupEventListeners() {
+        // Navigation buttons
+        document.getElementById('step1-next').addEventListener('click', function() { nextStep(); });
+        document.getElementById('step2-back').addEventListener('click', function() { prevStep(); });
+        document.getElementById('step2-next').addEventListener('click', function() { nextStep(); });
+        document.getElementById('step3-back').addEventListener('click', function() { prevStep(); });
+        document.getElementById('step3-next').addEventListener('click', function() { nextStep(); });
+        document.getElementById('step4-back').addEventListener('click', function() { prevStep(); });
+        document.getElementById('step4-generate').addEventListener('click', function() { generatePackage(); });
+
+        // Equipment buttons
+        document.getElementById('add-row-btn').addEventListener('click', function() { addEquipmentRow(); });
+        document.getElementById('download-template-btn').addEventListener('click', function() { downloadTemplate(); });
+        document.getElementById('csv-input').addEventListener('change', function(e) { importCSV(e); });
+
+        // Download and share
+        document.getElementById('download-zip-btn').addEventListener('click', function() { downloadZip(); });
+        document.getElementById('copy-share-btn').addEventListener('click', function() { copyShareUrl(); });
+
+        // Image removal
+        document.getElementById('logo-remove').addEventListener('click', function(e) {
+          e.stopPropagation();
+          removeImage('logo');
+        });
+        document.getElementById('splash-remove').addEventListener('click', function(e) {
+          e.stopPropagation();
+          removeImage('splash');
+        });
+      }
+
+      function nextStep() {
+        if (!validateStep(currentStep)) return;
+        if (currentStep < totalSteps) {
+          currentStep++;
+          updateUI();
+          if (currentStep === 4) {
+            updatePreview();
+          }
+        }
+      }
+
+      function prevStep() {
+        if (currentStep > 1) {
+          currentStep--;
+          updateUI();
+        }
+      }
+
+      function updateUI() {
+        var steps = document.querySelectorAll('.progress-step');
+        steps.forEach(function(el, index) {
+          var stepNum = index + 1;
+          el.classList.remove('active', 'completed');
+          if (stepNum === currentStep) {
+            el.classList.add('active');
+          } else if (stepNum < currentStep) {
+            el.classList.add('completed');
+          }
+        });
+
+        var sections = document.querySelectorAll('.step-section');
+        sections.forEach(function(el, index) {
+          el.classList.remove('active');
+          if (index + 1 === currentStep) {
+            el.classList.add('active');
+          }
+        });
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function validateStep(step) {
+        var isValid = true;
+
+        if (step === 1) {
+          var fields = [
+            { id: 'dept-name', key: 'deptName' },
+            { id: 'short-name', key: 'shortName' },
+            { id: 'unit-name', key: 'unitName' },
+            { id: 'contact-email', key: 'contactEmail' }
+          ];
+
+          fields.forEach(function(field) {
+            var input = document.getElementById(field.id);
+            var value = input.value.trim();
+            formData[field.key] = value;
+
+            if (!value || (field.id === 'contact-email' && !isValidEmail(value))) {
+              input.classList.add('error');
+              isValid = false;
+            } else {
+              input.classList.remove('error');
+            }
+          });
+        }
+
+        if (step === 2) {
+          if (!formData.logo) {
+            alert('Please upload a department logo');
+            isValid = false;
+          }
+        }
+
+        if (step === 3) {
+          collectEquipmentData();
+          if (formData.equipment.length === 0) {
+            alert('Please add at least one equipment item');
+            isValid = false;
+          }
+        }
+
+        return isValid;
+      }
+
+      function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      function setupImageUploads() {
+        setupUpload('logo');
+        setupUpload('splash');
+      }
+
+      function setupUpload(type) {
+        var container = document.getElementById(type + '-upload');
+        var input = document.getElementById(type + '-input');
+
+        container.addEventListener('click', function(e) {
+          if (e.target.classList.contains('remove-image')) return;
+          input.click();
+        });
+
+        container.addEventListener('dragover', function(e) {
+          e.preventDefault();
+          container.style.borderColor = 'var(--primary)';
+        });
+
+        container.addEventListener('dragleave', function() {
+          container.style.borderColor = '';
+        });
+
+        container.addEventListener('drop', function(e) {
+          e.preventDefault();
+          container.style.borderColor = '';
+          var file = e.dataTransfer.files[0];
+          if (file && file.type.startsWith('image/')) {
+            handleImageFile(file, type);
+          }
+        });
+
+        input.addEventListener('change', function(e) {
+          var file = e.target.files[0];
+          if (file) {
+            handleImageFile(file, type);
+          }
+        });
+      }
+
+      function handleImageFile(file, type) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var preview = document.getElementById(type + '-preview');
+          var container = document.getElementById(type + '-upload');
+
+          preview.src = e.target.result;
+          container.classList.add('has-image');
+
+          formData[type] = e.target.result;
+          formData[type + 'Name'] = file.name;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function removeImage(type) {
+        var container = document.getElementById(type + '-upload');
+        var preview = document.getElementById(type + '-preview');
+        var input = document.getElementById(type + '-input');
+
+        container.classList.remove('has-image');
+        preview.src = '';
+        input.value = '';
+        formData[type] = null;
+        formData[type + 'Name'] = '';
+      }
+
+      function addEquipmentRow(data) {
+        data = data || {};
+        var tbody = document.getElementById('equipment-tbody');
+        var row = document.createElement('tr');
+
+        // Name cell
+        var nameCell = document.createElement('td');
+        var nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.placeholder = 'e.g., AED';
+        nameInput.value = data.name || '';
+        nameInput.className = 'eq-name';
+        nameCell.appendChild(nameInput);
+        row.appendChild(nameCell);
+
+        // Location cell
+        var locCell = document.createElement('td');
+        var locInput = document.createElement('input');
+        locInput.type = 'text';
+        locInput.placeholder = 'e.g., Cabinet A';
+        locInput.value = data.location || '';
+        locInput.className = 'eq-location';
+        locCell.appendChild(locInput);
+        row.appendChild(locCell);
+
+        // Quantity cell
+        var qtyCell = document.createElement('td');
+        var qtyInput = document.createElement('input');
+        qtyInput.type = 'number';
+        qtyInput.min = '1';
+        qtyInput.value = data.quantity || 1;
+        qtyInput.className = 'eq-qty';
+        qtyInput.style.width = '60px';
+        qtyCell.appendChild(qtyInput);
+        row.appendChild(qtyCell);
+
+        // Critical cell
+        var critCell = document.createElement('td');
+        critCell.style.textAlign = 'center';
+        var critInput = document.createElement('input');
+        critInput.type = 'checkbox';
+        critInput.className = 'critical-toggle eq-critical';
+        critInput.checked = data.critical || false;
+        critCell.appendChild(critInput);
+        row.appendChild(critCell);
+
+        // Category cell
+        var catCell = document.createElement('td');
+        var catSelect = document.createElement('select');
+        catSelect.className = 'eq-category';
+
+        var defaultOpt = document.createElement('option');
+        defaultOpt.value = '';
+        defaultOpt.textContent = 'Select...';
+        catSelect.appendChild(defaultOpt);
+
+        categories.forEach(function(cat) {
+          var opt = document.createElement('option');
+          opt.value = cat;
+          opt.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+          if (data.category === cat) opt.selected = true;
+          catSelect.appendChild(opt);
+        });
+        catCell.appendChild(catSelect);
+        row.appendChild(catCell);
+
+        // Delete cell
+        var delCell = document.createElement('td');
+        var delBtn = document.createElement('button');
+        delBtn.className = 'delete-row';
+        delBtn.textContent = '\u2715';
+        delBtn.addEventListener('click', function() {
+          row.remove();
+          updateItemCount();
+        });
+        delCell.appendChild(delBtn);
+        row.appendChild(delCell);
+
+        tbody.appendChild(row);
+        updateItemCount();
+      }
+
+      function updateItemCount() {
+        var count = document.querySelectorAll('#equipment-tbody tr').length;
+        document.getElementById('item-count').textContent = count;
+      }
+
+      function collectEquipmentData() {
+        var rows = document.querySelectorAll('#equipment-tbody tr');
+        formData.equipment = [];
+
+        rows.forEach(function(row) {
+          var name = row.querySelector('.eq-name').value.trim();
+          var location = row.querySelector('.eq-location').value.trim();
+
+          if (name && location) {
+            formData.equipment.push({
+              name: name,
+              location: location,
+              quantity: parseInt(row.querySelector('.eq-qty').value) || 1,
+              critical: row.querySelector('.eq-critical').checked,
+              category: row.querySelector('.eq-category').value || 'supplies'
+            });
+          }
+        });
+      }
+
+      function downloadTemplate() {
+        var template = 'name,location,quantity,critical,category\n' +
+          'AED,Cabinet A,1,true,cardiac\n' +
+          'Oxygen Tank,Compartment B,2,true,breathing\n' +
+          'Trauma Bag,Main Compartment,1,true,trauma\n' +
+          'BVM Adult,Airway Cabinet,1,true,airway\n' +
+          'Bandages,Supply Drawer,10,false,supplies';
+
+        var blob = new Blob([template], { type: 'text/csv' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'equipment-template.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function importCSV(event) {
+        var file = event.target.files[0];
+        if (!file) return;
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var text = e.target.result;
+          var lines = text.split('\n').filter(function(line) { return line.trim(); });
+
+          document.getElementById('equipment-tbody').textContent = '';
+
+          for (var i = 1; i < lines.length; i++) {
+            var cols = lines[i].split(',').map(function(c) {
+              return c.trim().replace(/^"|"$/g, '');
+            });
+            if (cols[0] && cols[1]) {
+              addEquipmentRow({
+                name: cols[0],
+                location: cols[1],
+                quantity: parseInt(cols[2]) || 1,
+                critical: cols[3] && cols[3].toLowerCase() === 'true',
+                category: cols[4] || 'supplies'
+              });
+            }
+          }
+
+          var count = document.querySelectorAll('#equipment-tbody tr').length;
+          alert('Imported ' + count + ' items!');
+        };
+        reader.readAsText(file);
+      }
+
+      function updatePreview() {
+        collectEquipmentData();
+
+        document.getElementById('preview-short-name').textContent = formData.shortName || 'YOUR DEPT';
+        document.getElementById('preview-unit').textContent = formData.unitName || 'Unit';
+        document.getElementById('preview-full-name').textContent = formData.deptName || '-';
+        document.getElementById('preview-email').textContent = formData.contactEmail || '-';
+        document.getElementById('preview-item-count').textContent = formData.equipment.length;
+
+        var criticalCount = formData.equipment.filter(function(e) { return e.critical; }).length;
+        document.getElementById('preview-critical-count').textContent = criticalCount;
+
+        var locationSet = {};
+        formData.equipment.forEach(function(e) { locationSet[e.location] = true; });
+        var locations = Object.keys(locationSet);
+        document.getElementById('preview-compartment-count').textContent = locations.length;
+
+        var logoContainer = document.getElementById('preview-logo-container');
+        if (formData.logo) {
+          logoContainer.textContent = '';
+          var logoImg = document.createElement('img');
+          logoImg.src = formData.logo;
+          logoImg.alt = 'Logo';
+          logoImg.style.maxWidth = '100%';
+          logoImg.style.maxHeight = '100%';
+          logoContainer.appendChild(logoImg);
+        }
+
+        var compartmentSummary = document.getElementById('compartment-summary');
+        compartmentSummary.textContent = '';
+        locations.forEach(function(loc) {
+          var count = formData.equipment.filter(function(e) { return e.location === loc; }).length;
+
+          var item = document.createElement('div');
+          item.className = 'compartment-item';
+
+          var nameSpan = document.createElement('span');
+          nameSpan.className = 'compartment-name';
+          nameSpan.textContent = '\uD83D\uDCCD ' + loc;
+
+          var countSpan = document.createElement('span');
+          countSpan.className = 'compartment-count';
+          countSpan.textContent = count + ' item' + (count !== 1 ? 's' : '');
+
+          item.appendChild(nameSpan);
+          item.appendChild(countSpan);
+          compartmentSummary.appendChild(item);
+        });
+      }
+
+      function generatePackage() {
+        collectEquipmentData();
+
+        var tenantId = formData.shortName
+          .toLowerCase()
+          .replace(/[^a-z0-9]/g, '-')
+          .replace(/-+/g, '-')
+          .replace(/^-|-$/g, '');
+
+        document.getElementById('folder-display').textContent = '\uD83D\uDCC1 tenants/' + tenantId + '/';
+
+        currentStep = 5;
+        updateUI();
+      }
+
+      function downloadZip() {
+        var tenantId = formData.shortName
+          .toLowerCase()
+          .replace(/[^a-z0-9]/g, '-')
+          .replace(/-+/g, '-')
+          .replace(/^-|-$/g, '');
+
+        var zip = new JSZip();
+        var folder = zip.folder('tenants/' + tenantId);
+
+        var config = {
+          id: tenantId,
+          name: formData.deptName,
+          shortName: formData.shortName,
+          unit: formData.unitName,
+          contactEmail: formData.contactEmail,
+          logo: '/tenants/' + tenantId + '/logo.png',
+          splash: formData.splash ? {
+            image: '/tenants/' + tenantId + '/splash.jpg',
+            title: formData.shortName.split(' ')[0],
+            subtitle: formData.shortName.split(' ').slice(1).join(' ') || 'FIRE & RESCUE',
+            tagline: 'Equipment Finder'
+          } : null,
+          theme: {
+            primary: '#dc2626',
+            accent: '#FFD700',
+            background: '#111111'
+          },
+          createdAt: new Date().toISOString()
+        };
+
+        folder.file('config.json', JSON.stringify(config, null, 2));
+
+        var locationSet = {};
+        formData.equipment.forEach(function(e) { locationSet[e.location] = true; });
+        var locations = Object.keys(locationSet);
+
+        var compartments = {};
+        locations.forEach(function(loc) {
+          compartments[loc] = {
+            description: loc,
+            image: null
+          };
+        });
+
+        var equipment = {
+          items: formData.equipment.map(function(item) {
+            return {
+              name: item.name,
+              location: item.location,
+              quantity: item.quantity,
+              critical: item.critical,
+              category: item.category,
+              keywords: [item.name.toLowerCase()]
+            };
+          }),
+          compartments: compartments
+        };
+
+        folder.file('equipment.json', JSON.stringify(equipment, null, 2));
+
+        if (formData.logo) {
+          var logoData = formData.logo.split(',')[1];
+          folder.file('logo.png', logoData, { base64: true });
+        }
+
+        if (formData.splash) {
+          var splashData = formData.splash.split(',')[1];
+          folder.file('splash.jpg', splashData, { base64: true });
+        }
+
+        var readme = '# ' + formData.deptName + ' - Equipment Finder Setup\n\n' +
+          '## Tenant ID: ' + tenantId + '\n\n' +
+          '## Files Included:\n' +
+          '- config.json - Department configuration and branding\n' +
+          '- equipment.json - Equipment inventory data\n' +
+          '- logo.png - Department logo\n' +
+          (formData.splash ? '- splash.jpg - Splash screen image\n' : '') +
+          '\n## Installation:\n' +
+          '1. Send this folder to your Equipment Finder administrator\n' +
+          '2. They will add it to: /tenants/' + tenantId + '/\n' +
+          '3. Your custom URL will be: https://[domain]/?org=' + tenantId + '\n\n' +
+          '## Equipment Summary:\n' +
+          '- Total Items: ' + formData.equipment.length + '\n' +
+          '- Critical Items: ' + formData.equipment.filter(function(e) { return e.critical; }).length + '\n' +
+          '- Locations: ' + locations.length + '\n\n' +
+          '## Contact:\n' + formData.contactEmail + '\n\n' +
+          'Generated: ' + new Date().toLocaleString() + '\n';
+
+        folder.file('README.md', readme);
+
+        zip.generateAsync({ type: 'blob' }).then(function(blob) {
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = 'equipment-finder-' + tenantId + '.zip';
+          a.click();
+          URL.revokeObjectURL(url);
+        });
+      }
+
+      function updateShareUrl() {
+        var url = window.location.href.split('?')[0];
+        document.getElementById('share-url').textContent = url;
+      }
+
+      function copyShareUrl() {
+        var url = document.getElementById('share-url').textContent;
+        navigator.clipboard.writeText(url).then(function() {
+          alert('Link copied to clipboard!');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
