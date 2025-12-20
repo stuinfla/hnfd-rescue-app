@@ -22,7 +22,8 @@ const ASSETS_TO_CACHE = [
   '/icons/icon-192.png',
   '/icons/icon-384.png',
   '/icons/icon-512.png',
-  // Logo and equipment images
+  // Logo, splash, and equipment images
+  '/images/splash-ambulance.jpg',
   '/images/hnfr-logo.png',
   '/images/trauma_bag_adult.jpg',
   '/images/cabinet_k_overview.jpg',

@@ -1,9 +1,9 @@
 {
-  "version": "2.10.2",
+  "version": "2.10.3",
   "build": "2025-12-20",
   "changelog": [
-    "ARCH: Single source of truth for version (version.js)",
-    "ARCH: SW and app.js both read from version.js",
-    "Preparing for multi-tenant architecture"
+    "NEW: First-time splash screen with R7 ambulance photo",
+    "Splash auto-dismisses after 4 seconds or on tap",
+    "Only shows on first visit (localStorage)"
   ]
 }
