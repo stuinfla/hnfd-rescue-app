@@ -266,6 +266,12 @@ function createEquipmentCard(item) {
   guideBtn.onclick = () => viewLocationGuide(item.id);
   actions.appendChild(guideBtn);
 
+  const deleteBtn = document.createElement('button');
+  deleteBtn.className = 'btn btn-danger btn-small';
+  deleteBtn.textContent = '🗑️';
+  deleteBtn.onclick = () => deleteEquipment(item.id);
+  actions.appendChild(deleteBtn);
+
   card.appendChild(actions);
 
   return card;
@@ -845,6 +851,70 @@ function replaceImage(itemId) {
   setTimeout(() => {
     document.getElementById('edit-image-file').click();
   }, 100);
+}
+
+function addNewEquipment() {
+  const name = prompt('Equipment name:');
+  if (!name) return;
+
+  const location = prompt('Location (e.g., Cabinet K, middle shelf):');
+  if (!location) return;
+
+  const compartment = prompt('Compartment letter (e.g., K, J, D):');
+  const description = prompt('Description (what is it/what does it do):');
+  const quickFind = prompt('Quick find tip (optional):');
+  const isCritical = confirm('Is this a critical/life-saving item?');
+
+  // Generate a unique ID
+  const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+
+  // Check for duplicate ID
+  if (STATE.equipment.find(e => e.id === id)) {
+    alert('An item with a similar name already exists. Please use a different name.');
+    return;
+  }
+
+  const newItem = {
+    id: id,
+    name: name,
+    location: location,
+    compartment: compartment || '',
+    description: description || '',
+    quickFind: quickFind || '',
+    critical: isCritical,
+    criticalRank: isCritical ? STATE.equipment.filter(e => e.critical).length + 1 : null,
+    image: null,
+    images: {
+      ambulancePosition: null,
+      compartmentView: null,
+      equipmentPhoto: null
+    },
+    goldDots: {},
+    locationSteps: [],
+    _modified: true
+  };
+
+  STATE.equipment.push(newItem);
+  addChange('Added new equipment: ' + name);
+  renderEquipment();
+  updateStats();
+
+  // Offer to edit the new item immediately
+  if (confirm('Equipment added! Would you like to edit it now to add more details?')) {
+    editEquipment(id);
+  }
+}
+
+function deleteEquipment(itemId) {
+  const item = STATE.equipment.find(i => i.id === itemId);
+  if (!item) return;
+
+  if (!confirm('Delete "' + item.name + '"? This cannot be undone.')) return;
+
+  STATE.equipment = STATE.equipment.filter(i => i.id !== itemId);
+  addChange('Deleted equipment: ' + item.name);
+  renderEquipment();
+  updateStats();
 }
 
 // ============================================================================

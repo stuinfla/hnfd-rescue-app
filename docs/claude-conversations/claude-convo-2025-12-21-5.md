@@ -7,3 +7,13 @@
 
 ---
 
+
+## Human
+
+Why are you doing Netlify builds this is always done on Vercel so why are you switching over back up think about this be consistent
+
+
+## Human
+
+I need to be able to do add edits and deletes for all equipment and people and everything else so please complement the admin capabilities so that everything can be edited correctly 
+
