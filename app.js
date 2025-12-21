@@ -2009,8 +2009,9 @@ function displayResults(results, query) {
   // AUTO-SPEAK: Always speak results immediately - this is life-saving equipment!
   // EMTs need hands-free operation - don't make them tap a button
   if (currentResult) {
+    const wasVoiceSearch = lastSearchWasVoice;
     lastSearchWasVoice = false; // Reset flag regardless
-    console.log('[TTS] Auto-speaking result for:', currentResult.name);
+    console.log('[TTS] Auto-speaking result for:', currentResult.name, '(voice:', wasVoiceSearch, ')');
 
     // Delay to ensure:
     // 1. Speech recognition is fully stopped (iOS requirement)
@@ -2018,12 +2019,14 @@ function displayResults(results, query) {
     // 3. Audio context is ready
     setTimeout(() => {
       if (currentResult) {
-        // Cancel any lingering speech recognition
-        if (recognition) {
+        // Only abort recognition if it was a voice search and still running
+        // CRITICAL: Don't disrupt recognition state for text searches
+        if (wasVoiceSearch && recognition && (isListening || recognitionStarting)) {
+          console.log('[TTS] Stopping recognition before speaking');
           try { recognition.abort(); } catch(e) {}
+          isListening = false;
+          recognitionStarting = false;
         }
-        isListening = false;
-        recognitionStarting = false;
 
         // Initialize audio and speak
         initializeAudio();

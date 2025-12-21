@@ -1,9 +1,9 @@
 {
-  "version": "2.11.0",
+  "version": "2.11.1",
   "build": "2025-12-21",
   "changelog": [
-    "NEW: Auto-scroll to results when equipment found",
-    "NEW: Auto-speak location instructions immediately (no tap required)",
-    "Faster access to life-saving equipment locations"
+    "FIX: Speech recognition no longer breaks after text search",
+    "Auto-scroll to results when equipment found",
+    "Auto-speak location instructions immediately"
   ]
 }
