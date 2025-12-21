@@ -1996,19 +1996,28 @@ function displayResults(results, query) {
     }
   });
 
-  // Auto-speak result if search came from voice input
-  // IMPORTANT: Always speak results after voice search (life-threatening situations)
-  if (lastSearchWasVoice && currentResult) {
-    lastSearchWasVoice = false; // Reset flag
-    console.log('[TTS] Voice search completed - will speak result');
+  // AUTO-SCROLL: Scroll to results so user sees them immediately
+  // Critical for emergency situations - don't make them hunt for the result
+  setTimeout(() => {
+    const topResult = document.getElementById('topResult');
+    if (topResult) {
+      topResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      console.log('[UI] Auto-scrolled to result');
+    }
+  }, 100);
 
-    // Longer delay to ensure:
+  // AUTO-SPEAK: Always speak results immediately - this is life-saving equipment!
+  // EMTs need hands-free operation - don't make them tap a button
+  if (currentResult) {
+    lastSearchWasVoice = false; // Reset flag regardless
+    console.log('[TTS] Auto-speaking result for:', currentResult.name);
+
+    // Delay to ensure:
     // 1. Speech recognition is fully stopped (iOS requirement)
-    // 2. UI is rendered
+    // 2. UI is rendered and scrolled
     // 3. Audio context is ready
     setTimeout(() => {
       if (currentResult) {
-        console.log('[TTS] Speaking result for:', currentResult.name);
         // Cancel any lingering speech recognition
         if (recognition) {
           try { recognition.abort(); } catch(e) {}
@@ -2020,7 +2029,7 @@ function displayResults(results, query) {
         initializeAudio();
         speakResult();
       }
-    }, 500); // Increased delay for iOS
+    }, 600); // Slight delay after scroll
   }
 }
 

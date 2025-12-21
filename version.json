@@ -1,9 +1,9 @@
 {
-  "version": "2.10.3",
-  "build": "2025-12-20",
+  "version": "2.11.0",
+  "build": "2025-12-21",
   "changelog": [
-    "NEW: First-time splash screen with R7 ambulance photo",
-    "Splash auto-dismisses after 4 seconds or on tap",
-    "Only shows on first visit (localStorage)"
+    "NEW: Auto-scroll to results when equipment found",
+    "NEW: Auto-speak location instructions immediately (no tap required)",
+    "Faster access to life-saving equipment locations"
   ]
 }
