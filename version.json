@@ -1,9 +1,10 @@
 {
-  "version": "2.11.1",
+  "version": "2.12.0",
   "build": "2025-12-21",
   "changelog": [
-    "FIX: Speech recognition no longer breaks after text search",
-    "Auto-scroll to results when equipment found",
-    "Auto-speak location instructions immediately"
+    "SAFETY: Updates are now user-controlled (no auto-update)",
+    "Updates require manual tap and verify signal before applying",
+    "App remains 100% functional even in no-signal areas",
+    "FIX: Speech recognition state handling"
   ]
 }

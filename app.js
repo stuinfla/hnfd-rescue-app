@@ -1207,17 +1207,20 @@ async function checkForUpdates(showIfCurrent = false) {
 }
 
 function showUpdateNotification(newVersion, changelog) {
-  // AUTO-UPDATE: Don't prompt - just apply the update immediately
-  console.log(`[Update] Auto-applying update to v${newVersion}`);
+  // SAFETY-FIRST: Never auto-update - let user choose when to update
+  // In bad signal areas, auto-updating could break the app entirely
+  console.log(`[Update] New version v${newVersion} available - user can update from Settings`);
 
-  // Show brief "Updating..." message
+  // Just show a subtle indicator - don't interrupt emergency use
   const statusText = document.getElementById('status-text');
   if (statusText) {
-    statusText.textContent = `Updating to v${newVersion}...`;
+    statusText.textContent = `Update available`;
+    statusText.style.cursor = 'pointer';
+    statusText.onclick = () => openSettingsModal();
   }
 
-  // Apply update after brief delay so user sees message
-  setTimeout(() => applyUpdate(), 500);
+  // Store for settings menu
+  window.pendingUpdate = { version: newVersion, changelog };
 }
 
 function showVersionInfo(message) {
@@ -3393,46 +3396,90 @@ function checkVersionStatus(latestVersion) {
   if (latestVersion === APP_VERSION) {
     statusEl.innerHTML = '<span style="color: var(--green-500);">✓ You\'re on the latest version!</span>';
   } else {
-    statusEl.innerHTML = `<span style="color: var(--yellow-400);">⚠️ Update available: v${latestVersion}</span>`;
+    // Show update available with manual update button
+    // SAFETY: Never auto-update - bad signal could break the app
+    statusEl.innerHTML = `
+      <div style="text-align: center;">
+        <div style="color: var(--yellow-400); margin-bottom: 10px;">
+          📦 Update available: v${latestVersion}
+        </div>
+        <button onclick="applyUpdateSafely('${latestVersion}')"
+                style="background: var(--green-600); color: white; border: none;
+                       padding: 12px 24px; border-radius: 8px; font-weight: 600;
+                       font-size: 16px; cursor: pointer; margin-bottom: 8px;">
+          📥 Update Now
+        </button>
+        <div style="color: var(--gray-400); font-size: 12px;">
+          ⚠️ Make sure you have good signal before updating
+        </div>
+      </div>
+    `;
+    window.pendingUpdateVersion = latestVersion;
   }
 }
 
-async function checkForUpdates() {
+async function applyUpdateSafely(version) {
+  const statusEl = document.getElementById('settings-update-status');
+
+  // Check signal strength first
+  if (!navigator.onLine) {
+    statusEl.innerHTML = '<span style="color: var(--red-600);">❌ No internet connection. Update when you have signal.</span>';
+    return;
+  }
+
+  statusEl.innerHTML = `<span style="color: var(--green-500);">🔄 Downloading v${version}...</span>`;
+
+  try {
+    // First, try to fetch critical files to verify good connection
+    const testFetch = await Promise.race([
+      fetch('/app.js?' + Date.now(), { cache: 'no-store' }),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 10000))
+    ]);
+
+    if (!testFetch.ok) {
+      throw new Error('Could not reach server');
+    }
+
+    statusEl.innerHTML = `<span style="color: var(--green-500);">✅ Download complete. Reloading...</span>`;
+
+    // Clear service worker cache and reload
+    if ('serviceWorker' in navigator) {
+      const registration = await navigator.serviceWorker.ready;
+      await registration.unregister();
+    }
+
+    // Clear caches
+    if ('caches' in window) {
+      const cacheNames = await caches.keys();
+      await Promise.all(cacheNames.map(name => caches.delete(name)));
+    }
+
+    // Force reload
+    setTimeout(() => window.location.reload(true), 500);
+  } catch (err) {
+    console.error('[Update] Failed:', err);
+    statusEl.innerHTML = `
+      <div style="color: var(--red-600);">
+        ❌ Update failed - weak signal
+        <div style="color: var(--gray-400); font-size: 12px; margin-top: 5px;">
+          Your current version still works. Try again with better signal.
+        </div>
+      </div>
+    `;
+  }
+}
+
+async function checkForUpdatesManual() {
   const statusEl = document.getElementById('settings-update-status');
   statusEl.innerHTML = '<span style="color: var(--gray-400);">🔄 Checking for updates...</span>';
 
   try {
-    // Force fetch fresh version.json
-    const response = await fetch('/version.json?' + Date.now());
+    const response = await fetch('/version.json?' + Date.now(), { cache: 'no-store' });
     const data = await response.json();
-
-    if (data.version !== APP_VERSION) {
-      statusEl.innerHTML = `<span style="color: var(--green-500);">🔄 Updating to v${data.version}...</span>`;
-
-      // AUTO-UPDATE: Don't ask, just do it
-      console.log(`[Update] Auto-updating from v${APP_VERSION} to v${data.version}`);
-
-      // Clear service worker cache and reload
-      if ('serviceWorker' in navigator) {
-        const registration = await navigator.serviceWorker.ready;
-        await registration.unregister();
-      }
-
-      // Clear caches
-      if ('caches' in window) {
-        const cacheNames = await caches.keys();
-        await Promise.all(cacheNames.map(name => caches.delete(name)));
-      }
-
-      // Force reload
-      window.location.reload(true);
-    } else {
-      statusEl.innerHTML = '<span style="color: var(--green-500);">✓ You\'re on the latest version!</span>';
-      hapticFeedback('success');
-    }
+    checkVersionStatus(data.version);
   } catch (err) {
     console.error('[Settings] Update check failed:', err);
-    statusEl.innerHTML = '<span style="color: var(--red-600);">❌ Could not check for updates</span>';
+    statusEl.innerHTML = '<span style="color: var(--red-600);">❌ Could not check - try with better signal</span>';
   }
 }
 
