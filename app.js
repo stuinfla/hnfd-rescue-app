@@ -986,29 +986,74 @@ const INVENTORY_DATABASE = {
 
 // ============================================================================
 // DRIVER ZONES DATABASE - Harpswell Area Driver Assignments
-// Source: HNFD Zone Map and Driver List
+// Source: HNFD Zone Map and Driver List (Updated 8/29/25)
 // ============================================================================
 const DRIVER_ZONES = {
   mapImage: "/images/zone_map.jpg",
   driverListImage: "/images/driver_list.jpg",
   zones: [
-    { id: "728", driver: "Pinkston Russell", phone: "" },
-    { id: "729", driver: "Bebarski Jim", phone: "" },
-    { id: "731", driver: "Baiss David", phone: "" },
-    { id: "732", driver: "Moore Tom", phone: "" },
-    { id: "736", driver: "Arnold Pete", phone: "" },
-    { id: "738", driver: "King Anthony", phone: "" },
-    { id: "739", driver: "Griffiths Lauren", phone: "" },
-    { id: "741", driver: "Hickey Kathy", phone: "" },
-    { id: "742", driver: "Marshall Howie", phone: "" },
-    { id: "743", driver: "Beck Bill", phone: "" },
-    { id: "744", driver: "DeLorenzo Michael", phone: "" },
-    { id: "745", driver: "Rose Chris", phone: "" },
-    { id: "748", driver: "Dumas Rick", phone: "" },
-    { id: "749", driver: "Carson Brownie", phone: "" },
-    { id: "761", driver: "Williams Gail", phone: "" }
+    { id: "728", driver: "Pinkston Russell", phone: "512-971-9130" },
+    { id: "729", driver: "Bebarski Jim", phone: "847-946-8809" },
+    { id: "731", driver: "Baiss David", phone: "207-650-0450" },
+    { id: "732", driver: "Moore Tom", phone: "207-504-0374" },
+    { id: "736", driver: "Arnold Pete", phone: "207-577-2146" },
+    { id: "738", driver: "King Anthony", phone: "315-920-1926" },
+    { id: "739", driver: "Griffiths Lauren", phone: "781-492-5157" },
+    { id: "741", driver: "Hickey Kathy", phone: "860-418-0688" },
+    { id: "742", driver: "Marshall Howie", phone: "617-858-5740" },
+    { id: "743", driver: "Beck Bill", phone: "914-217-5390" },
+    { id: "744", driver: "DeLorenzo Michael", phone: "207-607-3088" },
+    { id: "745", driver: "Rose Chris", phone: "207-751-3669" },
+    { id: "748", driver: "Dumas Rick", phone: "207-522-9860" },
+    { id: "749", driver: "Carson Brownie", phone: "207-751-9076" },
+    { id: "761", driver: "Williams Gail", phone: "207-751-9190" }
   ]
 };
+
+// ============================================================================
+// HNFD RESCUE ROSTER - All Members with Contact Info
+// Source: Current Roster 8-29-25.pdf
+// ============================================================================
+const HNFD_ROSTER = [
+  { number: "717", lastName: "Aibel", firstName: "Dave", certification: "AEMT", office: "", phone: "401-862-4203", email: "daibel@stiarna.com" },
+  { number: "718", lastName: "Aibel", firstName: "Laura", certification: "EMT", office: "", phone: "401-862-4231", email: "laibel@stiarna.com" },
+  { number: "736", lastName: "Arnold", firstName: "Pete", certification: "Rescue Driver", office: "", phone: "207-577-2146", email: "peter.arnold0423@gmail.com" },
+  { number: "713", lastName: "Atwood", firstName: "Doane", certification: "in training", office: "", phone: "207-571-2663", email: "doane.atwood@gmail.com" },
+  { number: "731", lastName: "Baiss", firstName: "David", certification: "Rescue Driver", office: "", phone: "207-650-0450", email: "baiss_david@comcast.net" },
+  { number: "702", lastName: "Barter", firstName: "Nelson", certification: "FF", office: "Asst Chief", phone: "207-319-4485", email: "nelbarleather@gmail.com" },
+  { number: "743", lastName: "Beck", firstName: "Bill", certification: "in training", office: "", phone: "914-217-5390", email: "mainemorning@att.net" },
+  { number: "729", lastName: "Bebarski", firstName: "Jim", certification: "Rescue Driver", office: "", phone: "847-946-8809", email: "jim@avitra.com" },
+  { number: "727", lastName: "Bibber", firstName: "Marolyn", certification: "AEMT", office: "Rescue Captain", phone: "833-5085", email: "bibbermarolyn@gmail.com" },
+  { number: "723", lastName: "Bowersock", firstName: "Gordon", certification: "Pump Operator", office: "", phone: "401-255-3076", email: "gordonbowersock@yahoo.com" },
+  { number: "781", lastName: "Bradbury", firstName: "Parker", certification: "FF", office: "", phone: "844-1553", email: "Leatherhead892@gmail.com" },
+  { number: "782", lastName: "Bradbury", firstName: "Noah", certification: "FF", office: "", phone: "522-7710", email: "noahbradbury792@gmail.com" },
+  { number: "716", lastName: "Cammarn", firstName: "Scott", certification: "EMT", office: "", phone: "704-287-3297", email: "scott.cammarn@gmail.com" },
+  { number: "749", lastName: "Carson", firstName: "Brownie", certification: "Rescue Driver", office: "Scheduler", phone: "207-751-9076", email: "ebc250@yahoo.com" },
+  { number: "758", lastName: "Chipman", firstName: "Eric", certification: "", office: "Radio Officer", phone: "207-837-1584", email: "echipman758@outlook.com" },
+  { number: "744", lastName: "DeLorenzo", firstName: "Michael", certification: "Rescue Driver", office: "Driving Instructor", phone: "207-607-3088", email: "trane208@me.com" },
+  { number: "707", lastName: "Douglas", firstName: "Craig", certification: "FF", office: "Fire Lieutenant", phone: "207-798-0467", email: "lavalampfloyd@gmail.com" },
+  { number: "748", lastName: "Dumas", firstName: "Rick", certification: "Rescue Driver", office: "", phone: "207-522-9860", email: "william.dumas@comcast.net" },
+  { number: "739", lastName: "Griffiths", firstName: "Lauren", certification: "Rescue Driver", office: "", phone: "781-492-5157", email: "LaurenLGriffiths@gmail.com" },
+  { number: "715", lastName: "Heinig", firstName: "Chris", certification: "EMT", office: "Safety Officer", phone: "207-751-3696", email: "cheinig@merassessment.com" },
+  { number: "773", lastName: "Heidrich", firstName: "David", certification: "FF", office: "", phone: "207-504-7986", email: "Chief3oxfd@yahoo.com" },
+  { number: "741", lastName: "Hickey", firstName: "Kathy", certification: "Rescue Driver", office: "Scheduler", phone: "860-418-0688", email: "khickey1759@gmail.com" },
+  { number: "738", lastName: "King", firstName: "Anthony", certification: "Rescue Driver", office: "", phone: "315-920-1926", email: "anthony.m.king92@gmail.com" },
+  { number: "737", lastName: "Konicek", firstName: "Tim", certification: "Rescue Driver", office: "", phone: "617-201-5361", email: "timkonicek59@gmail.com" },
+  { number: "742", lastName: "Marshall", firstName: "Howie", certification: "Rescue Driver", office: "Driving Instructor", phone: "617-858-5740", email: "hzm@alumni.caltech.edu" },
+  { number: "701", lastName: "Mercier", firstName: "David", certification: "FF", office: "Chief", phone: "207-841-4501", email: "m00sehead2020@comcast.net" },
+  { number: "735", lastName: "Moody", firstName: "Danielle", certification: "Rescue Driver", office: "", phone: "207-841-9515", email: "auntiedaniellem@gmail.com" },
+  { number: "732", lastName: "Moore", firstName: "Tom", certification: "Rescue Driver", office: "", phone: "207-504-0374", email: "tom.moore.maine@gmail.com" },
+  { number: "", lastName: "Munk", firstName: "Marc-David", certification: "", office: "Medical Director", phone: "617-921-5666", email: "marc@mecpe.org" },
+  { number: "728", lastName: "Pinkston", firstName: "Russell", certification: "Rescue Driver", office: "", phone: "512-971-9130", email: "pinkstonrf@gmail.com" },
+  { number: "704", lastName: "Pough", firstName: "Harvey", certification: "EMT", office: "Rescue Chief", phone: "207-205-4625", email: "harvey.pough@gmail.com" },
+  { number: "747", lastName: "Randall", firstName: "Deb", certification: "Rescue Driver", office: "Administrator", phone: "203-536-9301", email: "drandall517@gmail.com" },
+  { number: "745", lastName: "Rose", firstName: "Chris", certification: "Rescue Driver", office: "", phone: "207-751-3669", email: "crose04079@gmail.com" },
+  { number: "734", lastName: "Rose", firstName: "David", certification: "Rescue Driver", office: "", phone: "602-319-4826", email: "azruins@gmail.com" },
+  { number: "733", lastName: "Stokinger", firstName: "Jack", certification: "Rescue Driver/Pump Operator", office: "Ambulance Maintenance", phone: "978-807-3339", email: "jackstokinger@comcast.net" },
+  { number: "746", lastName: "Treat", firstName: "Steve", certification: "in training", office: "", phone: "207-329-1303", email: "streat52@gmail.com" },
+  { number: "703", lastName: "True", firstName: "Frank", certification: "FF", office: "Fire Training Officer", phone: "207-446-1729", email: "franklin.true@va.gov" },
+  { number: "761", lastName: "Williams", firstName: "Gail", certification: "Rescue Driver", office: "", phone: "207-751-9190", email: "castonguay1@comcast.net" }
+];
 
 // ============================================================================
 // INTELLIGENT VOICE MATCHING - Restrict to valid equipment only
@@ -2302,6 +2347,9 @@ function ensureVoicesLoaded() {
   });
 }
 
+// TTS guard flag to prevent multiple simultaneous calls
+let ttsInProgress = false;
+
 async function speakResult(retryCount = 0) {
   if (!currentResult) {
     console.error('[TTS] No result to speak');
@@ -2313,13 +2361,22 @@ async function speakResult(retryCount = 0) {
     return;
   }
 
+  // Prevent multiple simultaneous TTS calls (fixes stuttering)
+  if (ttsInProgress && retryCount === 0) {
+    console.log('[TTS] Already speaking, ignoring duplicate call');
+    return;
+  }
+
   console.log('[TTS] speakResult called, retry:', retryCount);
+
+  // Set guard flag
+  ttsInProgress = true;
 
   // Cancel any ongoing speech
   synthesis.cancel();
 
   // Small delay after cancel to ensure clean state
-  await new Promise(resolve => setTimeout(resolve, 100));
+  await new Promise(resolve => setTimeout(resolve, 150));
 
   // Ensure voices are loaded (critical for Android)
   const voices = await ensureVoicesLoaded();
@@ -2371,15 +2428,17 @@ async function speakResult(retryCount = 0) {
   utterance.onend = () => {
     speakBtn.classList.remove('speaking');
     statusText.textContent = 'Ready';
+    ttsInProgress = false; // Reset guard flag
     console.log('[TTS] Speaking ended');
   };
 
   utterance.onerror = (e) => {
     console.error('[TTS] Error:', e.error, e);
     speakBtn.classList.remove('speaking');
+    ttsInProgress = false; // Reset guard flag
 
-    // Retry up to 2 times on error
-    if (retryCount < 2) {
+    // Retry up to 2 times on error (but not for 'interrupted' which is normal)
+    if (e.error !== 'interrupted' && retryCount < 2) {
       console.log('[TTS] Retrying speech...');
       setTimeout(() => speakResult(retryCount + 1), 300);
     } else {
@@ -2500,6 +2559,19 @@ searchInput.addEventListener('input', (e) => {
 });
 
 speakBtn.addEventListener('click', () => {
+  // Toggle TTS - if speaking, stop it; otherwise speak
+  if (synthesis.speaking || ttsInProgress) {
+    synthesis.cancel();
+    ttsInProgress = false; // Reset guard flag
+    hapticFeedback('light');
+    speakBtn.classList.remove('speaking');
+    const statusText = document.querySelector('.status-text');
+    if (statusText) {
+      statusText.textContent = 'Speech stopped';
+      setTimeout(() => statusText.textContent = 'Ready', 1500);
+    }
+    return;
+  }
   initializeAudio();  // Ensure audio is unlocked on iOS
   speakResult();
 });
@@ -2933,23 +3005,36 @@ function closeAZBrowse() {
 function openDriverZones() {
   const modal = document.getElementById('driver-zones-modal');
   const listEl = document.getElementById('driver-zones-list');
+  const flipInner = document.getElementById('driver-flip-inner');
+  const hint = document.getElementById('driver-flip-hint');
   if (!modal || !listEl) return;
 
   hapticFeedback('light');
 
-  // Build driver list HTML
-  let html = '';
+  // Reset flip state to show map first
+  driverCardFlipped = false;
+  if (flipInner) {
+    flipInner.classList.remove('flipped');
+  }
+  if (hint) {
+    hint.textContent = '👆 Tap map to see driver list';
+  }
+
+  // Build driver list HTML with clickable phone numbers
+  let html = '<div style="padding: 10px 0;">';
+  html += '<div style="text-align: center; font-size: 13px; color: var(--gray-400); padding: 8px 16px; border-bottom: 1px solid var(--gray-700);">👆 Tap to see map</div>';
   DRIVER_ZONES.zones.forEach(zone => {
     html += `
-      <div class="az-item" style="display: flex; justify-content: space-between; align-items: center;">
-        <div>
-          <span style="font-weight: 700; color: var(--green-500); margin-right: 10px;">Zone ${zone.id}</span>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--gray-700);">
+        <div style="flex: 1;">
+          <span style="font-weight: 700; color: var(--green-500); margin-right: 8px;">${zone.id}</span>
           <span style="color: white;">${zone.driver}</span>
         </div>
-        ${zone.phone ? `<a href="tel:${zone.phone}" style="color: var(--green-500); text-decoration: none;">📞</a>` : ''}
+        ${zone.phone ? `<a href="tel:${zone.phone}" onclick="event.stopPropagation();" style="display: flex; align-items: center; gap: 4px; background: var(--green-600); color: white; text-decoration: none; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;">📞</a>` : ''}
       </div>
     `;
   });
+  html += '</div>';
 
   listEl.innerHTML = html;
   modal.classList.add('active');
@@ -2994,24 +3079,149 @@ function toggleMapFullscreen(imgEl) {
   }
 }
 
+// Flip card state for driver zones
+let driverCardFlipped = false;
+
+/**
+ * Flip the driver zones card between map and list
+ */
+function flipDriverCard() {
+  const inner = document.getElementById('driver-flip-inner');
+  const hint = document.getElementById('driver-flip-hint');
+  if (!inner) return;
+
+  driverCardFlipped = !driverCardFlipped;
+  hapticFeedback('light');
+
+  if (driverCardFlipped) {
+    inner.classList.add('flipped');
+    if (hint) hint.textContent = '👆 Tap to see zone map';
+  } else {
+    inner.classList.remove('flipped');
+    if (hint) hint.textContent = '👆 Tap map to see driver list';
+  }
+}
+
 // Make driver zone functions globally accessible
 window.openDriverZones = openDriverZones;
 window.closeDriverZones = closeDriverZones;
 window.toggleMapFullscreen = toggleMapFullscreen;
+window.flipDriverCard = flipDriverCard;
+
+// ============================================================================
+// ROSTER - All HNFD Members with Clickable Phone Numbers
+// ============================================================================
+
+/**
+ * Open the Roster modal showing all members with phone links
+ */
+function openRoster() {
+  const modal = document.getElementById('roster-modal');
+  const listEl = document.getElementById('roster-list');
+  if (!modal || !listEl) return;
+
+  hapticFeedback('light');
+
+  // Group by certification type
+  const officers = HNFD_ROSTER.filter(m => m.office);
+  const emts = HNFD_ROSTER.filter(m => m.certification.includes('EMT') || m.certification.includes('AEMT'));
+  const drivers = HNFD_ROSTER.filter(m => m.certification.includes('Rescue Driver'));
+  const firefighters = HNFD_ROSTER.filter(m => m.certification === 'FF');
+  const training = HNFD_ROSTER.filter(m => m.certification === 'in training');
+
+  // Build roster HTML with categories
+  let html = '';
+
+  // Leadership section
+  html += `<div style="font-size: 12px; font-weight: 700; color: var(--yellow-400); padding: 12px 16px; background: var(--gray-900); border-bottom: 1px solid var(--gray-700);">LEADERSHIP & OFFICERS</div>`;
+  officers.forEach(member => {
+    html += buildRosterItem(member);
+  });
+
+  // All members alphabetically
+  html += `<div style="font-size: 12px; font-weight: 700; color: var(--green-500); padding: 12px 16px; background: var(--gray-900); border-bottom: 1px solid var(--gray-700); margin-top: 8px;">ALL MEMBERS (A-Z)</div>`;
+
+  const sorted = [...HNFD_ROSTER].sort((a, b) => a.lastName.localeCompare(b.lastName));
+  sorted.forEach(member => {
+    html += buildRosterItem(member);
+  });
+
+  listEl.innerHTML = html;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function buildRosterItem(member) {
+  const name = `${member.firstName} ${member.lastName}`;
+  const role = member.office || member.certification || '';
+  const phone = member.phone;
+
+  return `
+    <div class="roster-item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--gray-800);">
+      <div style="flex: 1;">
+        <div style="color: white; font-weight: 600;">${name}</div>
+        <div style="color: var(--gray-400); font-size: 13px;">${role}${member.number ? ` (#${member.number})` : ''}</div>
+      </div>
+      ${phone ? `<a href="tel:${phone}" style="display: flex; align-items: center; gap: 6px; background: var(--green-600); color: white; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; min-width: 70px; justify-content: center;">📞</a>` : '<span style="width: 70px;"></span>'}
+    </div>
+  `;
+}
+
+/**
+ * Close Roster modal
+ */
+function closeRoster() {
+  const modal = document.getElementById('roster-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+// Make roster functions globally accessible
+window.openRoster = openRoster;
+window.closeRoster = closeRoster;
 
 /**
  * Open the Compartment Browse modal with visual compartment cards
+ * Compartments A-H are INSIDE the ambulance, OB is OUTSIDE (driver side)
  */
 function openCompartmentBrowse() {
   const modal = document.getElementById('compartment-modal');
   const listEl = document.getElementById('compartment-list');
   if (!modal || !listEl) return;
 
-  // Get compartments that have images (the new HNFR ones)
-  const compartmentsWithImages = ['A', 'B', 'C', 'OB', 'E', 'F', 'G', 'H'];
+  // Compartments: A-H are inside, OB is outside
+  const insideCompartments = ['A', 'B', 'C', 'E', 'F', 'G', 'H'];
+  const outsideCompartments = ['OB'];
 
   let html = '';
-  compartmentsWithImages.forEach(key => {
+
+  // Inside compartments header
+  html += `<div style="font-size: 12px; font-weight: 700; color: var(--yellow-400); padding: 12px 16px; background: var(--gray-900); border-bottom: 1px solid var(--gray-700); margin-bottom: 8px;">📍 INSIDE AMBULANCE (A-H)</div>`;
+
+  insideCompartments.forEach(key => {
+    const comp = INVENTORY_DATABASE.compartments[key];
+    if (!comp || !comp.image) return;
+
+    const contentsPreview = comp.contents ? comp.contents.slice(0, 4).join(', ') + (comp.contents.length > 4 ? '...' : '') : '';
+
+    html += `
+      <div class="compartment-card" onclick="showCompartmentDetail('${key}')">
+        <img src="${comp.image}" alt="${comp.name}" class="compartment-thumb">
+        <div class="compartment-info">
+          <div class="compartment-name">${comp.name}</div>
+          <div class="compartment-desc">${comp.description}</div>
+          <div class="compartment-contents">${contentsPreview}</div>
+        </div>
+      </div>
+    `;
+  });
+
+  // Outside compartments header
+  html += `<div style="font-size: 12px; font-weight: 700; color: var(--green-500); padding: 12px 16px; background: var(--gray-900); border-bottom: 1px solid var(--gray-700); margin: 16px 0 8px 0;">🚑 OUTSIDE AMBULANCE (Driver Side)</div>`;
+
+  outsideCompartments.forEach(key => {
     const comp = INVENTORY_DATABASE.compartments[key];
     if (!comp || !comp.image) return;
 

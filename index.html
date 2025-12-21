@@ -2268,19 +2268,23 @@
       <div class="recent-searches" id="recent-searches"></div>
     </section>
 
-    <!-- Browse Buttons - A-Z, Compartments, and Driver Zones -->
-    <div class="browse-buttons-row">
-      <button class="browse-az-btn" id="azBrowseBtn" onclick="openAZBrowse()">
+    <!-- Browse Buttons - A-Z, Compartments, Drivers, and Roster -->
+    <div class="browse-buttons-row" style="flex-wrap: wrap;">
+      <button class="browse-az-btn" id="azBrowseBtn" onclick="openAZBrowse()" style="flex: 1 1 45%;">
         <span class="browse-az-icon">📋</span>
         <span class="browse-az-text">A-Z List</span>
       </button>
-      <button class="browse-az-btn browse-compartment-btn" id="compartmentBrowseBtn" onclick="openCompartmentBrowse()">
+      <button class="browse-az-btn browse-compartment-btn" id="compartmentBrowseBtn" onclick="openCompartmentBrowse()" style="flex: 1 1 45%;">
         <span class="browse-az-icon">🚑</span>
         <span class="browse-az-text">Compartment</span>
       </button>
-      <button class="browse-az-btn browse-drivers-btn" id="driverZonesBtn" onclick="openDriverZones()">
+      <button class="browse-az-btn browse-drivers-btn" id="driverZonesBtn" onclick="openDriverZones()" style="flex: 1 1 45%;">
         <span class="browse-az-icon">🗺️</span>
-        <span class="browse-az-text">Drivers</span>
+        <span class="browse-az-text">Zones</span>
+      </button>
+      <button class="browse-az-btn browse-roster-btn" id="rosterBtn" onclick="openRoster()" style="flex: 1 1 45%; background: linear-gradient(135deg, #059669, #047857);">
+        <span class="browse-az-icon">📞</span>
+        <span class="browse-az-text">Roster</span>
       </button>
     </div>
 
@@ -2889,27 +2893,80 @@ Example for Narcan:
     </div>
   </div>
 
-  <!-- Driver Zones Modal -->
+  <!-- Driver Zones Modal - Flip Card -->
   <div class="az-modal" id="driver-zones-modal">
     <div class="az-simple-container" style="max-width: 500px;">
       <div class="az-simple-header">
         <h2>🗺️ Driver Zones</h2>
         <button class="az-close-btn" onclick="closeDriverZones()">✕</button>
       </div>
-      <div class="az-count">Harpswell Area Driver Assignments</div>
+      <div class="az-count" id="driver-flip-hint">👆 Tap map to see driver list</div>
 
-      <!-- Zone Map Image -->
-      <div style="margin: 15px 0; border-radius: 12px; overflow: hidden;">
-        <img src="/images/zone_map.jpg" alt="Zone Map"
-             style="width: 100%; display: block; cursor: pointer;"
-             onclick="toggleMapFullscreen(this)">
-        <div style="text-align: center; font-size: 12px; color: var(--gray-400); padding: 8px;">
-          Tap map to enlarge
+      <!-- Flip Card Container with proper CSS -->
+      <style>
+        .driver-flip-card {
+          perspective: 1000px;
+          margin: 15px 0;
+          cursor: pointer;
+          min-height: 400px;
+        }
+        .driver-flip-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+        }
+        .driver-flip-inner.flipped {
+          transform: rotateY(180deg);
+        }
+        .driver-flip-front, .driver-flip-back {
+          position: absolute;
+          width: 100%;
+          min-height: 400px;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          border-radius: 12px;
+          overflow: hidden;
+        }
+        .driver-flip-front {
+          background: var(--gray-800);
+        }
+        .driver-flip-back {
+          background: var(--gray-800);
+          transform: rotateY(180deg);
+          max-height: 70vh;
+          overflow-y: auto;
+        }
+      </style>
+
+      <div class="driver-flip-card" id="driver-flip-card" onclick="flipDriverCard()">
+        <div class="driver-flip-inner" id="driver-flip-inner">
+          <!-- Front - Zone Map -->
+          <div class="driver-flip-front">
+            <img src="/images/zone_map.jpg" alt="Zone Map" style="width: 100%; display: block;">
+            <div style="text-align: center; font-size: 14px; color: var(--green-500); padding: 12px; background: var(--gray-900); font-weight: 600;">
+              👆 TAP TO SEE DRIVERS
+            </div>
+          </div>
+          <!-- Back - Driver List -->
+          <div class="driver-flip-back" id="driver-zones-list">
+            <!-- Populated by JS -->
+          </div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- Driver List -->
-      <div class="az-list-container" id="driver-zones-list" style="max-height: 50vh;">
+  <!-- Roster Modal - All Members with Phone Numbers -->
+  <div class="az-modal" id="roster-modal">
+    <div class="az-simple-container" style="max-width: 500px;">
+      <div class="az-simple-header" style="background: linear-gradient(135deg, #059669, #047857);">
+        <h2>📞 HNFD Roster</h2>
+        <button class="az-close-btn" onclick="closeRoster()">✕</button>
+      </div>
+      <div class="az-count">Tap phone icon to call</div>
+      <div class="az-list-container" id="roster-list" style="max-height: 70vh;">
         <!-- Populated by JS -->
       </div>
     </div>

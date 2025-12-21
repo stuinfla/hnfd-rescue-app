@@ -1,10 +1,12 @@
 {
-  "version": "2.13.0",
+  "version": "2.14.0",
   "build": "2025-12-21",
   "changelog": [
-    "NEW: Driver Zones - view zone map and driver assignments",
-    "NEW: Tap 'Drivers' button to see Harpswell zone map",
-    "NEW: Admin portal can now edit driver assignments",
-    "Tap map to view fullscreen"
+    "NEW: Roster - tap to call any HNFD member",
+    "NEW: Driver zones now have phone numbers",
+    "NEW: Tap speaker again to stop speech",
+    "NEW: Flip card for driver zones map",
+    "FIX: Speech no longer stutters on start",
+    "Compartments labeled Inside/Outside"
   ]
 }

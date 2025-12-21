@@ -1316,6 +1316,155 @@ function addNewDriver() {
 }
 
 // ============================================================================
+// ROSTER MANAGEMENT
+// ============================================================================
+
+const ROSTER_STATE = {
+  members: []
+};
+
+function loadRoster() {
+  // Load from HNFD_ROSTER if available (from app.js)
+  if (typeof HNFD_ROSTER !== 'undefined') {
+    ROSTER_STATE.members = JSON.parse(JSON.stringify(HNFD_ROSTER));
+  } else {
+    ROSTER_STATE.members = [];
+  }
+  renderRoster();
+}
+
+function renderRoster() {
+  const grid = document.getElementById('roster-grid');
+  if (!grid) return;
+
+  while (grid.firstChild) {
+    grid.removeChild(grid.firstChild);
+  }
+
+  // Sort by last name
+  ROSTER_STATE.members.sort((a, b) => a.lastName.localeCompare(b.lastName)).forEach(member => {
+    const card = document.createElement('div');
+    card.className = 'equipment-card';
+    card.style.padding = '15px';
+
+    const header = document.createElement('div');
+    header.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;';
+
+    const nameDiv = document.createElement('div');
+    nameDiv.innerHTML = `
+      <div style="font-size: 18px; font-weight: 700; color: white;">${member.firstName} ${member.lastName}</div>
+      <div style="font-size: 13px; color: var(--gray-400);">${member.office || member.certification || 'Member'}${member.number ? ' #' + member.number : ''}</div>
+    `;
+    header.appendChild(nameDiv);
+
+    const actions = document.createElement('div');
+    actions.style.cssText = 'display: flex; gap: 8px;';
+
+    const editBtn = document.createElement('button');
+    editBtn.className = 'btn btn-secondary btn-small';
+    editBtn.textContent = '✏️';
+    editBtn.onclick = () => editMember(member.number || member.lastName);
+    actions.appendChild(editBtn);
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'btn btn-danger btn-small';
+    deleteBtn.textContent = '🗑️';
+    deleteBtn.onclick = () => deleteMember(member.number || member.lastName);
+    actions.appendChild(deleteBtn);
+
+    header.appendChild(actions);
+    card.appendChild(header);
+
+    // Phone info
+    const infoDiv = document.createElement('div');
+    infoDiv.style.cssText = 'display: flex; align-items: center; gap: 8px; margin-top: 10px;';
+    infoDiv.innerHTML = `
+      <span style="color: var(--green-500);">📞</span>
+      <span style="color: var(--gray-300);">${member.phone || 'No phone'}</span>
+    `;
+    card.appendChild(infoDiv);
+
+    // Email if exists
+    if (member.email) {
+      const emailDiv = document.createElement('div');
+      emailDiv.style.cssText = 'display: flex; align-items: center; gap: 8px; margin-top: 5px;';
+      emailDiv.innerHTML = `
+        <span style="color: var(--blue-500);">📧</span>
+        <span style="color: var(--gray-400); font-size: 12px;">${member.email}</span>
+      `;
+      card.appendChild(emailDiv);
+    }
+
+    grid.appendChild(card);
+  });
+}
+
+function editMember(identifier) {
+  const member = ROSTER_STATE.members.find(m => m.number === identifier || m.lastName === identifier);
+  if (!member) return;
+
+  const newFirst = prompt('First name:', member.firstName);
+  if (newFirst === null) return;
+
+  const newLast = prompt('Last name:', member.lastName);
+  if (newLast === null) return;
+
+  const newPhone = prompt('Phone number:', member.phone || '');
+  if (newPhone === null) return;
+
+  const newCert = prompt('Certification (EMT, AEMT, Rescue Driver, FF, etc.):', member.certification || '');
+  const newOffice = prompt('Office/Title (optional):', member.office || '');
+
+  member.firstName = newFirst;
+  member.lastName = newLast;
+  member.phone = newPhone;
+  member.certification = newCert || '';
+  member.office = newOffice || '';
+  member._modified = true;
+
+  addChange('Updated member: ' + newFirst + ' ' + newLast);
+  renderRoster();
+}
+
+function deleteMember(identifier) {
+  const member = ROSTER_STATE.members.find(m => m.number === identifier || m.lastName === identifier);
+  if (!member) return;
+
+  if (!confirm('Delete ' + member.firstName + ' ' + member.lastName + '? This cannot be undone.')) return;
+
+  ROSTER_STATE.members = ROSTER_STATE.members.filter(m => m !== member);
+  addChange('Deleted member: ' + member.firstName + ' ' + member.lastName);
+  renderRoster();
+}
+
+function addNewMember() {
+  const firstName = prompt('First name:');
+  if (!firstName) return;
+
+  const lastName = prompt('Last name:');
+  if (!lastName) return;
+
+  const phone = prompt('Phone number:');
+  const number = prompt('Member number (optional):');
+  const certification = prompt('Certification (EMT, AEMT, Rescue Driver, FF, etc.):');
+  const office = prompt('Office/Title (optional):');
+  const email = prompt('Email (optional):');
+
+  ROSTER_STATE.members.push({
+    number: number || '',
+    firstName: firstName,
+    lastName: lastName,
+    phone: phone || '',
+    certification: certification || '',
+    office: office || '',
+    email: email || ''
+  });
+
+  addChange('Added member: ' + firstName + ' ' + lastName);
+  renderRoster();
+}
+
+// ============================================================================
 // INITIALIZATION
 // ============================================================================
 
@@ -1323,5 +1472,6 @@ window.addEventListener('load', () => {
   console.log('[Admin Portal] Initializing...');
   loadEquipment();
   loadDriverZones();
+  loadRoster();
   updateChangesDisplay();
 });

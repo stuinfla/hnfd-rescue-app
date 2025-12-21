@@ -593,10 +593,11 @@
     <!-- Main Content -->
     <main class="main-content">
       <!-- Tabs -->
-      <div class="tabs">
+      <div class="tabs" style="flex-wrap: wrap;">
         <button class="tab active" onclick="switchTab('equipment')">📦 Equipment</button>
         <button class="tab" onclick="switchTab('images')">🖼️ Images</button>
         <button class="tab" onclick="switchTab('drivers')">🗺️ Drivers</button>
+        <button class="tab" onclick="switchTab('roster')">📞 Roster</button>
         <button class="tab" onclick="switchTab('deployment')">🚀 Deployment</button>
       </div>
 
@@ -666,6 +667,22 @@
 
           <div class="equipment-grid" id="drivers-grid">
             <!-- Driver cards will be generated here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Roster Tab -->
+      <div class="tab-content" id="roster-tab">
+        <div class="optimizer-section">
+          <div class="optimizer-header">
+            <h2>📞 HNFD Roster Management</h2>
+            <button class="btn btn-primary" onclick="addNewMember()">
+              + Add Member
+            </button>
+          </div>
+          <p style="color: var(--gray-400); margin-bottom: 20px;">Edit member information and phone numbers. Changes update the app roster.</p>
+          <div class="equipment-grid" id="roster-grid">
+            <!-- Roster cards will be generated here -->
           </div>
         </div>
       </div>
