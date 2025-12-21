@@ -1050,7 +1050,6 @@ const HNFD_ROSTER = [
   { number: "745", lastName: "Rose", firstName: "Chris", certification: "Rescue Driver", office: "", phone: "207-751-3669", email: "crose04079@gmail.com" },
   { number: "734", lastName: "Rose", firstName: "David", certification: "Rescue Driver", office: "", phone: "602-319-4826", email: "azruins@gmail.com" },
   { number: "733", lastName: "Stokinger", firstName: "Jack", certification: "Rescue Driver/Pump Operator", office: "Ambulance Maintenance", phone: "978-807-3339", email: "jackstokinger@comcast.net" },
-  { number: "746", lastName: "Treat", firstName: "Steve", certification: "in training", office: "", phone: "207-329-1303", email: "streat52@gmail.com" },
   { number: "703", lastName: "True", firstName: "Frank", certification: "FF", office: "Fire Training Officer", phone: "207-446-1729", email: "franklin.true@va.gov" },
   { number: "761", lastName: "Williams", firstName: "Gail", certification: "Rescue Driver", office: "", phone: "207-751-9190", email: "castonguay1@comcast.net" }
 ];
