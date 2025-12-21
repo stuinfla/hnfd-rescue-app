@@ -1176,11 +1176,152 @@ function exportData() {
 }
 
 // ============================================================================
+// DRIVER ZONES MANAGEMENT
+// ============================================================================
+
+// Driver zones state
+const DRIVER_STATE = {
+  zones: []
+};
+
+function loadDriverZones() {
+  // Load from DRIVER_ZONES if available (from app.js)
+  if (typeof DRIVER_ZONES !== 'undefined') {
+    DRIVER_STATE.zones = JSON.parse(JSON.stringify(DRIVER_ZONES.zones));
+  } else {
+    // Fallback default data
+    DRIVER_STATE.zones = [
+      { id: "728", driver: "Pinkston Russell", phone: "" },
+      { id: "729", driver: "Bebarski Jim", phone: "" },
+      { id: "731", driver: "Baiss David", phone: "" },
+      { id: "732", driver: "Moore Tom", phone: "" },
+      { id: "736", driver: "Arnold Pete", phone: "" },
+      { id: "738", driver: "King Anthony", phone: "" },
+      { id: "739", driver: "Griffiths Lauren", phone: "" },
+      { id: "741", driver: "Hickey Kathy", phone: "" },
+      { id: "742", driver: "Marshall Howie", phone: "" },
+      { id: "743", driver: "Beck Bill", phone: "" },
+      { id: "744", driver: "DeLorenzo Michael", phone: "" },
+      { id: "745", driver: "Rose Chris", phone: "" },
+      { id: "748", driver: "Dumas Rick", phone: "" },
+      { id: "749", driver: "Carson Brownie", phone: "" },
+      { id: "761", driver: "Williams Gail", phone: "" }
+    ];
+  }
+  renderDrivers();
+}
+
+function renderDrivers() {
+  const grid = document.getElementById('drivers-grid');
+  if (!grid) return;
+
+  while (grid.firstChild) {
+    grid.removeChild(grid.firstChild);
+  }
+
+  DRIVER_STATE.zones.sort((a, b) => parseInt(a.id) - parseInt(b.id)).forEach(zone => {
+    const card = document.createElement('div');
+    card.className = 'equipment-card';
+    card.style.padding = '20px';
+
+    const header = document.createElement('div');
+    header.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;';
+
+    const zoneLabel = document.createElement('div');
+    zoneLabel.style.cssText = 'font-size: 24px; font-weight: 700; color: var(--green-500);';
+    zoneLabel.textContent = 'Zone ' + zone.id;
+    header.appendChild(zoneLabel);
+
+    const actions = document.createElement('div');
+    actions.style.cssText = 'display: flex; gap: 8px;';
+
+    const editBtn = document.createElement('button');
+    editBtn.className = 'btn btn-secondary btn-small';
+    editBtn.textContent = '✏️ Edit';
+    editBtn.onclick = () => editDriver(zone.id);
+    actions.appendChild(editBtn);
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'btn btn-danger btn-small';
+    deleteBtn.textContent = '🗑️';
+    deleteBtn.onclick = () => deleteDriver(zone.id);
+    actions.appendChild(deleteBtn);
+
+    header.appendChild(actions);
+    card.appendChild(header);
+
+    const driverName = document.createElement('div');
+    driverName.style.cssText = 'font-size: 18px; color: white; margin-bottom: 10px;';
+    driverName.textContent = zone.driver;
+    card.appendChild(driverName);
+
+    if (zone.phone) {
+      const phone = document.createElement('div');
+      phone.style.cssText = 'font-size: 14px; color: var(--gray-400);';
+      phone.textContent = '📞 ' + zone.phone;
+      card.appendChild(phone);
+    }
+
+    grid.appendChild(card);
+  });
+}
+
+function editDriver(zoneId) {
+  const zone = DRIVER_STATE.zones.find(z => z.id === zoneId);
+  if (!zone) return;
+
+  const newDriver = prompt('Driver name for Zone ' + zoneId + ':', zone.driver);
+  if (newDriver === null) return;
+
+  const newPhone = prompt('Phone number (optional):', zone.phone || '');
+
+  zone.driver = newDriver;
+  zone.phone = newPhone || '';
+  zone._modified = true;
+
+  addChange('Updated Zone ' + zoneId + ' driver to ' + newDriver);
+  renderDrivers();
+}
+
+function deleteDriver(zoneId) {
+  if (!confirm('Delete Zone ' + zoneId + '? This cannot be undone.')) return;
+
+  DRIVER_STATE.zones = DRIVER_STATE.zones.filter(z => z.id !== zoneId);
+  addChange('Deleted Zone ' + zoneId);
+  renderDrivers();
+}
+
+function addNewDriver() {
+  const zoneId = prompt('Enter Zone number (e.g., 750):');
+  if (!zoneId) return;
+
+  if (DRIVER_STATE.zones.find(z => z.id === zoneId)) {
+    alert('Zone ' + zoneId + ' already exists!');
+    return;
+  }
+
+  const driverName = prompt('Driver name for Zone ' + zoneId + ':');
+  if (!driverName) return;
+
+  const phone = prompt('Phone number (optional):');
+
+  DRIVER_STATE.zones.push({
+    id: zoneId,
+    driver: driverName,
+    phone: phone || ''
+  });
+
+  addChange('Added Zone ' + zoneId + ' - ' + driverName);
+  renderDrivers();
+}
+
+// ============================================================================
 // INITIALIZATION
 // ============================================================================
 
 window.addEventListener('load', () => {
   console.log('[Admin Portal] Initializing...');
   loadEquipment();
+  loadDriverZones();
   updateChangesDisplay();
 });

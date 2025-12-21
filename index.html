@@ -2268,7 +2268,7 @@
       <div class="recent-searches" id="recent-searches"></div>
     </section>
 
-    <!-- Browse Buttons - A-Z and Compartments -->
+    <!-- Browse Buttons - A-Z, Compartments, and Driver Zones -->
     <div class="browse-buttons-row">
       <button class="browse-az-btn" id="azBrowseBtn" onclick="openAZBrowse()">
         <span class="browse-az-icon">📋</span>
@@ -2276,7 +2276,11 @@
       </button>
       <button class="browse-az-btn browse-compartment-btn" id="compartmentBrowseBtn" onclick="openCompartmentBrowse()">
         <span class="browse-az-icon">🚑</span>
-        <span class="browse-az-text">By Compartment</span>
+        <span class="browse-az-text">Compartment</span>
+      </button>
+      <button class="browse-az-btn browse-drivers-btn" id="driverZonesBtn" onclick="openDriverZones()">
+        <span class="browse-az-icon">🗺️</span>
+        <span class="browse-az-text">Drivers</span>
       </button>
     </div>
 
@@ -2881,6 +2885,32 @@ Example for Narcan:
       <div class="az-count" id="az-count"></div>
       <div class="az-list-container" id="az-list">
         <!-- Items populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Driver Zones Modal -->
+  <div class="az-modal" id="driver-zones-modal">
+    <div class="az-simple-container" style="max-width: 500px;">
+      <div class="az-simple-header">
+        <h2>🗺️ Driver Zones</h2>
+        <button class="az-close-btn" onclick="closeDriverZones()">✕</button>
+      </div>
+      <div class="az-count">Harpswell Area Driver Assignments</div>
+
+      <!-- Zone Map Image -->
+      <div style="margin: 15px 0; border-radius: 12px; overflow: hidden;">
+        <img src="/images/zone_map.jpg" alt="Zone Map"
+             style="width: 100%; display: block; cursor: pointer;"
+             onclick="toggleMapFullscreen(this)">
+        <div style="text-align: center; font-size: 12px; color: var(--gray-400); padding: 8px;">
+          Tap map to enlarge
+        </div>
+      </div>
+
+      <!-- Driver List -->
+      <div class="az-list-container" id="driver-zones-list" style="max-height: 50vh;">
+        <!-- Populated by JS -->
       </div>
     </div>
   </div>

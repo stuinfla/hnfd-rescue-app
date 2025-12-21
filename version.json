@@ -1,10 +1,10 @@
 {
-  "version": "2.12.0",
+  "version": "2.13.0",
   "build": "2025-12-21",
   "changelog": [
-    "SAFETY: Updates are now user-controlled (no auto-update)",
-    "Updates require manual tap and verify signal before applying",
-    "App remains 100% functional even in no-signal areas",
-    "FIX: Speech recognition state handling"
+    "NEW: Driver Zones - view zone map and driver assignments",
+    "NEW: Tap 'Drivers' button to see Harpswell zone map",
+    "NEW: Admin portal can now edit driver assignments",
+    "Tap map to view fullscreen"
   ]
 }

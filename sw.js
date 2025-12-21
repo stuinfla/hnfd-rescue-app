@@ -49,7 +49,10 @@ const ASSETS_TO_CACHE = [
   '/images/locations/drug_box_closeup.jpg',
   '/images/locations/lifepak_closeup.jpg',
   '/images/locations/narcan_syringe_closeup.jpg',
-  '/images/locations/oxygen_tanks_closeup.jpg'
+  '/images/locations/oxygen_tanks_closeup.jpg',
+  // Driver zone images (v2.13.0)
+  '/images/zone_map.jpg',
+  '/images/driver_list.jpg'
 ];
 
 // Install - cache all assets

@@ -985,6 +985,32 @@ const INVENTORY_DATABASE = {
 };
 
 // ============================================================================
+// DRIVER ZONES DATABASE - Harpswell Area Driver Assignments
+// Source: HNFD Zone Map and Driver List
+// ============================================================================
+const DRIVER_ZONES = {
+  mapImage: "/images/zone_map.jpg",
+  driverListImage: "/images/driver_list.jpg",
+  zones: [
+    { id: "728", driver: "Pinkston Russell", phone: "" },
+    { id: "729", driver: "Bebarski Jim", phone: "" },
+    { id: "731", driver: "Baiss David", phone: "" },
+    { id: "732", driver: "Moore Tom", phone: "" },
+    { id: "736", driver: "Arnold Pete", phone: "" },
+    { id: "738", driver: "King Anthony", phone: "" },
+    { id: "739", driver: "Griffiths Lauren", phone: "" },
+    { id: "741", driver: "Hickey Kathy", phone: "" },
+    { id: "742", driver: "Marshall Howie", phone: "" },
+    { id: "743", driver: "Beck Bill", phone: "" },
+    { id: "744", driver: "DeLorenzo Michael", phone: "" },
+    { id: "745", driver: "Rose Chris", phone: "" },
+    { id: "748", driver: "Dumas Rick", phone: "" },
+    { id: "749", driver: "Carson Brownie", phone: "" },
+    { id: "761", driver: "Williams Gail", phone: "" }
+  ]
+};
+
+// ============================================================================
 // INTELLIGENT VOICE MATCHING - Restrict to valid equipment only
 // ============================================================================
 
@@ -2896,6 +2922,82 @@ function closeAZBrowse() {
     document.body.style.overflow = '';
   }
 }
+
+// ============================================================================
+// DRIVER ZONES - Harpswell Area Driver Assignments by Zone
+// ============================================================================
+
+/**
+ * Open the Driver Zones modal showing map and driver list
+ */
+function openDriverZones() {
+  const modal = document.getElementById('driver-zones-modal');
+  const listEl = document.getElementById('driver-zones-list');
+  if (!modal || !listEl) return;
+
+  hapticFeedback('light');
+
+  // Build driver list HTML
+  let html = '';
+  DRIVER_ZONES.zones.forEach(zone => {
+    html += `
+      <div class="az-item" style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <span style="font-weight: 700; color: var(--green-500); margin-right: 10px;">Zone ${zone.id}</span>
+          <span style="color: white;">${zone.driver}</span>
+        </div>
+        ${zone.phone ? `<a href="tel:${zone.phone}" style="color: var(--green-500); text-decoration: none;">📞</a>` : ''}
+      </div>
+    `;
+  });
+
+  listEl.innerHTML = html;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Close Driver Zones modal
+ */
+function closeDriverZones() {
+  const modal = document.getElementById('driver-zones-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+/**
+ * Toggle map fullscreen view
+ */
+function toggleMapFullscreen(imgEl) {
+  if (imgEl.style.position === 'fixed') {
+    // Exit fullscreen
+    imgEl.style.position = '';
+    imgEl.style.top = '';
+    imgEl.style.left = '';
+    imgEl.style.width = '';
+    imgEl.style.height = '';
+    imgEl.style.zIndex = '';
+    imgEl.style.objectFit = '';
+    imgEl.style.background = '';
+  } else {
+    // Enter fullscreen
+    imgEl.style.position = 'fixed';
+    imgEl.style.top = '0';
+    imgEl.style.left = '0';
+    imgEl.style.width = '100vw';
+    imgEl.style.height = '100vh';
+    imgEl.style.zIndex = '10000';
+    imgEl.style.objectFit = 'contain';
+    imgEl.style.background = 'rgba(0,0,0,0.95)';
+  }
+}
+
+// Make driver zone functions globally accessible
+window.openDriverZones = openDriverZones;
+window.closeDriverZones = closeDriverZones;
+window.toggleMapFullscreen = toggleMapFullscreen;
 
 /**
  * Open the Compartment Browse modal with visual compartment cards

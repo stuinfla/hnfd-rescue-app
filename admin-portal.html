@@ -596,6 +596,7 @@
       <div class="tabs">
         <button class="tab active" onclick="switchTab('equipment')">📦 Equipment</button>
         <button class="tab" onclick="switchTab('images')">🖼️ Images</button>
+        <button class="tab" onclick="switchTab('drivers')">🗺️ Drivers</button>
         <button class="tab" onclick="switchTab('deployment')">🚀 Deployment</button>
       </div>
 
@@ -645,6 +646,27 @@
 
         <div class="equipment-grid" id="images-grid">
           <!-- Image cards will be generated here -->
+        </div>
+      </div>
+
+      <!-- Drivers Tab -->
+      <div class="tab-content" id="drivers-tab">
+        <div class="optimizer-section">
+          <div class="optimizer-header">
+            <h2>🗺️ Driver Zone Assignments</h2>
+            <button class="btn btn-primary" onclick="addNewDriver()">
+              + Add Driver
+            </button>
+          </div>
+
+          <div style="margin: 20px 0;">
+            <img src="/images/zone_map.jpg" alt="Zone Map" style="width: 100%; max-width: 600px; border-radius: 12px; display: block; margin: 0 auto;">
+            <p style="text-align: center; color: var(--gray-400); margin-top: 10px;">Harpswell Area Zone Map</p>
+          </div>
+
+          <div class="equipment-grid" id="drivers-grid">
+            <!-- Driver cards will be generated here -->
+          </div>
         </div>
       </div>
 
