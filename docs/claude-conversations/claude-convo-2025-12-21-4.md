@@ -12,3 +12,8 @@
 
 continue
 
+
+## Human
+
+Change the blue text 'cause it's completely unreadable and the close button is still not working here. Very important the close button needs to take you back to the roster cleanly and correctly please  fix and verify now
+

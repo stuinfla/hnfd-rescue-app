@@ -1,7 +1,9 @@
 {
-  "version": "2.14.5",
+  "version": "2.14.6",
   "build": "2025-12-21",
   "changelog": [
+    "FIX: Member detail close button works properly",
+    "FIX: Email text now white (readable)",
     "Roster now requires PIN to access",
     "Tap name to see member details",
     "Leadership sorted by number",
