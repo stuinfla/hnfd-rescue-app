@@ -1015,6 +1015,7 @@ const DRIVER_ZONES = {
 // Source: Current Roster 8-29-25.pdf
 // ============================================================================
 const HNFD_ROSTER = [
+  { number: "701", lastName: "Mercier", firstName: "David", certification: "FF", office: "Chief", phone: "207-841-4501", email: "m00sehead2020@comcast.net" },
   { number: "717", lastName: "Aibel", firstName: "Dave", certification: "AEMT", office: "", phone: "401-862-4203", email: "daibel@stiarna.com" },
   { number: "718", lastName: "Aibel", firstName: "Laura", certification: "EMT", office: "", phone: "401-862-4231", email: "laibel@stiarna.com" },
   { number: "736", lastName: "Arnold", firstName: "Pete", certification: "Rescue Driver", office: "", phone: "207-577-2146", email: "peter.arnold0423@gmail.com" },
@@ -1040,7 +1041,6 @@ const HNFD_ROSTER = [
   { number: "738", lastName: "King", firstName: "Anthony", certification: "Rescue Driver", office: "", phone: "315-920-1926", email: "anthony.m.king92@gmail.com" },
   { number: "737", lastName: "Konicek", firstName: "Tim", certification: "Rescue Driver", office: "", phone: "617-201-5361", email: "timkonicek59@gmail.com" },
   { number: "742", lastName: "Marshall", firstName: "Howie", certification: "Rescue Driver", office: "Driving Instructor", phone: "617-858-5740", email: "hzm@alumni.caltech.edu" },
-  { number: "701", lastName: "Mercier", firstName: "David", certification: "FF", office: "Chief", phone: "207-841-4501", email: "m00sehead2020@comcast.net" },
   { number: "735", lastName: "Moody", firstName: "Danielle", certification: "Rescue Driver", office: "", phone: "207-841-9515", email: "auntiedaniellem@gmail.com" },
   { number: "732", lastName: "Moore", firstName: "Tom", certification: "Rescue Driver", office: "", phone: "207-504-0374", email: "tom.moore.maine@gmail.com" },
   { number: "", lastName: "Munk", firstName: "Marc-David", certification: "", office: "Medical Director", phone: "617-921-5666", email: "marc@mecpe.org" },
