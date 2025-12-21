@@ -3253,7 +3253,7 @@ function showMemberDetail(memberId) {
 
   const name = `${member.firstName} ${member.lastName}`;
   const detailHtml = `
-    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 10001; display: flex; align-items: center; justify-content: center; padding: 20px;" onclick="this.remove()">
+    <div id="member-detail-overlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 10001; display: flex; align-items: center; justify-content: center; padding: 20px;" onclick="closeMemberDetail()">
       <div style="background: var(--gray-800); border-radius: 16px; max-width: 340px; width: 100%; max-height: 80vh; overflow-y: auto;" onclick="event.stopPropagation()">
         <div style="background: linear-gradient(135deg, var(--blue-600), var(--blue-800)); padding: 20px; border-radius: 16px 16px 0 0; text-align: center;">
           <div style="font-size: 48px; margin-bottom: 8px;">👤</div>
@@ -3279,7 +3279,7 @@ function showMemberDetail(memberId) {
           </a>` : ''}
         </div>
         <div style="padding: 0 16px 16px;">
-          <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" style="width: 100%; padding: 14px; background: var(--gray-600); border: none; border-radius: 8px; color: white; font-size: 16px; font-weight: 600; cursor: pointer;">Close</button>
+          <button onclick="closeMemberDetail()" style="width: 100%; padding: 14px; background: var(--gray-600); border: none; border-radius: 8px; color: white; font-size: 16px; font-weight: 600; cursor: pointer;">Close</button>
         </div>
       </div>
     </div>
@@ -3288,7 +3288,13 @@ function showMemberDetail(memberId) {
   document.body.insertAdjacentHTML('beforeend', detailHtml);
 }
 
+function closeMemberDetail() {
+  const overlay = document.getElementById('member-detail-overlay');
+  if (overlay) overlay.remove();
+}
+
 window.showMemberDetail = showMemberDetail;
+window.closeMemberDetail = closeMemberDetail;
 
 /**
  * Close Roster modal
