@@ -12,3 +12,8 @@
 
 elimenate steve treat from teh roster.  he is no long acdtive
 
+
+## Human
+
+You go to. Hey on the roster I should be able to click on a person's name and see all the details on that person that's a second link  [Image #1]
+

@@ -3121,18 +3121,18 @@ function openRoster() {
 
   hapticFeedback('light');
 
-  // Group by certification type
-  const officers = HNFD_ROSTER.filter(m => m.office);
-  const emts = HNFD_ROSTER.filter(m => m.certification.includes('EMT') || m.certification.includes('AEMT'));
-  const drivers = HNFD_ROSTER.filter(m => m.certification.includes('Rescue Driver'));
-  const firefighters = HNFD_ROSTER.filter(m => m.certification === 'FF');
-  const training = HNFD_ROSTER.filter(m => m.certification === 'in training');
+  // Group by certification type - officers sorted by number
+  const officers = HNFD_ROSTER.filter(m => m.office).sort((a, b) => {
+    const numA = parseInt(a.number) || 9999;
+    const numB = parseInt(b.number) || 9999;
+    return numA - numB;
+  });
 
   // Build roster HTML with categories
   let html = '';
 
-  // Leadership section
-  html += `<div style="font-size: 12px; font-weight: 700; color: var(--yellow-400); padding: 12px 16px; background: var(--gray-900); border-bottom: 1px solid var(--gray-700);">LEADERSHIP & OFFICERS</div>`;
+  // Leadership section - sorted by number
+  html += `<div style="font-size: 12px; font-weight: 700; color: var(--yellow-400); padding: 12px 16px; background: var(--gray-900); border-bottom: 1px solid var(--gray-700);">LEADERSHIP & OFFICERS (by #)</div>`;
   officers.forEach(member => {
     html += buildRosterItem(member);
   });
@@ -3154,17 +3154,66 @@ function buildRosterItem(member) {
   const name = `${member.firstName} ${member.lastName}`;
   const role = member.office || member.certification || '';
   const phone = member.phone;
+  const memberId = member.number || member.lastName;
 
   return `
     <div class="roster-item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--gray-800);">
-      <div style="flex: 1;">
-        <div style="color: white; font-weight: 600;">${name}</div>
+      <div style="flex: 1; cursor: pointer;" onclick="showMemberDetail('${memberId}')">
+        <div style="color: white; font-weight: 600;">${name} <span style="color: var(--blue-400); font-size: 11px;">ℹ️</span></div>
         <div style="color: var(--gray-400); font-size: 13px;">${role}${member.number ? ` (#${member.number})` : ''}</div>
       </div>
-      ${phone ? `<a href="tel:${phone}" style="display: flex; align-items: center; gap: 6px; background: var(--green-600); color: white; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; min-width: 70px; justify-content: center;">📞</a>` : '<span style="width: 70px;"></span>'}
+      ${phone ? `<a href="tel:${phone}" onclick="event.stopPropagation();" style="display: flex; align-items: center; gap: 6px; background: var(--green-600); color: white; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; min-width: 70px; justify-content: center;">📞</a>` : '<span style="width: 70px;"></span>'}
     </div>
   `;
 }
+
+/**
+ * Show detailed member information
+ */
+function showMemberDetail(memberId) {
+  const member = HNFD_ROSTER.find(m => m.number === memberId || m.lastName === memberId);
+  if (!member) return;
+
+  hapticFeedback('light');
+
+  const name = `${member.firstName} ${member.lastName}`;
+  const detailHtml = `
+    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 10001; display: flex; align-items: center; justify-content: center; padding: 20px;" onclick="this.remove()">
+      <div style="background: var(--gray-800); border-radius: 16px; max-width: 340px; width: 100%; max-height: 80vh; overflow-y: auto;" onclick="event.stopPropagation()">
+        <div style="background: linear-gradient(135deg, var(--blue-600), var(--blue-800)); padding: 20px; border-radius: 16px 16px 0 0; text-align: center;">
+          <div style="font-size: 48px; margin-bottom: 8px;">👤</div>
+          <div style="font-size: 20px; font-weight: 700; color: white;">${name}</div>
+          ${member.number ? `<div style="font-size: 14px; color: var(--blue-200);">#${member.number}</div>` : ''}
+        </div>
+        <div style="padding: 16px;">
+          ${member.office ? `<div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--yellow-900); border-radius: 8px; margin-bottom: 12px;">
+            <span style="font-size: 20px;">⭐</span>
+            <div><div style="color: var(--yellow-400); font-size: 12px; font-weight: 600;">OFFICE</div><div style="color: white; font-weight: 600;">${member.office}</div></div>
+          </div>` : ''}
+          ${member.certification ? `<div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--gray-700); border-radius: 8px; margin-bottom: 12px;">
+            <span style="font-size: 20px;">🏥</span>
+            <div><div style="color: var(--gray-400); font-size: 12px; font-weight: 600;">CERTIFICATION</div><div style="color: white;">${member.certification}</div></div>
+          </div>` : ''}
+          ${member.phone ? `<a href="tel:${member.phone}" style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--green-900); border-radius: 8px; margin-bottom: 12px; text-decoration: none;">
+            <span style="font-size: 20px;">📞</span>
+            <div><div style="color: var(--green-400); font-size: 12px; font-weight: 600;">PHONE</div><div style="color: white; font-weight: 600;">${member.phone}</div></div>
+          </a>` : ''}
+          ${member.email ? `<a href="mailto:${member.email}" style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--gray-700); border-radius: 8px; margin-bottom: 12px; text-decoration: none;">
+            <span style="font-size: 20px;">✉️</span>
+            <div><div style="color: var(--gray-400); font-size: 12px; font-weight: 600;">EMAIL</div><div style="color: var(--blue-400); font-size: 13px;">${member.email}</div></div>
+          </a>` : ''}
+        </div>
+        <div style="padding: 0 16px 16px;">
+          <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" style="width: 100%; padding: 14px; background: var(--gray-600); border: none; border-radius: 8px; color: white; font-size: 16px; font-weight: 600; cursor: pointer;">Close</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', detailHtml);
+}
+
+window.showMemberDetail = showMemberDetail;
 
 /**
  * Close Roster modal
