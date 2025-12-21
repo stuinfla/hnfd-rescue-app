@@ -3111,6 +3111,10 @@ window.flipDriverCard = flipDriverCard;
 // ROSTER - All HNFD Members with Clickable Phone Numbers
 // ============================================================================
 
+// Roster PIN for access control
+const ROSTER_PIN = '1426';
+let rosterUnlocked = false;
+
 /**
  * Open the Roster modal showing all members with phone links
  */
@@ -3120,6 +3124,77 @@ function openRoster() {
   if (!modal || !listEl) return;
 
   hapticFeedback('light');
+
+  // Check if already unlocked this session
+  if (!rosterUnlocked) {
+    showPinPrompt();
+    return;
+  }
+
+  showRosterContent(modal, listEl);
+}
+
+/**
+ * Show PIN entry prompt
+ */
+function showPinPrompt() {
+  const pinHtml = `
+    <div id="pin-overlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 10002; display: flex; align-items: center; justify-content: center; padding: 20px;">
+      <div style="background: var(--gray-800); border-radius: 16px; max-width: 300px; width: 100%; padding: 24px; text-align: center;">
+        <div style="font-size: 48px; margin-bottom: 12px;">🔒</div>
+        <div style="font-size: 18px; font-weight: 700; color: white; margin-bottom: 8px;">Roster Access</div>
+        <div style="color: var(--gray-400); font-size: 14px; margin-bottom: 20px;">Enter PIN to view roster</div>
+        <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" id="pin-input"
+          style="width: 100%; padding: 16px; font-size: 24px; text-align: center; letter-spacing: 8px; background: var(--gray-700); border: 2px solid var(--gray-600); border-radius: 8px; color: white; margin-bottom: 16px;"
+          placeholder="••••" autocomplete="off">
+        <div id="pin-error" style="color: var(--red-500); font-size: 14px; margin-bottom: 12px; display: none;">Incorrect PIN</div>
+        <div style="display: flex; gap: 12px;">
+          <button onclick="closePinPrompt()" style="flex: 1; padding: 14px; background: var(--gray-600); border: none; border-radius: 8px; color: white; font-size: 16px; font-weight: 600; cursor: pointer;">Cancel</button>
+          <button onclick="verifyPin()" style="flex: 1; padding: 14px; background: var(--green-600); border: none; border-radius: 8px; color: white; font-size: 16px; font-weight: 600; cursor: pointer;">Enter</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', pinHtml);
+
+  const pinInput = document.getElementById('pin-input');
+  pinInput.focus();
+
+  // Handle enter key
+  pinInput.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') verifyPin();
+  });
+}
+
+function verifyPin() {
+  const input = document.getElementById('pin-input');
+  const error = document.getElementById('pin-error');
+
+  if (input.value === ROSTER_PIN) {
+    rosterUnlocked = true;
+    closePinPrompt();
+    hapticFeedback('success');
+    openRoster(); // Now open roster
+  } else {
+    error.style.display = 'block';
+    input.value = '';
+    input.focus();
+    hapticFeedback('error');
+  }
+}
+
+function closePinPrompt() {
+  const overlay = document.getElementById('pin-overlay');
+  if (overlay) overlay.remove();
+}
+
+window.verifyPin = verifyPin;
+window.closePinPrompt = closePinPrompt;
+
+/**
+ * Show roster content after PIN verified
+ */
+function showRosterContent(modal, listEl) {
 
   // Group by certification type - officers sorted by number
   const officers = HNFD_ROSTER.filter(m => m.office).sort((a, b) => {
