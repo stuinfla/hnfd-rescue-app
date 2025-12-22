@@ -30,24 +30,7 @@ const INVENTORY_DATABASE = {
       criticalRank: 1,
       description: "Contains all trauma supplies for adult patients",
       notes: "Red tag = inventory tracking. If seal unbroken, contents unchanged.",
-      image: "/images/trauma_bag_adult.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
-        compartmentView: "/images/locations/cabinet_k_overview.jpg",
-        equipmentPhoto: "/images/locations/adult_trauma_bag_closeup.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 45, y: 60, label: "Cabinet K" },
-        compartmentView: { x: 50, y: 70, label: "Middle Drawer" },
-        equipmentPhoto: null
-      },
-      locationSteps: [
-        "Step 1: Go to OUTSIDE of ambulance (driver's side)",
-        "Step 2: Find Cabinet K - main side compartment door",
-        "Step 3: Open Middle Drawer - trauma bag is in FRONT",
-        "Step 4: Grab RED/ORANGE bag - this is the adult trauma bag"
-      ],
-      quickFind: "Outside ambulance → Cabinet K (side door) → Middle drawer → RED bag in front"
+      image: "/images/trauma_bag_adult.jpg"
     },
     {
       id: "oxygen_kit_adult",
@@ -61,17 +44,7 @@ const INVENTORY_DATABASE = {
       criticalRank: 2,
       description: "Complete respiratory treatment kit with oxygen tank inside",
       contents: "Oral airways, nasal airways, oxygen masks, oxygen tank",
-      image: "/images/oxygen_kit_adult.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
-        compartmentView: "/images/locations/cabinet_k_overview.jpg",
-        equipmentPhoto: "/images/oxygen_kit_adult.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 45, y: 60, label: "Cabinet K" },
-        compartmentView: { x: 50, y: 55, label: "Middle Drawer" },
-        equipmentPhoto: null
-      }
+      image: "/images/cabinet_k_overview.jpg"
     },
     {
       id: "oxygen_kit_pediatric",
@@ -85,17 +58,7 @@ const INVENTORY_DATABASE = {
       criticalRank: 3,
       description: "Pediatric respiratory kit - placed FIRST because children primarily have respiratory emergencies",
       notes: "Kids rarely have cardiac problems - respiratory is primary concern. Oxygen for children is PRIMARY importance.",
-      image: "/images/pediatric_oxygen.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
-        compartmentView: "/images/locations/cabinet_k_overview.jpg",
-        equipmentPhoto: "/images/pediatric_oxygen.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 45, y: 60, label: "Cabinet K" },
-        compartmentView: { x: 50, y: 70, label: "Lower Drawer" },
-        equipmentPhoto: null
-      }
+      image: "/images/pediatric_bags.jpg"
     },
     {
       id: "trauma_bag_pediatric",
@@ -108,17 +71,7 @@ const INVENTORY_DATABASE = {
       critical: true,
       criticalRank: 4,
       description: "Pediatric trauma supplies",
-      image: "/images/pediatric_trauma.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
-        compartmentView: "/images/locations/cabinet_k_overview.jpg",
-        equipmentPhoto: "/images/pediatric_trauma.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 45, y: 60, label: "Cabinet K" },
-        compartmentView: { x: 50, y: 70, label: "Lower Drawer" },
-        equipmentPhoto: null
-      }
+      image: "/images/pediatric_bags.jpg"
     },
     {
       id: "intubation_kit",
@@ -131,17 +84,7 @@ const INVENTORY_DATABASE = {
       critical: true,
       criticalRank: 5,
       description: "Complete intubation equipment for advanced airway management",
-      image: "/images/intubation_kit.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
-        compartmentView: "/images/locations/cabinet_k_overview.jpg",
-        equipmentPhoto: "/images/locations/intubation_bag_blue.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 45, y: 60, label: "Cabinet K" },
-        compartmentView: { x: 50, y: 30, label: "Top Shelf" },
-        equipmentPhoto: null
-      }
+      image: "/images/intubation_kit.jpg"
     },
     {
       id: "iv_bag",
@@ -154,17 +97,7 @@ const INVENTORY_DATABASE = {
       criticalRank: 6,
       description: "Everything to establish IV access - primarily for paramedic drug administration",
       notes: "Does NOT contain saline bags",
-      image: "/images/iv_kit.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
-        compartmentView: "/images/locations/cabinet_k_overview.jpg",
-        equipmentPhoto: "/images/locations/iv_kit_closeup.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 45, y: 60, label: "Cabinet K" },
-        compartmentView: { x: 50, y: 30, label: "Top Shelf" },
-        equipmentPhoto: null
-      }
+      image: "/images/cabinet_k_overview.jpg"
     },
     {
       id: "portable_aed",
@@ -178,24 +111,7 @@ const INVENTORY_DATABASE = {
       criticalRank: 7,
       description: "Automated External Defibrillator for cardiac emergencies",
       notes: "Check for GREEN FLASH every 8-10 seconds = charged and ready",
-      image: "/images/cabinet_d_aed.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
-        compartmentView: "/images/locations/cabinet_k_overview.jpg",
-        equipmentPhoto: "/images/locations/aed_closeup.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 45, y: 60, label: "Cabinet K" },
-        compartmentView: { x: 50, y: 30, label: "Top Shelf" },
-        equipmentPhoto: null
-      },
-      locationSteps: [
-        "Step 1: Go to OUTSIDE of ambulance (driver's side)",
-        "Step 2: Find Cabinet K - main side compartment door",
-        "Step 3: Open cabinet - AED is on TOP SHELF (further back)",
-        "Step 4: Look for BLACK bag with RED 'AED' lettering"
-      ],
-      quickFind: "Outside ambulance → Cabinet K (side door) → Top shelf (back) → BLACK bag with RED AED letters"
+      image: "/images/cabinet_d_aed.jpg"
     },
     {
       id: "drug_box",
@@ -210,24 +126,7 @@ const INVENTORY_DATABASE = {
       description: "Contains non-controlled drugs: acetaminophen, magnesium sulfate, etc.",
       driverNote: "ORANGE BOX = DRUG BOX. That's all you need to know.",
       notes: "Blue tags track drug accountability",
-      image: "/images/drug_box.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
-        compartmentView: "/images/locations/drug_box_cabinet.jpg",
-        equipmentPhoto: "/images/locations/drug_box_closeup.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 25, y: 50, label: "Cabinet J" },
-        compartmentView: { x: 30, y: 50, label: "Orange Box" },
-        equipmentPhoto: null
-      },
-      locationSteps: [
-        "Step 1: Enter patient compartment through side door",
-        "Step 2: Find Cabinet J - located ABOVE Cabinet K, inside",
-        "Step 3: Open cabinet - look for ORANGE box",
-        "Step 4: Grab the ORANGE BOX - that's the Drug Box"
-      ],
-      quickFind: "Inside ambulance → Cabinet J (above K) → ORANGE box"
+      image: "/images/drug_box.jpg"
     },
     {
       id: "portable_suction",
@@ -241,25 +140,7 @@ const INVENTORY_DATABASE = {
       description: "Battery-operated suction for on-scene use",
       warning: "CRITICAL: Cord plugged into cigarette lighter at back of cabinet. MUST UNPLUG before removing! Does NOT detach at unit. Like pulling away from gas pump with nozzle in tank!",
       notes: "One of THREE suction types on board",
-      image: "/images/suction.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
-        compartmentView: "/images/locations/drug_box_cabinet.jpg",
-        equipmentPhoto: "/images/suction.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 25, y: 50, label: "Cabinet J" },
-        compartmentView: { x: 60, y: 50, label: "Suction Unit" },
-        equipmentPhoto: null
-      },
-      locationSteps: [
-        "Step 1: Enter patient compartment through side door",
-        "Step 2: Find Cabinet J - located ABOVE Cabinet K, inside",
-        "Step 3: BEFORE grabbing - locate power cord at back of cabinet",
-        "Step 4: UNPLUG cord from cigarette lighter FIRST",
-        "Step 5: Then remove suction unit"
-      ],
-      quickFind: "Inside ambulance → Cabinet J (above K) → UNPLUG FIRST, then grab unit"
+      image: "/images/suction.jpg"
     },
     {
       id: "glucometer",
@@ -273,24 +154,7 @@ const INVENTORY_DATABASE = {
       criticalRank: 10,
       description: "Checks blood glucose levels in diabetic patients",
       driverNote: "Little black box, little black pouch - always in same spot",
-      image: "/images/glucometer.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
-        compartmentView: "/images/locations/drawer_n_open.jpg",
-        equipmentPhoto: "/images/glucometer.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 70, y: 45, label: "Drawer N" },
-        compartmentView: { x: 40, y: 50, label: "Black Pouch" },
-        equipmentPhoto: null
-      },
-      locationSteps: [
-        "Step 1: Enter patient compartment through side door",
-        "Step 2: Look for Drawer N - located on left wall",
-        "Step 3: Open drawer - Glucometer always in SAME spot",
-        "Step 4: Grab small BLACK box/pouch"
-      ],
-      quickFind: "Inside ambulance → Drawer N (left wall) → Small black box/pouch"
+      image: "/images/glucometer.jpg"
     },
     {
       id: "narcan",
@@ -304,24 +168,7 @@ const INVENTORY_DATABASE = {
       description: "Opioid overdose reversal medication - delivered intranasally",
       warning: "CRITICAL: Nasal ATOMIZER must come with syringe - they are TAPED TOGETHER. Syringe alone is useless! Atomizer screws onto syringe tip.",
       notes: "Old packaging: orange container. New packaging: clear tube (can see syringe). Additional Narcan in Drug Box but Drawer N is fastest.",
-      image: "/images/locations/narcan_syringe_closeup.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
-        compartmentView: "/images/locations/drawer_n_contents.jpg",
-        equipmentPhoto: "/images/locations/narcan_syringe_closeup.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 70, y: 45, label: "Drawer N" },
-        compartmentView: { x: 55, y: 40, label: "Clear Tubes" },
-        equipmentPhoto: null
-      },
-      locationSteps: [
-        "Step 1: Enter patient compartment through side door",
-        "Step 2: Look for Drawer N - located on left wall",
-        "Step 3: Open drawer - Narcan in clear tubes or orange containers",
-        "Step 4: GRAB BOTH syringe AND atomizer (taped together)"
-      ],
-      quickFind: "Inside ambulance → Drawer N (left wall) → Clear tubes or orange containers"
+      image: "/images/narcan.jpg"
     },
     {
       id: "spare_oxygen_tanks",
@@ -335,24 +182,7 @@ const INVENTORY_DATABASE = {
       description: "2 spare tanks in holder, plus 1 each in adult and pediatric oxygen kits (4 total)",
       warning: "SQUEEZE brackets together to release tank (counterintuitive). At 15 L/min, tank only lasts few minutes.",
       notes: "New Matheson tanks: green top, aluminum, single valve operation. Old steel tanks: two-step process - open valve first, then set flow.",
-      image: "/images/oxygen_tanks.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_exterior_side.jpg",
-        compartmentView: "/images/locations/oxygen_compartment.jpg",
-        equipmentPhoto: "/images/locations/oxygen_tanks_closeup.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 60, y: 70, label: "O2 Compartment" },
-        compartmentView: { x: 50, y: 60, label: "Tank Holder" },
-        equipmentPhoto: null
-      },
-      locationSteps: [
-        "Step 1: Go to SIDE of ambulance",
-        "Step 2: Find side entry door (with steps)",
-        "Step 3: Look NEXT TO the steps - tanks are in holder",
-        "Step 4: SQUEEZE brackets together to release tank"
-      ],
-      quickFind: "Side of ambulance → Next to entry steps → SQUEEZE brackets to release"
+      image: "/images/oxygen_tanks.jpg"
     },
     {
       id: "lifepak_15",
@@ -366,24 +196,7 @@ const INVENTORY_DATABASE = {
       description: "Cardiac monitor/defibrillator - $42,000-$62,000 - HANDLE WITH CARE",
       driverNote: "Press GREEN button ONCE briefly when requested to turn on. Do NOT shut off after hospital - EMT needs code summary printout.",
       notes: "Carry with sensitive side (screen) against body. Has extra BP cuffs and batteries on other side. Must press AND HOLD to shut off (prevents accidental shutdown).",
-      image: "/images/lifepak_mounted.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
-        compartmentView: "/images/locations/lifepak_closeup.jpg",
-        equipmentPhoto: "/images/locations/lifepak_closeup.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 35, y: 55, label: "LifePak Mount" },
-        compartmentView: { x: 35, y: 55, label: "Mounted Here" },
-        equipmentPhoto: null
-      },
-      locationSteps: [
-        "Step 1: Enter patient compartment through side door",
-        "Step 2: Look for mounted unit - obvious location on wall",
-        "Step 3: Press GREEN button ONCE briefly to turn on",
-        "Step 4: Carry with screen facing your body (protect it)"
-      ],
-      quickFind: "Inside ambulance → Mounted on wall → Press GREEN button to turn on"
+      image: "/images/lifepak_mounted.jpg"
     },
     {
       id: "lucas_device",
@@ -396,17 +209,7 @@ const INVENTORY_DATABASE = {
       criticalRank: 13,
       description: "Mechanical CPR device - delivers consistent chest compressions",
       notes: "Hit seatbelt release to access. Purchased by Town of Harpswell. MC2 carries it because they're usually first on scene (OBI is 23 minutes away).",
-      image: "/images/lucas_device.jpg",
-      images: {
-        ambulancePosition: "/images/lucas_device.jpg",
-        compartmentView: "/images/lucas_device.jpg",
-        equipmentPhoto: "/images/lucas_device.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 70, y: 50, label: "MC2 Vehicle" },
-        compartmentView: { x: 50, y: 50, label: "Back Seat" },
-        equipmentPhoto: null
-      }
+      image: "/images/lucas_device.jpg"
     },
     {
       id: "saline_bags",
@@ -418,17 +221,7 @@ const INVENTORY_DATABASE = {
       description: "IV fluid for hydration - moved from K for easier access",
       warning: "MUST grab PRIMARY SET (IV tubing) with saline bag - bag is USELESS without tubing!",
       notes: "Warm saline in heated IV warmer during winter for hypothermic patients. Cabinet doors fold DOWN for easier access.",
-      image: "/images/compartments/compartment-d-ob-linens.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
-        compartmentView: "/images/compartments/compartment-d-ob-linens.jpg",
-        equipmentPhoto: "/images/compartments/compartment-d-ob-linens.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 30, y: 50, label: "Cabinet D" },
-        compartmentView: { x: 50, y: 50, label: "Saline Bags" },
-        equipmentPhoto: null
-      }
+      image: "/images/saline_bags.jpg"
     },
     {
       id: "primary_sets",
@@ -438,454 +231,16 @@ const INVENTORY_DATABASE = {
       location: "Cabinet D - right next to saline bags",
       compartment: "D",
       description: "IV tubing with needle for saline bags - required to administer saline",
-      image: "/images/primary_sets.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
-        compartmentView: "/images/primary_sets.jpg",
-        equipmentPhoto: "/images/primary_sets.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 30, y: 50, label: "Cabinet D" },
-        compartmentView: { x: 50, y: 50, label: "IV Tubing" },
-        equipmentPhoto: null
-      }
+      image: "/images/primary_sets.jpg"
     },
     {
       id: "onboard_suction",
       name: "Onboard Suction",
       aliases: ["main suction", "built-in suction", "vacuum suction", "stretcher suction"],
       searchText: "onboard main built-in vacuum suction stretcher transport",
-      location: "Built into patient compartment - wall-mounted unit",
+      location: "Built into patient compartment",
       compartment: "onboard",
-      description: "Vacuum pump driven suction for patients on stretcher during transport",
-      notes: "Wall-mounted in patient compartment. Always available when patient is on stretcher.",
-      image: "/images/locations/onboard_suction_area.jpg",
-      images: {
-        ambulancePosition: "/images/locations/ambulance_interior_overview.jpg",
-        compartmentView: "/images/locations/onboard_suction_area.jpg",
-        equipmentPhoto: "/images/locations/onboard_suction_area.jpg"
-      },
-      goldDots: {
-        ambulancePosition: { x: 15, y: 45, label: "Suction Panel" },
-        compartmentView: { x: 40, y: 35, label: "Wall Unit" },
-        equipmentPhoto: null
-      },
-      locationSteps: [
-        "Step 1: Enter patient compartment",
-        "Step 2: Look at LEFT WALL near head of stretcher",
-        "Step 3: Wall-mounted suction unit with green components",
-        "Step 4: Already connected - ready to use"
-      ],
-      quickFind: "Inside ambulance → Left wall → Green wall-mounted unit"
-    },
-    // === COMPARTMENT A - BASIC SUPPLIES ===
-    {
-      id: "bandaids",
-      name: "Bandaids",
-      aliases: ["band-aids", "band aids", "adhesive bandages", "plasters"],
-      searchText: "bandaids band aids adhesive bandages plasters small wounds",
-      location: "Compartment A - Basic Supplies",
-      compartment: "A",
-      description: "Adhesive bandages for small wounds",
-      image: "/images/compartments/compartment-a-supplies.jpg",
-      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
-    },
-    {
-      id: "cold_packs",
-      name: "Cold Packs",
-      aliases: ["ice packs", "instant cold", "cold compress"],
-      searchText: "cold packs ice instant compress cooling",
-      location: "Compartment A - Basic Supplies",
-      compartment: "A",
-      description: "Instant cold packs for swelling and injuries",
-      image: "/images/compartments/compartment-a-supplies.jpg",
-      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
-    },
-    {
-      id: "hot_packs",
-      name: "Hot Packs",
-      aliases: ["heat packs", "instant heat", "warm packs"],
-      searchText: "hot packs heat instant warm warming",
-      location: "Compartment A - Basic Supplies",
-      compartment: "A",
-      description: "Instant heat packs",
-      image: "/images/compartments/compartment-a-supplies.jpg",
-      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
-    },
-    {
-      id: "triangle_bandages",
-      name: "Triangle Bandages",
-      aliases: ["triangular bandage", "sling", "cravat"],
-      searchText: "triangle triangular bandages sling cravat arm sling",
-      location: "Compartment A - Basic Supplies",
-      compartment: "A",
-      description: "Triangle bandages for slings and cravats",
-      image: "/images/compartments/compartment-a-supplies.jpg",
-      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
-    },
-    {
-      id: "gauze",
-      name: "Gauze",
-      aliases: ["gauze pads", "gauze dressings", "gauze rolls"],
-      searchText: "gauze pads dressings rolls wound care",
-      location: "Compartment A - Basic Supplies",
-      compartment: "A",
-      description: "Gauze for wound care",
-      image: "/images/compartments/compartment-a-supplies.jpg",
-      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
-    },
-    {
-      id: "kling",
-      name: "Kling",
-      aliases: ["kling bandage", "kerlix", "roller gauze", "conforming bandage"],
-      searchText: "kling kerlix roller gauze conforming bandage wrap",
-      location: "Compartment A - Basic Supplies",
-      compartment: "A",
-      description: "Conforming roller bandage for securing dressings",
-      image: "/images/compartments/compartment-a-supplies.jpg",
-      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
-    },
-    {
-      id: "sam_splints",
-      name: "SAM Splints",
-      aliases: ["sam splint", "malleable splint", "aluminum splint"],
-      searchText: "SAM splint malleable aluminum foam splint fracture",
-      location: "Compartment A - Basic Supplies",
-      compartment: "A",
-      description: "SAM malleable splints for fractures",
-      image: "/images/compartments/compartment-a-supplies.jpg",
-      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
-    },
-    {
-      id: "flexall_splints",
-      name: "Flex-All Splints",
-      aliases: ["flexall", "flex all splint", "cardboard splint"],
-      searchText: "flex all flexall splint cardboard fracture immobilization",
-      location: "Compartment A - Basic Supplies",
-      compartment: "A",
-      description: "Flex-All splints for fracture immobilization",
-      image: "/images/compartments/compartment-a-supplies.jpg",
-      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
-    },
-    {
-      id: "tocs",
-      name: "T.O.C.S. (Chest Seal)",
-      aliases: ["TOCS", "occlusive dressing", "chest seal", "occlusive chest seal"],
-      searchText: "TOCS occlusive chest seal dressing pneumothorax sucking wound",
-      location: "Compartment A - Basic Supplies",
-      compartment: "A",
-      critical: true,
-      description: "Occlusive chest seal for sucking chest wounds",
-      image: "/images/compartments/compartment-a-supplies.jpg",
-      quickFind: "Outside ambulance → Compartment A → Basic Supplies area"
-    },
-    // === COMPARTMENT B - TRAUMA & BURN ===
-    {
-      id: "burn_dressings",
-      name: "Burn Dressings",
-      aliases: ["burn pads", "burn sheets", "water-jel"],
-      searchText: "burn dressings pads sheets water-jel thermal burns",
-      location: "Compartment B - Trauma & Burn Supplies",
-      compartment: "B",
-      description: "Specialized dressings for burn injuries",
-      image: "/images/compartments/compartment-b-trauma.jpg",
-      quickFind: "Outside ambulance → Compartment B → Trauma & Burn area"
-    },
-    {
-      id: "abd_pads",
-      name: "ABD Pads",
-      aliases: ["abdominal pads", "combine pads", "trauma pads", "large pads"],
-      searchText: "ABD abdominal pads combine trauma large absorbent dressing",
-      location: "Compartment B - Trauma & Burn Supplies",
-      compartment: "B",
-      description: "Large absorbent dressings for major wounds",
-      image: "/images/compartments/compartment-b-trauma.jpg",
-      quickFind: "Outside ambulance → Compartment B → Trauma & Burn area"
-    },
-    {
-      id: "multitrauma_dressing",
-      name: "Multi-Trauma Dressing",
-      aliases: ["trauma dressing", "MTD", "10x30"],
-      searchText: "multi trauma dressing MTD 10x30 large wound coverage",
-      location: "Compartment B - Trauma & Burn Supplies",
-      compartment: "B",
-      description: "Large multi-trauma dressings for extensive wounds",
-      image: "/images/compartments/compartment-b-trauma.jpg",
-      quickFind: "Outside ambulance → Compartment B → Trauma & Burn area"
-    },
-    {
-      id: "eye_pads",
-      name: "Eye Pads",
-      aliases: ["eye dressings", "eye patches"],
-      searchText: "eye pads dressings patches ocular injury",
-      location: "Compartment B - Trauma & Burn Supplies",
-      compartment: "B",
-      description: "Sterile eye pads for eye injuries",
-      image: "/images/compartments/compartment-b-trauma.jpg",
-      quickFind: "Outside ambulance → Compartment B → Trauma & Burn area"
-    },
-    {
-      id: "morgan_lens",
-      name: "Morgan Lens",
-      aliases: ["eye irrigation", "eye wash lens"],
-      searchText: "morgan lens eye irrigation wash chemical burn flush",
-      location: "Compartment B - Trauma & Burn Supplies",
-      compartment: "B",
-      description: "Morgan Lens for continuous eye irrigation",
-      image: "/images/compartments/compartment-b-trauma.jpg",
-      quickFind: "Outside ambulance → Compartment B → Trauma & Burn area"
-    },
-    {
-      id: "hemostatic_dressings",
-      name: "Hemostatic Dressings",
-      aliases: ["quikclot", "celox", "hemostatic gauze", "bleeding control"],
-      searchText: "hemostatic dressings quikclot celox gauze bleeding control hemorrhage",
-      location: "Compartment B - Trauma & Burn Supplies",
-      compartment: "B",
-      critical: true,
-      description: "Hemostatic agents for severe bleeding control",
-      image: "/images/compartments/compartment-b-trauma.jpg",
-      quickFind: "Outside ambulance → Compartment B → Trauma & Burn area"
-    },
-    // === COMPARTMENT C - CERVICAL COLLARS ===
-    {
-      id: "cervical_collars",
-      name: "Cervical Collars",
-      aliases: ["c-collar", "neck collar", "c collar", "cervical spine collar"],
-      searchText: "cervical collar c-collar neck collar spine immobilization",
-      location: "Compartment C - Cervical Collars & Saline",
-      compartment: "C",
-      critical: true,
-      description: "Cervical spine immobilization collars",
-      image: "/images/compartments/compartment-c-collars.jpg",
-      quickFind: "Outside ambulance → Compartment C → Collars area"
-    },
-    // === COMPARTMENT D (OB) - OB KIT & LINENS ===
-    {
-      id: "ob_kit",
-      name: "OB Kit",
-      aliases: ["obstetrics kit", "delivery kit", "childbirth kit", "curaplex OB"],
-      searchText: "OB obstetrics delivery kit childbirth curaplex labor",
-      location: "Compartment D (OB) - Inside glass cabinet",
-      compartment: "OB",
-      critical: true,
-      description: "Complete obstetrics kit for emergency delivery",
-      image: "/images/compartments/compartment-d-ob-linens.jpg",
-      quickFind: "Inside ambulance → Glass cabinet → OB Kit"
-    },
-    {
-      id: "emesis_bags",
-      name: "Emesis Bags",
-      aliases: ["vomit bags", "barf bags", "sick bags"],
-      searchText: "emesis bags vomit barf sick nausea",
-      location: "Compartment D (OB) - Inside glass cabinet",
-      compartment: "OB",
-      description: "Emesis bags for nausea/vomiting",
-      image: "/images/compartments/compartment-d-ob-linens.jpg",
-      quickFind: "Inside ambulance → Glass cabinet → Near linens"
-    },
-    {
-      id: "blankets",
-      name: "Blankets",
-      aliases: ["linens", "sheets", "patient blankets"],
-      searchText: "blankets linens sheets patient warming hypothermia",
-      location: "Compartment D (OB) - Inside glass cabinet",
-      compartment: "OB",
-      description: "Patient blankets for warmth and comfort",
-      image: "/images/compartments/compartment-d-ob-linens.jpg",
-      quickFind: "Inside ambulance → Glass cabinet → Linens area"
-    },
-    // === COMPARTMENT F - PPE SUPPLIES ===
-    {
-      id: "ppe_supplies",
-      name: "PPE Supplies",
-      aliases: ["personal protective equipment", "protective gear", "PPE"],
-      searchText: "PPE personal protective equipment gear infection control",
-      location: "Compartment F - Inside upper cabinet",
-      compartment: "F",
-      description: "Personal Protective Equipment supplies",
-      image: "/images/compartments/compartment-f-ppe.jpg",
-      quickFind: "Inside ambulance → Upper cabinet → PPE area"
-    },
-    {
-      id: "gowns",
-      name: "Gowns",
-      aliases: ["isolation gowns", "protective gowns"],
-      searchText: "gowns isolation protective PPE infection control",
-      location: "Compartment F - PPE Supplies",
-      compartment: "F",
-      description: "Protective gowns for infection control",
-      image: "/images/compartments/compartment-f-ppe.jpg",
-      quickFind: "Inside ambulance → Compartment F → PPE area"
-    },
-    {
-      id: "n95_masks",
-      name: "N95 Masks",
-      aliases: ["N95", "respirator", "N95 respirator"],
-      searchText: "N95 masks respirator respiratory protection airborne",
-      location: "Compartment F - PPE Supplies",
-      compartment: "F",
-      description: "N95 respirator masks for airborne protection",
-      image: "/images/compartments/compartment-f-ppe.jpg",
-      quickFind: "Inside ambulance → Compartment F → PPE area"
-    },
-    {
-      id: "surgical_masks",
-      name: "Surgical Masks",
-      aliases: ["face masks", "procedure masks"],
-      searchText: "surgical masks face procedure masks droplet protection",
-      location: "Compartment F - PPE Supplies",
-      compartment: "F",
-      description: "Surgical face masks",
-      image: "/images/compartments/compartment-f-ppe.jpg",
-      quickFind: "Inside ambulance → Compartment F → PPE area"
-    },
-    {
-      id: "protective_eyewear",
-      name: "Protective Eyewear",
-      aliases: ["safety glasses", "goggles", "eye protection"],
-      searchText: "protective eyewear safety glasses goggles eye protection splash",
-      location: "Compartment F - PPE Supplies",
-      compartment: "F",
-      description: "Protective eyewear for splash protection",
-      image: "/images/compartments/compartment-f-ppe.jpg",
-      quickFind: "Inside ambulance → Compartment F → PPE area"
-    },
-    {
-      id: "face_shields",
-      name: "Face Shields",
-      aliases: ["full face shield", "face visor"],
-      searchText: "face shields visor full face protection splash",
-      location: "Compartment F - PPE Supplies",
-      compartment: "F",
-      description: "Full face shields for protection",
-      image: "/images/compartments/compartment-f-ppe.jpg",
-      quickFind: "Inside ambulance → Compartment F → PPE area"
-    },
-    // === COMPARTMENT G - AIRWAY SUPPLIES ===
-    {
-      id: "airway_supplies",
-      name: "Airway Supplies",
-      aliases: ["airway equipment", "respiratory supplies"],
-      searchText: "airway supplies equipment respiratory management",
-      location: "Compartment G - Glass cabinet labeled 'AIRWAY SUPPLIES'",
-      compartment: "G",
-      description: "Complete airway management supplies",
-      image: "/images/compartments/compartment-g-airway.jpg",
-      quickFind: "Inside ambulance → Glass cabinet → 'AIRWAY SUPPLIES' label"
-    },
-    {
-      id: "nasal_airways",
-      name: "Nasal Airways (NPA)",
-      aliases: ["NPA", "nasal trumpet", "nasopharyngeal airway"],
-      searchText: "nasal airways NPA trumpet nasopharyngeal airway",
-      location: "Compartment G - Airway Supplies cabinet",
-      compartment: "G",
-      description: "Nasopharyngeal airways (NPA) - various sizes",
-      image: "/images/compartments/compartment-g-airway.jpg",
-      quickFind: "Inside ambulance → Compartment G → Airway cabinet"
-    },
-    {
-      id: "oral_airways",
-      name: "Oral Airways (OPA)",
-      aliases: ["OPA", "oropharyngeal airway", "guedel airway"],
-      searchText: "oral airways OPA oropharyngeal guedel airway",
-      location: "Compartment G - Airway Supplies cabinet",
-      compartment: "G",
-      description: "Oropharyngeal airways (OPA) - various sizes",
-      image: "/images/compartments/compartment-g-airway.jpg",
-      quickFind: "Inside ambulance → Compartment G → Airway cabinet"
-    },
-    {
-      id: "king_airways",
-      name: "King Airways",
-      aliases: ["king LT", "supraglottic airway", "King tube"],
-      searchText: "king airways LT supraglottic tube advanced airway",
-      location: "Compartment G - Airway Supplies cabinet",
-      compartment: "G",
-      critical: true,
-      description: "King supraglottic airways for advanced airway management",
-      image: "/images/compartments/compartment-g-airway.jpg",
-      quickFind: "Inside ambulance → Compartment G → Airway cabinet"
-    },
-    {
-      id: "non_rebreather_masks",
-      name: "Non-Rebreather Masks",
-      aliases: ["NRB", "high flow mask", "oxygen mask", "NRM"],
-      searchText: "non rebreather masks NRB NRM high flow oxygen mask",
-      location: "Compartment G - Airway Supplies cabinet",
-      compartment: "G",
-      description: "Non-rebreather oxygen masks for high flow O2",
-      image: "/images/compartments/compartment-g-airway.jpg",
-      quickFind: "Inside ambulance → Compartment G → Airway cabinet"
-    },
-    {
-      id: "nasal_cannulas",
-      name: "Nasal Cannulas",
-      aliases: ["nasal prongs", "NC", "oxygen cannula"],
-      searchText: "nasal cannula NC prongs oxygen low flow",
-      location: "Compartment G - Airway Supplies cabinet",
-      compartment: "G",
-      description: "Nasal cannulas for oxygen delivery",
-      image: "/images/compartments/compartment-g-airway.jpg",
-      quickFind: "Inside ambulance → Compartment G → Airway cabinet"
-    },
-    {
-      id: "nebulizers",
-      name: "Nebulizers",
-      aliases: ["nebulizer mask", "aerosol mask", "SVN"],
-      searchText: "nebulizer nebulizers mask aerosol SVN breathing treatment",
-      location: "Compartment G - Airway Supplies cabinet",
-      compartment: "G",
-      description: "Nebulizer masks for medication delivery",
-      image: "/images/compartments/compartment-g-airway.jpg",
-      quickFind: "Inside ambulance → Compartment G → Airway cabinet"
-    },
-    {
-      id: "end_tidal_co2",
-      name: "End Tidal CO2",
-      aliases: ["ETCO2", "capnography", "CO2 detector"],
-      searchText: "end tidal CO2 ETCO2 capnography detector waveform",
-      location: "Compartment G - Airway Supplies cabinet",
-      compartment: "G",
-      description: "End tidal CO2 detection for airway confirmation",
-      image: "/images/compartments/compartment-g-airway.jpg",
-      quickFind: "Inside ambulance → Compartment G → Airway cabinet"
-    },
-    // === COMPARTMENT H - BVM & VENTILATION ===
-    {
-      id: "bvm",
-      name: "Bag Valve Mask (BVM)",
-      aliases: ["BVM", "ambu bag", "bag mask", "manual resuscitator"],
-      searchText: "BVM bag valve mask ambu manual resuscitator ventilation",
-      location: "Compartment H - Glass cabinet labeled 'BAG VALVE MASKS'",
-      compartment: "H",
-      critical: true,
-      description: "Bag valve masks for manual ventilation",
-      image: "/images/compartments/compartment-h-bvm.jpg",
-      quickFind: "Inside ambulance → Glass cabinet → 'BAG VALVE MASKS' label"
-    },
-    {
-      id: "bvm_face_masks",
-      name: "BVM Face Masks",
-      aliases: ["face masks for BVM", "ventilation masks"],
-      searchText: "BVM face masks ventilation masks sizes",
-      location: "Compartment H - With BVM equipment",
-      compartment: "H",
-      description: "Face masks for BVM - various sizes",
-      image: "/images/compartments/compartment-h-bvm.jpg",
-      quickFind: "Inside ambulance → Compartment H → With BVM"
-    },
-    {
-      id: "suction_catheters",
-      name: "Suction Catheters",
-      aliases: ["yankauer", "suction tip", "tonsil tip"],
-      searchText: "suction catheters yankauer tip tonsil",
-      location: "Compartment H - With BVM/Ventilation equipment",
-      compartment: "H",
-      description: "Suction catheters including Yankauer tips",
-      image: "/images/compartments/compartment-h-bvm.jpg",
-      quickFind: "Inside ambulance → Compartment H → With ventilation gear"
+      description: "Vacuum pump driven suction for patients on stretcher during transport"
     }
   ],
   compartments: {
@@ -923,136 +278,9 @@ const INVENTORY_DATABASE = {
       name: "MC2 Vehicle",
       description: "Chase vehicle",
       access: "Back/passenger seat"
-    },
-    // === NEW HNFR COMPARTMENTS A-H (from Dec 2024 photos) ===
-    "A": {
-      name: "Compartment A",
-      description: "Basic Supplies - bandages, splints, cold/hot packs",
-      access: "Outside - side compartment",
-      image: "/images/compartments/compartment-a-supplies.jpg",
-      contents: ["Bandaids", "Cold Packs", "Hot Packs", "Triangle Bandages", "Gauze", "Kling", "SAM Splints", "Flex-All Splints", "Gloves", "Stethoscope", "T.O.C.S. (Occlusive Chest Seal)"]
-    },
-    "B": {
-      name: "Compartment B",
-      description: "Trauma & Burn Supplies",
-      access: "Outside - side compartment",
-      image: "/images/compartments/compartment-b-trauma.jpg",
-      contents: ["Stuffed Animals", "Burn Dressings", "ABD Pads", "Multi-Trauma Dressing", "Eye Pads", "Morgan Lens", "Hemostatic Dressings"]
-    },
-    "C": {
-      name: "Compartment C",
-      description: "Cervical Collars & Saline",
-      access: "Outside - side compartment",
-      image: "/images/compartments/compartment-c-collars.jpg",
-      contents: ["Cervical Collars", "Saline", "Stretcher Battery"]
-    },
-    "OB": {
-      name: "Compartment D (OB/Linens)",
-      description: "OB Kit, Linens, Emesis Bags",
-      access: "Inside - glass cabinet",
-      image: "/images/compartments/compartment-d-ob-linens.jpg",
-      contents: ["OB Kit (Curaplex)", "Emesis Bags", "Linens", "Sharps Container", "Blankets"]
-    },
-    "E": {
-      name: "Compartment E",
-      description: "Protocols & Reference Materials",
-      access: "Inside - cabinet with lock",
-      image: "/images/compartments/compartment-e-protocols.jpg",
-      contents: ["ME EMS Protocols", "Drug Log", "LIFEPAK 15 Manual", "SCBA Binder", "LVAD Info"]
-    },
-    "F": {
-      name: "Compartment F",
-      description: "PPE Supplies",
-      access: "Inside - upper cabinet",
-      image: "/images/compartments/compartment-f-ppe.jpg",
-      contents: ["Gowns", "N95 Masks", "Surgical Masks", "Protective Eyewear", "Face Shields"]
-    },
-    "G": {
-      name: "Compartment G",
-      description: "Airway Supplies",
-      access: "Inside - glass cabinet with 'AIRWAY SUPPLIES' label",
-      image: "/images/compartments/compartment-g-airway.jpg",
-      contents: ["Nasal Airways (NPA)", "Oral Airways (OPA)", "King Airways", "Tube Holders", "CO2 Adapters", "Non-Rebreather Masks", "End Tidal CO2", "Adult Oxygen Nasal Cannulas", "Nebulizers"]
-    },
-    "H": {
-      name: "Compartment H",
-      description: "BVM & Ventilation",
-      access: "Inside - glass cabinet with 'BAG VALVE MASKS' label",
-      image: "/images/compartments/compartment-h-bvm.jpg",
-      contents: ["Bag Valve Masks (BVM)", "Face Masks for BVM", "Suction Catheters", "Suction Tubing"]
     }
   }
 };
-
-// ============================================================================
-// DRIVER ZONES DATABASE - Harpswell Area Driver Assignments
-// Source: HNFD Zone Map and Driver List (Updated 8/29/25)
-// ============================================================================
-const DRIVER_ZONES = {
-  mapImage: "/images/zone_map.jpg",
-  driverListImage: "/images/driver_list.jpg",
-  zones: [
-    { id: "728", driver: "Pinkston Russell", phone: "512-971-9130" },
-    { id: "729", driver: "Bebarski Jim", phone: "847-946-8809" },
-    { id: "731", driver: "Baiss David", phone: "207-650-0450" },
-    { id: "732", driver: "Moore Tom", phone: "207-504-0374" },
-    { id: "736", driver: "Arnold Pete", phone: "207-577-2146" },
-    { id: "738", driver: "King Anthony", phone: "315-920-1926" },
-    { id: "739", driver: "Griffiths Lauren", phone: "781-492-5157" },
-    { id: "741", driver: "Hickey Kathy", phone: "860-418-0688" },
-    { id: "742", driver: "Marshall Howie", phone: "617-858-5740" },
-    { id: "743", driver: "Beck Bill", phone: "914-217-5390" },
-    { id: "744", driver: "DeLorenzo Michael", phone: "207-607-3088" },
-    { id: "745", driver: "Rose Chris", phone: "207-751-3669" },
-    { id: "748", driver: "Dumas Rick", phone: "207-522-9860" },
-    { id: "749", driver: "Carson Brownie", phone: "207-751-9076" },
-    { id: "761", driver: "Williams Gail", phone: "207-751-9190" }
-  ]
-};
-
-// ============================================================================
-// HNFD RESCUE ROSTER - All Members with Contact Info
-// Source: Current Roster 8-29-25.pdf
-// ============================================================================
-const HNFD_ROSTER = [
-  { number: "701", lastName: "Mercier", firstName: "David", certification: "FF", office: "Chief", phone: "207-841-4501", email: "m00sehead2020@comcast.net" },
-  { number: "717", lastName: "Aibel", firstName: "Dave", certification: "AEMT", office: "", phone: "401-862-4203", email: "daibel@stiarna.com" },
-  { number: "718", lastName: "Aibel", firstName: "Laura", certification: "EMT", office: "", phone: "401-862-4231", email: "laibel@stiarna.com" },
-  { number: "736", lastName: "Arnold", firstName: "Pete", certification: "Rescue Driver", office: "", phone: "207-577-2146", email: "peter.arnold0423@gmail.com" },
-  { number: "713", lastName: "Atwood", firstName: "Doane", certification: "in training", office: "", phone: "207-571-2663", email: "doane.atwood@gmail.com" },
-  { number: "731", lastName: "Baiss", firstName: "David", certification: "Rescue Driver", office: "", phone: "207-650-0450", email: "baiss_david@comcast.net" },
-  { number: "702", lastName: "Barter", firstName: "Nelson", certification: "FF", office: "Asst Chief", phone: "207-319-4485", email: "nelbarleather@gmail.com" },
-  { number: "743", lastName: "Beck", firstName: "Bill", certification: "in training", office: "", phone: "914-217-5390", email: "mainemorning@att.net" },
-  { number: "729", lastName: "Bebarski", firstName: "Jim", certification: "Rescue Driver", office: "", phone: "847-946-8809", email: "jim@avitra.com" },
-  { number: "727", lastName: "Bibber", firstName: "Marolyn", certification: "AEMT", office: "Rescue Captain", phone: "833-5085", email: "bibbermarolyn@gmail.com" },
-  { number: "723", lastName: "Bowersock", firstName: "Gordon", certification: "Pump Operator", office: "", phone: "401-255-3076", email: "gordonbowersock@yahoo.com" },
-  { number: "781", lastName: "Bradbury", firstName: "Parker", certification: "FF", office: "", phone: "844-1553", email: "Leatherhead892@gmail.com" },
-  { number: "782", lastName: "Bradbury", firstName: "Noah", certification: "FF", office: "", phone: "522-7710", email: "noahbradbury792@gmail.com" },
-  { number: "716", lastName: "Cammarn", firstName: "Scott", certification: "EMT", office: "", phone: "704-287-3297", email: "scott.cammarn@gmail.com" },
-  { number: "749", lastName: "Carson", firstName: "Brownie", certification: "Rescue Driver", office: "Scheduler", phone: "207-751-9076", email: "ebc250@yahoo.com" },
-  { number: "758", lastName: "Chipman", firstName: "Eric", certification: "", office: "Radio Officer", phone: "207-837-1584", email: "echipman758@outlook.com" },
-  { number: "744", lastName: "DeLorenzo", firstName: "Michael", certification: "Rescue Driver", office: "Driving Instructor", phone: "207-607-3088", email: "trane208@me.com" },
-  { number: "707", lastName: "Douglas", firstName: "Craig", certification: "FF", office: "Fire Lieutenant", phone: "207-798-0467", email: "lavalampfloyd@gmail.com" },
-  { number: "748", lastName: "Dumas", firstName: "Rick", certification: "Rescue Driver", office: "", phone: "207-522-9860", email: "william.dumas@comcast.net" },
-  { number: "739", lastName: "Griffiths", firstName: "Lauren", certification: "Rescue Driver", office: "", phone: "781-492-5157", email: "LaurenLGriffiths@gmail.com" },
-  { number: "715", lastName: "Heinig", firstName: "Chris", certification: "EMT", office: "Safety Officer", phone: "207-751-3696", email: "cheinig@merassessment.com" },
-  { number: "773", lastName: "Heidrich", firstName: "David", certification: "FF", office: "", phone: "207-504-7986", email: "Chief3oxfd@yahoo.com" },
-  { number: "741", lastName: "Hickey", firstName: "Kathy", certification: "Rescue Driver", office: "Scheduler", phone: "860-418-0688", email: "khickey1759@gmail.com" },
-  { number: "738", lastName: "King", firstName: "Anthony", certification: "Rescue Driver", office: "", phone: "315-920-1926", email: "anthony.m.king92@gmail.com" },
-  { number: "737", lastName: "Konicek", firstName: "Tim", certification: "Rescue Driver", office: "", phone: "617-201-5361", email: "timkonicek59@gmail.com" },
-  { number: "742", lastName: "Marshall", firstName: "Howie", certification: "Rescue Driver", office: "Driving Instructor", phone: "617-858-5740", email: "hzm@alumni.caltech.edu" },
-  { number: "735", lastName: "Moody", firstName: "Danielle", certification: "Rescue Driver", office: "", phone: "207-841-9515", email: "auntiedaniellem@gmail.com" },
-  { number: "732", lastName: "Moore", firstName: "Tom", certification: "Rescue Driver", office: "", phone: "207-504-0374", email: "tom.moore.maine@gmail.com" },
-  { number: "", lastName: "Munk", firstName: "Marc-David", certification: "", office: "Medical Director", phone: "617-921-5666", email: "marc@mecpe.org" },
-  { number: "728", lastName: "Pinkston", firstName: "Russell", certification: "Rescue Driver", office: "", phone: "512-971-9130", email: "pinkstonrf@gmail.com" },
-  { number: "704", lastName: "Pough", firstName: "Harvey", certification: "EMT", office: "Rescue Chief", phone: "207-205-4625", email: "harvey.pough@gmail.com" },
-  { number: "747", lastName: "Randall", firstName: "Deb", certification: "Rescue Driver", office: "Administrator", phone: "203-536-9301", email: "drandall517@gmail.com" },
-  { number: "745", lastName: "Rose", firstName: "Chris", certification: "Rescue Driver", office: "", phone: "207-751-3669", email: "crose04079@gmail.com" },
-  { number: "734", lastName: "Rose", firstName: "David", certification: "Rescue Driver", office: "", phone: "602-319-4826", email: "azruins@gmail.com" },
-  { number: "733", lastName: "Stokinger", firstName: "Jack", certification: "Rescue Driver/Pump Operator", office: "Ambulance Maintenance", phone: "978-807-3339", email: "jackstokinger@comcast.net" },
-  { number: "703", lastName: "True", firstName: "Frank", certification: "FF", office: "Fire Training Officer", phone: "207-446-1729", email: "franklin.true@va.gov" },
-  { number: "761", lastName: "Williams", firstName: "Gail", certification: "Rescue Driver", office: "", phone: "207-751-9190", email: "castonguay1@comcast.net" }
-];
 
 // ============================================================================
 // INTELLIGENT VOICE MATCHING - Restrict to valid equipment only
@@ -1238,8 +466,7 @@ function matchToValidEquipment(spokenText) {
 // ============================================================================
 // VERSION & AUTO-UPDATE SYSTEM
 // ============================================================================
-// APP_VERSION is loaded from /version.js (single source of truth)
-// It's included in index.html before this script
+const APP_VERSION = '2.3.0';
 const VERSION_CHECK_INTERVAL = 60 * 60 * 1000; // Check every hour when online
 
 // Check for updates automatically
@@ -1247,26 +474,16 @@ async function checkForUpdates(showIfCurrent = false) {
   if (!navigator.onLine) return;
 
   try {
-    // CRITICAL: Add cache-busting and force no-cache headers
-    const response = await fetch(`/version.json?t=${Date.now()}`, {
-      cache: 'no-store',
-      headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0'
-      }
-    });
+    // Add cache-busting parameter
+    const response = await fetch(`/version.json?t=${Date.now()}`);
     if (!response.ok) return;
 
     const data = await response.json();
     const serverVersion = data.version;
     const currentVersion = APP_VERSION;
 
-    console.log(`[Update] Server: v${serverVersion}, Current: v${currentVersion}`);
-
     if (serverVersion !== currentVersion) {
       // New version available
-      console.log('[Update] New version detected - showing notification');
       showUpdateNotification(serverVersion, data.changelog);
     } else if (showIfCurrent) {
       showVersionInfo('App is up to date!');
@@ -1277,20 +494,31 @@ async function checkForUpdates(showIfCurrent = false) {
 }
 
 function showUpdateNotification(newVersion, changelog) {
-  // SAFETY-FIRST: Never auto-update - let user choose when to update
-  // In bad signal areas, auto-updating could break the app entirely
-  console.log(`[Update] New version v${newVersion} available - user can update from Settings`);
+  // Remove any existing notification
+  const existing = document.getElementById('update-notification');
+  if (existing) existing.remove();
 
-  // Just show a subtle indicator - don't interrupt emergency use
-  const statusText = document.getElementById('status-text');
-  if (statusText) {
-    statusText.textContent = `Update available`;
-    statusText.style.cursor = 'pointer';
-    statusText.onclick = () => openSettingsModal();
-  }
+  const notification = document.createElement('div');
+  notification.id = 'update-notification';
+  notification.innerHTML = `
+    <div class="update-content">
+      <div class="update-header">
+        <span class="update-icon">🔄</span>
+        <strong>Update Available: v${newVersion}</strong>
+      </div>
+      <div class="update-changes">
+        ${changelog ? changelog.slice(0, 3).map(c => `• ${c}`).join('<br>') : ''}
+      </div>
+      <div class="update-buttons">
+        <button class="update-btn update-now" onclick="applyUpdate()">Update Now</button>
+        <button class="update-btn update-later" onclick="dismissUpdate()">Later</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(notification);
 
-  // Store for settings menu
-  window.pendingUpdate = { version: newVersion, changelog };
+  // Auto-show
+  setTimeout(() => notification.classList.add('visible'), 100);
 }
 
 function showVersionInfo(message) {
@@ -1346,10 +574,12 @@ function dismissUpdate() {
 
 // Schedule periodic update checks
 function startUpdateChecker() {
-  // CRITICAL: Check IMMEDIATELY on every page load (no delay, no cache)
-  // Clear any previous dismissal - always check on fresh load
-  sessionStorage.removeItem('hnfd_update_dismissed');
-  checkForUpdates();
+  // Check on startup (after 5 seconds)
+  setTimeout(() => {
+    if (!sessionStorage.getItem('hnfd_update_dismissed')) {
+      checkForUpdates();
+    }
+  }, 5000);
 
   // Check periodically
   setInterval(() => {
@@ -1455,56 +685,6 @@ function applyNightMode() {
 }
 
 // ============================================================================
-// SHARE APP - Let EMTs share with each other via native share or clipboard
-// ============================================================================
-async function shareApp() {
-  const shareBtn = document.getElementById('share-btn');
-  const shareData = {
-    title: 'HNFD Rescue - Equipment Finder',
-    text: 'Find equipment fast on the HNFD ambulance. Voice-enabled, works offline!',
-    url: 'https://hnfd-rescue.vercel.app'
-  };
-
-  hapticFeedback('light');
-
-  // Try native Web Share API first (works great on mobile)
-  if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
-    try {
-      await navigator.share(shareData);
-      console.log('[Share] Shared successfully via native share');
-      shareBtn.classList.add('shared');
-      setTimeout(() => shareBtn.classList.remove('shared'), 1000);
-      return;
-    } catch (err) {
-      // User cancelled or share failed - fall through to clipboard
-      if (err.name !== 'AbortError') {
-        console.log('[Share] Native share failed:', err);
-      }
-    }
-  }
-
-  // Fallback: Copy to clipboard
-  try {
-    await navigator.clipboard.writeText(shareData.url);
-    console.log('[Share] URL copied to clipboard');
-    hapticFeedback('success');
-    shareBtn.classList.add('shared');
-
-    // Show feedback
-    const originalText = statusText.textContent;
-    statusText.textContent = 'Link copied!';
-    setTimeout(() => {
-      statusText.textContent = originalText;
-      shareBtn.classList.remove('shared');
-    }, 2000);
-  } catch (err) {
-    console.error('[Share] Clipboard failed:', err);
-    // Last resort: show URL in alert
-    alert('Share this URL with other EMTs:\n\nhttps://hnfd-rescue.vercel.app');
-  }
-}
-
-// ============================================================================
 // EMERGENCY MODE - Show all critical items at once
 // ============================================================================
 function showEmergencyMode() {
@@ -1535,352 +715,112 @@ const statusText = document.getElementById('status-text');
 
 // ============================================================================
 // SPEECH RECOGNITION (Web Speech API - works offline on iOS/Android)
-// CRITICAL: This is life-safety code - must work 100% of the time
 // ============================================================================
-let recognitionInitialized = false;
-let recognitionAttempts = 0;
-const MAX_RECOGNITION_ATTEMPTS = 5;
-let recognitionStarting = false; // Prevent race conditions
-let recognitionCleanupTimer = null;
-
-/**
- * Initialize speech recognition with bulletproof error handling
- * This MUST work on iOS Safari in emergency situations
- */
 function initSpeechRecognition() {
-  try {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-    if (!SpeechRecognition) {
-      console.warn('[Speech] Web Speech API not available on this device');
-      if (voiceBtn) voiceBtn.style.display = 'none';
-      if (voiceLabel) voiceLabel.textContent = 'Voice not supported - use text search';
-      return false;
-    }
-
-    // CRITICAL: Always recreate recognition object to avoid stale state
-    // iOS Safari can get into bad states if we reuse the object
-    if (recognition) {
-      try {
-        recognition.abort();
-      } catch (e) {
-        console.log('[Speech] Could not abort old recognition:', e);
-      }
-      recognition = null;
-    }
-
-    recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = true;
-    recognition.lang = 'en-US';
-    recognition.maxAlternatives = 3;
-
-    recognition.onstart = () => {
-      console.log('[Speech] ✅ Recognition started successfully');
-      isListening = true;
-      recognitionStarting = false;
-      recognitionAttempts = 0; // Reset on success
-
-      // Clear any pending cleanup
-      if (recognitionCleanupTimer) {
-        clearTimeout(recognitionCleanupTimer);
-        recognitionCleanupTimer = null;
-      }
-
-      // Update UI
-      if (voiceBtn) voiceBtn.classList.add('listening');
-      if (voiceIcon) voiceIcon.textContent = '🔴';
-      if (voiceLabel) voiceLabel.textContent = 'Listening... speak now';
-      if (transcript) transcript.textContent = '';
-      if (statusText) statusText.textContent = 'Listening';
-      if (voiceCancelBtn) voiceCancelBtn.style.display = 'flex';
-    };
-
-    recognition.onresult = (event) => {
-      let interimTranscript = '';
-      let finalTranscript = '';
-
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        const result = event.results[i];
-        if (result.isFinal) {
-          finalTranscript += result[0].transcript;
-        } else {
-          interimTranscript += result[0].transcript;
-        }
-      }
-
-      if (transcript) transcript.textContent = finalTranscript || interimTranscript;
-
-      if (finalTranscript) {
-        console.log('[Speech] Raw input:', finalTranscript);
-
-        // CRITICAL: Match spoken text to valid equipment ONLY
-        const matchedEquipment = matchToValidEquipment(finalTranscript);
-        console.log('[Speech] Matched to:', matchedEquipment);
-
-        lastSearchWasVoice = true;
-        search(matchedEquipment);
-      }
-    };
-
-    recognition.onerror = (event) => {
-      console.error('[Speech] ❌ Recognition error:', event.error);
-      recognitionStarting = false;
-
-      // Handle specific errors with clear user guidance
-      if (event.error === 'no-speech') {
-        if (transcript) transcript.textContent = 'No speech detected. Tap to try again.';
-        // Auto-recover: restart after brief delay
-        recognitionCleanupTimer = setTimeout(() => {
-          if (!isListening) {
-            console.log('[Speech] Auto-recovering from no-speech...');
-            startListening();
-          }
-        }, 2000);
-      } else if (event.error === 'not-allowed' || event.error === 'permission-denied') {
-        // SMART PERMISSION HANDLING: Show helpful modal instead of text error
-        handleMicrophoneError(event.error);
-        recognitionInitialized = false; // Force re-init on next attempt
-      } else if (event.error === 'network') {
-        if (transcript) transcript.textContent = 'Network error. Checking connection...';
-        // Auto-retry network errors
-        recognitionCleanupTimer = setTimeout(() => {
-          console.log('[Speech] Retrying after network error...');
-          startListening();
-        }, 1500);
-      } else if (event.error === 'aborted') {
-        // User cancelled - this is normal, don't show error
-        console.log('[Speech] Recognition aborted by user');
-      } else if (event.error === 'audio-capture') {
-        // Don't show scary error - just reset to ready state
-        if (transcript) transcript.textContent = 'Tap microphone to try again';
-        console.log('[Speech] Audio capture issue - mic may be in use by another app');
-      } else {
-        // Unknown error - try to recover
-        console.error('[Speech] Unknown error:', event.error);
-        if (transcript) transcript.textContent = 'Voice error. Retrying...';
-
-        // Force re-initialization
-        recognitionInitialized = false;
-        recognition = null;
-
-        // Auto-retry unknown errors
-        if (recognitionAttempts < MAX_RECOGNITION_ATTEMPTS) {
-          recognitionCleanupTimer = setTimeout(() => {
-            console.log('[Speech] Auto-recovering from unknown error...');
-            startListening();
-          }, 1000);
-        }
-      }
-
-      stopListening();
-    };
-
-    recognition.onend = () => {
-      console.log('[Speech] Recognition ended');
-      recognitionStarting = false;
-
-      // CRITICAL: Always reset state when recognition ends
-      stopListening();
-
-      // iOS Safari workaround: Sometimes onend fires without onerror
-      // If we were listening and expected to continue, restart
-      if (isListening) {
-        console.log('[Speech] Unexpected end while listening - auto-restarting');
-        recognitionCleanupTimer = setTimeout(() => {
-          startListening();
-        }, 300);
-      }
-    };
-
-    recognitionInitialized = true;
-    console.log('[Speech] ✅ Web Speech API initialized successfully');
-    return true;
-
-  } catch (e) {
-    console.error('[Speech] ❌ Failed to initialize:', e);
-    if (voiceLabel) voiceLabel.textContent = 'Voice unavailable';
-    recognitionInitialized = false;
-    recognitionStarting = false;
-    return false;
+  if (!SpeechRecognition) {
+    voiceBtn.style.display = 'none';
+    voiceLabel.textContent = 'Voice not supported - use text search';
+    console.log('[Speech] Web Speech API not available');
+    return;
   }
+
+  recognition = new SpeechRecognition();
+  recognition.continuous = false;
+  recognition.interimResults = true;
+  recognition.lang = 'en-US';
+  recognition.maxAlternatives = 3;
+
+  recognition.onstart = () => {
+    isListening = true;
+    voiceBtn.classList.add('listening');
+    voiceIcon.textContent = '🔴';
+    voiceLabel.textContent = 'Listening... speak now';
+    transcript.textContent = '';
+    statusText.textContent = 'Listening';
+    // Show cancel button when listening
+    voiceCancelBtn.style.display = 'flex';
+  };
+
+  recognition.onresult = (event) => {
+    let interimTranscript = '';
+    let finalTranscript = '';
+
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      const result = event.results[i];
+      if (result.isFinal) {
+        finalTranscript += result[0].transcript;
+      } else {
+        interimTranscript += result[0].transcript;
+      }
+    }
+
+    transcript.textContent = finalTranscript || interimTranscript;
+
+    if (finalTranscript) {
+      console.log('[Speech] Raw input:', finalTranscript);
+
+      // CRITICAL: Match spoken text to valid equipment ONLY
+      // Prevents misheard words like "sailing" instead of "saline"
+      const matchedEquipment = matchToValidEquipment(finalTranscript);
+      console.log('[Speech] Matched to:', matchedEquipment);
+
+      lastSearchWasVoice = true; // Mark this as voice search
+      search(matchedEquipment);
+    }
+  };
+
+  recognition.onerror = (event) => {
+    console.error('[Speech] Recognition error:', event.error);
+    stopListening();
+
+    if (event.error === 'no-speech') {
+      transcript.textContent = 'No speech detected. Tap to try again.';
+    } else if (event.error === 'not-allowed') {
+      transcript.textContent = 'Microphone access denied. Please enable in settings.';
+    } else if (event.error === 'network') {
+      // Offline - this is expected
+      transcript.textContent = 'Voice requires network. Use text search offline.';
+    }
+  };
+
+  recognition.onend = () => {
+    stopListening();
+  };
+
+  console.log('[Speech] Web Speech API initialized');
 }
 
-/**
- * Start listening with comprehensive error handling and recovery
- * MUST work reliably on iOS Safari for emergency situations
- */
 function startListening() {
-  console.log('[Speech] 🎤 startListening called, isListening:', isListening, 'recognitionStarting:', recognitionStarting);
-
-  // Prevent race conditions
-  if (recognitionStarting) {
-    console.log('[Speech] Already starting, ignoring duplicate call');
-    return;
-  }
-
-  // If already listening, this is a toggle to stop
-  if (isListening) {
-    console.log('[Speech] Already listening, stopping');
-    try {
-      if (recognition) recognition.stop();
-    } catch (e) {
-      console.warn('[Speech] Error stopping:', e);
-      // Force state reset
-      stopListening();
-    }
-    return;
-  }
-
-  recognitionStarting = true;
-
-  // Auto-initialize if not done yet OR if we had errors
-  if (!recognition || !recognitionInitialized) {
-    console.log('[Speech] Recognition not ready, initializing...');
-    const success = initSpeechRecognition();
-    if (!success) {
-      if (transcript) transcript.textContent = 'Voice not available on this device';
-      console.error('[Speech] ❌ Could not initialize recognition');
-      recognitionStarting = false;
-      return;
-    }
-  }
-
-  // Set UI state BEFORE starting (iOS Safari requirement)
-  if (voiceBtn) voiceBtn.classList.add('listening');
-  if (voiceIcon) voiceIcon.textContent = '🔴';
-  if (voiceLabel) voiceLabel.textContent = 'Starting microphone...';
-  if (transcript) transcript.textContent = '';
-  if (statusText) statusText.textContent = 'Starting...';
-  if (voiceCancelBtn) voiceCancelBtn.style.display = 'flex';
+  if (!recognition) return;
 
   try {
-    console.log('[Speech] 🚀 Starting recognition...');
     recognition.start();
-    console.log('[Speech] ✅ recognition.start() called successfully');
-
-    // Safety timeout: If onstart doesn't fire within 3 seconds, something is wrong
-    const startTimeout = setTimeout(() => {
-      if (recognitionStarting && !isListening) {
-        console.error('[Speech] ⏰ Timeout waiting for recognition to start');
-        recognitionStarting = false;
-        stopListening();
-        if (transcript) transcript.textContent = 'Microphone timeout. Tap to retry.';
-
-        // Force re-init
-        recognitionInitialized = false;
-        recognition = null;
-      }
-    }, 3000);
-
-    // Clear timeout if we start successfully
-    recognition.addEventListener('start', () => {
-      clearTimeout(startTimeout);
-    }, { once: true });
-
   } catch (e) {
-    console.error('[Speech] ❌ Could not start recognition:', e.message);
-    recognitionStarting = false;
-
-    // Handle "already started" error - iOS Safari edge case
-    if (e.message && e.message.includes('already started')) {
-      console.log('[Speech] Recognition already running, forcing restart...');
-      try {
-        recognition.abort(); // Use abort instead of stop for force-kill
-        recognitionAttempts++;
-        if (recognitionAttempts < MAX_RECOGNITION_ATTEMPTS) {
-          setTimeout(() => {
-            recognitionStarting = false;
-            startListening();
-          }, 200);
-        } else {
-          stopListening();
-          if (transcript) transcript.textContent = 'Voice stuck. Refresh page to fix.';
-        }
-      } catch (e2) {
-        console.error('[Speech] Restart failed:', e2);
-        stopListening();
-        if (transcript) transcript.textContent = 'Voice error. Refresh page.';
-      }
-    } else if (e.message && e.message.includes('not-allowed')) {
-      stopListening();
-      // SMART PERMISSION HANDLING: Show helpful modal instead of text error
-      handleMicrophoneError('not-allowed');
-    } else {
-      // Unknown error - full recovery sequence
-      stopListening();
-      recognitionInitialized = false;
-      recognition = null;
-      recognitionAttempts++;
-
-      if (recognitionAttempts < MAX_RECOGNITION_ATTEMPTS) {
-        console.log('[Speech] 🔄 Attempting recovery, attempt:', recognitionAttempts);
-        if (transcript) transcript.textContent = `Retrying... (${recognitionAttempts}/${MAX_RECOGNITION_ATTEMPTS})`;
-        setTimeout(() => {
-          recognitionStarting = false;
-          startListening();
-        }, 500);
-      } else {
-        if (transcript) transcript.textContent = 'Voice unavailable. Use text search or refresh page.';
-        // Reset attempts after showing error
-        setTimeout(() => {
-          recognitionAttempts = 0;
-        }, 5000);
-      }
-    }
+    console.error('[Speech] Could not start recognition:', e);
   }
 }
 
-/**
- * Stop listening and reset all state
- */
 function stopListening() {
-  console.log('[Speech] 🛑 Stopping listening');
   isListening = false;
-  recognitionStarting = false;
-
-  if (voiceBtn) voiceBtn.classList.remove('listening');
-  if (voiceIcon) voiceIcon.textContent = '🎤';
-  if (voiceLabel) voiceLabel.textContent = 'Tap to ask where something is';
-  if (statusText) statusText.textContent = 'Ready';
-  if (voiceCancelBtn) voiceCancelBtn.style.display = 'none';
-
-  // Clear any pending cleanup timers
-  if (recognitionCleanupTimer) {
-    clearTimeout(recognitionCleanupTimer);
-    recognitionCleanupTimer = null;
-  }
+  voiceBtn.classList.remove('listening');
+  voiceIcon.textContent = '🎤';
+  voiceLabel.textContent = 'Tap to ask where something is';
+  statusText.textContent = 'Ready';
+  // Hide cancel button when not listening
+  voiceCancelBtn.style.display = 'none';
 }
 
-/**
- * User-initiated cancellation
- */
 function cancelListening() {
-  console.log('[Speech] 🚫 Cancelled by user');
-
-  // Clear any auto-recovery timers
-  if (recognitionCleanupTimer) {
-    clearTimeout(recognitionCleanupTimer);
-    recognitionCleanupTimer = null;
+  console.log('[Speech] Cancelled by user');
+  if (recognition && isListening) {
+    recognition.stop(); // This will trigger onend which calls stopListening()
   }
-
-  if (recognition && (isListening || recognitionStarting)) {
-    try {
-      recognition.abort(); // Use abort for immediate stop
-    } catch (e) {
-      console.warn('[Speech] Error aborting:', e);
-    }
-  }
-
-  stopListening();
-
-  if (transcript) {
-    transcript.textContent = 'Cancelled';
-    setTimeout(() => {
-      transcript.textContent = '';
-    }, 1500);
-  }
-
+  transcript.textContent = 'Cancelled';
+  setTimeout(() => {
+    transcript.textContent = '';
+  }, 1500);
   hapticFeedback('light');
 }
 
@@ -2017,25 +957,19 @@ function displayResults(results, query) {
           ${item.critical ? `<span class="result-badge badge-critical">Critical #${item.criticalRank}</span>` : ''}
         </div>
 
-        <!-- LOCATION FIRST - Most important info up front -->
-        <div class="result-location-primary">
-          <span class="location-icon-large">📍</span>
-          <span class="location-text-large">${item.location}</span>
-        </div>
-        ${item.color ? `<div class="result-color-inline">Color: <strong>${item.color}</strong></div>` : ''}
-
-        ${item.images ? `
-          <button class="location-guide-btn" onclick="showLocationGuide('${item.id}')">
-            📍 View Location Guide (3 Steps)
-          </button>
-        ` : ''}
-
         ${item.image ? `
           <div class="result-image-container">
-            <img src="${getImageUrl(item)}" alt="${item.name}" class="result-image" onclick="toggleImageZoom(this)" />
-            <div class="image-hint">Tap image to enlarge ${getCustomImage(item.id) ? '• Custom Image' : ''}</div>
+            <img src="${item.image}" alt="${item.name}" class="result-image" onclick="toggleImageZoom(this)" />
+            <div class="image-hint">Tap image to enlarge</div>
           </div>
         ` : ''}
+
+        <div class="result-location">
+          <span class="location-icon">📍</span>
+          <span>${item.location}</span>
+        </div>
+
+        ${item.color ? `<div class="result-color">Color: ${item.color}</div>` : ''}
 
         <div class="result-details">
           ${item.description || ''}
@@ -2044,13 +978,6 @@ function displayResults(results, query) {
         </div>
 
         ${item.warning ? `<div class="result-warning">⚠️ ${item.warning}</div>` : ''}
-
-        ${item.usageNotes ? `
-          <div class="result-usage-notes">
-            <div class="usage-notes-header">📋 EMT Reference Notes</div>
-            <div class="usage-notes-content">${item.usageNotes.replace(/\n/g, '<br>')}</div>
-          </div>
-        ` : ''}
 
         ${compartment.access ? `
           <div class="result-details" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1);">
@@ -2069,242 +996,19 @@ function displayResults(results, query) {
     }
   });
 
-  // AUTO-SCROLL: Scroll to results so user sees them immediately
-  // Critical for emergency situations - don't make them hunt for the result
-  setTimeout(() => {
-    const topResult = document.getElementById('topResult');
-    if (topResult) {
-      topResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      console.log('[UI] Auto-scrolled to result');
-    }
-  }, 100);
-
-  // AUTO-SPEAK: Always speak results immediately - this is life-saving equipment!
-  // EMTs need hands-free operation - don't make them tap a button
-  if (currentResult) {
-    const wasVoiceSearch = lastSearchWasVoice;
-    lastSearchWasVoice = false; // Reset flag regardless
-    console.log('[TTS] Auto-speaking result for:', currentResult.name, '(voice:', wasVoiceSearch, ')');
-
-    // Delay to ensure:
-    // 1. Speech recognition is fully stopped (iOS requirement)
-    // 2. UI is rendered and scrolled
-    // 3. Audio context is ready
+  // Auto-speak result if search came from voice input
+  // IMPORTANT: Always speak results after voice search (life-threatening situations)
+  if (lastSearchWasVoice && currentResult) {
+    lastSearchWasVoice = false; // Reset flag
+    // Small delay to ensure UI is updated and isListening is false
     setTimeout(() => {
-      if (currentResult) {
-        // Only abort recognition if it was a voice search and still running
-        // CRITICAL: Don't disrupt recognition state for text searches
-        if (wasVoiceSearch && recognition && (isListening || recognitionStarting)) {
-          console.log('[TTS] Stopping recognition before speaking');
-          try { recognition.abort(); } catch(e) {}
-          isListening = false;
-          recognitionStarting = false;
-        }
-
-        // Initialize audio and speak
-        initializeAudio();
+      if (currentResult) { // Double-check result still exists
+        initializeAudio(); // Ensure audio is unlocked
         speakResult();
       }
-    }, 600); // Slight delay after scroll
+    }, 100);
   }
 }
-
-// ============================================================================
-// ROTATING LOCATION GUIDE (3-image sequence: ambulance → drawer → equipment)
-// ============================================================================
-let guideInterval = null;
-let guideCurrentStep = 0;
-let guideSteps = [];
-
-function showLocationGuide(itemId) {
-  const item = INVENTORY_DATABASE.items.find(i => i.id === itemId);
-  if (!item || !item.images) {
-    alert('Location guide not available for this item');
-    return;
-  }
-
-  // Build the image steps
-  guideSteps = [];
-  if (item.images.ambulancePosition) {
-    guideSteps.push({
-      url: item.images.ambulancePosition,
-      label: 'Step 1: Find this area on the ambulance',
-      dot: item.goldDots?.ambulancePosition
-    });
-  }
-  if (item.images.compartmentView) {
-    guideSteps.push({
-      url: item.images.compartmentView,
-      label: 'Step 2: Open this drawer/cabinet',
-      dot: item.goldDots?.compartmentView
-    });
-  }
-  if (item.images.equipmentPhoto) {
-    guideSteps.push({
-      url: item.images.equipmentPhoto,
-      label: 'Step 3: Grab this item',
-      dot: item.goldDots?.equipmentPhoto
-    });
-  }
-
-  if (guideSteps.length === 0) {
-    alert('No location images available');
-    return;
-  }
-
-  // Create modal using safe DOM methods
-  const modal = document.createElement('div');
-  modal.id = 'location-guide-modal';
-  modal.className = 'guide-modal';
-
-  const content = document.createElement('div');
-  content.className = 'guide-content';
-
-  // Header
-  const header = document.createElement('div');
-  header.className = 'guide-header';
-  const title = document.createElement('h3');
-  title.textContent = '📍 ' + item.name + ' Location';
-  const closeBtn = document.createElement('button');
-  closeBtn.className = 'guide-close-btn';
-  closeBtn.textContent = '✕';
-  closeBtn.onclick = closeLocationGuide;
-  header.appendChild(title);
-  header.appendChild(closeBtn);
-
-  // Image container
-  const imgContainer = document.createElement('div');
-  imgContainer.className = 'guide-image-container';
-  const img = document.createElement('img');
-  img.id = 'guide-image';
-  img.className = 'guide-image'; // CRITICAL: Apply CSS class for object-fit: contain
-  img.src = guideSteps[0].url;
-  img.alt = 'Location guide';
-  const dot = document.createElement('div');
-  dot.id = 'guide-dot';
-  dot.className = 'guide-dot';
-  dot.style.display = 'none';
-  imgContainer.appendChild(img);
-  imgContainer.appendChild(dot);
-
-  // Label container
-  const labelContainer = document.createElement('div');
-  labelContainer.className = 'guide-label-container';
-  const stepNumber = document.createElement('div');
-  stepNumber.className = 'guide-step-number';
-  stepNumber.id = 'guide-step-number';
-  stepNumber.textContent = 'Step 1 of ' + guideSteps.length;
-  const labelText = document.createElement('div');
-  labelText.className = 'guide-label-text';
-  labelText.id = 'guide-label';
-  labelText.textContent = guideSteps[0].label;
-  labelContainer.appendChild(stepNumber);
-  labelContainer.appendChild(labelText);
-
-  // Progress dots
-  const progress = document.createElement('div');
-  progress.className = 'guide-progress';
-  guideSteps.forEach((_, i) => {
-    const stepDot = document.createElement('span');
-    stepDot.className = 'guide-progress-dot' + (i === 0 ? ' active' : '');
-    stepDot.dataset.step = i;
-    progress.appendChild(stepDot);
-  });
-
-  // Controls
-  const controls = document.createElement('div');
-  controls.className = 'guide-controls';
-  const pauseBtn = document.createElement('button');
-  pauseBtn.className = 'guide-play-btn';
-  pauseBtn.id = 'guide-pause-btn';
-  pauseBtn.textContent = '⏸ Pause';
-  pauseBtn.onclick = toggleGuidePlayback;
-  controls.appendChild(pauseBtn);
-
-  // Assemble
-  content.appendChild(header);
-  content.appendChild(imgContainer);
-  content.appendChild(labelContainer);
-  content.appendChild(progress);
-  content.appendChild(controls);
-  modal.appendChild(content);
-  document.body.appendChild(modal);
-
-  // Position gold dot if available
-  updateGuideDot(guideSteps[0].dot);
-
-  // Start auto-rotation (1.5 seconds per image)
-  guideCurrentStep = 0;
-  startGuideRotation();
-}
-
-function startGuideRotation() {
-  guideInterval = setInterval(() => {
-    guideCurrentStep = (guideCurrentStep + 1) % guideSteps.length;
-    const step = guideSteps[guideCurrentStep];
-
-    const img = document.getElementById('guide-image');
-    const label = document.getElementById('guide-label');
-    const stepNum = document.getElementById('guide-step-number');
-    if (img) img.src = step.url;
-    if (label) label.textContent = step.label;
-    if (stepNum) stepNum.textContent = 'Step ' + (guideCurrentStep + 1) + ' of ' + guideSteps.length;
-    updateGuideDot(step.dot);
-
-    // Update progress dots
-    document.querySelectorAll('.guide-progress-dot').forEach((el, i) => {
-      el.classList.toggle('active', i === guideCurrentStep);
-    });
-  }, 1500);
-}
-
-function updateGuideDot(dotData) {
-  const dotEl = document.getElementById('guide-dot');
-  if (!dotEl) return;
-
-  if (dotData && dotData.x && dotData.y) {
-    dotEl.style.display = 'block';
-    dotEl.style.left = dotData.x + '%';
-    dotEl.style.top = dotData.y + '%';
-    // Clear and add label safely
-    dotEl.textContent = '';
-    if (dotData.label) {
-      const labelSpan = document.createElement('span');
-      labelSpan.className = 'dot-label';
-      labelSpan.textContent = dotData.label;
-      dotEl.appendChild(labelSpan);
-    }
-  } else {
-    dotEl.style.display = 'none';
-  }
-}
-
-function toggleGuidePlayback() {
-  const btn = document.getElementById('guide-pause-btn');
-  if (!btn) return;
-
-  if (guideInterval) {
-    clearInterval(guideInterval);
-    guideInterval = null;
-    btn.textContent = '▶ Play';
-  } else {
-    startGuideRotation();
-    btn.textContent = '⏸ Pause';
-  }
-}
-
-function closeLocationGuide() {
-  if (guideInterval) {
-    clearInterval(guideInterval);
-    guideInterval = null;
-  }
-  const modal = document.getElementById('location-guide-modal');
-  if (modal) modal.remove();
-}
-
-// Make location guide functions globally accessible for onclick handlers
-window.showLocationGuide = showLocationGuide;
-window.closeLocationGuide = closeLocationGuide;
 
 // ============================================================================
 // TEXT-TO-SPEECH (100% Offline via native SpeechSynthesis)
@@ -2314,7 +1018,15 @@ let voiceLoadAttempts = 0;
 
 function ensureVoicesLoaded() {
   return new Promise((resolve) => {
-    const voices = synthesis.getVoices();
+    // Get fresh synthesis reference
+    const synth = window.speechSynthesis;
+    if (!synth) {
+      console.error('[TTS] SpeechSynthesis not available');
+      resolve([]);
+      return;
+    }
+
+    const voices = synth.getVoices();
     if (voices.length > 0) {
       voicesLoaded = true;
       console.log('[TTS] Voices available:', voices.length);
@@ -2328,54 +1040,44 @@ function ensureVoicesLoaded() {
       console.log('[TTS] Waiting for voices... attempt', voiceLoadAttempts);
 
       const timeout = setTimeout(() => {
-        synthesis.removeEventListener('voiceschanged', voicesHandler);
-        resolve(synthesis.getVoices());
+        synth.removeEventListener('voiceschanged', voicesHandler);
+        resolve(synth.getVoices());
       }, 1000);
 
       const voicesHandler = () => {
         clearTimeout(timeout);
         voicesLoaded = true;
-        console.log('[TTS] Voices loaded:', synthesis.getVoices().length);
-        resolve(synthesis.getVoices());
+        console.log('[TTS] Voices loaded:', synth.getVoices().length);
+        resolve(synth.getVoices());
       };
 
-      synthesis.addEventListener('voiceschanged', voicesHandler, { once: true });
+      synth.addEventListener('voiceschanged', voicesHandler, { once: true });
     } else {
       resolve(voices);
     }
   });
 }
 
-// TTS guard flag to prevent multiple simultaneous calls
-let ttsInProgress = false;
+async function speakResult() {
+  // Get synthesis fresh each time (fixes iOS load timing issue)
+  synthesis = window.speechSynthesis;
 
-async function speakResult(retryCount = 0) {
-  if (!currentResult) {
-    console.error('[TTS] No result to speak');
+  if (!currentResult || !synthesis) {
+    console.error('[TTS] Missing synthesis or result');
     return;
   }
 
-  if (!synthesis) {
-    console.error('[TTS] Speech synthesis not available');
-    return;
+  // iOS Safari fix: resume if paused (known iOS bug)
+  if (synthesis.paused) {
+    console.log('[TTS] Resuming paused synthesis');
+    synthesis.resume();
   }
-
-  // Prevent multiple simultaneous TTS calls (fixes stuttering)
-  if (ttsInProgress && retryCount === 0) {
-    console.log('[TTS] Already speaking, ignoring duplicate call');
-    return;
-  }
-
-  console.log('[TTS] speakResult called, retry:', retryCount);
-
-  // Set guard flag
-  ttsInProgress = true;
 
   // Cancel any ongoing speech
   synthesis.cancel();
 
-  // Small delay after cancel to ensure clean state
-  await new Promise(resolve => setTimeout(resolve, 150));
+  // iOS Safari workaround: short delay after cancel
+  await new Promise(resolve => setTimeout(resolve, 50));
 
   // Ensure voices are loaded (critical for Android)
   const voices = await ensureVoicesLoaded();
@@ -2420,47 +1122,69 @@ async function speakResult(retryCount = 0) {
 
   utterance.onstart = () => {
     speakBtn.classList.add('speaking');
-    speakBtn.innerHTML = '🔇'; // Show muted icon - tap to stop
     statusText.textContent = 'Speaking';
     console.log('[TTS] Speaking started');
   };
 
   utterance.onend = () => {
     speakBtn.classList.remove('speaking');
-    speakBtn.innerHTML = '🔊'; // Restore speaker icon
     statusText.textContent = 'Ready';
-    ttsInProgress = false; // Reset guard flag
     console.log('[TTS] Speaking ended');
   };
 
   utterance.onerror = (e) => {
     console.error('[TTS] Error:', e.error, e);
     speakBtn.classList.remove('speaking');
-    speakBtn.innerHTML = '🔊'; // Restore speaker icon
-    ttsInProgress = false; // Reset guard flag
-
-    // Retry up to 2 times on error (but not for 'interrupted' which is normal)
-    if (e.error !== 'interrupted' && retryCount < 2) {
-      console.log('[TTS] Retrying speech...');
-      setTimeout(() => speakResult(retryCount + 1), 300);
-    } else {
-      statusText.textContent = 'Tap speaker to hear location';
-      setTimeout(() => statusText.textContent = 'Ready', 3000);
-    }
+    statusText.textContent = 'Audio failed - tap speaker to retry';
+    setTimeout(() => statusText.textContent = 'Ready', 3000);
   };
 
   try {
-    console.log('[TTS] Calling synthesis.speak()');
+    // iOS Safari workaround: check speaking state and handle stalled speech
+    if (synthesis.speaking) {
+      console.log('[TTS] Still speaking, canceling first');
+      synthesis.cancel();
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+
+    // Speak the utterance
     synthesis.speak(utterance);
+    console.log('[TTS] Speech initiated, text:', text.substring(0, 50) + '...');
+
+    // iOS Safari workaround: sometimes speak() silently fails
+    // Check if speaking actually started after a brief delay
+    const retryUtterance = utterance; // Capture reference for retry
+    setTimeout(() => {
+      // Re-check synthesis is still available
+      const synth = window.speechSynthesis;
+      if (synth && !synth.speaking && !synth.pending && currentResult) {
+        console.warn('[TTS] Speech may have failed silently, retrying...');
+        // Create fresh utterance for retry (iOS requires this)
+        const freshUtterance = new SpeechSynthesisUtterance(text);
+        freshUtterance.rate = retryUtterance.rate;
+        freshUtterance.pitch = retryUtterance.pitch;
+        freshUtterance.volume = retryUtterance.volume;
+        if (retryUtterance.voice) freshUtterance.voice = retryUtterance.voice;
+        freshUtterance.onstart = retryUtterance.onstart;
+        freshUtterance.onend = retryUtterance.onend;
+        freshUtterance.onerror = retryUtterance.onerror;
+
+        synth.cancel();
+        setTimeout(() => {
+          try {
+            synth.speak(freshUtterance);
+            console.log('[TTS] Retry speak initiated');
+          } catch (retryErr) {
+            console.error('[TTS] Retry failed:', retryErr);
+          }
+        }, 100);
+      }
+    }, 300);
+
   } catch (e) {
     console.error('[TTS] Exception:', e);
-    // Retry on exception
-    if (retryCount < 2) {
-      setTimeout(() => speakResult(retryCount + 1), 300);
-    } else {
-      statusText.textContent = 'Tap speaker to hear location';
-      setTimeout(() => statusText.textContent = 'Ready', 2000);
-    }
+    statusText.textContent = 'Audio failed';
+    setTimeout(() => statusText.textContent = 'Ready', 2000);
   }
 }
 
@@ -2494,39 +1218,13 @@ function toggleImageZoom(imgElement) {
 }
 
 // ============================================================================
-// EVENT LISTENERS - CRITICAL: Single handlers only to prevent race conditions
+// EVENT LISTENERS
 // ============================================================================
-
-/**
- * Voice button click handler - MUST be reliable for emergency situations
- * Uses addEventListener instead of onclick to properly handle event propagation
- */
-voiceBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  e.stopPropagation(); // Prevent bubbling to voice-section
-
-  console.log('[VoiceBtn] Click handler triggered, isListening:', isListening, 'recognitionStarting:', recognitionStarting);
-
-  // Remove iOS attention pulse once user taps
-  voiceBtn.classList.remove('pulse-attention');
-
+voiceBtn.addEventListener('click', () => {
   hapticFeedback('medium');
-
-  // Toggle: Stop if listening, start if not
-  if (isListening || recognitionStarting) {
-    console.log('[VoiceBtn] Stopping recognition');
-    if (recognition) {
-      try {
-        recognition.stop();
-      } catch (e) {
-        console.warn('[VoiceBtn] Error stopping:', e);
-        stopListening(); // Force state reset
-      }
-    }
+  if (isListening) {
+    recognition?.stop();
   } else {
-    // SIMPLIFIED: Just start listening directly - let the browser handle permission prompts
-    // This is how v1/v2 worked and it was reliable
-    console.log('[VoiceBtn] Starting recognition directly');
     startListening();
   }
 });
@@ -2540,8 +1238,8 @@ voiceCancelBtn.addEventListener('click', (e) => {
 
 // Large tap zone - anywhere on voice section starts listening
 document.querySelector('.voice-section')?.addEventListener('click', (e) => {
-  // Don't trigger if clicking inside the button containers
-  if (!e.target.closest('.voice-btn') && !e.target.closest('.voice-cancel-btn') && !isListening) {
+  // Don't trigger if clicking the buttons directly
+  if (e.target !== voiceBtn && e.target !== voiceCancelBtn && !isListening) {
     startListening();
   }
 });
@@ -2564,20 +1262,6 @@ searchInput.addEventListener('input', (e) => {
 });
 
 speakBtn.addEventListener('click', () => {
-  // Toggle TTS - if speaking, stop it; otherwise speak
-  if (synthesis.speaking || ttsInProgress) {
-    synthesis.cancel();
-    ttsInProgress = false; // Reset guard flag
-    hapticFeedback('light');
-    speakBtn.classList.remove('speaking');
-    speakBtn.innerHTML = '🔊'; // Restore speaker icon
-    const statusText = document.querySelector('.status-text');
-    if (statusText) {
-      statusText.textContent = 'Speech stopped';
-      setTimeout(() => statusText.textContent = 'Ready', 1500);
-    }
-    return;
-  }
   initializeAudio();  // Ensure audio is unlocked on iOS
   speakResult();
 });
@@ -2597,9 +1281,6 @@ document.getElementById('emergency-btn')?.addEventListener('click', showEmergenc
 
 // Night mode toggle
 document.getElementById('night-toggle')?.addEventListener('click', toggleNightMode);
-
-// Share button - allows EMTs to share the app with each other
-document.getElementById('share-btn')?.addEventListener('click', shareApp);
 
 // Compartment map clicks
 document.querySelectorAll('.map-item').forEach(el => {
@@ -2631,278 +1312,52 @@ if (!navigator.onLine) {
 }
 
 // ============================================================================
-// MICROPHONE PERMISSION MANAGEMENT - Smart permission flow
-// ============================================================================
-const MIC_PERMISSION_KEY = 'hnfd-mic-permission-status';
-const MIC_SETUP_SHOWN_KEY = 'hnfd-mic-setup-shown';
-
-/**
- * Check if this is the first time the user is using the app
- * SIMPLIFIED: Don't show onboarding modals - let browser handle permission prompts naturally
- * This is how v1/v2 worked and was reliable on iOS Safari
- */
-function checkMicrophoneSetup() {
-  // DISABLED: The modal-based permission flow was blocking speech recognition
-  // Just let the browser handle permission prompts when user taps the microphone
-  console.log('[MicPerm] Skipping setup check - using direct browser permission flow');
-  return false;
-}
-
-/**
- * Show the microphone onboarding modal for first-time users
- */
-function showMicOnboardingModal() {
-  const modal = document.getElementById('mic-onboarding-modal');
-  if (modal) {
-    modal.classList.add('active');
-    localStorage.setItem(MIC_SETUP_SHOWN_KEY, 'true');
-    console.log('[MicPerm] Showing onboarding modal');
-  }
-}
-
-/**
- * Show the microphone blocked help modal
- */
-function showMicBlockedModal() {
-  const modal = document.getElementById('mic-blocked-modal');
-  if (modal) {
-    modal.classList.add('active');
-    console.log('[MicPerm] Showing blocked help modal');
-  }
-}
-
-/**
- * Close the onboarding modal
- */
-function closeMicOnboardingModal() {
-  const modal = document.getElementById('mic-onboarding-modal');
-  if (modal) {
-    modal.classList.remove('active');
-  }
-}
-
-/**
- * Close the blocked help modal
- */
-function closeMicBlockedModal() {
-  const modal = document.getElementById('mic-blocked-modal');
-  if (modal) {
-    modal.classList.remove('active');
-  }
-  // Update transcript to show text search is available
-  const transcript = document.getElementById('transcript');
-  if (transcript) {
-    transcript.textContent = 'Voice disabled - type equipment name below';
-  }
-}
-
-/**
- * Request microphone permission - triggered by user clicking Enable button
- */
-async function requestMicrophonePermission() {
-  console.log('[MicPerm] User requesting microphone permission');
-
-  closeMicOnboardingModal();
-
-  // Show feedback in UI
-  const transcript = document.getElementById('transcript');
-  if (transcript) {
-    transcript.textContent = 'Requesting microphone access...';
-  }
-
-  try {
-    // Try to get microphone stream - this triggers the permission prompt
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-
-    // Permission granted! Stop the stream immediately
-    stream.getTracks().forEach(track => track.stop());
-
-    console.log('[MicPerm] ✅ Permission granted!');
-    localStorage.setItem(MIC_PERMISSION_KEY, 'granted');
-
-    // Update UI
-    if (transcript) {
-      transcript.textContent = '✓ Voice search enabled! Tap microphone to speak.';
-    }
-
-    // Auto-start listening after a brief delay
-    setTimeout(() => {
-      if (!isListening && !recognitionStarting) {
-        startListening();
-      }
-    }, 800);
-
-    return true;
-  } catch (err) {
-    console.error('[MicPerm] ❌ Permission denied or error:', err.name, err.message);
-
-    // Store denied status
-    localStorage.setItem(MIC_PERMISSION_KEY, 'denied');
-
-    // Check if it's a permission denied error
-    if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-      // Show the help modal with steps to enable
-      showMicBlockedModal();
-    } else {
-      // Some other error - don't show scary message
-      if (transcript) {
-        transcript.textContent = 'Tap microphone to try again';
-      }
-    }
-
-    return false;
-  }
-}
-
-/**
- * User chooses to skip microphone setup
- */
-function skipMicrophoneSetup() {
-  console.log('[MicPerm] User skipped microphone setup');
-  localStorage.setItem(MIC_PERMISSION_KEY, 'skipped');
-  closeMicOnboardingModal();
-
-  const transcript = document.getElementById('transcript');
-  if (transcript) {
-    transcript.textContent = 'Type equipment name below to search';
-  }
-}
-
-/**
- * Retry microphone permission after user changed settings
- */
-async function retryMicrophonePermission() {
-  console.log('[MicPerm] Retrying microphone permission');
-  closeMicBlockedModal();
-
-  // Clear the denied status so we can try again
-  localStorage.removeItem(MIC_PERMISSION_KEY);
-
-  // Request permission again
-  const success = await requestMicrophonePermission();
-
-  if (!success) {
-    // Still denied - show blocked modal again
-    setTimeout(() => {
-      showMicBlockedModal();
-    }, 500);
-  }
-}
-
-/**
- * Check if microphone permission is currently granted
- */
-async function isMicrophonePermissionGranted() {
-  // Check localStorage first
-  const stored = localStorage.getItem(MIC_PERMISSION_KEY);
-  if (stored === 'granted') {
-    return true;
-  }
-  if (stored === 'denied' || stored === 'skipped') {
-    return false;
-  }
-
-  // Try permissions API (doesn't work on iOS Safari)
-  if (navigator.permissions && navigator.permissions.query) {
-    try {
-      const result = await navigator.permissions.query({ name: 'microphone' });
-      if (result.state === 'granted') {
-        localStorage.setItem(MIC_PERMISSION_KEY, 'granted');
-        return true;
-      }
-      if (result.state === 'denied') {
-        localStorage.setItem(MIC_PERMISSION_KEY, 'denied');
-        return false;
-      }
-    } catch (e) {
-      // Permissions API not supported
-    }
-  }
-
-  return null; // Unknown - need to ask
-}
-
-/**
- * Handle microphone error - show modal instead of text error
- */
-function handleMicrophoneError(error) {
-  console.log('[MicPerm] Handling error:', error);
-
-  if (error === 'not-allowed' || error === 'permission-denied') {
-    localStorage.setItem(MIC_PERMISSION_KEY, 'denied');
-    showMicBlockedModal();
-    return true; // Handled
-  }
-
-  return false; // Not a permission error
-}
-
-// ============================================================================
-// INITIALIZATION - CRITICAL: Auto-start listening for life-safety
+// INITIALIZATION
 // ============================================================================
 initSpeechRecognition();
 
 // Initialize audio on first user interaction (required for iOS)
 function initializeAudio() {
-  if (audioInitialized || !synthesis) return;
+  if (audioInitialized) return;
 
   try {
-    const utterance = new SpeechSynthesisUtterance('');
-    utterance.volume = 0;
-    synthesis.speak(utterance);
+    // Get fresh synthesis reference
+    synthesis = window.speechSynthesis;
+
+    if (!synthesis) {
+      console.error('[TTS] SpeechSynthesis not available');
+      return;
+    }
+
+    // iOS Safari: resume if in paused state
+    if (synthesis.paused) {
+      synthesis.resume();
+    }
+
+    // Cancel any stuck utterances
+    synthesis.cancel();
+
     audioInitialized = true;
-    console.log('[TTS] Audio initialized');
+    console.log('[TTS] Audio initialized, synthesis available');
   } catch (e) {
     console.error('[TTS] Audio init failed:', e);
   }
 }
 
-// ============================================================================
-// AUTO-START LISTENING when app loads
-// App starts in listening mode - ready to hear equipment names immediately
-// ============================================================================
-async function autoStartListening() {
-  console.log('[AutoStart] 🚀 Initializing speech recognition...');
+// Request microphone permission on first interaction (one-time setup)
+function requestMicrophonePermission() {
+  if (micPermissionRequested || !recognition) return;
 
   try {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      console.log('[AutoStart] ❌ Speech recognition not supported');
-      if (transcript) transcript.textContent = 'Voice not supported - use text search';
-      return;
-    }
-
-    // Initialize speech recognition
-    const initSuccess = initSpeechRecognition();
-    if (initSuccess) {
-      // Detect iOS - requires user tap (Apple policy for microphone access)
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-                    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-
-      if (isIOS) {
-        // iOS: MUST have user tap first - Apple security policy
-        console.log('[AutoStart] 📱 iOS detected - waiting for user tap (Apple policy)');
-        if (transcript) transcript.textContent = '🎤 TAP MICROPHONE to start voice search';
-        // Pulse the microphone to draw attention
-        const voiceBtn = document.getElementById('voiceBtn');
-        if (voiceBtn) voiceBtn.classList.add('pulse-attention');
-      } else {
-        // Desktop/Android: Try auto-start, fall back if it fails
-        console.log('[AutoStart] 💻 Desktop/Android - attempting auto-start');
-        try {
-          startListening();
-        } catch (e) {
-          console.log('[AutoStart] Auto-start failed, waiting for user tap');
-          if (transcript) transcript.textContent = 'Tap microphone to start voice search';
-        }
-      }
-    } else {
-      console.log('[AutoStart] ❌ Could not initialize');
-      if (transcript) transcript.textContent = 'Tap microphone to try voice search';
-    }
+    // Attempt to start and immediately stop recognition
+    // This triggers the browser's permission prompt
+    recognition.start();
+    recognition.stop();
+    localStorage.setItem('hnfd_mic_permission_requested', 'true');
+    micPermissionRequested = true;
+    console.log('[Mic] Permission requested');
   } catch (e) {
-    console.error('[AutoStart] ❌ Error:', e);
-    if (transcript) transcript.textContent = 'Tap microphone to start';
+    console.error('[Mic] Permission request failed:', e);
   }
 }
 
@@ -2911,37 +1366,18 @@ if (synthesis) {
   synthesis.onvoiceschanged = () => {
     console.log('[TTS] Voices loaded:', synthesis.getVoices().length);
   };
+  // Trigger voice loading
   synthesis.getVoices();
+
+  // Initialize audio AND request mic permission on any user interaction
+  const initEvents = ['click', 'touchstart', 'keydown'];
+  initEvents.forEach(event => {
+    document.addEventListener(event, () => {
+      initializeAudio();
+      requestMicrophonePermission();
+    }, { once: true, passive: true });
+  });
 }
-
-// ============================================================================
-// INITIALIZATION SEQUENCE
-// ============================================================================
-
-/**
- * Primary initialization - SIMPLIFIED: Just initialize, wait for user tap
- */
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('[Init] 📱 DOM loaded, initializing...');
-
-  // Initialize audio context unlock for iOS
-  initializeAudio();
-
-  // Initialize speech recognition (will show "Tap microphone to search by voice")
-  setTimeout(autoStartListening, 800);
-});
-
-/**
- * First user interaction - unlock audio for iOS Safari
- */
-let hasUnlockedAudio = false;
-document.addEventListener('click', () => {
-  if (!hasUnlockedAudio) {
-    hasUnlockedAudio = true;
-    console.log('[Init] 👆 First tap - unlocking audio');
-    initializeAudio();
-  }
-}, { once: true });
 
 // Register Service Worker for offline support
 if ('serviceWorker' in navigator) {
@@ -2973,535 +1409,6 @@ const versionDisplay = document.getElementById('version-display');
 if (versionDisplay) {
   versionDisplay.textContent = `v${APP_VERSION}`;
   versionDisplay.addEventListener('click', () => checkForUpdates(true));
-}
-
-// ============================================================================
-// A-Z BROWSE FEATURE - Alphabetical equipment list
-// ============================================================================
-
-/**
- * Open the A-Z browse modal with scrollable tappable list
- */
-function openAZBrowse() {
-  const modal = document.getElementById('az-modal');
-  const listEl = document.getElementById('az-list');
-  const countEl = document.getElementById('az-count');
-
-  if (!modal || !listEl) return;
-
-  // Sort equipment alphabetically by name
-  const sortedEquipment = [...INVENTORY_DATABASE.items].sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
-
-  // Build scrollable button list
-  let html = '';
-  sortedEquipment.forEach(item => {
-    const criticalClass = item.critical ? ' az-item-critical' : '';
-    html += `<button class="az-item${criticalClass}" onclick="selectAZItem('${item.id}')">${item.name}</button>`;
-  });
-
-  listEl.innerHTML = html;
-  countEl.textContent = `${sortedEquipment.length} items - tap to select`;
-
-  // Show modal
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-/**
- * Close the A-Z browse modal
- */
-function closeAZBrowse() {
-  const modal = document.getElementById('az-modal');
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-}
-
-// ============================================================================
-// DRIVER ZONES - Harpswell Area Driver Assignments by Zone
-// ============================================================================
-
-/**
- * Open the Driver Zones modal showing map and driver list
- */
-function openDriverZones() {
-  const modal = document.getElementById('driver-zones-modal');
-  const listEl = document.getElementById('driver-zones-list');
-  const flipInner = document.getElementById('driver-flip-inner');
-  const hint = document.getElementById('driver-flip-hint');
-  if (!modal || !listEl) return;
-
-  hapticFeedback('light');
-
-  // Reset flip state to show map first
-  driverCardFlipped = false;
-  if (flipInner) {
-    flipInner.classList.remove('flipped');
-  }
-  if (hint) {
-    hint.textContent = '👆 Tap map to see driver list';
-  }
-
-  // Build driver list HTML with clickable phone numbers
-  let html = '<div style="padding: 10px 0;">';
-  html += '<div style="text-align: center; font-size: 13px; color: var(--gray-400); padding: 8px 16px; border-bottom: 1px solid var(--gray-700);">👆 Tap to see map</div>';
-  DRIVER_ZONES.zones.forEach(zone => {
-    html += `
-      <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--gray-700);">
-        <div style="flex: 1;">
-          <span style="font-weight: 700; color: var(--green-500); margin-right: 8px;">${zone.id}</span>
-          <span style="color: white;">${zone.driver}</span>
-        </div>
-        ${zone.phone ? `<a href="tel:${zone.phone}" onclick="event.stopPropagation();" style="display: flex; align-items: center; gap: 4px; background: var(--green-600); color: white; text-decoration: none; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;">📞</a>` : ''}
-      </div>
-    `;
-  });
-  html += '</div>';
-
-  listEl.innerHTML = html;
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-/**
- * Close Driver Zones modal
- */
-function closeDriverZones() {
-  const modal = document.getElementById('driver-zones-modal');
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-}
-
-/**
- * Toggle map fullscreen view
- */
-function toggleMapFullscreen(imgEl) {
-  if (imgEl.style.position === 'fixed') {
-    // Exit fullscreen
-    imgEl.style.position = '';
-    imgEl.style.top = '';
-    imgEl.style.left = '';
-    imgEl.style.width = '';
-    imgEl.style.height = '';
-    imgEl.style.zIndex = '';
-    imgEl.style.objectFit = '';
-    imgEl.style.background = '';
-  } else {
-    // Enter fullscreen
-    imgEl.style.position = 'fixed';
-    imgEl.style.top = '0';
-    imgEl.style.left = '0';
-    imgEl.style.width = '100vw';
-    imgEl.style.height = '100vh';
-    imgEl.style.zIndex = '10000';
-    imgEl.style.objectFit = 'contain';
-    imgEl.style.background = 'rgba(0,0,0,0.95)';
-  }
-}
-
-// Flip card state for driver zones
-let driverCardFlipped = false;
-
-/**
- * Flip the driver zones card between map and list
- */
-function flipDriverCard() {
-  const inner = document.getElementById('driver-flip-inner');
-  const hint = document.getElementById('driver-flip-hint');
-  if (!inner) return;
-
-  driverCardFlipped = !driverCardFlipped;
-  hapticFeedback('light');
-
-  if (driverCardFlipped) {
-    inner.classList.add('flipped');
-    if (hint) hint.textContent = '👆 Tap to see zone map';
-  } else {
-    inner.classList.remove('flipped');
-    if (hint) hint.textContent = '👆 Tap map to see driver list';
-  }
-}
-
-// Make driver zone functions globally accessible
-window.openDriverZones = openDriverZones;
-window.closeDriverZones = closeDriverZones;
-window.toggleMapFullscreen = toggleMapFullscreen;
-window.flipDriverCard = flipDriverCard;
-
-// ============================================================================
-// ROSTER - All HNFD Members with Clickable Phone Numbers
-// ============================================================================
-
-// Roster PIN for access control
-const ROSTER_PIN = '1426';
-let rosterUnlocked = false;
-
-/**
- * Open the Roster modal showing all members with phone links
- */
-function openRoster() {
-  const modal = document.getElementById('roster-modal');
-  const listEl = document.getElementById('roster-list');
-  if (!modal || !listEl) return;
-
-  hapticFeedback('light');
-
-  // Check if already unlocked this session
-  if (!rosterUnlocked) {
-    showPinPrompt();
-    return;
-  }
-
-  showRosterContent(modal, listEl);
-}
-
-/**
- * Show PIN entry prompt
- */
-function showPinPrompt() {
-  const pinHtml = `
-    <div id="pin-overlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 10002; display: flex; align-items: center; justify-content: center; padding: 20px;">
-      <div style="background: var(--gray-800); border-radius: 16px; max-width: 300px; width: 100%; padding: 24px; text-align: center;">
-        <div style="font-size: 48px; margin-bottom: 12px;">🔒</div>
-        <div style="font-size: 18px; font-weight: 700; color: white; margin-bottom: 8px;">Roster Access</div>
-        <div style="color: var(--gray-400); font-size: 14px; margin-bottom: 20px;">Enter PIN to view roster</div>
-        <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" id="pin-input"
-          style="width: 100%; padding: 16px; font-size: 24px; text-align: center; letter-spacing: 8px; background: var(--gray-700); border: 2px solid var(--gray-600); border-radius: 8px; color: white; margin-bottom: 16px;"
-          placeholder="••••" autocomplete="off">
-        <div id="pin-error" style="color: var(--red-500); font-size: 14px; margin-bottom: 12px; display: none;">Incorrect PIN</div>
-        <div style="display: flex; gap: 12px;">
-          <button onclick="closePinPrompt()" style="flex: 1; padding: 14px; background: var(--gray-600); border: none; border-radius: 8px; color: white; font-size: 16px; font-weight: 600; cursor: pointer;">Cancel</button>
-          <button onclick="verifyPin()" style="flex: 1; padding: 14px; background: var(--green-600); border: none; border-radius: 8px; color: white; font-size: 16px; font-weight: 600; cursor: pointer;">Enter</button>
-        </div>
-      </div>
-    </div>
-  `;
-  document.body.insertAdjacentHTML('beforeend', pinHtml);
-
-  const pinInput = document.getElementById('pin-input');
-  pinInput.focus();
-
-  // Handle enter key
-  pinInput.addEventListener('keyup', (e) => {
-    if (e.key === 'Enter') verifyPin();
-  });
-}
-
-function verifyPin() {
-  const input = document.getElementById('pin-input');
-  const error = document.getElementById('pin-error');
-
-  if (input.value === ROSTER_PIN) {
-    rosterUnlocked = true;
-    closePinPrompt();
-    hapticFeedback('success');
-    openRoster(); // Now open roster
-  } else {
-    error.style.display = 'block';
-    input.value = '';
-    input.focus();
-    hapticFeedback('error');
-  }
-}
-
-function closePinPrompt() {
-  const overlay = document.getElementById('pin-overlay');
-  if (overlay) overlay.remove();
-}
-
-window.verifyPin = verifyPin;
-window.closePinPrompt = closePinPrompt;
-
-/**
- * Show roster content after PIN verified
- */
-function showRosterContent(modal, listEl) {
-
-  // Group by certification type - officers sorted by number
-  const officers = HNFD_ROSTER.filter(m => m.office).sort((a, b) => {
-    const numA = parseInt(a.number) || 9999;
-    const numB = parseInt(b.number) || 9999;
-    return numA - numB;
-  });
-
-  // Build roster HTML with categories
-  let html = '';
-
-  // Leadership section - sorted by number
-  html += `<div style="font-size: 12px; font-weight: 700; color: var(--yellow-400); padding: 12px 16px; background: var(--gray-900); border-bottom: 1px solid var(--gray-700);">LEADERSHIP & OFFICERS (by #)</div>`;
-  officers.forEach(member => {
-    html += buildRosterItem(member);
-  });
-
-  // All members alphabetically
-  html += `<div style="font-size: 12px; font-weight: 700; color: var(--green-500); padding: 12px 16px; background: var(--gray-900); border-bottom: 1px solid var(--gray-700); margin-top: 8px;">ALL MEMBERS (A-Z)</div>`;
-
-  const sorted = [...HNFD_ROSTER].sort((a, b) => a.lastName.localeCompare(b.lastName));
-  sorted.forEach(member => {
-    html += buildRosterItem(member);
-  });
-
-  listEl.innerHTML = html;
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function buildRosterItem(member) {
-  const name = `${member.firstName} ${member.lastName}`;
-  const role = member.office || member.certification || '';
-  const phone = member.phone;
-  const memberId = member.number || member.lastName;
-
-  return `
-    <div class="roster-item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--gray-800);">
-      <div style="flex: 1; cursor: pointer;" onclick="showMemberDetail('${memberId}')">
-        <div style="color: white; font-weight: 600;">${name} <span style="color: var(--blue-400); font-size: 11px;">ℹ️</span></div>
-        <div style="color: var(--gray-400); font-size: 13px;">${role}${member.number ? ` (#${member.number})` : ''}</div>
-      </div>
-      ${phone ? `<a href="tel:${phone}" onclick="event.stopPropagation();" style="display: flex; align-items: center; gap: 6px; background: var(--green-600); color: white; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; min-width: 70px; justify-content: center;">📞</a>` : '<span style="width: 70px;"></span>'}
-    </div>
-  `;
-}
-
-/**
- * Show detailed member information
- */
-function showMemberDetail(memberId) {
-  const member = HNFD_ROSTER.find(m => m.number === memberId || m.lastName === memberId);
-  if (!member) return;
-
-  hapticFeedback('light');
-
-  // Remove any existing detail overlay first
-  const existingOverlay = document.getElementById('member-detail-overlay');
-  if (existingOverlay) existingOverlay.remove();
-
-  const name = `${member.firstName} ${member.lastName}`;
-  const detailHtml = `
-    <div id="member-detail-overlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 10001; display: flex; align-items: center; justify-content: center; padding: 20px;">
-      <div style="background: #1f2937; border-radius: 16px; max-width: 340px; width: 100%; max-height: 80vh; overflow-y: auto;">
-        <div style="background: linear-gradient(135deg, #2563eb, #1e40af); padding: 20px; border-radius: 16px 16px 0 0; text-align: center;">
-          <div style="font-size: 48px; margin-bottom: 8px;">👤</div>
-          <div style="font-size: 20px; font-weight: 700; color: white;">${name}</div>
-          ${member.number ? `<div style="font-size: 14px; color: #bfdbfe;">#${member.number}</div>` : ''}
-        </div>
-        <div style="padding: 16px;">
-          ${member.office ? `<div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #78350f; border-radius: 8px; margin-bottom: 12px;">
-            <span style="font-size: 20px;">⭐</span>
-            <div><div style="color: #fbbf24; font-size: 12px; font-weight: 600;">OFFICE</div><div style="color: white; font-weight: 600;">${member.office}</div></div>
-          </div>` : ''}
-          ${member.certification ? `<div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #374151; border-radius: 8px; margin-bottom: 12px;">
-            <span style="font-size: 20px;">🏥</span>
-            <div><div style="color: #9ca3af; font-size: 12px; font-weight: 600;">CERTIFICATION</div><div style="color: white;">${member.certification}</div></div>
-          </div>` : ''}
-          ${member.phone ? `<a href="tel:${member.phone}" style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #14532d; border-radius: 8px; margin-bottom: 12px; text-decoration: none;">
-            <span style="font-size: 20px;">📞</span>
-            <div><div style="color: #4ade80; font-size: 12px; font-weight: 600;">PHONE</div><div style="color: white; font-weight: 600;">${member.phone}</div></div>
-          </a>` : ''}
-          ${member.email ? `<a href="mailto:${member.email}" style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #374151; border-radius: 8px; margin-bottom: 12px; text-decoration: none;">
-            <span style="font-size: 20px;">✉️</span>
-            <div><div style="color: #9ca3af; font-size: 12px; font-weight: 600;">EMAIL</div><div style="color: white; font-size: 13px; word-break: break-all;">${member.email}</div></div>
-          </a>` : ''}
-        </div>
-        <div style="padding: 0 16px 16px;">
-          <button id="member-detail-close-btn" style="width: 100%; padding: 14px; background: #dc2626; border: none; border-radius: 8px; color: white; font-size: 16px; font-weight: 600; cursor: pointer;">Close</button>
-        </div>
-      </div>
-    </div>
-  `;
-
-  document.body.insertAdjacentHTML('beforeend', detailHtml);
-
-  // Add event listener for close button
-  document.getElementById('member-detail-close-btn').addEventListener('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    closeMemberDetail();
-  });
-
-  // Add event listener for overlay click
-  document.getElementById('member-detail-overlay').addEventListener('click', function(e) {
-    if (e.target === this) {
-      closeMemberDetail();
-    }
-  });
-}
-
-function closeMemberDetail() {
-  const overlay = document.getElementById('member-detail-overlay');
-  if (overlay) {
-    overlay.remove();
-    hapticFeedback('light');
-  }
-}
-
-window.showMemberDetail = showMemberDetail;
-window.closeMemberDetail = closeMemberDetail;
-
-/**
- * Close Roster modal
- */
-function closeRoster() {
-  const modal = document.getElementById('roster-modal');
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-}
-
-// Make roster functions globally accessible
-window.openRoster = openRoster;
-window.closeRoster = closeRoster;
-
-/**
- * Open the Compartment Browse modal with visual compartment cards
- * Compartments A-H are INSIDE the ambulance, OB is OUTSIDE (driver side)
- */
-function openCompartmentBrowse() {
-  const modal = document.getElementById('compartment-modal');
-  const listEl = document.getElementById('compartment-list');
-  if (!modal || !listEl) return;
-
-  // Compartments: A-H are inside, OB is outside
-  const insideCompartments = ['A', 'B', 'C', 'E', 'F', 'G', 'H'];
-  const outsideCompartments = ['OB'];
-
-  let html = '';
-
-  // Inside compartments header
-  html += `<div style="font-size: 12px; font-weight: 700; color: var(--yellow-400); padding: 12px 16px; background: var(--gray-900); border-bottom: 1px solid var(--gray-700); margin-bottom: 8px;">📍 INSIDE AMBULANCE (A-H)</div>`;
-
-  insideCompartments.forEach(key => {
-    const comp = INVENTORY_DATABASE.compartments[key];
-    if (!comp || !comp.image) return;
-
-    const contentsPreview = comp.contents ? comp.contents.slice(0, 4).join(', ') + (comp.contents.length > 4 ? '...' : '') : '';
-
-    html += `
-      <div class="compartment-card" onclick="showCompartmentDetail('${key}')">
-        <img src="${comp.image}" alt="${comp.name}" class="compartment-thumb">
-        <div class="compartment-info">
-          <div class="compartment-name">${comp.name}</div>
-          <div class="compartment-desc">${comp.description}</div>
-          <div class="compartment-contents">${contentsPreview}</div>
-        </div>
-      </div>
-    `;
-  });
-
-  // Outside compartments header
-  html += `<div style="font-size: 12px; font-weight: 700; color: var(--green-500); padding: 12px 16px; background: var(--gray-900); border-bottom: 1px solid var(--gray-700); margin: 16px 0 8px 0;">🚑 OUTSIDE AMBULANCE (Driver Side)</div>`;
-
-  outsideCompartments.forEach(key => {
-    const comp = INVENTORY_DATABASE.compartments[key];
-    if (!comp || !comp.image) return;
-
-    const contentsPreview = comp.contents ? comp.contents.slice(0, 4).join(', ') + (comp.contents.length > 4 ? '...' : '') : '';
-
-    html += `
-      <div class="compartment-card" onclick="showCompartmentDetail('${key}')">
-        <img src="${comp.image}" alt="${comp.name}" class="compartment-thumb">
-        <div class="compartment-info">
-          <div class="compartment-name">${comp.name}</div>
-          <div class="compartment-desc">${comp.description}</div>
-          <div class="compartment-contents">${contentsPreview}</div>
-        </div>
-      </div>
-    `;
-  });
-
-  listEl.innerHTML = html;
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeCompartmentBrowse() {
-  const modal = document.getElementById('compartment-modal');
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-}
-
-function showCompartmentDetail(key) {
-  const comp = INVENTORY_DATABASE.compartments[key];
-  if (!comp) return;
-
-  closeCompartmentBrowse();
-
-  // Show full-screen image with contents overlay
-  const overlay = document.createElement('div');
-  overlay.className = 'compartment-detail-overlay';
-  overlay.innerHTML = `
-    <div class="compartment-detail-content">
-      <button class="compartment-detail-close" onclick="this.parentElement.parentElement.remove()">✕</button>
-      <img src="${comp.image}" alt="${comp.name}" class="compartment-detail-img">
-      <div class="compartment-detail-info">
-        <h3>${comp.name}</h3>
-        <p class="compartment-access"><strong>Access:</strong> ${comp.access}</p>
-        <div class="compartment-contents-list">
-          <strong>Contents:</strong>
-          <ul>${comp.contents ? comp.contents.map(c => `<li>${c}</li>`).join('') : ''}</ul>
-        </div>
-      </div>
-    </div>
-  `;
-  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
-  document.body.appendChild(overlay);
-}
-
-/**
- * Select an item from the A-Z list and show its details
- */
-function selectAZItem(itemId) {
-  if (!itemId) return;
-
-  closeAZBrowse();
-
-  // Find the item
-  const item = INVENTORY_DATABASE.items.find(e => e.id === itemId);
-  if (!item) return;
-
-  // Display the result
-  displayResults([item]);
-
-  // Scroll to results
-  const resultsSection = document.getElementById('results');
-  if (resultsSection) {
-    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
-
-// Make A-Z functions globally accessible for onclick handlers
-window.openAZBrowse = openAZBrowse;
-window.selectAZItem = selectAZItem;
-window.closeAZBrowse = closeAZBrowse;
-
-// A-Z Browse button click handler
-const azBrowseBtn = document.getElementById('azBrowseBtn');
-if (azBrowseBtn) {
-  azBrowseBtn.addEventListener('click', openAZBrowse);
-}
-
-// A-Z Close button click handler
-const azCloseBtn = document.getElementById('az-close-btn');
-if (azCloseBtn) {
-  azCloseBtn.addEventListener('click', closeAZBrowse);
-}
-
-// Close A-Z modal on background click
-const azModal = document.getElementById('az-modal');
-if (azModal) {
-  azModal.addEventListener('click', (e) => {
-    if (e.target === azModal) {
-      closeAZBrowse();
-    }
-  });
 }
 
 // ============================================================================
@@ -3637,10 +1544,8 @@ console.log('[HNFD] Recent searches:', recentSearches.length);
 
 const ADMIN_PASSWORD = 'hnfd2026admin'; // Admin access password
 const ADMIN_STORAGE_KEY = 'hnfd_equipment_custom';
-const CUSTOM_IMAGES_KEY = 'hnfd_custom_images'; // Store custom images
 let adminAuthenticated = false;
 let customInventory = null;
-let customImages = {}; // { itemId: base64ImageData }
 
 // DOM Elements
 const adminToggleBtn = document.getElementById('admin-toggle');
@@ -3684,145 +1589,6 @@ function saveCustomInventory() {
   try {
     localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(customInventory));
     console.log('[Admin] Saved custom inventory:', customInventory.items.length, 'items');
-  } catch (e) {
-    console.error('[Admin] Failed to save inventory:', e);
-  }
-}
-
-// ============================================================================
-// CUSTOM IMAGE MANAGEMENT - Camera Capture & Storage
-// ============================================================================
-
-// Load custom images from localStorage
-function loadCustomImages() {
-  const stored = localStorage.getItem(CUSTOM_IMAGES_KEY);
-  if (stored) {
-    try {
-      customImages = JSON.parse(stored);
-      console.log('[Images] Loaded custom images:', Object.keys(customImages).length);
-    } catch (e) {
-      console.error('[Images] Failed to load custom images:', e);
-      customImages = {};
-    }
-  }
-}
-
-// Save custom images to localStorage
-function saveCustomImages() {
-  try {
-    localStorage.setItem(CUSTOM_IMAGES_KEY, JSON.stringify(customImages));
-    console.log('[Images] Saved custom images:', Object.keys(customImages).length);
-  } catch (e) {
-    console.error('[Images] Failed to save custom images:', e);
-    alert('Failed to save image - it may be too large');
-  }
-}
-
-// Get custom image for item (returns null if none)
-function getCustomImage(itemId) {
-  return customImages[itemId] || null;
-}
-
-// Get image URL for item (custom or default)
-function getImageUrl(item) {
-  const customImg = getCustomImage(item.id);
-  return customImg || item.image;
-}
-
-// Open camera capture modal
-function openImageCapture(itemId) {
-  const item = customInventory.items.find(i => i.id === itemId);
-  if (!item) return;
-
-  const modal = document.getElementById('image-capture-modal');
-  const itemName = document.getElementById('capture-item-name');
-  const fileInput = document.getElementById('capture-file-input');
-
-  itemName.textContent = item.name;
-  modal.dataset.itemId = itemId;
-  modal.classList.add('active');
-
-  // Trigger file input for camera/gallery
-  fileInput.click();
-}
-
-// Handle image file selection
-function handleImageCapture(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  const modal = document.getElementById('image-capture-modal');
-  const itemId = modal.dataset.itemId;
-  const preview = document.getElementById('capture-preview');
-  const previewImg = document.getElementById('capture-preview-img');
-  const controls = document.getElementById('capture-controls');
-
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    // Show preview
-    previewImg.src = e.target.result;
-    preview.style.display = 'block';
-    controls.style.display = 'flex';
-
-    // Store temporarily for save
-    modal.dataset.imageData = e.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-
-// Save custom image
-function saveCustomImage() {
-  const modal = document.getElementById('image-capture-modal');
-  const itemId = modal.dataset.itemId;
-  const imageData = modal.dataset.imageData;
-
-  if (!itemId || !imageData) return;
-
-  // Store custom image
-  customImages[itemId] = imageData;
-  saveCustomImages();
-
-  // Close modal and refresh admin list
-  closeImageCapture();
-  renderAdminItemsList();
-
-  hapticFeedback('success');
-  alert('Image saved successfully!');
-}
-
-// Reset to default image
-function resetImage(itemId) {
-  if (confirm('Reset to default image?')) {
-    delete customImages[itemId];
-    saveCustomImages();
-    renderAdminItemsList();
-    hapticFeedback('medium');
-  }
-}
-
-// Close image capture modal
-function closeImageCapture() {
-  const modal = document.getElementById('image-capture-modal');
-  const preview = document.getElementById('capture-preview');
-  const controls = document.getElementById('capture-controls');
-  const fileInput = document.getElementById('capture-file-input');
-
-  modal.classList.remove('active');
-  preview.style.display = 'none';
-  controls.style.display = 'none';
-  fileInput.value = '';
-  delete modal.dataset.imageData;
-  delete modal.dataset.itemId;
-}
-
-// Load custom images on startup
-loadCustomImages();
-
-// Legacy save function - add error handling
-function saveCustomInventoryContinue() {
-  try {
-    localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(customInventory));
-    console.log('[Admin] Saved custom inventory:', customInventory.items.length, 'items');
     // Update the global inventory for immediate effect
     INVENTORY_DATABASE.items = customInventory.items;
     return true;
@@ -3833,184 +1599,15 @@ function saveCustomInventoryContinue() {
   }
 }
 
-// ============================================================================
-// SETTINGS MENU (User-facing settings with version info, updates, share)
-// ============================================================================
-
-const settingsModal = document.getElementById('settings-modal');
-
-function openSettingsModal() {
-  // Load version info
-  loadVersionInfo();
-  settingsModal.classList.add('active');
-}
-
-function closeSettingsModal() {
-  settingsModal.classList.remove('active');
-}
-
-function loadVersionInfo() {
-  // Display current version
-  document.getElementById('settings-version').textContent = `v${APP_VERSION}`;
-
-  // Fetch version.json for full details
-  fetch('/version.json?' + Date.now())
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('settings-build-date').textContent = data.build || '--';
-
-      // Display changelog
-      const changelog = document.getElementById('settings-changelog');
-      if (data.changelog && data.changelog.length > 0) {
-        changelog.innerHTML = data.changelog.map(item => {
-          if (item === '---') return '<hr style="border-color: var(--gray-700); margin: 8px 0;">';
-          return `<div style="margin-bottom: 6px; color: var(--gray-300);">• ${item}</div>`;
-        }).join('');
-      }
-
-      // Check if on latest
-      checkVersionStatus(data.version);
-    })
-    .catch(err => {
-      console.error('[Settings] Failed to load version info:', err);
-      document.getElementById('settings-update-status').innerHTML =
-        '<span style="color: var(--yellow-400);">⚠️ Could not check version</span>';
-    });
-}
-
-function checkVersionStatus(latestVersion) {
-  const statusEl = document.getElementById('settings-update-status');
-
-  if (latestVersion === APP_VERSION) {
-    statusEl.innerHTML = '<span style="color: var(--green-500);">✓ You\'re on the latest version!</span>';
-  } else {
-    // Show update available with manual update button
-    // SAFETY: Never auto-update - bad signal could break the app
-    statusEl.innerHTML = `
-      <div style="text-align: center;">
-        <div style="color: var(--yellow-400); margin-bottom: 10px;">
-          📦 Update available: v${latestVersion}
-        </div>
-        <button onclick="applyUpdateSafely('${latestVersion}')"
-                style="background: var(--green-600); color: white; border: none;
-                       padding: 12px 24px; border-radius: 8px; font-weight: 600;
-                       font-size: 16px; cursor: pointer; margin-bottom: 8px;">
-          📥 Update Now
-        </button>
-        <div style="color: var(--gray-400); font-size: 12px;">
-          ⚠️ Make sure you have good signal before updating
-        </div>
-      </div>
-    `;
-    window.pendingUpdateVersion = latestVersion;
-  }
-}
-
-async function applyUpdateSafely(version) {
-  const statusEl = document.getElementById('settings-update-status');
-
-  // Check signal strength first
-  if (!navigator.onLine) {
-    statusEl.innerHTML = '<span style="color: var(--red-600);">❌ No internet connection. Update when you have signal.</span>';
-    return;
-  }
-
-  statusEl.innerHTML = `<span style="color: var(--green-500);">🔄 Downloading v${version}...</span>`;
-
-  try {
-    // First, try to fetch critical files to verify good connection
-    const testFetch = await Promise.race([
-      fetch('/app.js?' + Date.now(), { cache: 'no-store' }),
-      new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 10000))
-    ]);
-
-    if (!testFetch.ok) {
-      throw new Error('Could not reach server');
-    }
-
-    statusEl.innerHTML = `<span style="color: var(--green-500);">✅ Download complete. Reloading...</span>`;
-
-    // Clear service worker cache and reload
-    if ('serviceWorker' in navigator) {
-      const registration = await navigator.serviceWorker.ready;
-      await registration.unregister();
-    }
-
-    // Clear caches
-    if ('caches' in window) {
-      const cacheNames = await caches.keys();
-      await Promise.all(cacheNames.map(name => caches.delete(name)));
-    }
-
-    // Force reload
-    setTimeout(() => window.location.reload(true), 500);
-  } catch (err) {
-    console.error('[Update] Failed:', err);
-    statusEl.innerHTML = `
-      <div style="color: var(--red-600);">
-        ❌ Update failed - weak signal
-        <div style="color: var(--gray-400); font-size: 12px; margin-top: 5px;">
-          Your current version still works. Try again with better signal.
-        </div>
-      </div>
-    `;
-  }
-}
-
-async function checkForUpdatesManual() {
-  const statusEl = document.getElementById('settings-update-status');
-  statusEl.innerHTML = '<span style="color: var(--gray-400);">🔄 Checking for updates...</span>';
-
-  try {
-    const response = await fetch('/version.json?' + Date.now(), { cache: 'no-store' });
-    const data = await response.json();
-    checkVersionStatus(data.version);
-  } catch (err) {
-    console.error('[Settings] Update check failed:', err);
-    statusEl.innerHTML = '<span style="color: var(--red-600);">❌ Could not check - try with better signal</span>';
-  }
-}
-
-function shareApp() {
-  const shareData = {
-    title: 'HNFD Rescue - Equipment Finder',
-    text: 'Quick voice-enabled app to find equipment locations on the ambulance. Works offline!',
-    url: window.location.origin
-  };
-
-  if (navigator.share) {
-    navigator.share(shareData)
-      .then(() => {
-        hapticFeedback('success');
-        console.log('[Share] App shared successfully');
-      })
-      .catch(err => {
-        console.log('[Share] Share cancelled or failed:', err);
-      });
-  } else {
-    // Fallback: Copy to clipboard
-    navigator.clipboard.writeText(window.location.origin)
-      .then(() => {
-        hapticFeedback('success');
-        alert('Link copied to clipboard!\n\nShare this with other EMTs:\n' + window.location.origin);
-      })
-      .catch(() => {
-        alert('Share this app:\n' + window.location.origin);
-      });
-  }
-}
-
-function openAdminLogin() {
-  closeSettingsModal();
-  adminLoginModal.classList.add('active');
-  adminPasswordInput.focus();
-}
-
-// Gear button - ALWAYS opens settings modal first (with all options)
+// Admin toggle button
 adminToggleBtn.addEventListener('click', () => {
   hapticFeedback('light');
-  // Always show settings menu - user can choose what they want to do
-  openSettingsModal();
+  if (adminAuthenticated) {
+    openAdminPanel();
+  } else {
+    adminLoginModal.classList.add('active');
+    adminPasswordInput.focus();
+  }
 });
 
 // Admin login
@@ -4080,15 +1677,6 @@ function renderAdminItemsList(filter = '') {
           ${item.compartment ? `<span class="admin-badge" style="background: var(--green-600);">${item.compartment}</span>` : ''}
         </div>
       </div>
-      <div class="admin-item-actions" style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1);">
-        <button class="admin-btn-small" style="background: var(--green-600);" data-item-id="${item.id}" onclick="event.stopPropagation(); openGuideEditor('${item.id}')">
-          🎯 Edit Location Guide
-        </button>
-        <button class="admin-btn-small admin-btn-camera" data-item-id="${item.id}" onclick="event.stopPropagation(); openImageCapture('${item.id}')">
-          📷 Replace Image
-        </button>
-        ${getCustomImage(item.id) ? `<button class="admin-btn-small admin-btn-secondary" onclick="event.stopPropagation(); resetImage('${item.id}')">🔄 Reset</button>` : ''}
-      </div>
     </div>
   `).join('');
 
@@ -4131,15 +1719,10 @@ function editItem(item) {
     document.getElementById('edit-contents').value = '';
     document.getElementById('edit-warning').value = '';
     document.getElementById('edit-driver-note').value = '';
-    document.getElementById('edit-usage-notes').value = '';
     document.getElementById('edit-image').value = '';
     document.getElementById('edit-critical').checked = false;
     document.getElementById('edit-critical-rank').value = '';
     adminDeleteBtn.style.display = 'none';
-    // Clear image preview
-    updateImagePreview('');
-    // Clear location guide preview
-    updateEditGuidePreview(null);
   } else {
     // Fill form with item data
     document.getElementById('edit-item-id').value = item.id;
@@ -4152,230 +1735,14 @@ function editItem(item) {
     document.getElementById('edit-contents').value = item.contents || '';
     document.getElementById('edit-warning').value = item.warning || '';
     document.getElementById('edit-driver-note').value = item.driverNote || '';
-    document.getElementById('edit-usage-notes').value = item.usageNotes || '';
     document.getElementById('edit-image').value = item.image || '';
     document.getElementById('edit-critical').checked = item.critical || false;
     document.getElementById('edit-critical-rank').value = item.criticalRank || '';
     adminDeleteBtn.style.display = 'block';
-    // Show image preview
-    updateImagePreview(item.image || '');
-    // Show location guide preview
-    updateEditGuidePreview(item);
   }
 
   adminEditModal.classList.add('active');
 }
-
-// ============================================================================
-// ADMIN PHOTO UPLOAD FUNCTIONS - iPhone-friendly
-// ============================================================================
-
-/**
- * Update the image preview in the admin form
- */
-function updateImagePreview(imagePath) {
-  const previewBox = document.getElementById('edit-image-preview');
-  if (!previewBox) return;
-
-  if (imagePath) {
-    previewBox.innerHTML = `<img src="${imagePath}" alt="Preview" onerror="this.onerror=null; this.parentNode.innerHTML='<span class=\\'image-preview-placeholder\\'>Image not found</span>';" />`;
-  } else {
-    previewBox.innerHTML = '<span class="image-preview-placeholder">No image</span>';
-  }
-}
-
-/**
- * Trigger camera to take a new photo
- */
-function takeEquipmentPhoto() {
-  const cameraInput = document.getElementById('edit-image-camera');
-  if (cameraInput) {
-    cameraInput.click();
-  }
-}
-
-/**
- * Open photo library to choose existing photo
- */
-function chooseEquipmentPhoto() {
-  const libraryInput = document.getElementById('edit-image-library');
-  if (libraryInput) {
-    libraryInput.click();
-  }
-}
-
-/**
- * Handle when user selects a photo (from camera or library)
- */
-function handleEquipmentPhotoSelect(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  // Create a local URL for preview
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    const dataUrl = e.target.result;
-
-    // Show preview
-    const previewBox = document.getElementById('edit-image-preview');
-    if (previewBox) {
-      previewBox.innerHTML = `<img src="${dataUrl}" alt="Preview" />`;
-    }
-
-    // For now, store a placeholder path
-    // In a real app, you'd upload to a server and get a URL back
-    const fileName = file.name.toLowerCase().replace(/[^a-z0-9.]/g, '_');
-    const imagePath = `/images/${fileName}`;
-    document.getElementById('edit-image').value = imagePath;
-
-    // Show a note about the upload
-    alert(`Photo selected: ${file.name}\n\nNote: In this version, the photo is shown as a preview but you'll need to manually upload it to /images/ folder on the server.`);
-  };
-
-  reader.readAsDataURL(file);
-
-  // Reset input so same file can be selected again
-  event.target.value = '';
-}
-
-/**
- * Clear the equipment photo
- */
-function clearEquipmentPhoto() {
-  document.getElementById('edit-image').value = '';
-  updateImagePreview('');
-}
-
-// ============================================================================
-// LOCATION GUIDE PREVIEW IN EDIT FORM
-// ============================================================================
-
-let editGuidePreviewInterval = null;
-let editGuideCurrentStep = 1;
-let editGuideImages = [];
-
-/**
- * Update the location guide thumbnails and preview in the edit form
- */
-function updateEditGuidePreview(item) {
-  // Clear existing preview
-  editGuideImages = [];
-  pauseEditGuidePreview();
-
-  // Get thumbnail containers
-  const thumb1 = document.getElementById('edit-thumb-img1');
-  const thumb2 = document.getElementById('edit-thumb-img2');
-  const thumb3 = document.getElementById('edit-thumb-img3');
-  const previewImg = document.getElementById('edit-guide-preview-img');
-  const placeholder = document.getElementById('edit-guide-preview-placeholder');
-  const dotsContainer = document.getElementById('edit-guide-preview-dots');
-
-  if (!thumb1 || !thumb2 || !thumb3) return;
-
-  // Reset thumbnails
-  [thumb1, thumb2, thumb3].forEach((thumb, i) => {
-    thumb.innerHTML = '<span class="guide-thumb-placeholder">No image</span>';
-    thumb.classList.remove('has-image');
-  });
-
-  if (!item || !item.images) {
-    // No item or no images - show empty state
-    if (previewImg) previewImg.style.display = 'none';
-    if (placeholder) placeholder.style.display = 'block';
-    if (dotsContainer) dotsContainer.style.display = 'none';
-    return;
-  }
-
-  // Update thumbnails
-  const images = item.images;
-  if (images.ambulancePosition) {
-    thumb1.innerHTML = `<img src="${images.ambulancePosition}" alt="Step 1" />`;
-    thumb1.classList.add('has-image');
-    editGuideImages.push({ url: images.ambulancePosition, step: 1 });
-  }
-  if (images.compartmentView) {
-    thumb2.innerHTML = `<img src="${images.compartmentView}" alt="Step 2" />`;
-    thumb2.classList.add('has-image');
-    editGuideImages.push({ url: images.compartmentView, step: 2 });
-  }
-  if (images.equipmentPhoto) {
-    thumb3.innerHTML = `<img src="${images.equipmentPhoto}" alt="Step 3" />`;
-    thumb3.classList.add('has-image');
-    editGuideImages.push({ url: images.equipmentPhoto, step: 3 });
-  }
-
-  // Show preview if any images exist
-  if (editGuideImages.length > 0) {
-    if (previewImg) {
-      previewImg.src = editGuideImages[0].url;
-      previewImg.style.display = 'block';
-    }
-    if (placeholder) placeholder.style.display = 'none';
-    if (dotsContainer) dotsContainer.style.display = editGuideImages.length > 1 ? 'flex' : 'none';
-    updateEditGuideDots(editGuideImages[0].step);
-  } else {
-    if (previewImg) previewImg.style.display = 'none';
-    if (placeholder) placeholder.style.display = 'block';
-    if (dotsContainer) dotsContainer.style.display = 'none';
-  }
-}
-
-/**
- * Update the preview dots to show current step
- */
-function updateEditGuideDots(step) {
-  const dots = document.querySelectorAll('#edit-guide-preview-dots .preview-dot');
-  dots.forEach((dot, i) => {
-    dot.classList.toggle('active', (i + 1) === step);
-  });
-}
-
-/**
- * Play the rotation preview animation
- */
-function playEditGuidePreview() {
-  if (editGuideImages.length < 2) return;
-  if (editGuidePreviewInterval) return; // Already playing
-
-  editGuideCurrentStep = 0;
-  editGuidePreviewInterval = setInterval(() => {
-    editGuideCurrentStep = (editGuideCurrentStep + 1) % editGuideImages.length;
-    const img = editGuideImages[editGuideCurrentStep];
-    const previewImg = document.getElementById('edit-guide-preview-img');
-    if (previewImg && img) {
-      previewImg.src = img.url;
-      updateEditGuideDots(img.step);
-    }
-  }, 2000);
-}
-
-/**
- * Pause the rotation preview animation
- */
-function pauseEditGuidePreview() {
-  if (editGuidePreviewInterval) {
-    clearInterval(editGuidePreviewInterval);
-    editGuidePreviewInterval = null;
-  }
-}
-
-/**
- * Wire up the Edit Guide button to open the guide editor
- */
-document.addEventListener('DOMContentLoaded', () => {
-  const editGuideBtn = document.getElementById('edit-location-guide-btn');
-  if (editGuideBtn) {
-    editGuideBtn.addEventListener('click', () => {
-      const itemId = document.getElementById('edit-item-id').value;
-      if (!itemId) {
-        alert('Please save the item first before editing the location guide.');
-        return;
-      }
-      // Open the guide editor for this item
-      openGuideEditor(itemId);
-    });
-  }
-});
 
 // Save item
 adminSaveBtn.addEventListener('click', () => {
@@ -4393,9 +1760,6 @@ adminSaveBtn.addEventListener('click', () => {
     .map(a => a.trim())
     .filter(a => a);
 
-  // CRITICAL: Preserve existing images/goldDots data when updating
-  const existingItem = itemId ? getAllItems().find(i => i.id === itemId) : null;
-
   const itemData = {
     id: itemId || name.toLowerCase().replace(/[^a-z0-9]+/g, '_'),
     name,
@@ -4410,13 +1774,7 @@ adminSaveBtn.addEventListener('click', () => {
     contents: document.getElementById('edit-contents').value.trim(),
     warning: document.getElementById('edit-warning').value.trim(),
     driverNote: document.getElementById('edit-driver-note').value.trim(),
-    usageNotes: document.getElementById('edit-usage-notes').value.trim(),
-    image: document.getElementById('edit-image').value.trim(),
-    // Preserve location guide data if it exists
-    images: existingItem?.images || {},
-    goldDots: existingItem?.goldDots || {},
-    locationSteps: existingItem?.locationSteps || [],
-    quickFind: existingItem?.quickFind || ''
+    image: document.getElementById('edit-image').value.trim()
   };
 
   if (itemId) {
@@ -4451,16 +1809,9 @@ adminDeleteBtn.addEventListener('click', () => {
   }
 });
 
-// Close admin edit modal (called from X button and Cancel button)
-function closeAdminEditModal() {
-  adminEditModal.classList.remove('active');
-}
-// Make it globally available for onclick
-window.closeAdminEditModal = closeAdminEditModal;
-
 // Cancel edit
 adminEditCancelBtn.addEventListener('click', () => {
-  closeAdminEditModal();
+  adminEditModal.classList.remove('active');
 });
 
 // Export JSON
@@ -4520,396 +1871,3 @@ if (localStorage.getItem(ADMIN_STORAGE_KEY)) {
 }
 
 console.log('[Admin] Module loaded');
-
-// ============================================================================
-// LOCATION GUIDE EDITOR
-// Allows editing 3-image location guides with draggable gold dots
-// ============================================================================
-
-let guideEditorItemId = null;
-let guideEditorData = {
-  step1: { image: null, dot: { x: 50, y: 50, label: '' } },
-  step2: { image: null, dot: { x: 50, y: 50, label: '' } },
-  step3: { image: null, dot: null } // Step 3 has no dot
-};
-let currentGuideStep = 1;
-let rotationInterval = null;
-let isDraggingDot = false;
-
-const STEP_DESCRIPTIONS = {
-  1: 'Show where on the ambulance to find this',
-  2: 'Show the cabinet/drawer where it\'s located',
-  3: 'Show the equipment itself (no dot needed)'
-};
-
-const STEP_IMAGE_KEYS = {
-  1: 'ambulancePosition',
-  2: 'compartmentView',
-  3: 'equipmentPhoto'
-};
-
-// Available images in the library
-const IMAGE_LIBRARY = [
-  '/images/locations/cabinet_k_labeled.jpg',
-  '/images/locations/cabinet_k_overview.jpg',
-  '/images/locations/ambulance_exterior_side.jpg',
-  '/images/locations/ambulance_interior_overview.jpg',
-  '/images/locations/drawer_n_open.jpg',
-  '/images/locations/drawer_n_contents.jpg',
-  '/images/locations/oxygen_compartment.jpg',
-  '/images/locations/drug_box_cabinet.jpg',
-  '/images/locations/adult_trauma_bag_closeup.jpg',
-  '/images/locations/aed_closeup.jpg',
-  '/images/locations/drug_box_closeup.jpg',
-  '/images/locations/lifepak_closeup.jpg',
-  '/images/locations/narcan_syringe_closeup.jpg',
-  '/images/locations/oxygen_tanks_closeup.jpg',
-  '/images/locations/iv_kit_closeup.jpg',
-  '/images/locations/intubation_bag_blue.jpg',
-  '/images/trauma_bag_adult.jpg',
-  '/images/cabinet_k_overview.jpg',
-  '/images/intubation_kit.jpg',
-  '/images/pediatric_bags.jpg',
-  '/images/drug_box.jpg',
-  '/images/lifepak_bag.jpg',
-  '/images/lifepak_mounted.jpg',
-  '/images/drawer_n.jpg',
-  '/images/drawer_n_labeled.jpg',
-  '/images/oxygen_tanks.jpg',
-  '/images/cabinet_d_aed.jpg'
-];
-
-function openGuideEditor(itemId) {
-  guideEditorItemId = itemId;
-  const item = getAllItems().find(i => i.id === itemId);
-
-  if (!item) {
-    alert('Item not found');
-    return;
-  }
-
-  // Load existing data
-  guideEditorData = {
-    step1: {
-      image: item.images?.ambulancePosition || null,
-      dot: item.goldDots?.ambulancePosition ? { ...item.goldDots.ambulancePosition } : { x: 50, y: 50, label: '' }
-    },
-    step2: {
-      image: item.images?.compartmentView || null,
-      dot: item.goldDots?.compartmentView ? { ...item.goldDots.compartmentView } : { x: 50, y: 50, label: '' }
-    },
-    step3: {
-      image: item.images?.equipmentPhoto || null,
-      dot: null
-    }
-  };
-
-  // Set item name
-  document.getElementById('guide-editor-item-name').textContent = item.name;
-
-  // Update tab states
-  updateTabStates();
-
-  // Select first step
-  currentGuideStep = 1;
-  selectGuideStep(1);
-
-  // Show modal
-  document.getElementById('guide-editor-modal').classList.add('active');
-
-  // Start preview
-  updateRotationPreview();
-}
-
-function closeGuideEditor() {
-  document.getElementById('guide-editor-modal').classList.remove('active');
-  pauseRotationPreview();
-  guideEditorItemId = null;
-}
-
-function selectGuideStep(step) {
-  currentGuideStep = step;
-
-  // Update tab active states
-  document.querySelectorAll('.guide-editor-tab').forEach(tab => {
-    tab.classList.toggle('active', parseInt(tab.dataset.step) === step);
-  });
-
-  // Update step info
-  document.getElementById('current-step-badge').textContent = `Step ${step}`;
-  document.getElementById('current-step-text').textContent = STEP_DESCRIPTIONS[step];
-
-  // Update image preview
-  const stepData = guideEditorData[`step${step}`];
-  const previewImg = document.getElementById('guide-preview-img');
-  const placeholder = document.getElementById('guide-image-placeholder');
-  const dotEditor = document.getElementById('guide-dot-editor');
-  const dotControls = document.getElementById('dot-controls');
-
-  if (stepData.image) {
-    previewImg.src = stepData.image;
-    previewImg.style.display = 'block';
-    placeholder.style.display = 'none';
-
-    // Show dot for steps 1 and 2 only
-    if (step <= 2 && stepData.dot) {
-      dotEditor.classList.add('visible');
-      dotEditor.style.left = `${stepData.dot.x}%`;
-      dotEditor.style.top = `${stepData.dot.y}%`;
-      dotControls.style.display = 'block';
-      document.getElementById('dot-label-input').value = stepData.dot.label || '';
-      updateDotPositionDisplay(stepData.dot.x, stepData.dot.y);
-    } else {
-      dotEditor.classList.remove('visible');
-      dotControls.style.display = 'none';
-    }
-  } else {
-    previewImg.style.display = 'none';
-    placeholder.style.display = 'block';
-    dotEditor.classList.remove('visible');
-    dotControls.style.display = 'none';
-  }
-}
-
-function updateTabStates() {
-  document.querySelectorAll('.guide-editor-tab').forEach(tab => {
-    const step = parseInt(tab.dataset.step);
-    const stepData = guideEditorData[`step${step}`];
-    tab.classList.toggle('has-image', !!stepData.image);
-  });
-}
-
-function openImageLibrary() {
-  const grid = document.getElementById('image-library-grid');
-  grid.innerHTML = IMAGE_LIBRARY.map(img => `
-    <div style="cursor: pointer; border: 2px solid transparent; border-radius: 8px; overflow: hidden;"
-         onclick="selectLibraryImage('${img}')"
-         onmouseover="this.style.borderColor='var(--green-500)'"
-         onmouseout="this.style.borderColor='transparent'">
-      <img src="${img}" style="width: 100%; aspect-ratio: 4/3; object-fit: contain; background: #1f2937;" onerror="this.parentElement.style.display='none'" />
-    </div>
-  `).join('');
-
-  document.getElementById('image-library-modal').classList.add('active');
-}
-
-function closeImageLibrary() {
-  document.getElementById('image-library-modal').classList.remove('active');
-}
-
-function selectLibraryImage(imagePath) {
-  guideEditorData[`step${currentGuideStep}`].image = imagePath;
-  closeImageLibrary();
-  updateTabStates();
-  selectGuideStep(currentGuideStep);
-  updateRotationPreview();
-}
-
-function uploadGuideImage() {
-  document.getElementById('guide-image-upload').click();
-}
-
-function handleGuideImageUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    // Store as base64 for custom uploads
-    guideEditorData[`step${currentGuideStep}`].image = e.target.result;
-    updateTabStates();
-    selectGuideStep(currentGuideStep);
-    updateRotationPreview();
-  };
-  reader.readAsDataURL(file);
-  event.target.value = '';
-}
-
-function clearGuideImage() {
-  guideEditorData[`step${currentGuideStep}`].image = null;
-  updateTabStates();
-  selectGuideStep(currentGuideStep);
-  updateRotationPreview();
-}
-
-function updateDotLabel() {
-  const label = document.getElementById('dot-label-input').value;
-  if (guideEditorData[`step${currentGuideStep}`].dot) {
-    guideEditorData[`step${currentGuideStep}`].dot.label = label;
-  }
-}
-
-function updateDotPositionDisplay(x, y) {
-  document.getElementById('dot-position-display').textContent = `Position: ${Math.round(x)}%, ${Math.round(y)}%`;
-}
-
-// Initialize dot dragging
-document.addEventListener('DOMContentLoaded', () => {
-  const dotEditor = document.getElementById('guide-dot-editor');
-  const previewContainer = document.getElementById('guide-image-preview');
-
-  if (dotEditor && previewContainer) {
-    // Mouse events
-    dotEditor.addEventListener('mousedown', (e) => {
-      e.preventDefault();
-      isDraggingDot = true;
-      dotEditor.style.cursor = 'grabbing';
-    });
-
-    document.addEventListener('mousemove', (e) => {
-      if (!isDraggingDot) return;
-      updateDotPosition(e.clientX, e.clientY, previewContainer, dotEditor);
-    });
-
-    document.addEventListener('mouseup', () => {
-      isDraggingDot = false;
-      if (dotEditor) dotEditor.style.cursor = 'grab';
-    });
-
-    // Touch events for mobile
-    dotEditor.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      isDraggingDot = true;
-    });
-
-    document.addEventListener('touchmove', (e) => {
-      if (!isDraggingDot) return;
-      const touch = e.touches[0];
-      updateDotPosition(touch.clientX, touch.clientY, previewContainer, dotEditor);
-    });
-
-    document.addEventListener('touchend', () => {
-      isDraggingDot = false;
-    });
-  }
-});
-
-function updateDotPosition(clientX, clientY, container, dot) {
-  const rect = container.getBoundingClientRect();
-  let x = ((clientX - rect.left) / rect.width) * 100;
-  let y = ((clientY - rect.top) / rect.height) * 100;
-
-  // Clamp to container
-  x = Math.max(5, Math.min(95, x));
-  y = Math.max(5, Math.min(95, y));
-
-  dot.style.left = `${x}%`;
-  dot.style.top = `${y}%`;
-
-  // Save to data
-  if (guideEditorData[`step${currentGuideStep}`].dot) {
-    guideEditorData[`step${currentGuideStep}`].dot.x = x;
-    guideEditorData[`step${currentGuideStep}`].dot.y = y;
-  }
-
-  updateDotPositionDisplay(x, y);
-}
-
-function updateRotationPreview() {
-  const images = [
-    guideEditorData.step1.image,
-    guideEditorData.step2.image,
-    guideEditorData.step3.image
-  ].filter(Boolean);
-
-  const previewImg = document.getElementById('gif-preview-img');
-  const placeholder = document.getElementById('gif-placeholder');
-
-  if (images.length > 0) {
-    previewImg.src = images[0];
-    previewImg.style.display = 'block';
-    placeholder.style.display = 'none';
-  } else {
-    previewImg.style.display = 'none';
-    placeholder.style.display = 'block';
-  }
-}
-
-let previewStep = 0;
-function playRotationPreview() {
-  pauseRotationPreview();
-
-  const images = [
-    guideEditorData.step1.image,
-    guideEditorData.step2.image,
-    guideEditorData.step3.image
-  ];
-
-  const validImages = images.filter(Boolean);
-  if (validImages.length === 0) return;
-
-  previewStep = 0;
-  const previewImg = document.getElementById('gif-preview-img');
-  const dots = document.querySelectorAll('.guide-rotation-dot');
-
-  function showNextImage() {
-    const validIndices = images.map((img, i) => img ? i : -1).filter(i => i >= 0);
-    const currentIndex = validIndices[previewStep % validIndices.length];
-
-    previewImg.src = images[currentIndex];
-    previewImg.style.display = 'block';
-
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentIndex);
-    });
-
-    previewStep++;
-  }
-
-  showNextImage();
-  rotationInterval = setInterval(showNextImage, 2000);
-}
-
-function pauseRotationPreview() {
-  if (rotationInterval) {
-    clearInterval(rotationInterval);
-    rotationInterval = null;
-  }
-}
-
-function saveGuideEditor() {
-  if (!guideEditorItemId) return;
-
-  const item = getAllItems().find(i => i.id === guideEditorItemId);
-  if (!item) {
-    alert('Item not found');
-    return;
-  }
-
-  // Update item with new guide data
-  item.images = {
-    ambulancePosition: guideEditorData.step1.image,
-    compartmentView: guideEditorData.step2.image,
-    equipmentPhoto: guideEditorData.step3.image
-  };
-
-  item.goldDots = {
-    ambulancePosition: guideEditorData.step1.dot ? {
-      x: guideEditorData.step1.dot.x,
-      y: guideEditorData.step1.dot.y,
-      label: guideEditorData.step1.dot.label
-    } : null,
-    compartmentView: guideEditorData.step2.dot ? {
-      x: guideEditorData.step2.dot.x,
-      y: guideEditorData.step2.dot.y,
-      label: guideEditorData.step2.dot.label
-    } : null,
-    equipmentPhoto: null
-  };
-
-  // Save to custom inventory
-  if (!customInventory.items.find(i => i.id === item.id)) {
-    customInventory.items.push(item);
-  }
-  saveCustomInventory();
-
-  // Close editor
-  closeGuideEditor();
-  renderAdminItemsList();
-
-  hapticFeedback('success');
-  alert('Location guide saved!');
-}
-
-console.log('[GuideEditor] Module loaded');
-// Force deploy Fri Dec 19 21:10:08 EST 2025
