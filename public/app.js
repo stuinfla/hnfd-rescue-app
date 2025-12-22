@@ -1018,7 +1018,15 @@ let voiceLoadAttempts = 0;
 
 function ensureVoicesLoaded() {
   return new Promise((resolve) => {
-    const voices = synthesis.getVoices();
+    // Get fresh synthesis reference
+    const synth = window.speechSynthesis;
+    if (!synth) {
+      console.error('[TTS] SpeechSynthesis not available');
+      resolve([]);
+      return;
+    }
+
+    const voices = synth.getVoices();
     if (voices.length > 0) {
       voicesLoaded = true;
       console.log('[TTS] Voices available:', voices.length);
@@ -1032,18 +1040,18 @@ function ensureVoicesLoaded() {
       console.log('[TTS] Waiting for voices... attempt', voiceLoadAttempts);
 
       const timeout = setTimeout(() => {
-        synthesis.removeEventListener('voiceschanged', voicesHandler);
-        resolve(synthesis.getVoices());
+        synth.removeEventListener('voiceschanged', voicesHandler);
+        resolve(synth.getVoices());
       }, 1000);
 
       const voicesHandler = () => {
         clearTimeout(timeout);
         voicesLoaded = true;
-        console.log('[TTS] Voices loaded:', synthesis.getVoices().length);
-        resolve(synthesis.getVoices());
+        console.log('[TTS] Voices loaded:', synth.getVoices().length);
+        resolve(synth.getVoices());
       };
 
-      synthesis.addEventListener('voiceschanged', voicesHandler, { once: true });
+      synth.addEventListener('voiceschanged', voicesHandler, { once: true });
     } else {
       resolve(voices);
     }
@@ -1051,13 +1059,25 @@ function ensureVoicesLoaded() {
 }
 
 async function speakResult() {
+  // Get synthesis fresh each time (fixes iOS load timing issue)
+  synthesis = window.speechSynthesis;
+
   if (!currentResult || !synthesis) {
     console.error('[TTS] Missing synthesis or result');
     return;
   }
 
+  // iOS Safari fix: resume if paused (known iOS bug)
+  if (synthesis.paused) {
+    console.log('[TTS] Resuming paused synthesis');
+    synthesis.resume();
+  }
+
   // Cancel any ongoing speech
   synthesis.cancel();
+
+  // iOS Safari workaround: short delay after cancel
+  await new Promise(resolve => setTimeout(resolve, 50));
 
   // Ensure voices are loaded (critical for Android)
   const voices = await ensureVoicesLoaded();
@@ -1120,7 +1140,28 @@ async function speakResult() {
   };
 
   try {
+    // iOS Safari workaround: check speaking state and handle stalled speech
+    if (synthesis.speaking) {
+      console.log('[TTS] Still speaking, canceling first');
+      synthesis.cancel();
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+
+    // Speak the utterance
     synthesis.speak(utterance);
+    console.log('[TTS] Speech initiated, text:', text.substring(0, 50) + '...');
+
+    // iOS Safari workaround: sometimes speak() silently fails
+    // Check if speaking actually started after a brief delay
+    setTimeout(() => {
+      if (!synthesis.speaking && !synthesis.pending) {
+        console.warn('[TTS] Speech may have failed silently, retrying...');
+        // Try once more
+        synthesis.cancel();
+        setTimeout(() => synthesis.speak(utterance), 100);
+      }
+    }, 250);
+
   } catch (e) {
     console.error('[TTS] Exception:', e);
     statusText.textContent = 'Audio failed';
@@ -1258,15 +1299,27 @@ initSpeechRecognition();
 
 // Initialize audio on first user interaction (required for iOS)
 function initializeAudio() {
-  if (audioInitialized || !synthesis) return;
+  if (audioInitialized) return;
 
   try {
-    // Create a silent utterance to "unlock" audio on iOS
-    const utterance = new SpeechSynthesisUtterance('');
-    utterance.volume = 0;
-    synthesis.speak(utterance);
+    // Get fresh synthesis reference
+    synthesis = window.speechSynthesis;
+
+    if (!synthesis) {
+      console.error('[TTS] SpeechSynthesis not available');
+      return;
+    }
+
+    // iOS Safari: resume if in paused state
+    if (synthesis.paused) {
+      synthesis.resume();
+    }
+
+    // Cancel any stuck utterances
+    synthesis.cancel();
+
     audioInitialized = true;
-    console.log('[TTS] Audio initialized');
+    console.log('[TTS] Audio initialized, synthesis available');
   } catch (e) {
     console.error('[TTS] Audio init failed:', e);
   }
