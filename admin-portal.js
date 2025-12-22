@@ -1539,8 +1539,8 @@ function addNewMember() {
 // ============================================================================
 
 const SETTINGS_STATE = {
-  rosterPin: '1426',  // Default
-  adminPin: '1426'    // Default
+  rosterPin: '1426',       // For roster access in main app
+  adminPin: 'hnfd2026admin' // For admin portal access
 };
 
 function loadSettings() {

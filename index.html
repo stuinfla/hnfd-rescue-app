@@ -139,6 +139,22 @@
       box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.3);
     }
 
+    /* iOS: Draw attention to microphone - user must tap to start */
+    .voice-btn.pulse-attention {
+      animation: attention-pulse 1.5s infinite;
+    }
+
+    @keyframes attention-pulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 6px 24px rgba(220, 38, 38, 0.4);
+      }
+      50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 0 12px rgba(220, 38, 38, 0.3), 0 6px 30px rgba(220, 38, 38, 0.6);
+      }
+    }
+
     .voice-cancel-btn {
       position: absolute;
       right: -50px;

@@ -1,300 +1,257 @@
 # HNFD Rescue Equipment Finder - Admin Guide
 
-**Version 2.8.0** | Last Updated: December 19, 2025
+**Version 2.14.10** | Last Updated: December 22, 2025
 
-This guide explains how to use the Admin features to manage equipment inventory, add images, set location guides, and add medical reference notes.
+This guide explains how to use the Admin Portal to manage equipment inventory, roster, driver zones, images, and security settings.
 
 ---
 
 ## Table of Contents
 
-1. [Accessing Admin Mode](#accessing-admin-mode)
-2. [Equipment Management](#equipment-management)
-3. [Location Guide Editor](#location-guide-editor)
-4. [Adding Usage Notes & Dosage Info](#adding-usage-notes--dosage-info)
-5. [Image Management](#image-management)
-6. [Export & Import](#export--import)
-7. [Best Practices](#best-practices)
+1. [Accessing the Admin Portal](#accessing-the-admin-portal)
+2. [Admin Portal Overview](#admin-portal-overview)
+3. [Equipment Management](#equipment-management)
+4. [Images Tab](#images-tab)
+5. [Driver Zones Management](#driver-zones-management)
+6. [Roster Management](#roster-management)
+7. [Settings (PIN Management)](#settings-pin-management)
+8. [Deployment](#deployment)
+9. [Best Practices](#best-practices)
 
 ---
 
-## Accessing Admin Mode
+## Accessing the Admin Portal
 
-### For Regular Users (Settings Menu)
-1. Tap the **gear icon** (⚙️) in the top-right corner
-2. The Settings menu shows:
-   - Current version and update status
-   - What's New changelog
-   - **Check for Updates** button
-   - **Share App with EMTs** button
-   - **Admin Access** button (for authorized users)
+### Direct URL
+Navigate to: `https://hnfd-rescue.vercel.app/admin-portal.html`
 
-### For Admin Users
-1. Tap the **gear icon** (⚙️)
-2. Tap **Admin Access**
-3. Enter the admin password
-4. The Equipment Management panel opens
+### Admin Password
+- **Admin PIN:** `hnfd2026admin`
+- This is separate from the Roster PIN (1426)
+- Can be changed in Settings tab
 
-**Note:** Once authenticated, tapping the gear icon goes directly to the admin panel for the rest of that session.
+---
+
+## Admin Portal Overview
+
+The Admin Portal has **6 tabs**:
+
+| Tab | Purpose |
+|-----|---------|
+| **Equipment** | Add, edit, delete equipment inventory |
+| **Images** | Manage equipment photos and location guides |
+| **Drivers** | Manage driver zones and phone numbers |
+| **Roster** | Manage HNFD member contact list |
+| **Deploy** | Review and push changes live |
+| **Settings** | Change Roster PIN and Admin PIN |
 
 ---
 
 ## Equipment Management
 
 ### Viewing Equipment
-The admin panel shows all equipment items with:
-- **Item Name** (e.g., "Adult Trauma Bag")
-- **Location** (e.g., "Cabinet K - Middle Drawer")
-- **Badges**: CRITICAL (red), Compartment letter (green)
+The Equipment tab shows all inventory items with:
+- Item name and location
+- Compartment badge
+- CRITICAL badge (if applicable)
+- **Edit** button
+- **Delete** button (🗑️)
 
 ### Adding New Equipment
-1. Tap **➕ Add Equipment**
-2. Fill in the required fields:
-   - **Item Name*** (required)
-   - **Location*** (required)
-3. Fill in optional fields as needed
-4. Tap **💾 Save**
+1. Click **+ Add Equipment**
+2. Follow the guided prompts:
+   - Equipment name (required)
+   - Location (e.g., "Cabinet K, middle shelf")
+   - Compartment letter (e.g., "K")
+   - Description
+   - Quick find tip (optional)
+   - Is it critical? (Yes/No)
+3. Equipment is added to the list
 
 ### Editing Equipment
-1. Tap on any equipment item in the list
-2. Edit any field
-3. Tap **💾 Save**
+1. Click **Edit** on any equipment card
+2. Modify fields in the modal
+3. Click **Save Changes**
 
 ### Deleting Equipment
-1. Tap on the equipment item
-2. Tap **🗑️ Delete** (red button)
-3. Confirm the deletion
+1. Click the **🗑️** delete button
+2. Confirm the deletion
+3. Equipment is removed
 
 ### Equipment Fields
 
 | Field | Description | Example |
 |-------|-------------|---------|
-| **Item Name** | Official name of the equipment | "Adult Trauma Bag" |
-| **Aliases** | Alternative names (comma-separated) | "trauma back, first-in bag, red bag" |
-| **Location** | Where to find it | "Cabinet K - Middle Drawer (FRONT)" |
-| **Compartment** | Cabinet/drawer letter | "K" |
-| **Color** | Color description | "Red/Orange" |
-| **Description** | What it contains/does | "Contains all trauma supplies for adult patients" |
-| **Contents** | List of items inside | "Bandages, gauze, trauma shears..." |
-| **Warning** | Critical safety info | "CRITICAL: Check expiration dates" |
-| **Driver Note** | Info for driver | "Can be restocked at station" |
-| **Usage Notes** | Medical/dosage info | See section below |
-| **Image Path** | Path to image | "/images/trauma_bag_adult.jpg" |
-| **Critical Item** | Checkbox for priority items | ✓ |
-| **Critical Rank** | Priority order (1=highest) | 1 |
+| **Name** | Official name | "Adult Trauma Bag" |
+| **Location** | Where to find it | "Cabinet K - Middle Drawer" |
+| **Compartment** | Cabinet letter | "K" |
+| **Description** | What it is/does | "Contains trauma supplies" |
+| **Quick Find** | Search tip | "red bag, trauma" |
+| **Critical** | Priority item | Yes/No |
+| **Image** | Photo path | Auto-managed |
 
 ---
 
-## Location Guide Editor
+## Images Tab
 
-The Location Guide Editor allows you to create 3-image visual guides that help EMTs find equipment quickly.
-
-### Opening the Location Guide Editor
-1. In the admin panel, find the equipment item
-2. Tap **🎯 Edit Location Guide**
-
-### The 3-Step Visual Guide
-
-| Step | Purpose | Example |
-|------|---------|---------|
-| **Step 1: Ambulance** | Show where on the ambulance | Side view with Cabinet K highlighted |
-| **Step 2: Cabinet** | Show the open cabinet/drawer | Cabinet K with middle drawer open |
-| **Step 3: Equipment** | Show the actual equipment | Close-up of the trauma bag |
-
-### Setting Images
-
-For each step:
-1. Tap the **step tab** (Step 1, Step 2, or Step 3)
-2. Choose an image:
-   - **📁 Image Library** - Select from existing photos
-   - **📤 Upload New** - Take or upload a new photo
-   - **🗑️ Clear** - Remove the current image
-
-### Positioning the Gold Dot
-
-Steps 1 and 2 have a **gold dot** that shows EMTs exactly where to look:
-
-1. Select Step 1 or Step 2
-2. The gold dot appears on the image
-3. **Drag the dot** to the correct position
-4. Enter a **label** (e.g., "Cabinet K", "Middle Drawer")
-5. The position shows as percentages (e.g., "Position: 45%, 60%")
-
-**Note:** Step 3 (Equipment) does not have a dot since it shows the actual equipment.
-
-### Rotation Preview
-
-The **Rotation Preview** section shows how users will see the guide:
-- Tap **▶️ Play Preview** to see the 3-image rotation
-- Tap **⏸️ Pause** to stop
-- The dots at the bottom indicate which image is showing
-
-### Saving Changes
-
-1. Tap **💾 Save Location Guide**
-2. The guide is saved and will appear when users search for this item
-
----
-
-## Adding Usage Notes & Dosage Info
-
-The **Usage Notes** field allows authorized EMTs to add medical reference information that appears when users look up equipment.
-
-### When to Use Usage Notes
-
-- **Dosage information** (for medications)
-- **Age-specific instructions** (adult vs. pediatric)
-- **Critical reminders** (contraindications, allergies)
-- **Step-by-step usage** (for complex equipment)
-- **Local protocols** (department-specific procedures)
-
-### Example: Narcan
-
-```
-DOSAGE GUIDELINES:
-- Adult: 0.4-2mg IV/IM/SC, repeat every 2-3 min if needed
-- Pediatric: 0.01mg/kg IV/IM/SC
-- Elderly: Start with lower dose
-
-IMPORTANT:
-- Monitor for recurrence of respiratory depression
-- Duration of naloxone may be shorter than opioid
-- Be prepared for potential agitation upon reversal
-```
-
-### Example: AED
-
-```
-USAGE:
-1. Power ON - green button
-2. Attach pads as shown on package
-3. Stand clear during analysis
-4. Follow voice prompts
-
-PEDIATRIC: Use pediatric pads if available
-- Under 8 years: Use pediatric pads
-- Over 8 years: Standard adult pads OK
-```
-
-### Adding Usage Notes
-
-1. Edit the equipment item
-2. Scroll to **Usage Notes / Dosage Info**
-3. Enter the information
-4. Tap **💾 Save**
-
-**IMPORTANT:** Only authorized EMTs should add medical information. This is reference material only - always follow your department's protocols.
-
----
-
-## Image Management
-
-### Replacing an Item's Main Image
-
-1. In the admin panel, find the item
-2. Tap **📷 Replace Image**
-3. Take a photo or select from gallery
-4. Tap **✓ Save Image**
+### Managing Equipment Images
+- Upload new photos for equipment
+- Set location guide images (3-step visual guide)
+- Position gold dots on images
+- All images display with `object-fit: contain` (never cropped)
 
 ### Image Guidelines
-
-**Good Images:**
 - Clear, well-lit photos
-- Show the equipment clearly
 - No faces or personal information
-- Consistent orientation
-- Appropriate file size (under 2MB)
-
-**Image Dimensions:**
-- Recommended: 4:3 aspect ratio
-- Minimum: 640x480 pixels
-- Maximum: 2048x1536 pixels
-
-### Using the Image Library
-
-The Image Library contains all existing equipment photos:
-- `/images/` - Main equipment photos
-- `/images/locations/` - Location guide photos
-
-Available images include:
-- Cabinet overviews (labeled and unlabeled)
-- Drawer contents
-- Equipment close-ups
-- Ambulance exterior/interior views
+- 4:3 aspect ratio recommended
+- Under 2MB file size
 
 ---
 
-## Export & Import
+## Driver Zones Management
 
-### Exporting Inventory
+### Viewing Driver Zones
+Each zone shows:
+- Zone number (e.g., Zone 750)
+- Driver name
+- Phone number
+- Quick tip for drivers
 
-1. Tap **📥 Export JSON**
-2. A file downloads containing all equipment data
-3. Use this for backup or sharing with other departments
+### Adding a Driver Zone
+1. Click **+ Add Zone**
+2. Enter zone number
+3. Enter driver name
+4. Enter phone number (optional)
 
-### Importing Inventory
+### Editing a Driver Zone
+1. Click **Edit** on the zone
+2. Modify driver name or phone
+3. Save changes
 
-1. Tap **📤 Import JSON**
-2. Select a previously exported JSON file
-3. Confirm the import
-4. The inventory is replaced with the imported data
+### Deleting a Driver Zone
+1. Click the delete button
+2. Confirm deletion
 
-**Warning:** Importing replaces ALL existing inventory data. Export first as a backup!
+---
+
+## Roster Management
+
+### Member Information
+Each member entry includes:
+- Name
+- Member number
+- Certification (EMT, AEMT, etc.)
+- Office/Title (if applicable)
+- Phone number
+- Email
+
+### Adding a Member
+1. Click **+ Add Member**
+2. Enter first name, last name
+3. Enter phone number
+4. Enter member number (optional)
+5. Enter certification
+6. Enter office/title (optional)
+7. Enter email (optional)
+
+### Editing a Member
+1. Click **Edit** on the member card
+2. Modify any field
+3. Save changes
+
+### Deleting a Member
+1. Click **🗑️** delete button
+2. Confirm deletion
+
+### Leadership Section
+- Leadership members are displayed separately
+- Sorted by member number
+- Chief (701) appears first
+
+---
+
+## Settings (PIN Management)
+
+### Roster PIN
+- **Current:** 1426
+- Used by EMTs to access the member roster in the main app
+- To change:
+  1. Enter new 4+ character PIN
+  2. Click **Update Roster PIN**
+
+### Admin PIN
+- **Current:** hnfd2026admin
+- Used to access this Admin Portal
+- To change:
+  1. Enter new 4+ character PIN
+  2. Click **Update Admin PIN**
+
+**Important:** Remember your new PINs before deploying!
+
+---
+
+## Deployment
+
+### Pending Changes
+The Deploy tab shows all changes made since last deployment:
+- Added equipment
+- Deleted members
+- Updated driver zones
+- PIN changes
+
+### Deploying Changes
+1. Review all pending changes
+2. Click **Deploy Changes**
+3. Changes are saved and pushed live
+
+**Note:** Changes are not visible to users until deployed.
 
 ---
 
 ## Best Practices
 
-### For Equipment Data
+### Equipment Management
+1. Use consistent naming conventions
+2. Add multiple search aliases
+3. Be specific about locations (include drawer position)
+4. Mark critical items appropriately
 
-1. **Use consistent naming** - "Adult Trauma Bag" not "trauma bag adult"
-2. **Add multiple aliases** - Include common misspellings and abbreviations
-3. **Be specific about location** - Include drawer position (FRONT, BACK, LEFT, RIGHT)
-4. **Mark critical items** - Helps with search prioritization
+### Security
+1. Keep Admin PIN separate from Roster PIN
+2. Change PINs periodically
+3. Don't share Admin PIN widely
+4. Export backups regularly
 
-### For Location Guides
+### Images
+1. Use clear, well-lit photos
+2. Ensure images are current
+3. Test location guides with actual EMTs
+4. Position gold dots accurately
 
-1. **Step 1** should show the ambulance exterior or interior with the general area highlighted
-2. **Step 2** should show the open cabinet/drawer with contents visible
-3. **Step 3** should be a clear close-up of the actual equipment
-4. **Position dots accurately** - Test by showing to another EMT
-
-### For Usage Notes
-
-1. **Keep it concise** - EMTs need quick reference, not textbooks
-2. **Highlight critical info** - Use CAPS or bullet points for important items
-3. **Include age groups** - Adult, pediatric, elderly when applicable
-4. **Cite protocols** - Reference department protocols when possible
-5. **Review regularly** - Update when protocols change
-
-### For Maintenance
-
-1. **Check for updates** regularly (Settings → Check for Updates)
-2. **Export backups** weekly or after major changes
-3. **Verify images** - Ensure photos are clear and current
-4. **Test voice search** - Say equipment names to verify recognition
+### Roster
+1. Keep contact info current
+2. Remove inactive members
+3. Update certifications when they change
+4. Verify phone numbers work
 
 ---
 
 ## Troubleshooting
 
-### Images Not Showing
+### Changes Not Appearing
+1. Make sure you clicked **Deploy**
+2. Users may need to refresh the app
+3. Check for any error messages
 
-1. Check the image path is correct
-2. Ensure the image file exists
-3. Try clearing the image and re-uploading
+### Cannot Access Admin Portal
+1. Verify the Admin PIN is correct
+2. Check the URL is correct
+3. Clear browser cache and try again
 
-### Location Guide Not Saving
-
-1. Ensure at least one image is set
-2. Check for unsaved changes in other fields
-3. Try closing and reopening the editor
-
-### Changes Not Appearing for Users
-
-1. Users need to check for updates (Settings → Check for Updates)
-2. Changes are saved to local storage, not server
-3. Export and share the JSON file to sync across devices
+### Images Not Displaying
+1. Verify image file exists
+2. Check file format (JPG, PNG)
+3. Re-upload the image
 
 ---
 
@@ -302,16 +259,23 @@ Available images include:
 
 | Action | How To |
 |--------|--------|
-| Add equipment | ➕ Add Equipment |
-| Edit equipment | Tap item → Edit fields → 💾 Save |
-| Delete equipment | Tap item → 🗑️ Delete |
-| Edit location guide | 🎯 Edit Location Guide |
-| Replace image | 📷 Replace Image |
-| Add dosage info | Edit → Usage Notes field → 💾 Save |
-| Export data | 📥 Export JSON |
-| Import data | 📤 Import JSON |
-| Check for updates | ⚙️ → Check for Updates |
-| Share app | ⚙️ → Share App with EMTs |
+| Add equipment | Equipment tab → + Add Equipment |
+| Delete equipment | Equipment tab → 🗑️ on card |
+| Add member | Roster tab → + Add Member |
+| Change Roster PIN | Settings tab → Update Roster PIN |
+| Change Admin PIN | Settings tab → Update Admin PIN |
+| Deploy changes | Deploy tab → Deploy Changes |
+
+---
+
+## Access Information
+
+| Resource | URL/Value |
+|----------|-----------|
+| Main App | https://hnfd-rescue.vercel.app |
+| Admin Portal | https://hnfd-rescue.vercel.app/admin-portal.html |
+| Roster PIN | 1426 |
+| Admin PIN | hnfd2026admin |
 
 ---
 
@@ -319,4 +283,4 @@ Available images include:
 
 Contact your department's technology coordinator or the app administrator.
 
-*This documentation is for HNFD Rescue Equipment Finder v2.8.0*
+*This documentation is for HNFD Rescue Equipment Finder v2.14.10*

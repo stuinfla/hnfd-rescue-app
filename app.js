@@ -2420,12 +2420,14 @@ async function speakResult(retryCount = 0) {
 
   utterance.onstart = () => {
     speakBtn.classList.add('speaking');
+    speakBtn.innerHTML = '🔇'; // Show muted icon - tap to stop
     statusText.textContent = 'Speaking';
     console.log('[TTS] Speaking started');
   };
 
   utterance.onend = () => {
     speakBtn.classList.remove('speaking');
+    speakBtn.innerHTML = '🔊'; // Restore speaker icon
     statusText.textContent = 'Ready';
     ttsInProgress = false; // Reset guard flag
     console.log('[TTS] Speaking ended');
@@ -2434,6 +2436,7 @@ async function speakResult(retryCount = 0) {
   utterance.onerror = (e) => {
     console.error('[TTS] Error:', e.error, e);
     speakBtn.classList.remove('speaking');
+    speakBtn.innerHTML = '🔊'; // Restore speaker icon
     ttsInProgress = false; // Reset guard flag
 
     // Retry up to 2 times on error (but not for 'interrupted' which is normal)
@@ -2504,6 +2507,9 @@ voiceBtn.addEventListener('click', (e) => {
 
   console.log('[VoiceBtn] Click handler triggered, isListening:', isListening, 'recognitionStarting:', recognitionStarting);
 
+  // Remove iOS attention pulse once user taps
+  voiceBtn.classList.remove('pulse-attention');
+
   hapticFeedback('medium');
 
   // Toggle: Stop if listening, start if not
@@ -2564,6 +2570,7 @@ speakBtn.addEventListener('click', () => {
     ttsInProgress = false; // Reset guard flag
     hapticFeedback('light');
     speakBtn.classList.remove('speaking');
+    speakBtn.innerHTML = '🔊'; // Restore speaker icon
     const statusText = document.querySelector('.status-text');
     if (statusText) {
       statusText.textContent = 'Speech stopped';
@@ -2852,7 +2859,7 @@ function initializeAudio() {
 
 // ============================================================================
 // AUTO-START LISTENING when app loads
-// SIMPLIFIED: Just initialize and wait for user to tap microphone
+// App starts in listening mode - ready to hear equipment names immediately
 // ============================================================================
 async function autoStartListening() {
   console.log('[AutoStart] 🚀 Initializing speech recognition...');
@@ -2865,11 +2872,30 @@ async function autoStartListening() {
       return;
     }
 
-    // Just initialize - let user tap microphone to start
+    // Initialize speech recognition
     const initSuccess = initSpeechRecognition();
     if (initSuccess) {
-      console.log('[AutoStart] ✅ Ready - waiting for user to tap microphone');
-      if (transcript) transcript.textContent = 'Tap microphone to search by voice';
+      // Detect iOS - requires user tap (Apple policy for microphone access)
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+                    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+      if (isIOS) {
+        // iOS: MUST have user tap first - Apple security policy
+        console.log('[AutoStart] 📱 iOS detected - waiting for user tap (Apple policy)');
+        if (transcript) transcript.textContent = '🎤 TAP MICROPHONE to start voice search';
+        // Pulse the microphone to draw attention
+        const voiceBtn = document.getElementById('voiceBtn');
+        if (voiceBtn) voiceBtn.classList.add('pulse-attention');
+      } else {
+        // Desktop/Android: Try auto-start, fall back if it fails
+        console.log('[AutoStart] 💻 Desktop/Android - attempting auto-start');
+        try {
+          startListening();
+        } catch (e) {
+          console.log('[AutoStart] Auto-start failed, waiting for user tap');
+          if (transcript) transcript.textContent = 'Tap microphone to start voice search';
+        }
+      }
     } else {
       console.log('[AutoStart] ❌ Could not initialize');
       if (transcript) transcript.textContent = 'Tap microphone to try voice search';

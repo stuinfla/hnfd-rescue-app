@@ -7,7 +7,14 @@
     "start": "node server.js",
     "dev": "node server.js",
     "init-db": "node src/init-database.js",
-    "test": "node src/test-search.js"
+    "test": "npx playwright test",
+    "test:mobile": "npx playwright test --project=mobile-app",
+    "test:mobile-android": "npx playwright test --project=mobile-android",
+    "test:admin": "npx playwright test --project=desktop-admin",
+    "test:admin-firefox": "npx playwright test --project=desktop-admin-firefox",
+    "test:all": "npx playwright test --project=mobile-app --project=desktop-admin",
+    "test:report": "npx playwright show-report",
+    "test:search": "node src/test-search.js"
   },
   "keywords": [
     "ambulance",

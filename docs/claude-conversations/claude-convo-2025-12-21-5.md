@@ -22,3 +22,13 @@ I need to be able to do add edits and deletes for all equipment and people and e
 
 You know you're not- On the admin portal it seems to be cropping the images. That's no good. I don't know. Never give me cropped images. Look at these. So fix how the admin portal works so that I'm not getting any cropped images 
 
+
+## Human
+
+Open the portal so I can see it myself I want to make sure it's fully working 
+
+
+## Human
+
+I'm still showing pictures that appear to be cropped versus shrunk down please make sure that no pictures  are ever cropped. I always  need to always be able to see the full picture 
+
