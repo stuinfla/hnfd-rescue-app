@@ -1,7 +1,8 @@
 {
-  "version": "2.14.10",
+  "version": "2.15.0",
   "build": "2025-12-22",
   "changelog": [
+    "TESTS: Improved Playwright test reliability",
     "UI: Speaker icon shows 🔇 when speaking (tap to stop)",
     "iOS: Auto-start listening on desktop, tap required on iOS",
     "iOS: Microphone pulses to prompt user to tap",

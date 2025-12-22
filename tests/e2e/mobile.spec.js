@@ -33,7 +33,7 @@ test.describe('Mobile App - Page Load & UI', () => {
 
     // Version should be visible somewhere on page
     const versionText = await page.textContent('body');
-    expect(versionText).toContain('2.14');
+    expect(versionText).toContain('2.15');
   });
 
   test('should have yellow search box border for visibility', async ({ page }) => {
