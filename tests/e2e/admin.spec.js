@@ -326,7 +326,7 @@ test.describe('Admin Portal - Roster Tab', () => {
   test('should have Add Member button', async ({ page }) => {
     await loginToAdmin(page);
 
-    const rosterTab = page.locator('button.tab:has-text("Roster"), text=Roster').first();
+    const rosterTab = page.locator('button.tab:has-text("Roster")').first();
     await rosterTab.click();
     await page.waitForTimeout(500);
 
