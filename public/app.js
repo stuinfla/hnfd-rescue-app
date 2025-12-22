@@ -1153,14 +1153,33 @@ async function speakResult() {
 
     // iOS Safari workaround: sometimes speak() silently fails
     // Check if speaking actually started after a brief delay
+    const retryUtterance = utterance; // Capture reference for retry
     setTimeout(() => {
-      if (!synthesis.speaking && !synthesis.pending) {
+      // Re-check synthesis is still available
+      const synth = window.speechSynthesis;
+      if (synth && !synth.speaking && !synth.pending && currentResult) {
         console.warn('[TTS] Speech may have failed silently, retrying...');
-        // Try once more
-        synthesis.cancel();
-        setTimeout(() => synthesis.speak(utterance), 100);
+        // Create fresh utterance for retry (iOS requires this)
+        const freshUtterance = new SpeechSynthesisUtterance(text);
+        freshUtterance.rate = retryUtterance.rate;
+        freshUtterance.pitch = retryUtterance.pitch;
+        freshUtterance.volume = retryUtterance.volume;
+        if (retryUtterance.voice) freshUtterance.voice = retryUtterance.voice;
+        freshUtterance.onstart = retryUtterance.onstart;
+        freshUtterance.onend = retryUtterance.onend;
+        freshUtterance.onerror = retryUtterance.onerror;
+
+        synth.cancel();
+        setTimeout(() => {
+          try {
+            synth.speak(freshUtterance);
+            console.log('[TTS] Retry speak initiated');
+          } catch (retryErr) {
+            console.error('[TTS] Retry failed:', retryErr);
+          }
+        }, 100);
       }
-    }, 250);
+    }, 300);
 
   } catch (e) {
     console.error('[TTS] Exception:', e);

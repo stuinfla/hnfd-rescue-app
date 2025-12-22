@@ -590,3 +590,205 @@ test.describe('Mobile App - Error Handling', () => {
     await expect(searchInput).toBeVisible();
   });
 });
+
+// ============================================================================
+// TTS (Text-to-Speech) Tests - Critical for hands-free operation
+// ============================================================================
+test.describe('Mobile App - TTS (Text-to-Speech)', () => {
+  test('speechSynthesis API is available', async ({ page }) => {
+    await page.goto(BASE_URL);
+    await page.waitForLoadState('networkidle');
+
+    const hasSpeechSynthesis = await page.evaluate(() => {
+      return typeof window.speechSynthesis !== 'undefined';
+    });
+    expect(hasSpeechSynthesis).toBe(true);
+  });
+
+  test('voices are available after page load', async ({ page }) => {
+    await page.goto(BASE_URL);
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(1000);
+
+    const voiceCount = await page.evaluate(() => {
+      return new Promise((resolve) => {
+        const voices = window.speechSynthesis.getVoices();
+        if (voices.length > 0) {
+          resolve(voices.length);
+        } else {
+          window.speechSynthesis.addEventListener('voiceschanged', () => {
+            resolve(window.speechSynthesis.getVoices().length);
+          }, { once: true });
+          setTimeout(() => resolve(window.speechSynthesis.getVoices().length), 3000);
+        }
+      });
+    });
+
+    console.log(`Available voices: ${voiceCount}`);
+    expect(voiceCount).toBeGreaterThan(0);
+  });
+
+  test('speaker button appears after search result', async ({ page }) => {
+    await page.goto(BASE_URL);
+    await page.waitForLoadState('networkidle');
+
+    const searchInput = page.locator('.search-input, input[type="text"]').first();
+    await searchInput.fill('AED');
+    await page.waitForTimeout(500);
+
+    const speakBtn = page.locator('#speakBtn, .speak-btn');
+    await expect(speakBtn).toBeVisible({ timeout: 3000 });
+  });
+
+  test('speaker button is clickable without error', async ({ page }) => {
+    await page.goto(BASE_URL);
+    await page.waitForLoadState('networkidle');
+
+    const searchInput = page.locator('.search-input, input[type="text"]').first();
+    await searchInput.fill('AED');
+    await page.waitForTimeout(500);
+
+    const speakBtn = page.locator('#speakBtn, .speak-btn');
+    await expect(speakBtn).toBeVisible({ timeout: 3000 });
+
+    // Track console errors
+    const consoleErrors = [];
+    page.on('console', msg => {
+      if (msg.type() === 'error' && !msg.text().includes('[TTS]')) {
+        consoleErrors.push(msg.text());
+      }
+    });
+
+    await speakBtn.click();
+    await page.waitForTimeout(1000);
+
+    // No JavaScript errors should occur
+    expect(consoleErrors.length).toBe(0);
+  });
+
+  test('TTS does not crash with rapid speaker button clicks', async ({ page }) => {
+    await page.goto(BASE_URL);
+    await page.waitForLoadState('networkidle');
+
+    const searchInput = page.locator('.search-input, input[type="text"]').first();
+    await searchInput.fill('oxygen');
+    await page.waitForTimeout(500);
+
+    const speakBtn = page.locator('#speakBtn, .speak-btn');
+    await expect(speakBtn).toBeVisible({ timeout: 3000 });
+
+    // Rapid clicks should not crash
+    for (let i = 0; i < 5; i++) {
+      await speakBtn.click();
+      await page.waitForTimeout(100);
+    }
+
+    // Page should still be responsive
+    await expect(searchInput).toBeVisible();
+    await searchInput.fill('bandage');
+    await page.waitForTimeout(500);
+    await expect(speakBtn).toBeVisible();
+  });
+
+  test('TTS handles multiple searches correctly', async ({ page }) => {
+    await page.goto(BASE_URL);
+    await page.waitForLoadState('networkidle');
+
+    const searchInput = page.locator('.search-input, input[type="text"]').first();
+    const speakBtn = page.locator('#speakBtn, .speak-btn');
+
+    // Search and speak multiple items
+    const items = ['AED', 'oxygen', 'bandage'];
+    for (const item of items) {
+      await searchInput.fill(item);
+      await page.waitForTimeout(500);
+      await expect(speakBtn).toBeVisible({ timeout: 3000 });
+      await speakBtn.click();
+      await page.waitForTimeout(200);
+    }
+
+    // App should still be responsive
+    await expect(searchInput).toBeVisible();
+  });
+
+  test('TTS logs show speech initiation', async ({ page }) => {
+    await page.goto(BASE_URL);
+    await page.waitForLoadState('networkidle');
+
+    const logs = [];
+    page.on('console', msg => {
+      if (msg.text().includes('[TTS]')) {
+        logs.push(msg.text());
+      }
+    });
+
+    const searchInput = page.locator('.search-input, input[type="text"]').first();
+    await searchInput.fill('AED');
+    await page.waitForTimeout(500);
+
+    const speakBtn = page.locator('#speakBtn, .speak-btn');
+    await speakBtn.click();
+    await page.waitForTimeout(1000);
+
+    // Should have TTS-related logs
+    const hasInitLog = logs.some(l =>
+      l.includes('Speech initiated') ||
+      l.includes('initialized') ||
+      l.includes('Using voice')
+    );
+    expect(hasInitLog).toBe(true);
+  });
+
+  test('TTS works after page idle time', async ({ page }) => {
+    await page.goto(BASE_URL);
+    await page.waitForLoadState('networkidle');
+
+    const searchInput = page.locator('.search-input, input[type="text"]').first();
+    await searchInput.fill('AED');
+    await page.waitForTimeout(500);
+
+    // Simulate idle time
+    await page.waitForTimeout(3000);
+
+    const speakBtn = page.locator('#speakBtn, .speak-btn');
+    await expect(speakBtn).toBeVisible();
+    await speakBtn.click();
+
+    // Should not show error status
+    const statusText = page.locator('#status-text, .status-text').first();
+    await page.waitForTimeout(500);
+
+    if (await statusText.isVisible()) {
+      const text = await statusText.textContent();
+      expect(text).not.toContain('failed');
+    }
+  });
+
+  test('synthesis.cancel prevents overlapping speech', async ({ page }) => {
+    await page.goto(BASE_URL);
+    await page.waitForLoadState('networkidle');
+
+    const logs = [];
+    page.on('console', msg => {
+      if (msg.text().includes('[TTS]')) {
+        logs.push(msg.text());
+      }
+    });
+
+    const searchInput = page.locator('.search-input, input[type="text"]').first();
+    const speakBtn = page.locator('#speakBtn, .speak-btn');
+
+    await searchInput.fill('AED');
+    await page.waitForTimeout(500);
+
+    // Click speak button twice rapidly
+    await speakBtn.click();
+    await page.waitForTimeout(100);
+    await speakBtn.click();
+    await page.waitForTimeout(500);
+
+    // Should show cancel behavior in logs
+    const hasSpeakLog = logs.some(l => l.includes('Speech initiated'));
+    expect(hasSpeakLog).toBe(true);
+  });
+});

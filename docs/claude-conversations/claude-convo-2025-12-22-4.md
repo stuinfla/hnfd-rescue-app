@@ -1,16 +1,11 @@
 # Claude Code Conversation
 
 **Date:** Monday, December 22, 2025
-**Time:** 09:29:51
+**Time:** 10:23:33
 **Model:** claude-sonnet-4-5-20250929
 **Session:** 74f19471-82fe-4c00-981f-848fda3a3c54
 
 ---
-
-
-## Human
-
-continue
 
 
 ## Assistant
@@ -671,9 +666,180 @@ EOF
 - **Admin Portal**: https://hnfd-rescue.vercel.app/admin.html (password: `hnfd2026admin`)
 
 
-<!-- LAST_LINE:      244 -->
+---
+**Tools Used:**
+
+• **TodoWrite** (4 tasks)
+
+• **Glob** `**/*.md`
+
+• **Glob** `**/README*`
+
+---
+
+
+---
+**Tools Used:**
+
+• **Bash** `find . -maxdepth 3 -name "*.md" -not -path "./node_modules/*" -not -path "./.git/*" 2>/dev/null`
+  _Find project documentation files_
+
+• **Bash** `ls -la *.md 2>/dev/null || echo "No MD files in root"`
+  _Check root for MD files_
+
+---
+
+
+---
+**Tools Used:**
+
+• **Read** `/Users/stuartkerr/Code/AMBUILANCE_INVENTORY/README.md`
+
+---
+
+
+---
+**Tools Used:**
+
+• **TodoWrite** (6 tasks)
+
+• **Write** `/Users/stuartkerr/Code/AMBUILANCE_INVENTORY/README.md`
+
+---
+
+
+---
+**Tools Used:**
+
+• **Write** `/Users/stuartkerr/Code/AMBUILANCE_INVENTORY/ADMIN_GUIDE.md`
+
+---
+
+
+---
+**Tools Used:**
+
+• **Read** `/Users/stuartkerr/Code/AMBUILANCE_INVENTORY/docs/ADMIN-GUIDE.md`
+
+• **Read** `/Users/stuartkerr/Code/AMBUILANCE_INVENTORY/DEPLOYMENT.md`
+
+---
+
+
+---
+**Tools Used:**
+
+• **Edit** `/Users/stuartkerr/Code/AMBUILANCE_INVENTORY/docs/ADMIN-GUIDE.md`
+
+• **Edit** `/Users/stuartkerr/Code/AMBUILANCE_INVENTORY/docs/ADMIN-GUIDE.md`
+
+---
+
+
+---
+**Tools Used:**
+
+• **Edit** `/Users/stuartkerr/Code/AMBUILANCE_INVENTORY/DEPLOYMENT.md`
+
+• **Edit** `/Users/stuartkerr/Code/AMBUILANCE_INVENTORY/DEPLOYMENT.md`
+
+---
+
+
+---
+**Tools Used:**
+
+• **Read** `/Users/stuartkerr/Code/AMBUILANCE_INVENTORY/public/ADMIN_GUIDE.md`
+
+---
+
+
+---
+**Tools Used:**
+
+• **Write** `/Users/stuartkerr/Code/AMBUILANCE_INVENTORY/public/ADMIN_GUIDE.md`
+
+---
+
+I'll complete the documentation update task by committing and deploying the changes.
+
+
+---
+**Tools Used:**
+
+• **Bash** `git status`
+  _Check git status for documentation changes_
+
+---
+
+
+---
+**Tools Used:**
+
+• **TodoWrite** (6 tasks)
+
+• **Bash** `git add ADMIN_GUIDE.md DEPLOYMENT.md README.md docs/ADMIN-GUIDE.md public/ADMIN_GUIDE.md && git commit -m "$(cat <<'EOF'
+docs: Update all documentation to v2.15.0
+
+- README.md: Complete rewrite with current features and version history
+- ADMIN_GUIDE.md: Updated with correct admin PIN and Settings tab
+- docs/ADMIN-GUIDE.md: Updated version number and access URLs
+- DEPLOYMENT.md: Updated with Vercel as primary deployment method
+- public/ADMIN_GUIDE.md: Updated with current security info
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+EOF
+)"`
+  _Commit documentation updates_
+
+---
+
+
+---
+**Tools Used:**
+
+• **Bash** `git push && vercel --prod --yes 2>&1 | head -30`
+  _Push and deploy to Vercel_
+
+---
+
+
+---
+**Tools Used:**
+
+• **TodoWrite** (6 tasks)
+
+---
+
+Documentation update complete.
+
+## Summary
+
+**5 documentation files updated to v2.15.0:**
+
+| File | Changes |
+|------|---------|
+| `README.md` | Complete rewrite with current features, security, version history |
+| `ADMIN_GUIDE.md` | Updated admin PIN, Settings tab, version history |
+| `docs/ADMIN-GUIDE.md` | Updated version, URLs, 6-tab admin portal structure |
+| `DEPLOYMENT.md` | Vercel as primary hosting, updated architecture diagram |
+| `public/ADMIN_GUIDE.md` | Updated PINs, Settings tab, troubleshooting |
+
+**Key documentation highlights:**
+- Admin Password: `hnfd2026admin`
+- Roster PIN: `1426`
+- Live App: https://hnfd-rescue.vercel.app
+- Admin Portal: https://hnfd-rescue.vercel.app/admin.html
+- 158 Playwright tests documented
+
+**Deployed:** https://hnfd-rescue.vercel.app
+
+
+<!-- LAST_LINE:      326 -->
 
 ## Human
 
-update all documentation to reflect current application.
+speaker not working.   voice in is working but voice out is not!!   how did you not catch this in your testing??
 
