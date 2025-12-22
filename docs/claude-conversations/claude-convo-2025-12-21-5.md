@@ -17,3 +17,8 @@ Why are you doing Netlify builds this is always done on Vercel so why are you sw
 
 I need to be able to do add edits and deletes for all equipment and people and everything else so please complement the admin capabilities so that everything can be edited correctly 
 
+
+## Human
+
+You know you're not- On the admin portal it seems to be cropping the images. That's no good. I don't know. Never give me cropped images. Look at these. So fix how the admin portal works so that I'm not getting any cropped images 
+
