@@ -453,21 +453,35 @@ test.describe('Mobile App - Text-to-Speech', () => {
     await page.waitForLoadState('networkidle');
     await page.waitForTimeout(500);
 
+    // Dismiss any install prompts that may block interactions
+    const dismissBtn = page.locator('.install-dismiss, button:has-text("Got It")').first();
+    if (await dismissBtn.isVisible().catch(() => false)) {
+      await dismissBtn.click();
+      await page.waitForTimeout(300);
+    }
+
     const searchInput = page.locator('.search-input, input[type="text"]').first();
     await searchInput.fill('oxygen');
     await searchInput.press('Enter');
 
     await page.waitForTimeout(2000);
 
+    // Dismiss any overlays again
+    const dismissBtn2 = page.locator('.install-dismiss, button:has-text("Got It")').first();
+    if (await dismissBtn2.isVisible().catch(() => false)) {
+      await dismissBtn2.click();
+      await page.waitForTimeout(300);
+    }
+
     // Look for speak button with multiple selectors
     const speakBtn = page.locator('.speak-btn, [class*="speak"], button:has-text("🔊")').first();
     const isVisible = await speakBtn.isVisible().catch(() => false);
     if (isVisible) {
       // First tap starts speech
-      await speakBtn.click();
+      await speakBtn.click({ force: true });
       await page.waitForTimeout(500);
       // Second tap should stop speech
-      await speakBtn.click();
+      await speakBtn.click({ force: true });
     }
     // Test passes even if speak button not visible (optional feature)
     expect(true).toBe(true);
