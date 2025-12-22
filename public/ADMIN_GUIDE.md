@@ -1,175 +1,101 @@
-# Admin Mode - Quick Reference
+# Admin Portal - Quick Reference (v2.15.0)
 
-## Accessing Admin Mode
+## Accessing the Admin Portal
 
-1. **Open the app**: https://hnfd-rescue.vercel.app
-2. **Click the ⚙️ gear icon** in the top-right header
-3. **Enter password**: `hnfd2024`
-4. Admin panel opens
+1. **Go to:** https://hnfd-rescue.vercel.app/admin.html
+2. **Enter password:** `hnfd2026admin`
+3. Admin portal opens with 6 tabs
 
-## Changing the Admin Password
+## Security (v2.14+)
 
-**File:** `public/app.js`
-**Line:** 1228
+The system uses **separate PINs**:
 
-```javascript
-const ADMIN_PASSWORD = 'hnfd2024'; // Change this for production
-```
+| Access | PIN | Purpose |
+|--------|-----|---------|
+| **Roster** | `1426` | Mobile app roster access |
+| **Admin** | `hnfd2026admin` | Admin portal login |
 
-Change `'hnfd2024'` to your secure password, save, and redeploy.
+### Changing PINs
+1. Go to **Settings** tab
+2. Enter new PIN
+3. Click **Update Roster PIN** or **Update Admin PIN**
 
-## Managing Equipment
+---
 
-### Add New Equipment
-1. Click **"➕ Add Equipment"**
-2. Fill in required fields:
-   - **Item Name** (required)
-   - **Location** (required)
-3. Optional fields:
-   - Aliases (comma-separated, e.g., "AED, defibrillator, defib")
-   - Compartment (K, J, N, D, etc.)
-   - Color (Red/Orange, GREEN, etc.)
-   - Description
-   - Contents
-   - Warning message
-   - Driver notes
-   - Image path (e.g., `/images/item.jpg`)
-   - Critical item checkbox
-   - Critical rank (1-10, lower = more important)
-4. Click **"💾 Save"**
+## Admin Portal Tabs
 
-### Edit Equipment
-1. Click on any equipment item in the list
-2. Modify fields as needed
-3. Click **"💾 Save"**
+### Equipment Tab
+Full CRUD for equipment:
+- **+ Add Equipment** - Create new items
+- **Edit** button - Modify existing items
+- **Delete** button - Remove items
 
-### Delete Equipment
-1. Click on the equipment item
-2. Click **"🗑️ Delete"** button
-3. Confirm deletion
+### Images Tab
+- Upload equipment photos
+- Manage location guide images
+- Images display without cropping
 
-### Search Equipment
-Use the search box at the top to filter items by name, location, or alias.
+### Drivers Tab
+- Add/edit driver zones
+- Phone numbers for each zone
+- Tap-to-call functionality
 
-## Backup & Restore
+### Roster Tab
+- View/add/edit members
+- Leadership sorted by number
+- Contact information
 
-### Export Database
-1. Click **"📥 Export JSON"**
-2. Downloads file: `hnfd-equipment-YYYY-MM-DD.json`
-3. Save this file for backup
+### Settings Tab
+- **Roster PIN** - Controls mobile roster access
+- **Admin PIN** - Controls admin portal access
 
-### Import Database
-1. Click **"📤 Import JSON"**
-2. Select your backup `.json` file
-3. Confirm replacement
-4. All equipment updated
+### Deploy Tab
+- Review pending changes
+- Deploy to production
 
-## Where Data is Stored
-
-| Storage | Location | Purpose |
-|---------|----------|---------|
-| **Default Database** | `app.js` lines 19-279 | Built-in equipment list |
-| **Custom Changes** | Browser localStorage | User edits/additions |
-| **Exports** | Downloaded JSON files | Backups |
-
-**Key:** `hnfd_equipment_custom` in localStorage
+---
 
 ## Equipment Data Structure
-
-Each item has these fields:
 
 ```json
 {
   "id": "trauma_bag_adult",
   "name": "Adult Trauma Bag",
   "aliases": ["trauma back", "first-in bag"],
-  "searchText": "adult trauma bag trauma back first in",
   "location": "Cabinet K - Middle Drawer (FRONT)",
   "compartment": "K",
   "color": "Red/Orange",
   "critical": true,
   "criticalRank": 1,
-  "description": "Contains all trauma supplies for adult patients",
-  "contents": "Bandages, gauze, tourniquets, etc.",
-  "warning": "CRITICAL: Check seal before use",
+  "description": "Contains all trauma supplies",
+  "warning": "Check seal before use",
   "driverNote": "Grab this first for trauma calls",
   "image": "/images/trauma_bag_adult.jpg"
 }
 ```
 
-## Quick Edits Without Admin Mode
-
-### Edit Equipment Directly in Code
-
-**File:** `public/app.js`
-**Lines:** 19-279 (INVENTORY_DATABASE)
-
-Example:
-```javascript
-{
-  id: "trauma_bag_adult",
-  name: "Adult Trauma Bag",
-  aliases: ["trauma back", "first-in bag"],
-  location: "Cabinet K - Middle Drawer (FRONT)",
-  // ... add or change fields
-}
-```
-
-After editing:
-1. Save `app.js`
-2. Git commit
-3. Git push
-4. Vercel auto-deploys
-
-### Change Admin Password
-
-**File:** `public/app.js`
-**Line:** 1228
-
-```javascript
-const ADMIN_PASSWORD = 'your-new-password';
-```
-
-### Change Images
-
-**File:** `public/app.js`
-Find the item and update `image` field:
-
-```javascript
-image: "/images/new_image_name.jpg"
-```
-
-Then add the new image to `/public/images/` folder.
+---
 
 ## Troubleshooting
 
-**Admin button not visible?**
-- Check you're on v2.2.0 or later (footer shows version)
-- Hard refresh: Cmd+Shift+R (Mac) or Ctrl+Shift+R (Windows)
+| Issue | Solution |
+|-------|----------|
+| Password not working | Use `hnfd2026admin` (case-sensitive) |
+| Can't find Settings | Settings is the 5th tab (gear icon) |
+| Changes not saving | Check browser console for errors |
+| Images cropped | Update to v2.14+ |
 
-**Password not working?**
-- Default is `hnfd2024` (case-sensitive)
-- Check line 1228 in `app.js` for current password
-
-**Changes not saving?**
-- Check browser console for errors
-- Ensure localStorage is enabled
-- Try export/import to force save
-
-**Lost changes?**
-- Export database regularly as backup
-- Check localStorage: `hnfd_equipment_custom`
-- Clear localStorage to restore defaults
+---
 
 ## Version History
 
 | Version | Changes |
 |---------|---------|
-| 2.2.0 | Added admin mode |
-| 2.1.2 | Fixed audio on Android/iOS |
-| 2.1.1 | Fixed offline icon caching |
-| 2.1.0 | Auto-updates, versioning |
+| 2.15.0 | Test reliability improvements |
+| 2.14.x | Separate admin/roster PINs, Settings tab |
+| 2.13.x | Full CRUD for equipment |
+| 2.12.x | Image cropping fixed |
 
 ---
 
-**Need help?** Check the code at: https://github.com/stuinfla/hnfd-rescue-app
+**Repository:** https://github.com/stuinfla/hnfd-rescue-app

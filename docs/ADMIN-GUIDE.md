@@ -1,6 +1,6 @@
 # HNFD Rescue Equipment Finder - Admin Guide
 
-**Version 2.14.10** | Last Updated: December 22, 2025
+**Version 2.15.0** | Last Updated: December 22, 2025
 
 This guide explains how to use the Admin Portal to manage equipment inventory, roster, driver zones, images, and security settings.
 
@@ -283,4 +283,4 @@ The Deploy tab shows all changes made since last deployment:
 
 Contact your department's technology coordinator or the app administrator.
 
-*This documentation is for HNFD Rescue Equipment Finder v2.14.10*
+*This documentation is for HNFD Rescue Equipment Finder v2.15.0*

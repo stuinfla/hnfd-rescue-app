@@ -1,175 +1,142 @@
-# Admin Mode - Quick Reference
+# Admin Portal Guide - v2.15.0
+
+## Quick Access
+
+**Admin Portal URL:** https://hnfd-rescue.vercel.app/admin.html
+**Admin Password:** `hnfd2026admin`
+
+---
 
 ## Accessing Admin Mode
 
-1. **Open the app**: https://hnfd-rescue.vercel.app
-2. **Click the ⚙️ gear icon** in the top-right header
-3. **Enter password**: `hnfd2024`
-4. Admin panel opens
+1. Go to https://hnfd-rescue.vercel.app/admin.html
+2. Enter password: `hnfd2026admin`
+3. Admin portal opens with 6 tabs:
+   - **Equipment** - Add, edit, delete equipment items
+   - **Images** - Manage equipment photos
+   - **Drivers** - Driver zone phone numbers
+   - **Roster** - Member management
+   - **Settings** - PIN management (Roster & Admin)
+   - **Deploy** - Deployment tools
 
-## Changing the Admin Password
+---
 
-**File:** `public/app.js`
-**Line:** 1228
+## Admin Portal Tabs
 
-```javascript
-const ADMIN_PASSWORD = 'hnfd2024'; // Change this for production
-```
+### Equipment Tab
+Full CRUD (Create, Read, Update, Delete) for equipment:
 
-Change `'hnfd2024'` to your secure password, save, and redeploy.
-
-## Managing Equipment
-
-### Add New Equipment
-1. Click **"➕ Add Equipment"**
+**Add New Equipment:**
+1. Click **"+ Add Equipment"** button
 2. Fill in required fields:
-   - **Item Name** (required)
-   - **Location** (required)
-3. Optional fields:
-   - Aliases (comma-separated, e.g., "AED, defibrillator, defib")
-   - Compartment (K, J, N, D, etc.)
-   - Color (Red/Orange, GREEN, etc.)
-   - Description
-   - Contents
-   - Warning message
-   - Driver notes
-   - Image path (e.g., `/images/item.jpg`)
-   - Critical item checkbox
-   - Critical rank (1-10, lower = more important)
-4. Click **"💾 Save"**
+   - Item Name (required)
+   - Location (required)
+3. Optional fields: Aliases, Compartment, Color, Description, Warning, Image
+4. Click **"Save"**
 
-### Edit Equipment
-1. Click on any equipment item in the list
-2. Modify fields as needed
-3. Click **"💾 Save"**
+**Edit Equipment:**
+1. Find the equipment card
+2. Click **"Edit"** button
+3. Modify fields as needed
+4. Click **"Save"**
 
-### Delete Equipment
-1. Click on the equipment item
-2. Click **"🗑️ Delete"** button
+**Delete Equipment:**
+1. Find the equipment card
+2. Click **"Delete"** button
 3. Confirm deletion
 
-### Search Equipment
-Use the search box at the top to filter items by name, location, or alias.
+### Images Tab
+- Upload new equipment images
+- View image gallery
+- Images displayed without cropping (full image visible)
 
-## Backup & Restore
+### Drivers Tab
+- Add/edit driver zones
+- Each zone includes phone number
+- Click to call functionality
 
-### Export Database
-1. Click **"📥 Export JSON"**
-2. Downloads file: `hnfd-equipment-YYYY-MM-DD.json`
-3. Save this file for backup
+### Roster Tab
+- View all members
+- Add new members
+- Edit member details
+- Leadership sorted by number
 
-### Import Database
-1. Click **"📤 Import JSON"**
-2. Select your backup `.json` file
-3. Confirm replacement
-4. All equipment updated
+### Settings Tab
+**Manage security PINs separately:**
 
-## Where Data is Stored
+| Setting | Purpose | Current |
+|---------|---------|---------|
+| **Roster PIN** | Access roster on mobile app | `1426` |
+| **Admin PIN** | Access admin portal | `hnfd2026admin` |
 
-| Storage | Location | Purpose |
-|---------|----------|---------|
-| **Default Database** | `app.js` lines 19-279 | Built-in equipment list |
-| **Custom Changes** | Browser localStorage | User edits/additions |
-| **Exports** | Downloaded JSON files | Backups |
+**To update a PIN:**
+1. Go to Settings tab
+2. Enter new PIN in the input field
+3. Click "Update Roster PIN" or "Update Admin PIN"
 
-**Key:** `hnfd_equipment_custom` in localStorage
+### Deploy Tab
+- Deployment status
+- Version information
+- Update controls
+
+---
+
+## Security
+
+### PIN Structure (v2.14+)
+The system now uses **separate PINs**:
+
+| Access | PIN | Where Used |
+|--------|-----|------------|
+| Roster | `1426` | Mobile app roster access |
+| Admin | `hnfd2026admin` | Admin portal login |
+
+This prevents roster users from accessing admin functions.
+
+---
 
 ## Equipment Data Structure
-
-Each item has these fields:
 
 ```json
 {
   "id": "trauma_bag_adult",
   "name": "Adult Trauma Bag",
   "aliases": ["trauma back", "first-in bag"],
-  "searchText": "adult trauma bag trauma back first in",
   "location": "Cabinet K - Middle Drawer (FRONT)",
   "compartment": "K",
   "color": "Red/Orange",
   "critical": true,
   "criticalRank": 1,
-  "description": "Contains all trauma supplies for adult patients",
-  "contents": "Bandages, gauze, tourniquets, etc.",
-  "warning": "CRITICAL: Check seal before use",
+  "description": "Contains all trauma supplies",
+  "warning": "Check seal before use",
   "driverNote": "Grab this first for trauma calls",
   "image": "/images/trauma_bag_adult.jpg"
 }
 ```
 
-## Quick Edits Without Admin Mode
-
-### Edit Equipment Directly in Code
-
-**File:** `public/app.js`
-**Lines:** 19-279 (INVENTORY_DATABASE)
-
-Example:
-```javascript
-{
-  id: "trauma_bag_adult",
-  name: "Adult Trauma Bag",
-  aliases: ["trauma back", "first-in bag"],
-  location: "Cabinet K - Middle Drawer (FRONT)",
-  // ... add or change fields
-}
-```
-
-After editing:
-1. Save `app.js`
-2. Git commit
-3. Git push
-4. Vercel auto-deploys
-
-### Change Admin Password
-
-**File:** `public/app.js`
-**Line:** 1228
-
-```javascript
-const ADMIN_PASSWORD = 'your-new-password';
-```
-
-### Change Images
-
-**File:** `public/app.js`
-Find the item and update `image` field:
-
-```javascript
-image: "/images/new_image_name.jpg"
-```
-
-Then add the new image to `/public/images/` folder.
+---
 
 ## Troubleshooting
 
-**Admin button not visible?**
-- Check you're on v2.2.0 or later (footer shows version)
-- Hard refresh: Cmd+Shift+R (Mac) or Ctrl+Shift+R (Windows)
+| Issue | Solution |
+|-------|----------|
+| Password not working | Use `hnfd2026admin` (case-sensitive) |
+| Changes not saving | Check browser console, ensure localStorage enabled |
+| Images cropped | Update to v2.14+ (images now show in full) |
+| Can't find Settings | Settings is the 5th tab (gear icon) |
 
-**Password not working?**
-- Default is `hnfd2024` (case-sensitive)
-- Check line 1228 in `app.js` for current password
-
-**Changes not saving?**
-- Check browser console for errors
-- Ensure localStorage is enabled
-- Try export/import to force save
-
-**Lost changes?**
-- Export database regularly as backup
-- Check localStorage: `hnfd_equipment_custom`
-- Clear localStorage to restore defaults
+---
 
 ## Version History
 
 | Version | Changes |
 |---------|---------|
-| 2.2.0 | Added admin mode |
-| 2.1.2 | Fixed audio on Android/iOS |
-| 2.1.1 | Fixed offline icon caching |
-| 2.1.0 | Auto-updates, versioning |
+| 2.15.0 | Test reliability improvements |
+| 2.14.x | Separate admin/roster PINs, Settings tab |
+| 2.13.x | Full CRUD for equipment |
+| 2.12.x | Image cropping fixed |
+| 2.11.x | Driver zones with phone numbers |
 
 ---
 
-**Need help?** Check the code at: https://github.com/stuinfla/hnfd-rescue-app
+**Repository:** https://github.com/stuinfla/hnfd-rescue-app

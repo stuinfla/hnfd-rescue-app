@@ -1,5 +1,7 @@
 # HNFD Rescue Equipment Finder - Deployment Guide
 
+**Version 2.15.0** | **Primary Hosting:** Vercel
+
 ## How The App Works
 
 ### Architecture Overview
@@ -52,26 +54,23 @@
 
 ## Deployment Options
 
-### Option 1: Static Hosting (Recommended for Production)
+### Option 1: Vercel (Production - Recommended)
 
-Deploy to any static hosting service:
+This project uses Vercel for production hosting with automatic GitHub deployments.
 
-#### Netlify (Free & Easy)
 ```bash
-# Install Netlify CLI
-npm install -g netlify-cli
-
-# Deploy
-cd /Users/stuartkerr/Code/AMBUILANCE_INVENTORY
-netlify deploy --prod --dir=public
-```
-
-#### Vercel
-```bash
-npm install -g vercel
+# Deploy to Vercel production
 cd /Users/stuartkerr/Code/AMBUILANCE_INVENTORY
 vercel --prod
 ```
+
+**Live URLs:**
+- Main App: https://hnfd-rescue.vercel.app
+- Admin Portal: https://hnfd-rescue.vercel.app/admin.html
+
+**Automatic Deployments:**
+- Push to `main` branch triggers automatic deployment
+- Preview deployments on pull requests
 
 #### GitHub Pages
 1. Push to GitHub repository
