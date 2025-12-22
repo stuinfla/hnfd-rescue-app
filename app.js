@@ -4660,7 +4660,7 @@ function openImageLibrary() {
          onclick="selectLibraryImage('${img}')"
          onmouseover="this.style.borderColor='var(--green-500)'"
          onmouseout="this.style.borderColor='transparent'">
-      <img src="${img}" style="width: 100%; aspect-ratio: 4/3; object-fit: cover;" onerror="this.parentElement.style.display='none'" />
+      <img src="${img}" style="width: 100%; aspect-ratio: 4/3; object-fit: contain; background: #1f2937;" onerror="this.parentElement.style.display='none'" />
     </div>
   `).join('');
 

@@ -1927,9 +1927,10 @@
     .compartment-thumb {
       width: 80px;
       height: 60px;
-      object-fit: cover;
+      object-fit: contain;
       border-radius: 8px;
       flex-shrink: 0;
+      background: var(--gray-800);
     }
     .compartment-info { flex: 1; }
     .compartment-name { font-weight: 700; color: #f59e0b; margin-bottom: 4px; }
@@ -2132,8 +2133,9 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
+      background: var(--gray-900);
     }
     .splash-overlay {
       position: relative;

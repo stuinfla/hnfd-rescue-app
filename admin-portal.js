@@ -372,11 +372,11 @@ function createImagesModal() {
     div.appendChild(label);
 
     const imgContainer = document.createElement('div');
-    imgContainer.style.cssText = 'height: 150px; background: var(--gray-700); border-radius: 8px; margin-bottom: 10px; overflow: hidden; position: relative;';
+    imgContainer.style.cssText = 'min-height: 120px; max-height: 200px; background: var(--gray-700); border-radius: 8px; margin-bottom: 10px; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center;';
 
     const img = document.createElement('img');
     img.id = section.id + '-img';
-    img.style.cssText = 'width: 100%; height: 100%; object-fit: cover; display: none;';
+    img.style.cssText = 'max-width: 100%; max-height: 200px; object-fit: contain; display: none;';
     imgContainer.appendChild(img);
 
     const placeholder = document.createElement('div');
@@ -1535,6 +1535,84 @@ function addNewMember() {
 }
 
 // ============================================================================
+// SETTINGS / PIN MANAGEMENT
+// ============================================================================
+
+const SETTINGS_STATE = {
+  rosterPin: '1426',  // Default
+  adminPin: '1426'    // Default
+};
+
+function loadSettings() {
+  // Load from app.js constants if available
+  if (typeof ROSTER_PIN !== 'undefined') {
+    SETTINGS_STATE.rosterPin = ROSTER_PIN;
+  }
+  if (typeof ADMIN_PIN !== 'undefined') {
+    SETTINGS_STATE.adminPin = ADMIN_PIN;
+  }
+
+  // Update display
+  const rosterPinDisplay = document.getElementById('current-roster-pin');
+  const adminPinDisplay = document.getElementById('current-admin-pin');
+
+  if (rosterPinDisplay) {
+    rosterPinDisplay.textContent = SETTINGS_STATE.rosterPin;
+  }
+  if (adminPinDisplay) {
+    adminPinDisplay.textContent = SETTINGS_STATE.adminPin;
+  }
+}
+
+function updateRosterPin() {
+  const input = document.getElementById('roster-pin-input');
+  const newPin = input.value.trim();
+
+  if (!newPin) {
+    alert('Please enter a PIN');
+    return;
+  }
+
+  if (newPin.length < 4) {
+    alert('PIN must be at least 4 characters');
+    return;
+  }
+
+  const oldPin = SETTINGS_STATE.rosterPin;
+  SETTINGS_STATE.rosterPin = newPin;
+
+  document.getElementById('current-roster-pin').textContent = newPin;
+  input.value = '';
+
+  addChange('Changed Roster PIN from ' + oldPin + ' to ' + newPin);
+  alert('Roster PIN updated to: ' + newPin + '\n\nRemember to Deploy for changes to take effect!');
+}
+
+function updateAdminPin() {
+  const input = document.getElementById('admin-pin-input');
+  const newPin = input.value.trim();
+
+  if (!newPin) {
+    alert('Please enter a PIN');
+    return;
+  }
+
+  if (newPin.length < 4) {
+    alert('PIN must be at least 4 characters');
+    return;
+  }
+
+  const oldPin = SETTINGS_STATE.adminPin;
+  SETTINGS_STATE.adminPin = newPin;
+
+  document.getElementById('current-admin-pin').textContent = newPin;
+  input.value = '';
+
+  addChange('Changed Admin PIN from ' + oldPin + ' to ' + newPin);
+  alert('Admin PIN updated to: ' + newPin + '\n\nRemember to Deploy for changes to take effect!');
+}
+
+// ============================================================================
 // INITIALIZATION
 // ============================================================================
 
@@ -1543,5 +1621,6 @@ window.addEventListener('load', () => {
   loadEquipment();
   loadDriverZones();
   loadRoster();
+  loadSettings();
   updateChangesDisplay();
 });

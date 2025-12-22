@@ -599,6 +599,7 @@
         <button class="tab" onclick="switchTab('images')">🖼️ Images</button>
         <button class="tab" onclick="switchTab('drivers')">🗺️ Drivers</button>
         <button class="tab" onclick="switchTab('roster')">📞 Roster</button>
+        <button class="tab" onclick="switchTab('settings')">⚙️ Settings</button>
         <button class="tab" onclick="switchTab('deployment')">🚀 Deployment</button>
       </div>
 
@@ -693,6 +694,49 @@
           <p style="color: var(--gray-400); margin-bottom: 20px;">Edit member information and phone numbers. Changes update the app roster.</p>
           <div class="equipment-grid" id="roster-grid">
             <!-- Roster cards will be generated here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings Tab -->
+      <div class="tab-content" id="settings-tab">
+        <div class="optimizer-section">
+          <div class="optimizer-header">
+            <h2>⚙️ App Settings</h2>
+          </div>
+          <p style="color: var(--gray-400); margin-bottom: 30px;">Manage access PINs and security settings. Changes take effect after deployment.</p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <!-- Roster PIN -->
+            <div style="background: var(--gray-700); padding: 20px; border-radius: 12px;">
+              <h3 style="color: var(--green-500); margin-bottom: 15px;">📞 Roster Access PIN</h3>
+              <p style="color: var(--gray-400); font-size: 14px; margin-bottom: 15px;">PIN required to view the member roster in the app.</p>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <input type="text" id="roster-pin-input" placeholder="Current PIN"
+                       style="flex: 1; padding: 12px; border: 2px solid var(--gray-600); border-radius: 8px; background: var(--gray-800); color: white; font-size: 18px; letter-spacing: 4px; text-align: center;"
+                       maxlength="6">
+                <button class="btn btn-primary" onclick="updateRosterPin()">Update</button>
+              </div>
+              <p style="color: var(--gray-500); font-size: 12px; margin-top: 10px;">Current: <span id="current-roster-pin">****</span></p>
+            </div>
+
+            <!-- Admin PIN -->
+            <div style="background: var(--gray-700); padding: 20px; border-radius: 12px;">
+              <h3 style="color: var(--red-500); margin-bottom: 15px;">🔐 Admin Portal PIN</h3>
+              <p style="color: var(--gray-400); font-size: 14px; margin-bottom: 15px;">PIN required to access this admin portal.</p>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <input type="text" id="admin-pin-input" placeholder="Current PIN"
+                       style="flex: 1; padding: 12px; border: 2px solid var(--gray-600); border-radius: 8px; background: var(--gray-800); color: white; font-size: 18px; letter-spacing: 4px; text-align: center;"
+                       maxlength="6">
+                <button class="btn btn-primary" onclick="updateAdminPin()">Update</button>
+              </div>
+              <p style="color: var(--gray-500); font-size: 12px; margin-top: 10px;">Current: <span id="current-admin-pin">****</span></p>
+            </div>
+          </div>
+
+          <div style="margin-top: 30px; padding: 20px; background: rgba(239, 68, 68, 0.1); border: 1px solid var(--red-600); border-radius: 12px;">
+            <h4 style="color: var(--red-500); margin-bottom: 10px;">⚠️ Security Note</h4>
+            <p style="color: var(--gray-400); font-size: 14px;">PIN changes require deployment to take effect. Make sure to remember your new PINs before deploying.</p>
           </div>
         </div>
       </div>
