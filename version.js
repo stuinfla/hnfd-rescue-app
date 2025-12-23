@@ -4,4 +4,4 @@
  *
  * Both app.js (via index.html) and sw.js (via importScripts) use this
  */
-const APP_VERSION = '2.14.10';
+const APP_VERSION = '2.15.1';
