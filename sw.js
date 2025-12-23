@@ -3,11 +3,14 @@
  * Enables 100% offline operation - CRITICAL for no-cell-service areas
  */
 
-const CACHE_NAME = 'hnfd-rescue-v2.3.0';
+// Import version from single source of truth
+importScripts('/version.js');
+const CACHE_NAME = 'hnfd-rescue-v' + APP_VERSION;
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
   '/app.js',
+  '/version.js',
   '/manifest.json',
   '/version.json',
   // All PWA icons (required for offline install)
@@ -19,7 +22,8 @@ const ASSETS_TO_CACHE = [
   '/icons/icon-192.png',
   '/icons/icon-384.png',
   '/icons/icon-512.png',
-  // Logo and equipment images
+  // Logo, splash, and equipment images
+  '/images/splash-ambulance.jpg',
   '/images/hnfr-logo.png',
   '/images/trauma_bag_adult.jpg',
   '/images/cabinet_k_overview.jpg',
@@ -31,7 +35,24 @@ const ASSETS_TO_CACHE = [
   '/images/drawer_n.jpg',
   '/images/drawer_n_labeled.jpg',
   '/images/oxygen_tanks.jpg',
-  '/images/cabinet_d_aed.jpg'
+  '/images/cabinet_d_aed.jpg',
+  // Location guide images (v2.6.0)
+  '/images/locations/ambulance_exterior_side.jpg',
+  '/images/locations/ambulance_interior_overview.jpg',
+  '/images/locations/cabinet_k_overview.jpg',
+  '/images/locations/drawer_n_open.jpg',
+  '/images/locations/drawer_n_contents.jpg',
+  '/images/locations/oxygen_compartment.jpg',
+  '/images/locations/drug_box_cabinet.jpg',
+  '/images/locations/adult_trauma_bag_closeup.jpg',
+  '/images/locations/aed_closeup.jpg',
+  '/images/locations/drug_box_closeup.jpg',
+  '/images/locations/lifepak_closeup.jpg',
+  '/images/locations/narcan_syringe_closeup.jpg',
+  '/images/locations/oxygen_tanks_closeup.jpg',
+  // Driver zone images (v2.13.0)
+  '/images/zone_map.jpg',
+  '/images/driver_list.jpg'
 ];
 
 // Install - cache all assets
