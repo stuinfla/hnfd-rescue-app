@@ -2355,9 +2355,18 @@ async function speakResult(retryCount = 0) {
     return;
   }
 
+  // Get synthesis fresh each time (fixes iOS timing issue where it's not ready at load)
+  synthesis = window.speechSynthesis;
+
   if (!synthesis) {
     console.error('[TTS] Speech synthesis not available');
     return;
+  }
+
+  // iOS Safari fix: resume if stuck in paused state (known iOS bug)
+  if (synthesis.paused) {
+    console.log('[TTS] Resuming paused synthesis (iOS fix)');
+    synthesis.resume();
   }
 
   // Prevent multiple simultaneous TTS calls (fixes stuttering)
@@ -2374,8 +2383,8 @@ async function speakResult(retryCount = 0) {
   // Cancel any ongoing speech
   synthesis.cancel();
 
-  // Small delay after cancel to ensure clean state
-  await new Promise(resolve => setTimeout(resolve, 150));
+  // Small delay after cancel to ensure clean state (iOS needs this)
+  await new Promise(resolve => setTimeout(resolve, 200));
 
   // Ensure voices are loaded (critical for Android)
   const voices = await ensureVoicesLoaded();
